@@ -1,0 +1,93 @@
+.signin-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #c4dfdf;
+  padding: 0;
+  margin: 0;
+  font-family: serif; /* Ensures text is styled uniformly */
+
+}
+
+.signin-box {
+  width: 300px;
+  padding: 50px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  text-align: center;
+  
+}
+
+.input-container {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.fa {
+  position: absolute;
+  left: 10px; /* Adjust this value as needed to position the icon inside the input field */
+  top: 50%; /* Centers the icon vertically */
+  transform: translateY(-50%); /* Ensures precise centering */
+  color: #ccc; /* Optional: sets the icon color */
+  z-index: 10;
+}
+
+
+.input-field {
+  width: 100%;
+  padding: 8px 10px;
+  padding-left: 30px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.checkbox-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%; /* Ensures alignment is controlled across the full width */
+  font-size: 13px;
+}
+
+.signin-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #427D9D;
+}
+
+.signup-container {
+  font-size: 13px;
+  margin-top: 10px;
+  color: grey;
+  font-family: serif, sans-serif;
+}
+
+.link {
+  color: #007bff;
+  text-decoration: none;
+  font-size: 13px;
+  font-family: serif, sans-serif;
+}
+
+/* Additional styles to ensure text alignment within checkbox */
+label {
+  display: flex;
+  align-items: center;
+  
+}
+
+input[type="checkbox"] {
+  margin-right: 5px; /* Space between checkbox and text */
+}
