@@ -1,5 +1,5 @@
 import React from 'react';
-import './header.css';  // Ensure the CSS file name matches the import
+import '../styles/header.css';  // Ensure the CSS file name matches the import
 import quizDaddyLogo from '../images/logo.png';
 
 
