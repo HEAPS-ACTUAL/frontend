@@ -3,6 +3,7 @@ import '../styles/SignIn.css';  // Make sure to create this CSS file
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { authenticate } from '../services/UserService';
+import {Link} from 'react-router-dom';
 
 function SignIn() {
   const [email, setEmail] = useState('');
@@ -55,7 +56,8 @@ function SignIn() {
           </div>
           <button type="submit" className="signin-button">Sign in</button>
           <div className="signup-container">
-            Don't have an account? <a href="#" className="link"> Register here </a>
+            Don't have an account? 
+            <Link to="/register"> <a href="#" className="link"> Register here </a> </Link>
           </div>
         </form>
         {message && <p> {message} </p>}
