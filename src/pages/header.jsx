@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/header.css';  // Ensure the CSS file name matches the import
 import quizDaddyLogo from '../images/logo.png';
+import {Link} from 'react-router-dom';
 
 
 function Header() {
@@ -18,7 +19,11 @@ function Header() {
             
             <div className="header__actions">
                 <a href="/" className="header__icon">Home Icon</a>
-                <button className="header__login">Login</button>
+
+                <Link to="/signin">
+                    <button className="header__login">Login</button>
+                </Link>
+
             </div>
         </header>
     );

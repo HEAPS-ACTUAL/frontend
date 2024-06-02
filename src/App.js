@@ -6,13 +6,8 @@ function App() {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={
-                    <>
-                       
-                        <AboutUs />
-                    </>
-                } />
-                
+                <Route path="/" element={<AboutUs />} />
+                <Route path="/signin" element={<SignIn />} />
             </Routes>
         </Router>
     );
