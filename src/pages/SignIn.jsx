@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './SignIn.css';  // Make sure to create this CSS file
+import '../styles/SignIn.css';  // Make sure to create this CSS file
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
