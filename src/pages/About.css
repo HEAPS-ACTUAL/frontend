@@ -1,0 +1,104 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+  
+  header .login-button {
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+
+  }
+  
+  .hero-section {
+    text-align: center;
+    padding: 100px 20px;
+    background: linear-gradient(to right, #c4dfdf, #d2e9e9, #e3f4f4, #f8f6f4);
+  }
+  
+.main{
+    margin: 100px;
+}
+.main h1 {
+    margin-bottom: 16px;
+    font-size: 2.5rem;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+  
+.main p {
+    margin-bottom: 16px;
+    color: #666;
+    font-size: 1.2rem;
+}
+
+
+.btn {
+    padding: 12px 24px;
+    margin: 0 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+  
+  .primary {
+    background-color: #007bff;
+    color: white;
+  }
+
+.featuresHeader{
+    margin: 10px;
+}
+
+.primary:hover {
+    background-color: #000080;
+}
+  
+.features-box {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    gap: 50px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+  
+.box {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    width: 280px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+  
+.box:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    background-color: #f0f0f0;
+}
+  
+.title {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+  
+
+  
+.info {
+    font-weight: 400;
+    color: #333;
+}
+  
+footer {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+}

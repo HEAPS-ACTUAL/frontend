@@ -1,22 +1,29 @@
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './pages/header';
-import AboutUs from './pages/AboutUs';
+
+import Navbar from './pages/NavBar';
+import About from './pages/About';
+import Features from './pages/Features';
+import CreateQuizzes from './pages/CreateQuizzes';
 import SignIn from './pages/SignIn';
+import './App.css'; 
+
 function App() {
-    return (
-        <Router>
-            <Routes>
-                <Route path="/" element={
-                    <>
-                       
-                        <AboutUs />
-                    </>
-                } />
-                
-            </Routes>
-        </Router>
-    );
+  return (
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<About />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/create-quizzes" element={<CreateQuizzes />} />
+        <Route path="/features" element={<Features />} />
+        <Route path="/login" element={<SignIn />} />
+
+
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
