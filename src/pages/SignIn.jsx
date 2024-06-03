@@ -19,7 +19,7 @@ function SignIn() {
   return (
     <div className="signin-container">
       <div className="signin-box">
-        <h2>Sign in</h2>
+        <h2>Log in</h2>
         <form onSubmit={handleSubmit}>
 
           <div className="input-container">
@@ -64,3 +64,55 @@ function SignIn() {
 }
 
 export default SignIn;
+
+// import React from 'react';
+// import Swal from 'sweetalert2';
+
+// function LoginForm() {
+//   const handleLogin = () => {
+//     let usernameInput;
+//     let passwordInput;
+
+//     Swal.fire({
+//       title: 'Login Form',
+//       html: (
+//         <>
+//           <input type="text" id="username" className="swal2-input" placeholder="Username" />
+//           <input type="password" id="password" className="swal2-input" placeholder="Password" />
+//         </>
+//       ),
+//       confirmButtonText: 'Sign in',
+//       focusConfirm: false,
+//       didOpen: () => {
+//         const popup = Swal.getPopup();
+//         usernameInput = popup.querySelector('#username');
+//         passwordInput = popup.querySelector('#password');
+
+//         usernameInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm();
+//         passwordInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm();
+//       },
+//       preConfirm: () => {
+//         const username = usernameInput.value;
+//         const password = passwordInput.value;
+//         if (!username || !password) {
+//           Swal.showValidationMessage('Please enter username and password');
+//         }
+//         return { username, password };
+//       },
+//     }).then((result) => {
+//       if (result.isConfirmed) {
+//         const { username, password } = result.value;
+//         console.log('Username:', username, 'Password:', password);
+//         // Handle the login logic here
+//       }
+//     });
+//   };
+
+//   // return (
+//   //   <div>
+//   //     <button onClick={handleLogin}>Login</button>
+//   //   </div>
+//   // );
+// }
+
+// export default LoginForm;

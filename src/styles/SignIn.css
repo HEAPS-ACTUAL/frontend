@@ -3,12 +3,13 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #c4dfdf;
+  background: linear-gradient(to right, #c4dfdf, #d2e9e9, #e3f4f4, #f8f6f4);
   padding: 0;
   margin: 0;
   font-family: serif; /* Ensures text is styled uniformly */
 
 }
+
 
 .signin-box {
   width: 300px;
