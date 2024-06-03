@@ -2,24 +2,26 @@ import React, { useState } from 'react';
 import '../styles/SignIn.css';  // Make sure to create this CSS file
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { authenticate } from '../services/UserService';
+import { Link } from 'react-router-dom';
 
 function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const [message, setMessage] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Add your sign-in logic here
-    console.log('Email:', email);
-    console.log('Password:', password);
-    console.log('Remember Me:', rememberMe);
+    console.log(password);
+    const returnedMessage = await authenticate(email, password);
+    setMessage(returnedMessage);
   };
 
   return (
     <div className="signin-container">
       <div className="signin-box">
-        <h2>Log in</h2>
+        <h2>Sign in</h2>
         <form onSubmit={handleSubmit}>
 
           <div className="input-container">
@@ -55,9 +57,11 @@ function SignIn() {
           </div>
           <button type="submit" className="signin-button">Sign in</button>
           <div className="signup-container">
-            Don't have an account? <a href="#" className="link">Sign up</a>
+            Don't have an account? 
+            <Link to="/register"> <a href="#" className="link"> Register here </a> </Link>
           </div>
         </form>
+        {message && <p> {message} </p>}
       </div>
     </div>
   );

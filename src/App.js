@@ -7,7 +7,8 @@ import About from './pages/About';
 import Features from './pages/Features';
 import CreateQuizzes from './pages/CreateQuizzes';
 import SignIn from './pages/SignIn';
-import './App.css'; 
+import './styles/App.css'; 
+import Register from './pages/register';
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
         <Route path="/create-quizzes" element={<CreateQuizzes />} />
         <Route path="/features" element={<Features />} />
         <Route path="/login" element={<SignIn />} />
+        <Route path="/register" element={<Register />} />
+
 
 
       </Routes>
