@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -7,7 +6,7 @@ import About from './pages/About';
 import Features from './pages/Features';
 import CreateQuizzes from './pages/CreateQuizzes';
 import SignIn from './pages/SignIn';
-import './App.css'; 
+import './styles/App.css'; 
 
 function App() {
   return (
