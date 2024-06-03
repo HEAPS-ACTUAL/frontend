@@ -7,7 +7,7 @@ import Features from './pages/Features';
 import CreateQuizzes from './pages/CreateQuizzes';
 import SignIn from './pages/SignIn';
 import './styles/App.css'; 
-
+import Register from './pages/register';
 
 function App() {
   return (
