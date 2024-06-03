@@ -8,6 +8,7 @@ import CreateQuizzes from './pages/CreateQuizzes';
 import SignIn from './pages/SignIn';
 import './styles/App.css'; 
 
+
 function App() {
   return (
     <Router>
@@ -18,6 +19,8 @@ function App() {
         <Route path="/create-quizzes" element={<CreateQuizzes />} />
         <Route path="/features" element={<Features />} />
         <Route path="/login" element={<SignIn />} />
+        <Route path="/register" element={<Register />} />
+
 
 
       </Routes>
