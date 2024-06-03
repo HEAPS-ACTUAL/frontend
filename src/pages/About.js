@@ -1,5 +1,5 @@
 import React from 'react';
-import './About.css'; // Separate CSS for Home
+import '../styles/About.css'; // Separate CSS for Home
 
 function About() {
   return (
