@@ -5,7 +5,7 @@ body {
     color: #333;
   }
   
-  header .login-button {
+header .login-button {
     color: white;
     padding: 10px 20px;
     border: none;
@@ -14,15 +14,16 @@ body {
 
   }
   
-  .hero-section {
+.hero-section {
     text-align: center;
     padding: 100px 20px;
     background: linear-gradient(to right, #c4dfdf, #d2e9e9, #e3f4f4, #f8f6f4);
-  }
+}
   
 .main{
     margin: 100px;
 }
+
 .main h1 {
     margin-bottom: 16px;
     font-size: 2.5rem;
@@ -46,10 +47,10 @@ body {
     transition: background-color 0.3s ease;
 }
   
-  .primary {
+.primary {
     background-color: #007bff;
     color: white;
-  }
+}
 
 .featuresHeader{
     margin: 10px;
@@ -88,8 +89,6 @@ body {
     font-weight: 600;
     margin-bottom: 10px;
 }
-  
-
   
 .info {
     font-weight: 400;
