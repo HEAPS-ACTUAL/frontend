@@ -1,5 +1,5 @@
 import React from 'react';
-import './CreateQuizzes.css';
+import '../styles/CreateQuizzes.css';
 
 function CreateQuizzes(){
     return(
