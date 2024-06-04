@@ -1,13 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Navbar from './pages/NavBar';
 import About from './pages/About';
-import Features from './pages/Features';
 import CreateQuizzes from './pages/CreateQuizzes';
+import Features from './pages/Features';
+import Navbar from './pages/NavBar';
+import Register from './pages/register';
 import SignIn from './pages/SignIn';
 import './styles/App.css'; 
-import Register from './pages/register';
+
 
 function App() {
   return (

@@ -7,7 +7,7 @@ function About() {
 
         <div className='main'>
             <h1>The parent you never knew you needed</h1>
-            <p>Empower your learning journey with tools tailored for efficient study habits. </p>
+            <p>Empower your learning with tools tailored for efficient study habits. </p>
             <p>Start transforming your PDFs into interactive learning experiences today!</p>
             <button className="btn primary">Launch Your Learning</button>
         </div>
