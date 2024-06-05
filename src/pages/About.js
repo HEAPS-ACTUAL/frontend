@@ -4,6 +4,7 @@ import styles from '../styles/About.module.css';
 import { RxLightningBolt } from "react-icons/rx";
 import { FaRegBell } from "react-icons/fa";
 import { GiMaterialsScience } from "react-icons/gi";
+import { IoSparkles } from "react-icons/io5";
 
 function About() {
   return (
@@ -11,9 +12,8 @@ function About() {
 
         <div className={styles.main}>
             <h1>The parent you never knew you needed</h1>
-            <p>Empower your learning with tools tailored for efficient study habits. </p>
-            <p>Start transforming your PDFs into interactive learning experiences today!</p>
-            <button className={styles.btn}>Launch Your Learning</button>
+            <p>Half your study time and double the fun.</p>
+            <button className={styles.btn}><IoSparkles className={styles.iconSparkles}/> Launch Your Learning</button>
         </div>
 
         <div className={styles.features}>

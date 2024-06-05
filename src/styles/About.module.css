@@ -12,14 +12,15 @@
 
 .main h1 {
     margin-bottom: 16px;
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
 }
   
 .main p {
-    margin-bottom: 16px;
+    margin-top:30px;
+    margin-bottom:30px;
     color: #666;
-    font-size: 1.2rem;
+    font-size: 1.6rem;
 }
 
 
@@ -31,15 +32,15 @@
     cursor: pointer;
     font-size: 1rem;
     transition: background-color 0.3s ease;
-}
-  
-.btn {
     background-color: #007bff;
     color: white;
-}
+    font-size: 33px;
+
+}   
 
 .featuresHeader{
     margin: 10px;
+    font-size: 1.6rem;
 }
 
 .btn:hover {
@@ -64,6 +65,7 @@
     width: 280px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     transition: box-shadow 0.3s ease, background-color 0.3s ease;
+    
 }
   
 .box:hover {
@@ -85,6 +87,12 @@
     font-size: 35px; 
     color: #427d9d; 
     margin-bottom: 15px;
+}
+
+.iconSparkles{
+    font-size: 35px;
+    margin-right: 8px;
+    
 }
   
 footer {
