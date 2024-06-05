@@ -14,7 +14,7 @@ body {
     padding: 50px;
 }
 
-.sidebar-element {
+.sidebarElement {
     background: #ffffff;
     border-radius: 25px;
     margin: 10px 0;
@@ -40,7 +40,7 @@ body {
 } */
 
 
-.sidebar-element:hover {
+.sidebarElement:hover {
     background-color: #f0f0f0; 
     transform: translateY(-2px); /* Small lift effect on hover */
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
