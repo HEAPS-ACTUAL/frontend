@@ -1,25 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/NavBar.css'; 
+import styles from '../styles/NavBar.module.css'; 
 import quizDaddyLogo from '../images/logo.png';
 
 
 function Navbar() {
   return (
-    <div className="navbar">
-        <Link to="/" className="logo-link">
-            <img src={quizDaddyLogo} alt="quizDaddy Logo" className="logo" />
-            <span className="logo-text">quizDaddy</span>
+    <div className={styles.navbar}>
+        <Link to="/" className={styles.logoLink}>
+            <img src={quizDaddyLogo} alt="quizDaddy Logo" className={styles.logo} />
+            <span className={styles.logoText}>quizDaddy</span>
         </Link>
 
-        <div className="nav-items">
-            <Link to="/about" className="nav-link">About</Link>
-            <Link to="/features" className="nav-link">Features</Link>
-            <Link to="/CQquizzes" className="nav-link">Home</Link>
+        <div className={styles.navItems}>
+            <Link to="/about" className={styles.navLink}>About</Link>
+            <Link to="/features" className={styles.navLink}>Features</Link>
+            <Link to="/CQquizzes" className={styles.navLink}>Home</Link>
+            <Link to="/flashcard" className={styles.navLink}>flashcard(temp)</Link>
             
         </div>
 
-        <Link to="/login" className="nav-link-login">Log in</Link>
+        <Link to="/login" className={styles.navLinkLogin}>Log in</Link>
     </div>
   );
 }

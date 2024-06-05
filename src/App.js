@@ -5,12 +5,11 @@ import About from './pages/About';
 import CQquizzes from './pages/CQquizzes';
 import Features from './pages/Features';
 import Navbar from './pages/NavBar';
-import Register from './pages/register';
 import SignIn from './pages/SignIn';
 import CQMontitorProgress from './pages/CQmonitorProgress';
 import CQRevisionSchedule from './pages/CQrevisionSchedule';
+import Flashcards from './pages/flashcard';
 import './styles/App.css'; 
-
 
 function App() {
   return (
@@ -22,9 +21,10 @@ function App() {
         <Route path="/CQquizzes" element={<CQquizzes />} />
         <Route path="/features" element={<Features />} />
         <Route path="/login" element={<SignIn />} />
-        <Route path="/register" element={<Register />} />
         <Route path="/monitor-progress" element={<CQMontitorProgress />} />
         <Route path="/revision-schedule" element={<CQRevisionSchedule />} />
+        <Route path="/flashcard" element={<Flashcards />} />
+
 
 
       </Routes>

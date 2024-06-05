@@ -1,26 +1,23 @@
 import React from 'react';
-import '../styles/Features.css';
+import styles from '../styles/Features.module.css';
 
 function Features(){
     return(
 
-        <div className='Features'>
-            <div className='interactive-flashcards'>
+        <div className={styles.Features}>
+            <div className={styles.interactiveFlashcards}>
                 <h2>Interactive Flashcards</h2>
             </div>
 
-            <div className='spaced-repetition-schedule'>
+            <div className={styles.spacedRepetitionSchedule}>
                 <h2>Customized Spaced Repetition Scheduling</h2>
             </div>
 
-            <div className='smart-quiz-popups'>
+            <div className={styles.smartQuizPopups}>
                 <h2>Smart Quiz Pop-Ups</h2>
 
             </div>
 
-            <div className='smart-quiz-popups'>
-
-            </div>
             
         </div>
        
