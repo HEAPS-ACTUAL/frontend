@@ -15,32 +15,46 @@ body {
 }
 
 .sidebar-element {
-    background: #ffffff; /* Solid white background */
-    border-radius: 25px; /* Rounded corners */
+    background: #ffffff;
+    border-radius: 25px;
     margin: 10px 0;
     padding: 10px 20px;
     display: flex;
     align-items: center;
-    width: 100%; /* Full width of the sidebar area */
+    width: 100%; 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
     transition: all 0.3s ease; /* Smooth transition for hover effects */
     text-decoration: none;
 
 }
 
+/* .sidebar-element {
+    background: transparent; 
+    border-radius: 0; 
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    box-shadow: none;
+    text-decoration: none;
+} */
+
+
+
+
 .sidebar-element:hover {
-    background-color: #f0f0f0; /* Slightly darker on hover */
+    background-color: #f0f0f0; 
     transform: translateY(-2px); /* Small lift effect on hover */
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
 }
 
 .icon {
-    font-size: 24px; /* Larger icon size */
-    color: #427d9d; /* Icon color */
+    font-size: 24px; 
+    color: #427d9d; 
     margin-right: 15px; /* Space between icon and text */
 }
 
 .word {
-    color: #333; /* Dark grey for text for better readability */
+    color: #333;
     text-transform: uppercase; /* All caps for a more structured look */
 }

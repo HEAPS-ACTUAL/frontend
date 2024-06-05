@@ -2,6 +2,8 @@ body {
     background: linear-gradient(to right, #c4dfdf, #d2e9e9, #e3f4f4, #f8f6f4);
     font-family: 'Roboto', sans-serif;
 }
+
+
 @keyframes fadeIn {
     from {
         opacity: 0;
