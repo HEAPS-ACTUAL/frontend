@@ -9,6 +9,7 @@ const SignIn = () => {
             <div className="form-container sign-up">
                 <form>
                     <h1>Create Account</h1>
+                    <br></br>
                     <input type="text" placeholder="First Name" />
                     <input type="text" placeholder="Last Name" />
                     <select name="gender">
@@ -25,9 +26,10 @@ const SignIn = () => {
             <div className="form-container sign-in">
                 <form>
                     <h1>Sign In</h1>
+                    <br></br>
                     <input type="email" placeholder="Email" />
                     <input type="password" placeholder="Password" />
-                    <a href="#">Forget Your Password?</a>
+                    <a href="#">Forget Your Password?</a> 
                     <button type="button">Sign In</button>
                 </form>
             </div>
