@@ -5,13 +5,15 @@ body {
 
 .sidebar {
     float: left;
-    width: 300px;
-    margin: 30px;
+    /* width: 300px; */
+    margin-left: 30px;
     font-size: 18px; 
     font-weight: bold;
     display: flex;
     flex-direction: column;
     padding: 20px; 
+    height: 100vh;
+    /* background-color: aliceblue; */
 }
 
 .sidebarElement {
@@ -21,7 +23,7 @@ body {
     padding: 10px 20px;
     display: flex;
     align-items: center;
-    width: 80%; 
+    /* width: 80%;  */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
     transition: all 0.3s ease; /* Smooth transition for hover effects */
     text-decoration: none;
@@ -35,7 +37,7 @@ body {
 }
 
 .icon {
-    font-size: 24px; 
+    font-size: 20px; 
     color: #427d9d; 
     margin-right: 15px; /* Space between icon and text */
 }
