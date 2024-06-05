@@ -14,7 +14,6 @@ body {
 }
 
 .greeting {
-    
     animation: fadeIn 2s ease-in; /* Apply the animation */
 }
 
@@ -40,6 +39,5 @@ body {
     display: block;
     margin-bottom: 0.5em; 
     background: -webkit-linear-gradient(left, #3a7bd5, #3a6073); 
-    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;  
 }

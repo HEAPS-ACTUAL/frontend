@@ -5,14 +5,16 @@ import CQSideBar from "./CQsideBar";
 function CQquizzes(){
 
     return(
-        <div className="container">
+        <>
             <CQSideBar />
-            
-            <div className='greeting'>
+
+            <div className="container">
+                <div className='greeting'>
                     <div className='name'>Hello Arin, </div>
                     <div className='line'> ready to conquer some new knowledge today?</div>
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 
