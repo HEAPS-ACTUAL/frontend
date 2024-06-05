@@ -9,7 +9,14 @@ const SignIn = () => {
             <div className="form-container sign-up">
                 <form>
                     <h1>Create Account</h1>
-                    <input type="text" placeholder="Name" />
+                    <input type="text" placeholder="First Name" />
+                    <input type="text" placeholder="Last Name" />
+                    <select name="gender">
+                        <option value="">Select Gender</option> 
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>      
                     <input type="email" placeholder="Email" />
                     <input type="password" placeholder="Password" />
                     <button type="button">Sign Up</button>

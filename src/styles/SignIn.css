@@ -85,6 +85,26 @@
     height: 100%;
     transition: all 0.6s ease-in-out;
 }
+.form-container input,
+.form-container select {
+  width: 100%; /* Ensures full-width */
+  padding: 10px; /* Good padding for clickability and readability */
+  margin: 8px 0; /* Adds space between fields */
+  display: inline-block; /* Aligns elements in a line */
+  border: 1px solid #ccc; /* Subtle border */
+  border-radius: 4px; /* Rounded corners */
+  box-sizing: border-box; /* Includes padding and border in width */
+  font-size: 13px; /* Matching font size with other inputs */
+}
+
+.form-container select {
+  appearance: none; /* Removes native dropdown styling */
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2212%22%20height%3D%2212%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpolygon%20fill%3D%22%23A0A0A0%22%20points%3D%226%2C0%209%2C5%203%2C5%22%2F%3E%3C%2Fsvg%3E'); /* Adds custom arrow */
+  background-repeat: no-repeat;
+  background-position: right 10px center; /* Positions custom arrow */
+  background-color: white; /* Matches the background of other inputs */
+}
+
 
 .sign-in{
     left: 0;

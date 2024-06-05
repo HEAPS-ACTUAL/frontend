@@ -1,4 +1,73 @@
-body{
+body {
     background: linear-gradient(to right, #c4dfdf, #d2e9e9, #e3f4f4, #f8f6f4);
-   
+    font-family: 'Roboto', sans-serif;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.greeting {
+    font-size: 35px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    background: -webkit-linear-gradient(left, #3a7bd5, #3a6073); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fadeIn 1.5s ease-in; /* Apply the animation */
+}
+
+.greeting-line {
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+
+.sidebar {
+    width: 300px;
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 50px;
+}
+
+.sidebar-element {
+    background: #ffffff; /* Solid white background */
+    border-radius: 25px; /* Rounded corners */
+    margin: 10px 0;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    width: 100%; /* Full width of the sidebar area */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    text-decoration: none;
+
+}
+
+.sidebar-element:hover {
+    background-color: #f0f0f0; /* Slightly darker on hover */
+    transform: translateY(-2px); /* Small lift effect on hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+.icon {
+    font-size: 24px; /* Larger icon size */
+    color: #427d9d; /* Icon color */
+    margin-right: 15px; /* Space between icon and text */
+}
+
+.word {
+    color: #333; /* Dark grey for text for better readability */
+    text-transform: uppercase; /* All caps for a more structured look */
 }
