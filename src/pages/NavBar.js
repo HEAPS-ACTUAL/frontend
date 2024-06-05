@@ -16,6 +16,7 @@ function Navbar() {
             <Link to="/about" className={styles.navLink}>About</Link>
             <Link to="/features" className={styles.navLink}>Features</Link>
             <Link to="/CQquizzes" className={styles.navLink}>Home</Link>
+            <Link to="/flashcard" className={styles.navLink}>flashcard(temp)</Link>
             
         </div>
 
