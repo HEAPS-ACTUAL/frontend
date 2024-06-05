@@ -14,7 +14,7 @@ function Navbar() {
 
         <div className="nav-items">
             <Link to="/about" className="nav-link">About</Link>
-            <Link to="/create-quizzes" className="nav-link">Create Quizzes</Link>
+            <Link to="/CQSideBar" className="nav-link">Create Quizzes</Link>
             <Link to="/features" className="nav-link">Features</Link>
         </div>
 
