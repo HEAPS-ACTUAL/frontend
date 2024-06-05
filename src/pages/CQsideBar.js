@@ -14,7 +14,7 @@ function CQSideBar(){
 
             <div className='sidebar'>
 
-                <Link to="/quizzes" className="sidebar-element">
+                <Link to="/CQquizzes" className="sidebar-element">
                     <div className='icon'><FaQuestion /></div>
                     <div className='word'>quizzes</div>
                 </Link>
