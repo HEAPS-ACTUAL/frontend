@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import '../styles/SignIn.css'; // Make sure this path is correct based on your project structure
+// import '../styles/SignIn.css'; // Make sure this path is correct based on your project structure
 const SignIn = () => {
     const [isActive, setIsActive] = useState(false);
 
