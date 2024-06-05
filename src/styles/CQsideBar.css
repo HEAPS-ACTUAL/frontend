@@ -40,8 +40,6 @@ body {
 } */
 
 
-
-
 .sidebar-element:hover {
     background-color: #f0f0f0; 
     transform: translateY(-2px); /* Small lift effect on hover */

@@ -1,11 +1,4 @@
-body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    color: #333;
-  }
-  
-header .login-button {
+  header .login-button {
     color: white;
     padding: 10px 20px;
     border: none;
@@ -14,7 +7,9 @@ header .login-button {
 
   }
   
-.hero-section {
+.heroSection {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
     text-align: center;
     padding: 100px 20px;
     background: linear-gradient(to right, #c4dfdf, #d2e9e9, #e3f4f4, #f8f6f4);
@@ -47,7 +42,7 @@ header .login-button {
     transition: background-color 0.3s ease;
 }
   
-.primary {
+.btn {
     background-color: #007bff;
     color: white;
 }
@@ -56,11 +51,11 @@ header .login-button {
     margin: 10px;
 }
 
-.primary:hover {
+.btn:hover {
     background-color: #000080;
 }
   
-.features-box {
+.featuresBox {
     display: flex;
     justify-content: center;
     text-align: center;
@@ -93,6 +88,12 @@ header .login-button {
 .info {
     font-weight: 400;
     color: #333;
+}
+
+.icon {
+    font-size: 35px; 
+    color: #427d9d; 
+    margin-bottom: 15px;
 }
   
 footer {
