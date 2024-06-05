@@ -12,8 +12,8 @@ function CreateQuizzes(){
         <div className='dashboard'>
 
             <div className='greeting'>
-                <div className='greeting-line'>Hello Arin, </div>
-                <div className='greeting-line'> ready to conquer some new knowledge today?</div>
+                <div className='name'>Hello Arin, </div>
+                <div className='line'> ready to conquer some new knowledge today?</div>
             </div>
 
             <div className='sidebar'>
