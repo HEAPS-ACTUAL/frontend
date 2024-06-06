@@ -46,12 +46,8 @@
 }
 
 .createQuiz, .reviewNow, .allQuizzes{
-    /* background-color: #f9f9f9; */
-    /* border: 1px solid #ddd; */
     padding: 20px 20px 20px 0px;
     margin: 20px 60px 20px 60px;
-    /* border-radius: 8px; */
-    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
   }
   
 .createQuiz h2 {
@@ -72,8 +68,8 @@
 }
   
 .createQuiz button {
-    background-color: #666e67;
-    color: white;
+    background-color: rgb(69, 79, 78);
+    color: whitesmoke;
     font-weight: 600;
     padding: 10px 20px;
     border: none;
@@ -83,7 +79,8 @@
 }
 
 .createQuiz button:hover {
-    background-color: #082923;
+    
+    background-color: #666c6f;
 }
 
 .generateQuizButton {
