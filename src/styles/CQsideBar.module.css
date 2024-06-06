@@ -3,42 +3,39 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+.allSidebarWords {
+    /* background-color: antiquewhite; */
+    border-left: 3px solid black;
+}
+
 .sidebar {
-    width: 300px;
-    margin-top: 30px;
-    font-size: 18px;
+    float: left;
+    /* width: 300px; */
+    /* margin-left: 30px; */
+    font-size: 18px; 
     font-weight: bold;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    padding: 50px;
+    padding: 20px; 
+    height: calc(100vh - 72px);
+    /* background-color: aliceblue; */
+    position: sticky;
+    top: 72px;
+    
 }
 
 .sidebarElement {
-    background: #ffffff;
-    border-radius: 25px;
+    /* background: #7ca9cd; */
+    /* border-radius: 25px; */
     margin: 10px 0;
     padding: 10px 20px;
     display: flex;
     align-items: center;
-    width: 100%; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
+    /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
     transition: all 0.3s ease; /* Smooth transition for hover effects */
     text-decoration: none;
 
 }
-
-/* .sidebar-element {
-    background: transparent; 
-    border-radius: 0; 
-    padding: 10px 20px;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    box-shadow: none;
-    text-decoration: none;
-} */
-
 
 .sidebarElement:hover {
     background-color: #f0f0f0; 
@@ -47,12 +44,12 @@ body {
 }
 
 .icon {
-    font-size: 24px; 
+    font-size: 20px; 
     color: #427d9d; 
     margin-right: 15px; /* Space between icon and text */
 }
 
 .word {
     color: #333;
-    text-transform: uppercase; /* All caps for a more structured look */
+     /* All caps for a more structured look */
 }
