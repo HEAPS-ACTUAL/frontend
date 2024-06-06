@@ -3,7 +3,7 @@ import styles from '../styles/CQquizzes.module.css'
 import CQSideBar from "./CQsideBar";
 
 function CQquizzes(){
-
+    
     return(
         <div>
             <CQSideBar />
@@ -17,7 +17,8 @@ function CQquizzes(){
                     <h2> Create quizzes </h2>
 
                     <form>
-                        <input type="file" />
+                        Please select one or more files
+                        <input type="file" multiple />
                         <button type="submit"> Upload </button>
                     </form>
                 </div>
@@ -29,6 +30,49 @@ function CQquizzes(){
                 <div className={styles.allQuizzes}>
                     <h2> All quizzes </h2>
                 </div>
+
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+
+                <h1>hello</h1>
             </div>
         </div>
     );
