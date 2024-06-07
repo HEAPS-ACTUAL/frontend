@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import About from './pages/About';
-import CQquizzes from './pages/CQquizzes';
-import Features from './pages/Features';
-import Navbar from './pages/NavBar';
-import SignIn from './pages/SignIn';
-import CQMontitorProgress from './pages/CQmonitorProgress';
-import CQRevisionSchedule from './pages/CQrevisionSchedule';
-import Flashcards from './pages/flashcard';
+import About from './pages/others/About';
+import CQquizzes from './pages/home/Quizzes';
+import Features from './pages/others/Features';
+import Navbar from './pages/common/NavBar';
+import SignIn from './pages/others/SignIn';
+import CQMontitorProgress from './pages/home/MonitorProgress';
+import CQRevisionSchedule from './pages/home/RevisionSchedule';
+import Flashcards from './pages/Flashcard';
 import './styles/App.css'; 
 
 function App() {

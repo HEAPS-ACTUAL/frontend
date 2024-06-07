@@ -1,6 +1,6 @@
 import React from 'react';
-import CQSideBar from './CQsideBar';
-import styles from '../styles/CQrevisionSchedule.module.css'
+import CQSideBar from '../common/SideBar';
+import styles from '../../styles/RevisionSchedule.module.css'
 
 function CQRevisionSchedule(){
 

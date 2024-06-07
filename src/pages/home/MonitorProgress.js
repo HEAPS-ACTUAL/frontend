@@ -1,6 +1,6 @@
 import React from 'react';
-import CQSideBar from './CQsideBar';
-import styles from '../styles/CQmonitorProgress.module.css'
+import CQSideBar from '../common/SideBar';
+import styles from '../../styles/MonitorProgress.module.css'
 
 function CQMontitorProgress(){
 

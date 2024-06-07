@@ -1,6 +1,6 @@
 import React from "react";
-import styles from '../styles/CQquizzes.module.css'
-import CQSideBar from "./CQsideBar";
+import styles from '../../styles/Quizzes.module.css'
+import CQSideBar from "../common/SideBar";
 
 function CQquizzes(){
     

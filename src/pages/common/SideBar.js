@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/CQsideBar.module.css';
+import styles from '../../styles/SideBar.module.css';
 
 // icons
 import { FaQuestion } from 'react-icons/fa';

@@ -1,8 +1,8 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/SignIn.css'; // Make sure this path is correct based on your project structure
-import { authenticate, createNewUser } from '../services (for backend)/UserService';
+import '../../styles/SignIn.css'; 
+import { authenticate, createNewUser } from '../../services (for backend)/UserService';
 
 
 const SignIn = () => {
@@ -27,7 +27,7 @@ const SignIn = () => {
         const returnedMessage = await authenticate (email, password);
         setMessage(returnedMessage);
 
-        if (returnedMessage != 'Authentication Successful!'){
+        if (returnedMessage !== 'Authentication Successful!'){
             setMessage(returnedMessage);
         }
         else{
@@ -63,7 +63,7 @@ const SignIn = () => {
                     <br></br>
                     <input type="email" placeholder="Email" onChange={(event) => setEmail(event.target.value)}/>
                     <input type="password" placeholder="Password" onChange={(event) => setPassword(event.target.value)}/>
-                    <a href="#">Forget Your Password?</a> 
+                    <a>Forget Your Password?</a> 
                     <button type="submit">Sign In</button>
                 </form>
             </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/About.module.css'; 
+import styles from '../../styles/About.module.css'; 
 
 import { RxLightningBolt } from "react-icons/rx";
 import { FaRegBell } from "react-icons/fa";
