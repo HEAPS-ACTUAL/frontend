@@ -26,6 +26,7 @@ async function createNewUser(email, password, firstName, lastName, gender){
             url: "/user/register/",
             data: {email, password, firstName, lastName, gender}
         });
+        console.log(response.data.message);
 
         return response.data.message;
     }
