@@ -26,7 +26,23 @@ async function createNewUser(email, password, firstName, lastName, gender){
             url: "/user/register/",
             data: {email, password, firstName, lastName, gender}
         });
-        console.log(response.data.message);
+
+        return response.data.message;
+    }
+    catch(error){
+        if(error.response){
+            return error.response.data.message;
+        }
+    }
+}
+
+async function getUserByEmail(email){
+    try{
+        const response = await axiosInstance({
+            method: "get",
+            url: "/user/profile/",
+            data: {email: email}
+        });
 
         return response.data.message;
     }

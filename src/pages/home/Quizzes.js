@@ -3,6 +3,8 @@ import styles from '../../styles/Quizzes.module.css'
 import CQSideBar from "../common/SideBar";
 
 function CQquizzes(){
+    const email = localStorage.getItem('userEmail');
+
     
     return(
         <div>
