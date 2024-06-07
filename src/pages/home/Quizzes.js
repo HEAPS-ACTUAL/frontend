@@ -1,17 +1,39 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from '../../styles/Quizzes.module.css'
 import CQSideBar from "../common/SideBar";
+import { getUserByEmail } from "../../services (for backend)/UserService";
 
 function CQquizzes(){
     const email = localStorage.getItem('userEmail');
+    const [firstName, setFirstName] = useState('');
+    // const [salutation, setSalutation] = useState('');
 
-    
+    async function getFirstNameOfUser(email){
+        const userFound = await getUserByEmail(email);
+        setFirstName(userFound.FirstName);
+    }
+
+    // async function getSalutation(email){
+    //     const userFound = await getUserByEmail(email);
+    //     const gender = userFound.Gender;
+        
+    //     if(gender === "F"){
+    //         setSalutation("Ms");
+    //     }
+    //     else{
+    //         setSalutation("Mr");
+    //     }
+    // }
+
+    getFirstNameOfUser(email);
+    // getSalutation(email);
+
     return(
         <div>
             <CQSideBar />
             <div className={styles.container}>
                 <div className={styles.greeting}>
-                    <div className={styles.name}>Hello Arin, </div>
+                    <div className={styles.name}>Hello {firstName}, </div>
                     <div className={styles.line}> ready to conquer some new knowledge today?</div>
                 </div>
 

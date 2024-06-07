@@ -39,18 +39,18 @@ async function createNewUser(email, password, firstName, lastName, gender){
 async function getUserByEmail(email){
     try{
         const response = await axiosInstance({
-            method: "get",
+            method: "post",
             url: "/user/profile/",
             data: {email: email}
         });
 
-        return response.data.message;
+        return response.data;
     }
     catch(error){
         if(error.response){
-            return error.response.data.message;
+            return error.message;
         }
     }
 }
 
-export {authenticate, createNewUser};
+export {authenticate, createNewUser, getUserByEmail};
