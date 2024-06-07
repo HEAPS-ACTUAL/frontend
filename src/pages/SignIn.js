@@ -1,26 +1,44 @@
 
 import React, { useState } from 'react';
-// import '../styles/SignIn.css'; // Make sure this path is correct based on your project structure
+import '../styles/SignIn.css'; // Make sure this path is correct based on your project structure
+import { authenticate, createNewUser } from '../services (for backend)/UserService';
+
+
 const SignIn = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [gender, setGender] = useState('');
+    const [message, setMessage] = useState('');
+
+    async function registration(event) {
+        event.preventDefault();
+        const returnedMessage = await createNewUser(email, password, firstName, lastName, gender);
+        console.log(returnedMessage);
+        setMessage(returnedMessage);
+    }
+
     const [isActive, setIsActive] = useState(false);
 
     return (
+        <>
         <div className={isActive ? "container active" : "container"} id="container">
             <div className="form-container sign-up">
-                <form>
+                <form onSubmit={registration}>
                     <h1>Create Account</h1>
                     <br></br>
-                    <input type="text" placeholder="First Name" />
-                    <input type="text" placeholder="Last Name" />
-                    <select name="gender">
-                        <option value="">Select Gender</option> 
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
+                    <input type="text" placeholder="First Name" onChange={(event) => setFirstName(event.target.value)} />
+                    <input type="text" placeholder="Last Name" onChange={(event) => setLastName(event.target.value)} />
+                    <select name="gender" onChange={(event) => setGender(event.target.value)}>
+                        <option>Select Gender</option> 
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
                         <option value="other">Other</option>
                     </select>      
-                    <input type="email" placeholder="Email" />
-                    <input type="password" placeholder="Password" />
-                    <button type="button">Sign Up</button>
+                    <input type="email" placeholder="Email" onChange={(event) => setEmail(event.target.value)}/>
+                    <input type="password" placeholder="Password" onChange={(event) => setPassword(event.target.value)} />
+                    <button type="submit">Sign up</button>
                 </form>
             </div>
             <div className="form-container sign-in">
@@ -30,7 +48,7 @@ const SignIn = () => {
                     <input type="email" placeholder="Email" />
                     <input type="password" placeholder="Password" />
                     <a href="#">Forget Your Password?</a> 
-                    <button type="button">Sign In</button>
+                    <button type="submit">Sign In</button>
                 </form>
             </div>
             <div className="toggle-container">
@@ -48,6 +66,8 @@ const SignIn = () => {
                 </div>
             </div>
         </div>
+        <h1>{message}</h1>
+        </>
     );
 }
 
