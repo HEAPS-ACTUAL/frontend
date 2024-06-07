@@ -4,6 +4,9 @@
     align-items: center;
     padding: 1rem 2rem;
     background: linear-gradient(to right, #c4dfdf, #d2e9e9, #e3f4f4, #f8f6f4);
+    position: sticky;
+    top: 0;
+    
 }
 
 .logoLink {
@@ -32,7 +35,6 @@
     align-items: left;
     
 }
-
 
 .navItems .navLink {
     margin-right: 20px;

@@ -3,7 +3,7 @@ import styles from '../styles/CQquizzes.module.css'
 import CQSideBar from "./CQsideBar";
 
 function CQquizzes(){
-
+    
     return(
         <div>
             <CQSideBar />
@@ -17,8 +17,13 @@ function CQquizzes(){
                     <h2> Create quizzes </h2>
 
                     <form>
-                        <input type="file" />
-                        <button type="submit"> Upload </button>
+                        <p> You can select one or more files </p>
+                        <br></br>
+                        <input type="file" multiple />
+                        <div>
+                            <button className={styles.uploadFileButton} type="submit"> Upload </button>
+                            <button className={styles.generateQuizButton}> Generate Quiz </button>
+                        </div>
                     </form>
                 </div>
 
@@ -29,6 +34,49 @@ function CQquizzes(){
                 <div className={styles.allQuizzes}>
                     <h2> All quizzes </h2>
                 </div>
+
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+
+                <h1>this is to test the scrolling</h1>
             </div>
         </div>
     );
