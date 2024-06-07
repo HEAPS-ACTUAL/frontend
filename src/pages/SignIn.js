@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/SignIn.css'; // Make sure this path is correct based on your project structure
 import { authenticate, createNewUser } from '../services (for backend)/UserService';
 
@@ -11,12 +12,27 @@ const SignIn = () => {
     const [lastName, setLastName] = useState('');
     const [gender, setGender] = useState('');
     const [message, setMessage] = useState('');
+    
+    const navigate = useNavigate();
 
-    async function registration(event) {
+    async function handleRegistration(event) {
         event.preventDefault();
         const returnedMessage = await createNewUser(email, password, firstName, lastName, gender);
         console.log(returnedMessage);
         setMessage(returnedMessage);
+    }
+
+    async function handleSignIn(event){
+        event.preventDefault();
+        const returnedMessage = await authenticate (email, password);
+        setMessage(returnedMessage);
+
+        if (returnedMessage != 'Authentication Successful!'){
+            setMessage(returnedMessage);
+        }
+        else{
+            navigate('/CQquizzes');
+        }
     }
 
     const [isActive, setIsActive] = useState(false);
@@ -25,7 +41,7 @@ const SignIn = () => {
         <>
         <div className={isActive ? "container active" : "container"} id="container">
             <div className="form-container sign-up">
-                <form onSubmit={registration}>
+                <form onSubmit={handleRegistration}>
                     <h1>Create Account</h1>
                     <br></br>
                     <input type="text" placeholder="First Name" onChange={(event) => setFirstName(event.target.value)} />
@@ -42,11 +58,11 @@ const SignIn = () => {
                 </form>
             </div>
             <div className="form-container sign-in">
-                <form>
+                <form onSubmit={handleSignIn}>
                     <h1>Sign In</h1>
                     <br></br>
-                    <input type="email" placeholder="Email" />
-                    <input type="password" placeholder="Password" />
+                    <input type="email" placeholder="Email" onChange={(event) => setEmail(event.target.value)}/>
+                    <input type="password" placeholder="Password" onChange={(event) => setPassword(event.target.value)}/>
                     <a href="#">Forget Your Password?</a> 
                     <button type="submit">Sign In</button>
                 </form>
