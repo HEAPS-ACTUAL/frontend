@@ -17,9 +17,13 @@ function CQquizzes(){
                     <h2> Create quizzes </h2>
 
                     <form>
-                        Please select one or more files
+                        <p> You can select one or more files </p>
+                        <br></br>
                         <input type="file" multiple />
-                        <button type="submit"> Upload </button>
+                        <div>
+                            <button className={styles.uploadFileButton} type="submit"> Upload </button>
+                            <button className={styles.generateQuizButton}> Generate Quiz </button>
+                        </div>
                     </form>
                 </div>
 
@@ -72,7 +76,7 @@ function CQquizzes(){
                 <br></br>
                 <br></br>
 
-                <h1>hello</h1>
+                <h1>this is to test the scrolling</h1>
             </div>
         </div>
     );
