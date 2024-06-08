@@ -30,6 +30,9 @@ const SignIn = () => {
             else{
                 const returnedMessage = await createNewUser(email, password, firstName, lastName, gender);
                 setRegisterMessage(returnedMessage);
+                setTimeout(() => {
+                     window.location.reload();
+                }, 1500);
             }
         }
     }
@@ -49,7 +52,7 @@ const SignIn = () => {
                 setSignInMessage(returnedMessage);
             }
             else{
-                localStorage.setItem('userEmail', email);
+                sessionStorage.setItem('userEmail', email);
                 navigate('/CQquizzes');
             }
         }    

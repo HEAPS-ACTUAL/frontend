@@ -44,11 +44,14 @@
     color: #333;
 }
 
-.navLinkLogin {
-    text-decoration: none;
-    padding: 5px 10px;
+.navLinkLogin button{
+    height: 32px;
+    width: 80px;
     border: 1px solid #007bff;
     border-radius: 5px;
     color: #007bff;
-    margin-left: auto; 
+    margin-left: 700px;
+    cursor: pointer;
+    background: transparent;
+    font-size: 16px;
 }
