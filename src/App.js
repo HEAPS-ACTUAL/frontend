@@ -16,13 +16,15 @@ import './styles/App.css';
 import checkLogInStatus from './utility/protect';
 
 function App() {
-  const [IsLoggedIn, setLogInStatus] = useState();
+  const [IsLoggedIn, setLogInStatus] = useState(true);
   
-  useEffect(() => {
-    console.log("i am runnning");
-    setLogInStatus(checkLogInStatus());
-    console.log(IsLoggedIn);
-  }, [IsLoggedIn]);
+  // I HAVENT FIGURED OUT THE CODE BELOW 
+  
+  // useEffect(() => {
+  //   console.log("i am runnning");
+  //   setLogInStatus(checkLogInStatus());
+  //   console.log(IsLoggedIn);
+  // }, [IsLoggedIn]);
   
   return (
     <Router>

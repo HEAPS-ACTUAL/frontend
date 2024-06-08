@@ -54,12 +54,11 @@ const SignIn = () => {
             else{
                 sessionStorage.setItem('userEmail', email);
                 
-                // navigate('/home/*');
+                // window.location.reload();
                 
-            //     setTimeout(() => {
-            //         window.location.reload();
-            //    }, 2000);
-               
+                setTimeout(() => {
+                    navigate('/home');
+               }, 5000);
             }
         }    
     }
