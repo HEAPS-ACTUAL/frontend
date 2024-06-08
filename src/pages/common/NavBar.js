@@ -5,15 +5,32 @@ import quizDaddyLogo from '../../images/logo.png';
 
 
 function Navbar() {
-  const [logInOut, setLogInOut] = useState('Log in')
 
-  useEffect(() => {
+  function handleLogOut(){
+    sessionStorage.clear();
+  }
+
+  // IGNORE THESE CODES FIRST, IM TRYING TO MAKE THE LOG IN CHANGE TO LOG OUT
+  // WHEN USER SUCCESSFULLY LOGS IN
+
+  const [logInOut, setLogInOut] = useState('');
+
+  function updateLogInStatus(){
     if(sessionStorage.getItem('userEmail')){
       setLogInOut('Log out');
     }
-  }, [])
+    else{
+      setLogInOut('Log in');
+    }
+  }
 
-  console.log(logInOut);
+  useEffect(() => {
+    updateLogInStatus();
+    // window.addEventListener('storage', updateLogInStatus);
+    // return () => {
+    //   window.removeEventListener('storage', updateLogInStatus);
+    // }
+  }, [])
 
   return (
     <div className={styles.navbar}>
@@ -29,7 +46,7 @@ function Navbar() {
             <Link to="/flashcard" className={styles.navLink}>flashcard(temp)</Link>
         </div>
 
-        <Link to="/login" className={styles.navLinkLogin}><button>{logInOut}</button></Link>
+        <Link to="/login" className={styles.navLinkLogin}><button onClick={handleLogOut}>{logInOut}</button></Link>
     </div>
   );
 }

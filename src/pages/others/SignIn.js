@@ -54,6 +54,9 @@ const SignIn = () => {
             else{
                 sessionStorage.setItem('userEmail', email);
                 navigate('/CQquizzes');
+                setTimeout(() => {
+                    window.location.reload();
+               }, 1);
             }
         }    
     }
