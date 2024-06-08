@@ -11,7 +11,7 @@ const SignIn = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [gender, setGender] = useState('');
-    const [signInmMessage, setSignInMessage] = useState('');
+    const [signInMessage, setSignInMessage] = useState('');
     const [registerMessage, setRegisterMessage] = useState('');
     
     const navigate = useNavigate();
@@ -53,10 +53,13 @@ const SignIn = () => {
             }
             else{
                 sessionStorage.setItem('userEmail', email);
-                navigate('/CQquizzes');
-                setTimeout(() => {
-                    window.location.reload();
-               }, 1);
+                
+                // navigate('/home/*');
+                
+            //     setTimeout(() => {
+            //         window.location.reload();
+            //    }, 2000);
+               
             }
         }    
     }
@@ -96,7 +99,7 @@ const SignIn = () => {
                     <input type="email" placeholder="Email" onChange={(event) => setEmail(event.target.value)}/>
                     <input type="password" placeholder="Password" onChange={(event) => setPassword(event.target.value)}/>
                     <button type="submit">Sign In</button>
-                    {signInmMessage && <p> {signInmMessage} </p>}
+                    {signInMessage && <p> {signInMessage} </p>}
                 </form>
             </div>
             <div className="toggle-container">

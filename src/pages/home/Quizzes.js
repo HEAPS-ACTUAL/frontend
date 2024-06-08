@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from "react";
 import styles from '../../styles/Quizzes.module.css'
-import CQSideBar from "../common/SideBar";
 import { getUserByEmail } from "../../services (for backend)/UserService";
-import Protect from "../../utility/protect";
+// import Protect from "../../utility/protect";
 
-function CQquizzes(){
-    Protect();
+function Quizzes(){
+    // Protect();
     
     const email = sessionStorage.getItem('userEmail');
     const [firstName, setFirstName] = useState('');
@@ -36,7 +35,6 @@ function CQquizzes(){
 
     return(
         <div>
-            <CQSideBar />
             <div className={styles.container}>
                 <div className={styles.greeting}>
                     <div className={styles.name}>Hello {firstName}, </div>
@@ -112,4 +110,4 @@ function CQquizzes(){
     );
 }
 
-export default CQquizzes;
+export default Quizzes;

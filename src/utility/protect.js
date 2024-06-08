@@ -1,14 +1,10 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-function Protect(){
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (!sessionStorage.getItem('userEmail')) {
-            navigate('/login');
-        }
-    });
+function checkLogInStatus(){
+    if(sessionStorage.getItem('userEmail')){
+        return true;
+    }
+    else{
+        return false;
+    }
 };
 
-export default Protect;
+export default checkLogInStatus;

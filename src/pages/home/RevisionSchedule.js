@@ -1,18 +1,13 @@
 import React from 'react';
-import CQSideBar from '../common/SideBar';
 import styles from '../../styles/RevisionSchedule.module.css'
 
-function CQRevisionSchedule(){
+function RevisionSchedule(){
 
     return(
         <div className={styles.RevisionSchedule}>
-            <CQSideBar />
-
-            <div>
-                revision schedule
-            </div>
+            revision schedule
         </div>
     )
 }
 
-export default CQRevisionSchedule;
+export default RevisionSchedule;
