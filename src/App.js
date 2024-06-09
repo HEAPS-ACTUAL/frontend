@@ -38,10 +38,10 @@ function App() {
         <Route path="/" element={<About />} />
         <Route path="/features" element={<Features />} />
         <Route path="/login" element={<SignIn />} />
-        <Route
+        <Route>
           path="/home/*"
           element={IsLoggedIn ? <Home /> : <Navigate to="/login" />} // REDIRECT TO SIGN IN PAGE IF NOT LOGGED IN
-        />
+        </Route>
         <Route path="/flashcard" element={<Flashcards />} />
       </Routes>
     </Router>
