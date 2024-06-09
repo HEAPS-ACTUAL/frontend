@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 
 // PAGES
 import About from "./pages/others/About";
@@ -38,10 +33,10 @@ function App() {
         <Route path="/" element={<About />} />
         <Route path="/features" element={<Features />} />
         <Route path="/login" element={<SignIn />} />
-        <Route>
+        <Route
           path="/home/*"
           element={IsLoggedIn ? <Home /> : <Navigate to="/login" />} // REDIRECT TO SIGN IN PAGE IF NOT LOGGED IN
-        </Route>
+        />
         <Route path="/flashcard" element={<Flashcards />} />
       </Routes>
     </Router>
