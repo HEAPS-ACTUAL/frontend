@@ -53,12 +53,8 @@ const SignIn = () => {
             }
             else{
                 sessionStorage.setItem('userEmail', email);
-                
                 // window.location.reload();
-                
-                setTimeout(() => {
-                    navigate('/home');
-               }, 5000);
+                navigate('/home');
             }
         }    
     }
