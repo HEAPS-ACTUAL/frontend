@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 // PAGES
-import About from "./pages/others/About";
-import Features from "./pages/others/Features";
-import Navbar from "./pages/common/NavBar";
-import SignIn from "./pages/others/SignIn";
-import Flashcards from "./pages/flashcard";
+import About from "./pages/main/About";
+import Features from "./pages/main/Features";
+import Navbar from "./pages/main/NavBar";
+import SignIn from "./pages/main/SignIn";
+import Flashcards from "./pages/Flashcard";
 import Home from "./pages/home/Home";
 
 // STYLES
