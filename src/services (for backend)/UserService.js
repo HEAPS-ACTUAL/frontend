@@ -53,4 +53,22 @@ async function getUserByEmail(email){
     }
 }
 
-export {authenticate, createNewUser, getUserByEmail};
+async function getUserFirstName(email){
+    const userFound = await getUserByEmail(email);
+    return userFound.FirstName;
+}
+
+async function getSalutation(email){
+    const userFound = await getUserByEmail(email);
+    const gender = userFound.Gender;
+    
+    if(gender === "F"){
+        return "Ms";
+    }
+    else{
+       return "Mr";
+    }
+}
+
+
+export {authenticate, createNewUser, getUserByEmail, getUserFirstName, getSalutation};

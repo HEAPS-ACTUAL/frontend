@@ -1,38 +1,25 @@
 import React, {useState, useEffect} from "react";
 import styles from '../../styles/Quizzes.module.css'
-import { getUserByEmail } from "../../services (for backend)/UserService";
+
+// Functions
+import { getSalutation, getUserFirstName } from "../../services (for backend)/UserService";
 import { generateQuiz } from "../../services (for backend)/QuizService";
-// import Protect from "../../utility/protect";
 
 function Quizzes(){
-    // Protect();
-    
     const email = sessionStorage.getItem('userEmail');
+
     const [firstName, setFirstName] = useState('');
-    // const [salutation, setSalutation] = useState('');
+    const [salutation, setSalutation] = useState('');
     
     useEffect(() => {
-        getUserFirstName(email);
-    });
+        async function fetchUserInfo(){
+            const firstName = await getUserFirstName(email);
+            setFirstName(firstName);
 
-    async function getUserFirstName(email){
-        const userFound = await getUserByEmail(email);
-        setFirstName(userFound.FirstName);
-    }
-    
-    // async function getSalutation(email){
-    //     const userFound = await getUserByEmail(email);
-    //     const gender = userFound.Gender;
-        
-    //     if(gender === "F"){
-    //         setSalutation("Ms");
-    //     }
-    //     else{
-    //         setSalutation("Mr");
-    //     }
-    // }
-
-    // getSalutation(email);
+            const salutation = await getSalutation(email);
+            setSalutation(salutation);
+        }
+    }, []);
 
     const [file, setFile] = useState(null);
 

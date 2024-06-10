@@ -1,7 +1,7 @@
 import {Routes, Route, Navigate} from 'react-router-dom';
 
 //PAGES
-import SideBar from "../common/SideBar";
+import SideBar from "./SideBar";
 import Quizzes from './Quizzes';
 import RevisionSchedule from './RevisionSchedule';
 import MontitorProgress from './MonitorProgress';
