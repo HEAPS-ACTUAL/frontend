@@ -17,11 +17,10 @@ body {
     display: flex;
     flex-direction: column;
     padding: 20px; 
-    height: calc(100vh - 72px);
+    height: calc(100vh - 80px);
     /* background-color: aliceblue; */
     position: sticky;
     top: 80px;
-    
 }
 
 .sidebarElement {
@@ -34,7 +33,6 @@ body {
     /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
     transition: all 0.3s ease; /* Smooth transition for hover effects */
     text-decoration: none;
-
 }
 
 .sidebarElement:hover {
