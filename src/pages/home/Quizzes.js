@@ -3,6 +3,7 @@ import styles from '../../styles/Quizzes.module.css'
 
 // Functions
 import { getSalutation, getUserFirstName } from "../../services (for backend)/UserService";
+import { generateQuiz } from "../../services (for backend)/QuizService";
 
 function Quizzes(){
     const email = sessionStorage.getItem('userEmail');
@@ -20,6 +21,8 @@ function Quizzes(){
         }
     }, []);
 
+    const [file, setFile] = useState(null);
+
     return(
         <div>
             <div className={styles.container}>
@@ -31,13 +34,13 @@ function Quizzes(){
                 <div className={styles.createQuiz}>
                     <h2> Create quizzes </h2>
 
-                    <form>
+                    <form onSubmit={generateQuiz}>
                         <p> You can select one or more files </p>
                         <br></br>
-                        <input type="file" multiple />
+                        <input type="file" onChange={(event) => setFile(event.target.value)} />
                         <div>
-                            <button className={styles.uploadFileButton} type="submit"> Upload </button>
-                            <button className={styles.generateQuizButton}> Generate Quiz </button>
+                            {/* <button className={styles.uploadFileButton} type="submit"> Upload </button> */}
+                            <button type='submit' className={styles.generateQuizButton}> Generate Quiz </button>
                         </div>
                     </form>
                 </div>
