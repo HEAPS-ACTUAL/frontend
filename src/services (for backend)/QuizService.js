@@ -4,7 +4,8 @@ async function generateSampleQuestions(file){
     try{
         const response = await axiosInstance({
             method: 'post',
-            url: '/quiz/generateSampleQuestions',
+            url: '/file/upload',
+            // url: '/quiz/generateSampleQuestions',
             data: {file: file}
         })
 
