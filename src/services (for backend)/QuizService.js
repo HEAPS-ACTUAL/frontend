@@ -2,11 +2,15 @@ import axiosInstance  from "../utility/axiosInstance";
 
 async function generateSampleQuestions(file){
     try{
+        const formData = new FormData();
+        formData.append('file', file[0]);
+        console.log(formData);
+        
         const response = await axiosInstance({
             method: 'post',
             url: '/file/upload',
             // url: '/quiz/generateSampleQuestions',
-            data: {file: file}
+            body: formData
         })
 
         console.log(response);
