@@ -8,14 +8,16 @@ function Quizzes(){
     const email = sessionStorage.getItem('userEmail');
 
     const [firstName, setFirstName] = useState('');
-    // const [salutation, setSalutation] = useState('');
+    const [salutation, setSalutation] = useState('');
     
     useEffect(() => {
-        async function fetchFirstName(){
+        async function fetchUserInfo(){
             const firstName = await getUserFirstName(email);
             setFirstName(firstName);
+
+            const salutation = await getSalutation(email);
+            setSalutation(salutation);
         }
-        // getSalutation(email);
     }, []);
 
     return(
