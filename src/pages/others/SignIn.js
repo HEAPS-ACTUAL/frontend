@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import '../../styles/SignIn.css';
 
+// functions
 import { authenticate, createNewUser } from '../../services (for backend)/UserService';
 import { handleLogIn } from '../../services (for backend)/ProtectionService';
 
