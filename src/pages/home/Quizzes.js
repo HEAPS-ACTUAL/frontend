@@ -21,7 +21,7 @@ function Quizzes(){
         }
     }, []);
 
-    const [file, setFile] = useState(null);
+    const [file, setFile] = useState([]);
 
     return(
         <div>
