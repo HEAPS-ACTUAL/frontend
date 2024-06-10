@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../styles/SignIn.css'; 
-import { authenticate, createNewUser } from '../../services (for backend)/UserService';
 
+import '../../styles/SignIn.css';
+
+import { authenticate, createNewUser } from '../../services (for backend)/UserService';
+import { handleLogIn } from '../../services (for backend)/ProtectionService';
 
 const SignIn = () => {
     const [email, setEmail] = useState('');
@@ -52,9 +54,8 @@ const SignIn = () => {
                 setSignInMessage(returnedMessage);
             }
             else{
-                sessionStorage.setItem('userEmail', email);
-                // window.location.reload();
-                navigate('/home');
+               handleLogIn(email);
+               navigate('/home');
             }
         }    
     }

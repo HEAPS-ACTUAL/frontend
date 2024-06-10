@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 // PAGES
 import About from "./pages/others/About";
@@ -13,34 +13,35 @@ import Home from "./pages/home/Home";
 import "./styles/App.css";
 
 // FUNCTIONS
-import checkLogInStatus from "./utility/protect";
+import { isLoggedIn } from "./services (for backend)/ProtectionService";
 
 function App() {
-  const [IsLoggedIn, setLogInStatus] = useState(true);
+    const [IsLoggedIn, setIsLoggedIn] = useState();
 
-  // I HAVENT FIGURED OUT THE CODE BELOW
+    function updateLogInStatus() {
+        setIsLoggedIn(isLoggedIn())
+    };
 
-  // useEffect(() => {
-  //   console.log("i am runnning");
-  //   setLogInStatus(checkLogInStatus());
-  //   console.log(IsLoggedIn);
-  // }, [IsLoggedIn]);
+    useEffect(() => {
+        updateLogInStatus();
+        window.addEventListener('logInOut', updateLogInStatus);
+    }, []);
 
-  return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<About />} />
-        <Route path="/features" element={<Features />} />
-        <Route path="/login" element={<SignIn />} />
-        <Route
-          path="/home/*"
-          element={IsLoggedIn ? <Home /> : <Navigate to="/login" />} // REDIRECT TO SIGN IN PAGE IF NOT LOGGED IN
-        />
-        <Route path="/flashcard" element={<Flashcards />} />
-      </Routes>
-    </Router>
-  );
+    return (
+        <Router>
+            <Navbar />
+            <Routes>
+                <Route path="/" element={<About />} />
+                <Route path="/features" element={<Features />} />
+                <Route path="/login" element={<SignIn />} />
+                <Route
+                    path="/home/*"
+                    element={IsLoggedIn ? <Home /> : <Navigate to="/login" />} // REDIRECT TO SIGN IN PAGE IF NOT LOGGED IN
+                />
+                <Route path="/flashcard" element={<Flashcards />} />
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;
