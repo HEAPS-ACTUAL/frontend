@@ -1,8 +1,20 @@
 import axiosInstance  from "../utility/axiosInstance";
 
-async function generateQuiz(event){
-    event.preventDefault();
-    console.log("helo wordly sjdf");
+async function generateSampleQuestions(file){
+    try{
+        const response = await axiosInstance({
+            method: 'post',
+            url: '/quiz/generateSampleQuestions',
+            data: {file: file}
+        })
+
+        console.log(response);
+    }
+    catch(error){
+        if(error.response){
+            return error.response;
+        }
+    }
 }
 
-export {generateQuiz};
+export {generateSampleQuestions};
