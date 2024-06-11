@@ -34,7 +34,7 @@ function Navbar() {
                 <Link to="/" className={styles.navLink}>About</Link>
                 <Link to="/features" className={styles.navLink}>Features</Link>
                 <Link to="/Home" className={styles.navLink}>Home</Link>
-                <Link to="/flashcard" className={styles.navLink}>flashcard(temp)</Link>
+                <Link to="/Quiz" className={styles.navLink}>quiz(temp)</Link>
             </div>
 
             <Link to="/login" className={styles.navLinkLogin}><button onClick={handleLogOut}>{logInOutButton}</button></Link>

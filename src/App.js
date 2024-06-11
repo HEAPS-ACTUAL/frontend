@@ -6,7 +6,7 @@ import About from "./pages/main/About";
 import Features from "./pages/main/Features";
 import Navbar from "./pages/main/NavBar";
 import SignIn from "./pages/main/SignIn";
-import QuizFeature from "./home/Quiz";
+import QuizFeature from "./pages/home/Quiz";
 import Home from "./pages/home/Home_route";
 
 // STYLES

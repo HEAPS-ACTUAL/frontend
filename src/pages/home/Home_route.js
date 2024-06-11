@@ -14,7 +14,7 @@ function Home(){
                 <Route path='/quizzes' element={<Quizzes />} />
                 <Route path="/monitor-progress" element={<MontitorProgress />} />
                 <Route path="/revision-schedule" element={<RevisionSchedule />} />
-                <Route path='/' element={ <Navigate to='/home/quizzes' />} />
+                <Route path='/' element={ <Navigate to='/home/Quizzes' />} />
              </Routes>
              
         </div>

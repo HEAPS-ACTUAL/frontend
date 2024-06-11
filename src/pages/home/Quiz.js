@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-
+import styles from '../../styles/Quiz.module.css'
 
 function QuizFeature () {
 
@@ -54,12 +54,13 @@ function QuizFeature () {
     };
 
     return(
-        <div>
+        <div className={styles.QuizContainer}>
            
-            <h1>{currentQuestion + 1}. {questions[currentQuestion].question}</h1>
-            <div>
+            <div className={styles.question}>{currentQuestion + 1}. {questions[currentQuestion].question}</div>
+            <div className={styles.optionsContainer} >
                 {questions[currentQuestion].options.map((option, index) => (
-                    <label key={index}>
+                    <div key={index} className={styles.options}>
+                    
                         <input
                             type = "radio"
                             value = {option}
@@ -67,15 +68,18 @@ function QuizFeature () {
                             onChange={() => handleOptionChange(option)}
                         />
                         {option}
-                    </label>
+                    </div>
+                    
                 ))}
             </div>
             <div>
                 {showExplanation && <p>{questions[currentQuestion].explanation}</p>}
             </div>
-            <button onClick={handleSubmit}>Submit</button>
-            <button onClick={handleNext}>Next</button>
-            
+
+            <div className='buttonsContainer'>
+            <button onClick={handleSubmit} className={styles.btnSubmit} >Submit</button>
+            <button onClick={handleNext} className={styles.btnNext}>Next</button>
+            </div>
         </div>
     );
 }
