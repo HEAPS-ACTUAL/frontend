@@ -4,14 +4,18 @@ async function generateSampleQuestions(file){
     try{
         console.log(file);
         const formData = new FormData();
-        formData.append('file', file[0]);
+
+        for(let i = 0; i < file.length; i += 1){
+            formData.append('file', file[i]);
+        }
+        
         // console.log(formData);
         
         const response = await axiosInstance({
             method: 'post',
             url: '/file/upload',
             // url: '/quiz/generateSampleQuestions',
-            data: formData
+            body: formData
         })
 
         // console.log(response);
