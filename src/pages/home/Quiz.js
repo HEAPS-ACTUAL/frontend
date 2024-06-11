@@ -48,7 +48,7 @@ function QuizFeature () {
     };
 
     // handler for selecting an option
-    const handleOptionChange = (option) => {
+    const handleOptionClick = (option) => {
         setSelectedOption(option);
         setShowExplanation(false); // Hide explanation when a new option is selected
     };
@@ -59,18 +59,14 @@ function QuizFeature () {
             <div className={styles.question}>{currentQuestion + 1}. {questions[currentQuestion].question}</div>
             <div className={styles.optionsContainer} >
                 {questions[currentQuestion].options.map((option, index) => (
-                    <div key={index} className={styles.options}>
-                    
-                        <input
-                            type = "radio"
-                            value = {option}
-                            checked = {selectedOption === option}
-                            onChange={() => handleOptionChange(option)}
-                        />
-                        {option}
-                    </div>
+                    <div key={index} 
+                    className={`${styles.option} ${selectedOption === option ? styles.selectedOption : ''}`}
+                    onClick={() => handleOptionClick(option)}>
+                   {option}
+                    </div> //  I DONT UNDERSTAND THIS PART OF THE CODE, NEED TO FIND OUT MORE
                     
                 ))}
+                
             </div>
             <div>
                 {showExplanation && <p>{questions[currentQuestion].explanation}</p>}
@@ -85,3 +81,7 @@ function QuizFeature () {
 }
 
 export default QuizFeature;
+
+// i want all the options button to have the same width, once the user submits,
+// if the option chosen is correct, then show a green tick icon beside the option
+// if the option chosen is wrong, show a red cross icon beside the option chosen
