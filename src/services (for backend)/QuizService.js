@@ -2,7 +2,7 @@ import axiosInstance  from "../utility/axiosInstance";
 
 async function generateSampleQuestions(file){
     try{
-        console.log(file);
+        // console.log(file);
         const formData = new FormData();
 
         for(let i = 0; i < file.length; i += 1){

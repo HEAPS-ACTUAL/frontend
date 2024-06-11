@@ -27,6 +27,7 @@ function Quizzes(){
     const [file, setFile] = useState([]);
 
     function handleFileUpload(event){
+        console.log(file);
         event.preventDefault();
         generateSampleQuestions(file);
     }
