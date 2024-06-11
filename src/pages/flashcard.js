@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../styles/flashcard.module.css";
+import styles from "../styles/Flashcard.module.css";
 
 function Flashcards() {
   return (

@@ -6,7 +6,7 @@ import About from "./pages/main/About";
 import Features from "./pages/main/Features";
 import Navbar from "./pages/main/NavBar";
 import SignIn from "./pages/main/SignIn";
-import Flashcards from "./pages/flashcard";
+import Flashcards from "./pages/Flashcard";
 import Home from "./pages/home/Home";
 
 // STYLES
