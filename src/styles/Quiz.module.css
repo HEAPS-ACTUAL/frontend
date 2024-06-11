@@ -2,8 +2,8 @@
     font-family: sans-serif;
     display: flex;
     flex-direction: column; 
-    align-items: center; /* Ensure content is centered horizontally */
-    height: 100vh; /* Full screen height, adjust if necessary */
+    align-items: center; 
+    height: 100vh; 
 }
 
 .question{
@@ -15,7 +15,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 50px;
-    width: 100%; /* Ensures full width if needed */
+    width: 100%; 
    
 }
 
