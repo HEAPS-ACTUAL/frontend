@@ -18,6 +18,9 @@ function Quizzes(){
             const salutation = await getSalutation(email);
             setSalutation(salutation);
         }
+
+        fetchUserInfo();
+        
     }, []);
 
     return(
