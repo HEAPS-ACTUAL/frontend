@@ -1,9 +1,12 @@
 import axiosInstance  from "../utility/axiosInstance";
 
-async function generateQuiz(file){
+async function generateQuiz(email, quizName, difficulty, file){
     try{
-        // console.log(file);
         const formData = new FormData();
+        
+        formData.append('email', email)
+        formData.append('quizName', quizName)
+        formData.append('difficulty', difficulty);
         formData.append('file', file[0]);
         
         const response = await axiosInstance({
@@ -14,7 +17,7 @@ async function generateQuiz(file){
             headers: { 'Content-Type': 'multipart/form-data' }
         })
 
-        console.log(response.data.questions);
+        console.log(response.data.chatgptResponse);
     }
     catch(error){
         if(error.response){

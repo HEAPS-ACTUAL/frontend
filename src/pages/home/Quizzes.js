@@ -28,7 +28,7 @@ function Quizzes(){
 
     function handleFileUpload(event){
         event.preventDefault();
-        generateQuiz(file);
+        generateQuiz(email, 'sample quiz', 'Easy', file);
     }
 
     return(
