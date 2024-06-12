@@ -15,6 +15,8 @@ async function generateQuiz(email, quizName, difficulty, file){
             data: formData,
             headers: { 'Content-Type': 'multipart/form-data' }
         })
+
+        return response.data.message;
     }
     catch(error){
         if(error.response){
