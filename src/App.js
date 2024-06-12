@@ -9,6 +9,8 @@ import SignIn from "./pages/main/SignIn";
 import QuizFeature from "./pages/home/Quiz";
 import Home from "./pages/home/Home_route";
 
+
+
 // STYLES
 import "./styles/App.css";
 
