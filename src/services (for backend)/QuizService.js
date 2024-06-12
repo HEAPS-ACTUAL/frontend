@@ -11,17 +11,14 @@ async function generateQuiz(email, quizName, difficulty, file){
         
         const response = await axiosInstance({
             method: 'post',
-            // url: '/file/upload',
-            url: '/quiz/generateSampleQuestions',
+            url: '/quiz/generateAndStoreQuiz',
             data: formData,
             headers: { 'Content-Type': 'multipart/form-data' }
         })
-
-        console.log(response.data.chatgptResponse);
     }
     catch(error){
         if(error.response){
-            return error.response;
+            return error.response.data.message;
         }
     }
 }
