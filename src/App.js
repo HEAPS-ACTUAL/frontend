@@ -8,6 +8,7 @@ import Navbar from "./pages/main/NavBar";
 import SignIn from "./pages/main/SignIn";
 import QuizFeature from "./pages/home/Quiz";
 import Home from "./pages/home/Home_route";
+import ResultsPage from "./pages/home/ResultsPage";
 
 
 
@@ -41,6 +42,7 @@ function App() {
                     element={IsLoggedIn ? <Home /> : <Navigate to="/login" />} // REDIRECT TO SIGN IN PAGE IF NOT LOGGED IN
                 />
                 <Route path="/Quiz" element={<QuizFeature />} />
+                <Route path="/ResultsPage" element={<ResultsPage />} />
             </Routes>
         </Router>
     );
