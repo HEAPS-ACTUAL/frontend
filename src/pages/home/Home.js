@@ -3,6 +3,7 @@ import styles from '../../styles/Quizzes.module.css'
 
 // Functions
 import { getSalutation, getUserFirstName } from "../../services (for backend)/UserService";
+import { generateQuiz } from "../../services (for backend)/QuizService";
 
 function Quizzes(){
     const email = sessionStorage.getItem('userEmail');
@@ -22,6 +23,13 @@ function Quizzes(){
         fetchUserInfo();
         
     }, []);
+
+    const [file, setFile] = useState([]);
+
+    function handleFileUpload(event) {
+        event.preventDefault();
+        generateQuiz(email, 'sample quiz', 'E', file);
+    }
 
     return(
         <div>
