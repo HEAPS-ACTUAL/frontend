@@ -9,26 +9,31 @@ const ResultsPage = () => {
 
     return (
         <div className={styles.QuizResultsContainer}>
-
             <h1>Results</h1>
-
             {questions.map((question) => (
-                
                 <div key={question.id} className={styles.QuestionBlock}>
-                    <h2 className={styles.Question}>{question.question}</h2>
+                    <h2 className={styles.Question}>{question.id}. {question.question}</h2>
                     <div className={styles.OptionsContainer}>
                         {question.options.map((option) => (
                             <div key={option} className={`${styles.Option} 
-                                ${option === userAnswers[question.id] ? styles.UserAnswer : ''} 
+                                ${option === userAnswers[question.id] ? styles.UserAnswer : ''}
                                 ${option === question.correctAnswer ? styles.CorrectAnswer : ''}`}>
                                 {option}
                             </div>
                         ))}
                     </div>
-                    
-                    <p>Explanation: {question.explanation}</p>
+                    <div className={styles.Explanation}>Explanation: {question.explanation}</div>
                 </div>
             ))}
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br> 
+            {/* this is to test the scrolling */}
         </div>
     );
 }
