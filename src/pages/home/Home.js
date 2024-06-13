@@ -54,11 +54,11 @@ function Quizzes() {
                 </div>
 
                 <div className={styles.reviewNow}>
-                    <h2> Review now </h2>
+                    <h2> New quizzes </h2>
                 </div>
 
                 <div className={styles.allQuizzes}>
-                    <h2> All quizzes </h2>
+                    <h2> Completed quizzes </h2>
                 </div>
 
                 <br></br>
