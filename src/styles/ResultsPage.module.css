@@ -6,12 +6,14 @@
   
 }
 
-h1{
+.PageHeader{
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 30px;
     text-decoration: underline;
+    font-size: 30px;
+    font-weight: bold;
 }
 
 .QuestionBlock {
