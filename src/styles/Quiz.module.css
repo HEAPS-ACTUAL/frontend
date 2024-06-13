@@ -1,0 +1,85 @@
+.QuizContainer{
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    height: 100vh; 
+}
+
+.question{
+    background-color: #9bbec8;
+    font-size: 40px;
+    font-weight: bold;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    width: 100%; 
+   
+}
+
+.optionsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.option {
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #f4f4f4;
+    border: 2px solid #ddd;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.option:hover {
+    background-color: #e9e9e9;
+}
+
+.selectedOption {
+    background-color: #9bbec8;
+    color: white;
+    border-color: #9bbec8;
+}
+
+.buttonsContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;           
+    width: 100%;      
+}
+
+.btnSubmit, .btnNext, .btnPrev{
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: #164863;
+    color: white;
+    font-size: 16px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25);   
+    cursor: pointer;
+    justify-content: center;
+
+
+}
+
+
+
+.btnSubmit:hover{
+    background-color: #9bbec8;
+}
+
+.btnNext:hover{
+    background-color: #9bbec8;
+}
+
+
+

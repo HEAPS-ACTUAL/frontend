@@ -43,7 +43,6 @@ async function getUserByEmail(email){
             url: "/user/profile/",
             data: {email: email}
         });
-
         return response.data;
     }
     catch(error){

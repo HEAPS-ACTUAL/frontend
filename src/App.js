@@ -6,8 +6,10 @@ import About from "./pages/main/About";
 import Features from "./pages/main/Features";
 import Navbar from "./pages/main/NavBar";
 import SignIn from "./pages/main/SignIn";
-import Flashcards from "./pages/Flashcards";
-import Home from "./pages/home/Home";
+import QuizFeature from "./pages/home/Quiz";
+import Home from "./pages/home/Home_route";
+
+
 
 // STYLES
 import "./styles/App.css";
@@ -38,7 +40,7 @@ function App() {
                     path="/home/*"
                     element={IsLoggedIn ? <Home /> : <Navigate to="/login" />} // REDIRECT TO SIGN IN PAGE IF NOT LOGGED IN
                 />
-                <Route path="/flashcard" element={<Flashcards />} />
+                <Route path="/Quiz" element={<QuizFeature />} />
             </Routes>
         </Router>
     );
