@@ -1,18 +1,18 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import styles from '../../styles/Quizzes.module.css'
 
 // Functions
 import { getSalutation, getUserFirstName } from "../../services (for backend)/UserService";
 import { generateQuiz } from "../../services (for backend)/QuizService";
 
-function Quizzes(){
+function Quizzes() {
     const email = sessionStorage.getItem('userEmail');
 
     const [firstName, setFirstName] = useState('');
     const [salutation, setSalutation] = useState('');
-    
+
     useEffect(() => {
-        async function fetchUserInfo(){
+        async function fetchUserInfo() {
             const firstName = await getUserFirstName(email);
             setFirstName(firstName);
 
@@ -21,17 +21,17 @@ function Quizzes(){
         }
 
         fetchUserInfo();
-        
+
     }, []);
 
     const [file, setFile] = useState([]);
 
-    function handleFileUpload(event){
+    function handleFileUpload(event) {
         event.preventDefault();
         generateQuiz(email, 'sample quiz', 'E', file);
     }
 
-    return(
+    return (
         <div>
             <div className={styles.container}>
                 <div className={styles.greeting}>
