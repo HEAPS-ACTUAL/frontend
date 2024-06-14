@@ -3,7 +3,7 @@ import styles from '../../styles/Quizzes.module.css'
 
 // Functions
 import { getSalutation, getUserFirstName } from "../../services (for backend)/UserService";
-import { generateQuiz } from "../../services (for backend)/QuizService";
+import { generateQuiz, getAllUndoneQuizzes } from "../../services (for backend)/QuizService";
 
 function Quizzes() {
     const email = sessionStorage.getItem('userEmail');
@@ -21,6 +21,7 @@ function Quizzes() {
         }
 
         fetchUserInfo();
+        getAllUndoneQuizzes(email);
 
     }, []);
 
@@ -43,9 +44,9 @@ function Quizzes() {
                     <h2> Create quizzes </h2>
 
                     <form onSubmit={handleFileUpload}>
-                        <p> You can select one or more files </p>
+                        <p> Please select only one file </p>
                         <br></br>
-                        <input type="file" onChange={(event) => setFile(event.target.files)} multiple />
+                        <input type="file" onChange={(event) => setFile(event.target.files)} />
                         <div>
                             {/* <button className={styles.uploadFileButton} type="submit"> Upload </button> */}
                             <button type='submit' className={styles.generateQuizButton}> Generate Quiz </button>

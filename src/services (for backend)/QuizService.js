@@ -25,4 +25,19 @@ async function generateQuiz(email, quizName, difficulty, file){
     }
 }
 
-export {generateQuiz};
+async function getAllUndoneQuizzes(email){
+    try{
+        const response = await axiosInstance({
+            method: 'post',
+            url: '/quiz/getAllUndoneQuizzes',
+            data: {email: email}
+        })
+
+        console.log(response.data);
+    }
+    catch(error){
+        console.log(error.message);
+    }
+}
+
+export {generateQuiz, getAllUndoneQuizzes};
