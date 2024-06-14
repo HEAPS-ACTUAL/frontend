@@ -87,7 +87,7 @@
 // // if the option chosen is wrong, show a red cross icon beside the option chosen
 
 import React, { useState } from 'react';
-import styles from '../../styles/Quiz.module.css';
+import styles from '../../../styles/Quiz.module.css';
 import { useNavigate } from 'react-router-dom'; 
 
 function QuizFeature() {

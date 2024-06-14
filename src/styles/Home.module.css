@@ -86,3 +86,7 @@
 .generateQuizButton {
     margin-left: 10px;
 }
+
+.quizList {
+    background-color: bisque;
+}

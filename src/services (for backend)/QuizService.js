@@ -25,11 +25,11 @@ async function generateQuiz(email, quizName, difficulty, file){
     }
 }
 
-async function getAllUndoneQuizzes(email){
+async function getToDoQuizzes(email){
     try{
         const response = await axiosInstance({
             method: 'post',
-            url: '/quiz/getAllUndoneQuizzes',
+            url: '/quiz/getToDoQuizzes',
             data: {email: email}
         })
         
@@ -40,4 +40,19 @@ async function getAllUndoneQuizzes(email){
     }
 }
 
-export {generateQuiz, getAllUndoneQuizzes};
+async function getCompletedQuizzes(email){
+    try{
+        const response = await axiosInstance({
+            method: 'post',
+            url: '/quiz/getCompletedQuizzes',
+            data: {email: email}
+        })
+        
+        return response.data;
+    }
+    catch(error){
+        return error.response.data.message;
+    }
+}
+
+export {generateQuiz, getToDoQuizzes, getCompletedQuizzes};
