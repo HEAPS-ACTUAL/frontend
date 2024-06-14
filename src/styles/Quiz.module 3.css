@@ -1,0 +1,106 @@
+.QuizContainer{
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    height: 100vh; 
+}
+
+.Question{
+    /* background-color: #9bbec8; */
+    font-size: 40px;
+    font-weight: bold;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    width: 100%; 
+    padding: 50px;
+   
+}
+
+.optionsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+}
+
+    
+.option {
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 20px 30px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+    width: 800px;
+}
+
+.selectedOption {
+    background-color: #9bbec8; 
+    color: #fff;
+    border-color: #007BFF; 
+}
+
+.option:hover {
+    background-color: #e9e9e9;
+}
+
+.buttonsContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+    width: 100%;   
+    margin-top: 60px;   
+}
+
+.btnSubmit, .btnNext, .btnPrev{
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25);   
+    cursor: pointer;
+    justify-content: center;
+    width:500px
+}
+
+.btnNext{
+    background-color: #337ab7;
+    
+}
+
+.btnPrev{
+    background-color: #337ab7;
+    opacity: 0.9; 
+}
+
+.btnPrev:disabled, .btnNext:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.btnSubmit:hover{
+    background-color: #9bbec8;
+}
+
+.btnNext:hover{
+    background-color: #9bbec8;
+}
+
+.countQuestions{
+    margin-top: 80px;
+    color: gray;
+}
+
+
+
