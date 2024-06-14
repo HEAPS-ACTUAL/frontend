@@ -9,7 +9,7 @@ const ResultsPage = () => {
 
     return (
         <div className={styles.QuizResultsContainer}>
-            <div className={styles.PageHeader}>Results</div>
+            <h1>Results</h1>
             {questions.map((question) => (
                 <div key={question.id} className={styles.QuestionBlock}>
                     <h2 className={styles.Question}>{question.id}. {question.question}</h2>
