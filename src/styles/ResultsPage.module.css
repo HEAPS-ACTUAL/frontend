@@ -1,49 +1,81 @@
+
 .QuizResultsContainer {
-    font-family: Arial, sans-serif;
-    padding: 20px;
     width: 80%;
-    margin: auto;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+  
+}
+
+.Header{
     display: flex;
-    flex-direction: column; 
-    align-items: center; 
-    height: 100vh; 
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 40px;
 }
 
 .QuestionBlock {
-    margin-bottom: 20px;
-}
-
-.Question {
-    font-size: 1.5em;
-    color: #333;
-}
-
-.optionsContainer {
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 8px;
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
+    align-items: center; 
+    
+}
+
+
+.Question{
+    /* background-color: #9bbec8; */
+    font-size: 30px;
+    font-weight: bold;
+    height: 100px;
+    display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 60px;
+    margin-top: 5px;
+    width: 100%; 
+    padding: 50px;
+   
 }
+
+.OptionsContainer {
+    margin:5px;
+    display: flex;
+    flex-direction: column;
+}
+
 .Option {
     background-color: #fff;
     border: 2px solid #ddd;
     border-radius: 10px;
-    padding: 20px 30px;
+    padding: 15px 30px;
     margin-bottom: 10px;
     cursor: pointer;
     transition: background-color 0.3s, border-color 0.3s;
     width: 800px;
 }
 
-
 .UserAnswer {
-    border-color: #ff4500; /* Orange border for user's answer */
-    background-color: #ffe5d9;
+    background-color: #ffdede; /* Light red for user's answer */
 }
 
 .CorrectAnswer {
-    border-color: #4CAF50; /* Green border for correct answer */
-    background-color: #e8f5e9;
+    background-color: #d4edda; /* Light green for correct answer */
+}
+
+.Explanation {
+    margin-top: 10px;
+    font-style: italic;
+    background-color: #FF6F61; 
+    padding: 10px;
+    /* border-left: 15px solid #FF6F61;  */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+    width: 100%;
+    text-align: center; 
+    font-weight: bold; 
 }
