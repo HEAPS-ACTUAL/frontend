@@ -10,6 +10,7 @@ function Quizzes() {
 
     const [firstName, setFirstName] = useState('');
     const [salutation, setSalutation] = useState('');
+    const [undoneQuizzes, setUndoneQuizzes] = useState([]);
 
     useEffect(() => {
         async function fetchUserInfo() {
@@ -20,11 +21,16 @@ function Quizzes() {
             setSalutation(salutation);
         }
 
+        async function fetchUndoneQuizzes(){
+            const undoneQuizzesArray = await getAllUndoneQuizzes(email);
+            setUndoneQuizzes(undoneQuizzesArray);
+        }
+
         fetchUserInfo();
-        getAllUndoneQuizzes(email);
+        fetchUndoneQuizzes();
 
     }, []);
-
+    
     const [file, setFile] = useState([]);
 
     function handleFileUpload(event) {
@@ -56,6 +62,13 @@ function Quizzes() {
 
                 <div className={styles.reviewNow}>
                     <h2> New quizzes </h2>
+                    <div className={styles.newQuizzesContainer}>
+                        {/* <ol>
+                            {undoneQuizzes.map((quiz) => {
+                                return <li key={quiz.QuizName}> {quiz.QuizName} </li>
+                            })}
+                        </ol> */}
+                    </div>
                 </div>
 
                 <div className={styles.allQuizzes}>

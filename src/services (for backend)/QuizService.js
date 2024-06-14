@@ -32,11 +32,11 @@ async function getAllUndoneQuizzes(email){
             url: '/quiz/getAllUndoneQuizzes',
             data: {email: email}
         })
-
-        console.log(response.data);
+        
+        return response.data;
     }
     catch(error){
-        console.log(error.message);
+        return error.response.data.message;
     }
 }
 
