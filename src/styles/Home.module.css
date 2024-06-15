@@ -45,7 +45,7 @@
     -webkit-text-fill-color: transparent; 
 }
 
-.createQuiz, .reviewNow, .allQuizzes{
+.createQuiz, .yourQuizzes {
     padding: 20px 20px 20px 0px;
     margin: 20px 60px 20px 60px;
   }
@@ -88,5 +88,13 @@
 }
 
 .quizList {
-    background-color: bisque;
+    /* background-color: bisque; */
+    margin-top: 10px;
+    display: flex;
+    width: 900px;
+    height: 200px;
+    overflow-x: scroll;
+    white-space: nowrap;
+    /* border: solid grey;
+    border-radius: 12px; */
 }

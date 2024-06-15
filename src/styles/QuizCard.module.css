@@ -1,4 +1,17 @@
 .quizCard {
-    background-color: aquamarine;
-    margin: 10px;
+    background-color: #d7d8ff;
+    /* background-color: #ffc9c9; */
+    /* background-color: #d7e9ff; */
+    margin: 10px 20px 10px 0;
+    min-width: 330px;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.quizCard h3{
+    margin-bottom: 15px;
+}
+
+.quizCard p{
+    margin-bottom: 5px;
 }

@@ -6,7 +6,7 @@ function QuizCard({name, difficulty, dateCreated}){
     dateCreated = dateCreated.slice(0,10);
     return (
         <div className={styles.quizCard}>
-            <h2>{name}</h2>
+            <h3>{name}</h3>
             <p> Difficulty: {difficulty}</p>
             <p> Date Created: {dateCreated}</p>
         </div>

@@ -67,7 +67,7 @@ function Home() {
                     </form>
                 </div>
 
-                <div className={styles.reviewNow}>
+                <div className={styles.yourQuizzes}>
                     <h2> Your quizzes </h2>
                     <div className={styles.quizListContainer}>
                         <button 
@@ -85,18 +85,18 @@ function Home() {
                             }}> 
                             Completed 
                         </button>
-                    </div>
-                    <div className={styles.quizList}>
-                        {quizList.map((quiz) => {
-                            return (
-                                <QuizCard 
-                                    name = {quiz.QuizName}
-                                    difficulty = {quiz.Difficulty}
-                                    dateCreated = {quiz.DateTimeCreated}
-                                />
-                            )
-                        })} 
-                        
+                        <div className={styles.quizList}>
+                            {quizList.map((quiz) => {
+                                return (
+                                    <QuizCard 
+                                        name = {quiz.QuizName}
+                                        difficulty = {quiz.Difficulty}
+                                        dateCreated = {quiz.DateTimeCreated}
+                                    />
+                                )
+                            })} 
+                            
+                        </div>
                     </div>
                 </div>
 
