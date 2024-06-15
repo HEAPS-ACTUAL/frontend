@@ -48,6 +48,25 @@
     flex-direction: column;
 }
 
+.CorrectIcon, .IncorrectIcon {
+    margin-right: 8px; 
+    vertical-align: middle; 
+    padding: 0px;
+}
+
+.CorrectIcon{
+    color: green;
+    font-size: 40px;
+    
+}
+
+.IncorrectIcon{
+    color: red;
+    font-size: 30px;
+    font-weight: 500px;
+    stroke-width: 1.3px;
+}
+
 .Option {
     background-color: #fff;
     border: 2px solid #ddd;
@@ -67,10 +86,15 @@
     background-color: #d4edda; /* Light green for correct answer */
 }
 
+.UnselectedOption {
+    background-color: white; /* Light grey background for unselected options */
+}
+
+
 .Explanation {
     margin-top: 10px;
     font-style: italic;
-    background-color: greenyellow; 
+    /* background-color: greenyellow;  */
     padding: 10px;
     /* border-left: 15px solid #FF6F61;  */
     border-radius: 5px;
@@ -78,4 +102,43 @@
     width: 100%;
     text-align: center; 
     font-weight: bold; 
+}
+
+.ExplanationForCorrectAns {
+    background-color: lightgrey;
+}
+
+.ExplanationForIncorrectAns {
+    background-color: #ffcccb;
+}
+
+.BtnContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;   
+    margin-top: 60px;   
+}
+
+.RestartButton, .HomeButton{
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25);   
+    cursor: pointer;
+    justify-content: center;
+    width:500px;
+    background-color: #7d8e95;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+
+}
+
+.RestartButton:hover, .HomeButton:hover{
+    background-color: #9bbec8;
 }
