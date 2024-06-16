@@ -16,7 +16,7 @@ function Home() {
     const [quizList, setQuizList] = useState([]);
     const [selectedButton, setSelectedButton] = useState("to-do");
     const [quizName, setQuizName] = useState("");
-    const [difficulty, setDifficulty] = useState("E"); // Default to 'Easy'
+    const [difficulty, setDifficulty] = useState(""); // Default to 'Easy'
     
 
     async function fetchUserInfo() {
@@ -50,7 +50,8 @@ function Home() {
         generateQuiz(email, quizName, difficulty, file)
             .then((response) => {
                 console.log("Quiz generated successfully:", response);
-                fetchToDoQuizzes(); // fetch quizzes again to update the list
+                // fetchToDoQuizzes(); // fetch quizzes again to update the list
+                window.location.reload();
             })
             .catch((error) => {
                 console.error("Error generating quiz:", error);
@@ -65,67 +66,67 @@ function Home() {
         <div className={styles.container}>
             <div className={styles.greeting}>
                 <div className={styles.name}>Hello {firstName}, </div>
-                <div className={styles.line}> ready to conquer some new knowledge today?</div>
+                <div className={styles.line}> ready to conquer some new knowledge today? </div>
             </div>
-                <div className={styles.createQuiz}>
-                    <h2> Create a quiz </h2>
 
-                    <form onSubmit={handleFileUpload}>
-                        <p> Please select only one file </p>
-                        <br></br>
-                        <input type="file" onChange={(event) => setFile(event.target.files[0])}/>
-                        <br></br>
-                        <input type="text" placeholder="Enter Quiz Name" value={quizName} onChange={(event) => setQuizName(event.target.value)}/>
-                        <br></br>
-                        <select value={difficulty} onChange={(event) => setDifficulty(event.target.value)}>
-                            <option value="E">Easy</option>
-                            <option value="M">Medium</option>
-                            <option value="H">Hard</option>
-                        </select>
-                        <div>
-                            <button type="submit" className={styles.generateQuizButton}> Generate Quiz </button>
-                        </div>
-                    </form>
-                </div>
-        <div className={styles.yourQuizzes}>
-                        <h2> Your quizzes </h2>
-                        <button 
-                            className={
-                                selectedButton == 'to-do' ? styles.selectedButton : styles.notSelectedButton
-                            }
-                            onClick={() => {
-                                fetchToDoQuizzes(); 
-                                setSelectedButton('to-do');
-                            }}> 
-                            To-Do 
-                        </button>
+            <div className={styles.createQuiz}>
+                <h2> Create a quiz </h2>
 
-                        <button
-                            className={
-                                selectedButton == 'completed' ? styles.selectedButton : styles.notSelectedButton
-                            }
-                            onClick={() => {
-                                fetchCompletedQuizzes();
-                                setSelectedButton('completed');
-                            }}> 
-                            Completed 
-                        </button>
-                        <div className={styles.quizList}>
-                            {quizList.map((quiz) => {
-                                return (
-                                    <QuizCard 
-                                        key = {quiz.QuizID}
-                                        email = {quiz.UserEmail}
-                                        quizID = {quiz.QuizID}
-                                        name = {quiz.QuizName}
-                                        difficulty = {quiz.Difficulty}
-                                        dateCreated = {quiz.DateTimeCreated}
-                                        selectedButton = {selectedButton}
-                                    />
-                                )
-                            })} 
-                        </div>
+                <form onSubmit={handleFileUpload}>
+                    <p> Please select only one file </p>
+                    <br></br>
+                    <input type="file" onChange={(event) => setFile(event.target.files[0])}/>
+                    <br></br>
+                    <input type="text" placeholder="Enter Quiz Name" onChange={(event) => setQuizName(event.target.value)}/>
+                    <br></br>
+                    <select onChange={(event) => setDifficulty(event.target.value)}>
+                        <option value="E">Easy</option>
+                        <option value="M">Intermediate</option>
+                        <option value="H">Hard</option>
+                    </select>
+                    <div>
+                        <button type="submit" className={styles.generateQuizButton}> Generate Quiz </button>
                     </div>
+                </form>
+            </div>
+
+            <div className={styles.yourQuizzes}>
+                <h2> Your quizzes </h2>
+                <button 
+                    className={
+                        selectedButton == 'to-do' ? styles.selectedButton : styles.notSelectedButton
+                    }
+                    onClick={() => {
+                        fetchToDoQuizzes(); 
+                        setSelectedButton('to-do');
+                    }}> 
+                    To-Do 
+                </button>
+
+                <button
+                    className={
+                        selectedButton == 'completed' ? styles.selectedButton : styles.notSelectedButton
+                    }
+                    onClick={() => {
+                        fetchCompletedQuizzes();
+                        setSelectedButton('completed');
+                    }}> 
+                    Completed 
+                </button>
+                <div className={styles.quizList}>
+                    {quizList.map((quiz) => {
+                        return (
+                            <QuizCard 
+                                key = {quiz.QuizID}
+                                email = {quiz.UserEmail}
+                                quizID = {quiz.QuizID}
+                                name = {quiz.QuizName}
+                                difficulty = {quiz.Difficulty}
+                                dateCreated = {quiz.DateTimeCreated}
+                                selectedButton = {selectedButton}
+                            />
+                        )
+                    })} 
                 </div>
             </div>
         </div>
