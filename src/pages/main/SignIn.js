@@ -33,7 +33,7 @@ const SignIn = () => {
                 const returnedMessage = await createNewUser(email, password, firstName, lastName, gender);
                 setRegisterMessage(returnedMessage);
                 setTimeout(() => {
-                     window.location.reload();
+                    window.location.reload();
                 }, 1500);
             }
         }
@@ -41,7 +41,6 @@ const SignIn = () => {
 
     async function handleSignIn(event){
         event.preventDefault();
-        setRegisterMessage("");
 
         if(email === "" || password === ""){
             setSignInMessage("All fields must be filled in!");
