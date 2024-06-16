@@ -44,9 +44,14 @@
 
 .createQuiz, .yourQuizzes {
     padding: 20px 20px 20px 0px;
-    margin: 20px 60px 20px 60px;
+    margin: 10px 60px 0px 60px;
   }
-  
+
+h2 {
+    font-size: 28px;
+    color: #401818;
+}
+
 .createQuiz h2 {
     margin-bottom: 20px;
 }
@@ -97,7 +102,7 @@
     background-color: transparent;
     font-weight: 600;
     padding: 10px 20px;
-    border: 1px solid #08293c;
+    border: 2.2px solid #08293c;
     width: fit-content;
     transition: 0.2s;
 }
@@ -108,26 +113,6 @@
     transform: translate3d(0px, -2px, 0px);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
-
-
-/* .createQuiz .difficultyAndChooseFile {
-    display: flex;
-    align-items: center;
-    background-color: white;
-    width: fit-content;
-}
-
-.difficultyAndChooseFile input {
-    padding: 10px;
-    border: 1px solid #253852;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-left: 15px;
-    background-color: #a1c6df;
-    background-color: transparent;
-    margin-bottom: 20px;
-    width: 60%
-} */
 
 .quizList {
     /* background-color: bisque; */
