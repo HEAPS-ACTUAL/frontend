@@ -39,6 +39,7 @@ function Home() {
 
     useEffect(() => {
         fetchUserInfo();
+        fetchToDoQuizzes();
     }, []);
 
     const [file, setFile] = useState(null);
@@ -56,14 +57,16 @@ function Home() {
             });
     }
 
-    return (
-        <div>
-            <div className={styles.container}>
-                <div className={styles.greeting}>
-                    <div className={styles.name}>Hello {firstName}, </div>
-                    <div className={styles.line}> ready to conquer some new knowledge today?</div>
-                </div>
+    useEffect(() => {
+        console.log(selectedButton);
+    }, [selectedButton]);
 
+    return (
+        <div className={styles.container}>
+            <div className={styles.greeting}>
+                <div className={styles.name}>Hello {firstName}, </div>
+                <div className={styles.line}> ready to conquer some new knowledge today?</div>
+            </div>
                 <div className={styles.createQuiz}>
                     <h2> Create a quiz </h2>
 
@@ -84,62 +87,46 @@ function Home() {
                         </div>
                     </form>
                 </div>
-
-                <div className={styles.yourQuizzes}>
-                    <h2> Your quizzes </h2>
-                    <div className={styles.quizListContainer}>
-                        <button
+        <div className={styles.yourQuizzes}>
+                        <h2> Your quizzes </h2>
+                        <button 
+                            className={
+                                selectedButton == 'to-do' ? styles.selectedButton : styles.notSelectedButton
+                            }
                             onClick={() => {
-                                fetchToDoQuizzes();
-                                setSelectedButton("to-do");
-                            }}
-                        >
-                            To-Do
+                                fetchToDoQuizzes(); 
+                                setSelectedButton('to-do');
+                            }}> 
+                            To-Do 
                         </button>
 
                         <button
+                            className={
+                                selectedButton == 'completed' ? styles.selectedButton : styles.notSelectedButton
+                            }
                             onClick={() => {
                                 fetchCompletedQuizzes();
-                                setSelectedButton("completed");
-                            }}
-                        >
-                            Completed
+                                setSelectedButton('completed');
+                            }}> 
+                            Completed 
                         </button>
                         <div className={styles.quizList}>
                             {quizList.map((quiz) => {
                                 return (
-                                    <QuizCard
-                                        key={quiz.QuizID}
-                                        name={quiz.QuizName}
-                                        difficulty={quiz.Difficulty}
-                                        dateCreated={quiz.DateTimeCreated}
+                                    <QuizCard 
+                                        key = {quiz.QuizID}
+                                        email = {quiz.UserEmail}
+                                        quizID = {quiz.QuizID}
+                                        name = {quiz.QuizName}
+                                        difficulty = {quiz.Difficulty}
+                                        dateCreated = {quiz.DateTimeCreated}
+                                        selectedButton = {selectedButton}
                                     />
-                                );
-                            })}
+                                )
+                            })} 
                         </div>
                     </div>
                 </div>
-
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-
-                <h1>this is to test the scrolling</h1>
             </div>
         </div>
     );
