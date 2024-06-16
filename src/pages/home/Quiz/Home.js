@@ -58,8 +58,8 @@ function Home() {
             generateQuiz(email, quizName, difficulty, file)
                 .then((response) => {
                     console.log("Quiz generated successfully:", response);
-                    // fetchToDoQuizzes(); // fetch quizzes again to update the list
-                    window.location.reload();
+                    fetchToDoQuizzes(); // fetch quizzes again to update the list
+                    // window.location.reload();
                 })
                 .catch((error) => {
                     setCreateQuizMessage(`Error generating quiz: ${error}`);
