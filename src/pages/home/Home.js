@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styles from '../../styles/Quizzes.module.css'
-
-// Functions
+import { useNavigate } from 'react-router-dom';// Functions
 import { getSalutation, getUserFirstName } from "../../services (for backend)/UserService";
 import { generateQuiz } from "../../services (for backend)/QuizService";
 
 function Quizzes() {
+    const navigate = useNavigate();
     const email = sessionStorage.getItem('userEmail');
 
     const [firstName, setFirstName] = useState('');
@@ -26,10 +26,11 @@ function Quizzes() {
 
     const [file, setFile] = useState([]);
 
-    function handleFileUpload(event) {
+    const handleFileUpload = async (event) => {
         event.preventDefault();
-        generateQuiz(email, 'sample quiz', 'E', file);
-    }
+        await generateQuiz(email, 'sample quiz', 'E', file);
+        navigate('/loading'); // Redirect to loading page
+    };
 
     return (
         <div>
