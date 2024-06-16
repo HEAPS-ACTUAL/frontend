@@ -18,7 +18,7 @@ import "./styles/App.css";
 import { isLoggedIn } from "./services (for backend)/ProtectionService";
 
 function App() {
-    const [IsLoggedIn, setIsLoggedIn] = useState();
+    const [IsLoggedIn, setIsLoggedIn] = useState(true);
 
     function updateLogInStatus() {
         setIsLoggedIn(isLoggedIn())
