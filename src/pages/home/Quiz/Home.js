@@ -89,6 +89,9 @@ function Home() {
                             {quizList.map((quiz) => {
                                 return (
                                     <QuizCard 
+                                        key = {quiz.QuizID}
+                                        email = {quiz.UserEmail}
+                                        quizID = {quiz.QuizID}
                                         name = {quiz.QuizName}
                                         difficulty = {quiz.Difficulty}
                                         dateCreated = {quiz.DateTimeCreated}
