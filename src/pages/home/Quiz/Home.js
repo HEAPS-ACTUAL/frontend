@@ -14,10 +14,7 @@ function Home() {
     const [firstName, setFirstName] = useState("");
     const [salutation, setSalutation] = useState("");
     const [quizList, setQuizList] = useState([]);
-    const [selectedButton, setSelectedButton] = useState("to-do");
-    const [quizName, setQuizName] = useState("");
-    const [difficulty, setDifficulty] = useState(""); // Default to 'Easy'
-    
+    const [selectedButton, setSelectedButton] = useState("to-do");    
 
     async function fetchUserInfo() {
         const firstName = await getUserFirstName(email);
@@ -43,19 +40,31 @@ function Home() {
     }, []);
 
     const [file, setFile] = useState(null);
+    const [quizName, setQuizName] = useState("");
+    const [difficulty, setDifficulty] = useState(""); // Default to 'Easy'
+    const [createQuizMessage, setCreateQuizMessage] = useState('');
 
     function handleFileUpload(event) {
         event.preventDefault();
-        console.log("Generating quiz with:", { email, quizName, difficulty, file });
-        generateQuiz(email, quizName, difficulty, file)
-            .then((response) => {
-                console.log("Quiz generated successfully:", response);
-                // fetchToDoQuizzes(); // fetch quizzes again to update the list
-                window.location.reload();
-            })
-            .catch((error) => {
-                console.error("Error generating quiz:", error);
-            });
+
+        if(quizName === ''){
+            setCreateQuizMessage('Quiz name cannot be empty!');
+        }
+        else if(difficulty === ''){
+            setCreateQuizMessage('Please indicate the difficulty level!');
+        }
+        else{
+            console.log("Generating quiz with:", { email, quizName, difficulty, file });
+            generateQuiz(email, quizName, difficulty, file)
+                .then((response) => {
+                    console.log("Quiz generated successfully:", response);
+                    // fetchToDoQuizzes(); // fetch quizzes again to update the list
+                    window.location.reload();
+                })
+                .catch((error) => {
+                    setCreateQuizMessage(`Error generating quiz: ${error}`);
+                });
+        }
     }
 
     useEffect(() => {
@@ -73,20 +82,24 @@ function Home() {
                 <h2> Create a quiz </h2>
 
                 <form onSubmit={handleFileUpload}>
-                    <p> Please select only one file </p>
-                    <br></br>
-                    <input type="file" onChange={(event) => setFile(event.target.files[0])}/>
-                    <br></br>
                     <input type="text" placeholder="Enter Quiz Name" onChange={(event) => setQuizName(event.target.value)}/>
-                    <br></br>
-                    <select onChange={(event) => setDifficulty(event.target.value)}>
-                        <option value="E">Easy</option>
-                        <option value="M">Intermediate</option>
-                        <option value="H">Hard</option>
-                    </select>
-                    <div>
-                        <button type="submit" className={styles.generateQuizButton}> Generate Quiz </button>
+
+                    <div className={styles.difficultyAndChooseFile}>
+                        <select className={styles.difficulty} onChange={(event) => setDifficulty(event.target.value)}>
+                            <option value="">Select difficulty level</option>
+                            <option value="E">Easy</option>
+                            <option value="M">Intermediate</option>
+                            <option value="H">Hard</option>
+                        </select>
+
+                        <input className={styles.chooseFile}type="file" onChange={(event) => setFile(event.target.files[0])}/>
+                        {/* <p> Please select only one file </p> */}
                     </div>
+
+                    {createQuizMessage && <p>{createQuizMessage}</p>}
+                    
+                    <button type="submit"> Generate Quiz! </button>
+                   
                 </form>
             </div>
 
