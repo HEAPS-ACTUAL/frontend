@@ -148,3 +148,9 @@ h2 {
     transform: translate3d(0px, -2px, 0px);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
+
+.noQuizMessage {
+    margin-top: 20px;
+    font-weight: 800;
+    color: #b02727;
+}

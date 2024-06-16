@@ -67,10 +67,6 @@ function Home() {
         }
     }
 
-    useEffect(() => {
-        console.log(selectedButton);
-    }, [selectedButton]);
-
     return (
         <div className={styles.container}>
             <div className={styles.greeting}>
@@ -127,19 +123,22 @@ function Home() {
                     Completed 
                 </button>
                 <div className={styles.quizList}>
-                    {quizList.map((quiz) => {
-                        return (
-                            <QuizCard 
-                                key = {quiz.QuizID}
-                                email = {quiz.UserEmail}
-                                quizID = {quiz.QuizID}
-                                name = {quiz.QuizName}
-                                difficulty = {quiz.Difficulty}
-                                dateCreated = {quiz.DateTimeCreated}
-                                selectedButton = {selectedButton}
-                            />
-                        )
-                    })} 
+                    {quizList.length == 0 
+                        ? <p className={styles.noQuizMessage}>{selectedButton == 'to-do' ? 'You do not have any quizzes. Create a quiz above!' : 'You have not completed any quizzes yet!'} </p>
+                        : quizList.map((quiz) => {
+                            return (
+                                <QuizCard 
+                                    key = {quiz.QuizID}
+                                    email = {quiz.UserEmail}
+                                    quizID = {quiz.QuizID}
+                                    name = {quiz.QuizName}
+                                    difficulty = {quiz.Difficulty}
+                                    dateCreated = {quiz.DateTimeCreated}
+                                    selectedButton = {selectedButton}
+                                />
+                            )
+                        })
+                    } 
                 </div>
             </div>
         </div>
