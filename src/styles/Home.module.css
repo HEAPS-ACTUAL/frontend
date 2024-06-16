@@ -10,8 +10,6 @@
 .container {
     display: flex;
     flex-direction: column;
-    /* margin-right: 10%; */
-    /* background-color: aqua; */
     padding: 30px;
 } 
 
@@ -19,7 +17,6 @@
     display: flex;
     flex-direction: column;
     animation: fadeIn 2s ease-in; /* Apply the animation */
-    /* background-color: aquamarine; */
     margin-bottom: 30px;
     margin-left: 60px;
     text-align: left;
@@ -79,7 +76,6 @@
 }
 
 .createQuiz button:hover {
-    
     background-color: #666c6f;
 }
 
@@ -97,4 +93,27 @@
     white-space: nowrap;
     /* border: solid grey;
     border-radius: 12px; */
+}
+
+.yourQuizzes button {
+    margin: 10px 10px 0px 0px;
+    border: solid #78979a;
+    border-radius: 10px;
+    padding: 7px;
+    cursor: pointer;
+}
+
+.yourQuizzes .selectedButton {
+    background-color: #95d6dd;
+}
+
+.yourQuizzes .notSelectedButton {
+    background-color: transparent;
+    transition: 0.5s;
+}
+
+.yourQuizzes .notSelectedButton:hover{
+    background-color: #95d6dd;
+    transform: translate3d(0px, -2px, 0px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }

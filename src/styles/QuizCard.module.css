@@ -1,16 +1,23 @@
-.quizCard {
+.toDoQuizCard .quizCard {
+    background-color: #ffc9c9;
+}
+
+.completedQuizCard .quizCard {
     background-color: #d7d8ff;
-    /* background-color: #ffc9c9; */
+}
+
+.quizCard {
     /* background-color: #d7e9ff; */
-    margin: 10px 20px 10px 5px;
+    margin: 10px 20px 10px 0px;
     min-width: 340px;
     border-radius: 20px;
     padding: 20px 20px 20px 25px;
+    transition: 0.2s;
 }
 
 .quizCard:hover{
     border-bottom: 3px solid #606565 ;
-    transform: translateY(-2px) translateX(-2px);
+    transform: translate3d(0px, -2px, 0px);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
     cursor: pointer;
 }
@@ -19,7 +26,6 @@
     width: 30px;
     height: 30px;
     margin-right: 10px;
-    
 }
 
 .quizCard h3{
@@ -29,7 +35,6 @@
 
 .quizCard p{
     margin-bottom: 5px;
-    /* background-color: white; */
 }
 
 p:nth-child(4){
@@ -39,5 +44,5 @@ p:nth-child(4){
     margin-top: 35px;
     padding: 10px;
     border-radius: 50px;
-    background-color: #c0c2de;
+    background-color: #c6c7db;
 }
