@@ -61,10 +61,7 @@ function Home() {
             <div className={styles.container}>
                 <div className={styles.greeting}>
                     <div className={styles.name}>Hello {firstName}, </div>
-                    <div className={styles.line}>
-                        {" "}
-                        ready to conquer some new knowledge today?
-                    </div>
+                    <div className={styles.line}> ready to conquer some new knowledge today?</div>
                 </div>
 
                 <div className={styles.createQuiz}>
@@ -83,10 +80,7 @@ function Home() {
                             <option value="H">Hard</option>
                         </select>
                         <div>
-                            <button type="submit" className={styles.generateQuizButton}>
-                                {" "}
-                                Generate Quiz{" "}
-                            </button>
+                            <button type="submit" className={styles.generateQuizButton}> Generate Quiz </button>
                         </div>
                     </form>
                 </div>
