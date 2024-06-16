@@ -103,7 +103,7 @@ function Home() {
                 <h2> Your quizzes </h2>
                 <button 
                     className={
-                        selectedButton == 'to-do' ? styles.selectedButton : styles.notSelectedButton
+                        selectedButton === 'to-do' ? styles.selectedButton : styles.notSelectedButton
                     }
                     onClick={() => {
                         fetchToDoQuizzes(); 
@@ -114,7 +114,7 @@ function Home() {
 
                 <button
                     className={
-                        selectedButton == 'completed' ? styles.selectedButton : styles.notSelectedButton
+                        selectedButton === 'completed' ? styles.selectedButton : styles.notSelectedButton
                     }
                     onClick={() => {
                         fetchCompletedQuizzes();
@@ -123,8 +123,8 @@ function Home() {
                     Completed 
                 </button>
                 <div className={styles.quizList}>
-                    {quizList.length == 0 
-                        ? <p className={styles.noQuizMessage}>{selectedButton == 'to-do' ? 'You do not have any quizzes. Create a quiz above!' : 'You have not completed any quizzes yet!'} </p>
+                    {quizList.length === 0 
+                        ? <p className={styles.noQuizMessage}>{selectedButton === 'to-do' ? 'You do not have any quizzes. Create a quiz above!' : 'You have not completed any quizzes yet!'} </p>
                         : quizList.map((quiz) => {
                             return (
                                 <QuizCard 

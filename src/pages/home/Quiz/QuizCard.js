@@ -24,16 +24,16 @@ function QuizCard({email, quizID, name, difficulty, dateCreated, selectedButton}
 
     // const numberOfQuestions = 10;
     return (
-        <div className={selectedButton == 'to-do' ? styles.toDoQuizCard : styles.completedQuizCard}> 
+        <div className={selectedButton ==='to-do' ? styles.toDoQuizCard : styles.completedQuizCard}> 
             <div className={styles.quizCard}>
                 <h3>{name}</h3>
                 {/* <p> {quizID} </p> */}
                 <p>
-                    <img src={difficultyImage}/>
+                    <img src={difficultyImage} alt='man pushing boulder uphill'/>
                     {difficulty}
                 </p>
                 <p>
-                    <img src={calendarImage}/>
+                    <img src={calendarImage} alt='calendar'/>
                     {dateCreated}
                 </p>
                 <p>

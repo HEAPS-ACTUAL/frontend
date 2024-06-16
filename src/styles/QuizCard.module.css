@@ -1,13 +1,14 @@
 .toDoQuizCard .quizCard {
-    background-color: #ffc9c9;
+    /* background-color: #ffc9c9; */
+    background-color: #d7d8ff;
+    /* background-color: #c9ffd3; */
 }
 
 .completedQuizCard .quizCard {
-    background-color: #d7d8ff;
+    background-color: #c9ffd3;
 }
 
 .quizCard {
-    /* background-color: #d7e9ff; */
     margin: 10px 20px 10px 0px;
     min-width: 340px;
     border-radius: 20px;
