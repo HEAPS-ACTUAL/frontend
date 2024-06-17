@@ -10,7 +10,6 @@ import HomeRoute from "./pages/home/Home_route";
 import QuizFeature from "./pages/home/Quiz/Quiz";
 import ResultsPage from './pages/home/Quiz/ResultsPage';
 import LoadingPage from "./pages/home/Quiz/LoadingPage";
-import Hello from "./pages/home/Quiz/Hello";
 
 // STYLES
 import "./styles/App.css";
