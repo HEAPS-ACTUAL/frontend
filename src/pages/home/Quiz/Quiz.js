@@ -7,15 +7,13 @@ import { getAllQuestionsAndOptionsFromAQuiz } from '../../../services (for backe
 const QuizFeature = () => {
     const location = useLocation(); 
     const {email, quizID} = (location.state); // to retrieve UserEmail and QuizID from QuizCard page
-
-    // const email = 'jerricknsc@gmail.com';
-    // const quizID = 1;
     
     const [questionsOptionsArray, setQuestionsOptionsArray] = useState([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [userAnswers, setUserAnswers] = useState({});
+    const [notCompletedMessage, setNotCompletedMessage] = useState('');
+
     const navigate = useNavigate();
-    
     
     useEffect(() => {
         async function fetchQuizQuestionsAndOptions(){
@@ -36,8 +34,7 @@ const QuizFeature = () => {
     }
 
     // control navigation through the array of questions
-    const handleNextQuestion = () => {
-
+    const handleNextQuestion = () => {        
         // if there are more questions to be answered 
         if(currentQuestionIndex < questionsOptionsArray.length -1){ 
             setCurrentQuestionIndex(currentQuestionIndex + 1)
@@ -45,7 +42,7 @@ const QuizFeature = () => {
 
         // no more questions to be answered, navigate to the results page
         else{
-            navigate ( '/ResultsPage', { state: {userAnswers, questionsOptionsArray} } )
+            navigate ( '/ResultsPage', { state: {email, quizID, userAnswers, questionsOptionsArray} } )
             // passes additional state to the /results route. 
             // userAnswers - object containing all the answers given by the user
             // questions - array of questions
@@ -54,14 +51,11 @@ const QuizFeature = () => {
     }
 
     const handlePreviousQuestion = () =>{
+        setNotCompletedMessage('');
         if(currentQuestionIndex > 0){
             setCurrentQuestionIndex(currentQuestionIndex-1)
         }
     }
-
-    useEffect(() => {
-        console.log(userAnswers);
-    }, [userAnswers])
 
     if (questionsOptionsArray.length === 0) {
         return <div>Loading...</div>; // Display a loading state while questions are being fetched
@@ -96,10 +90,14 @@ const QuizFeature = () => {
                     Previous
                 </button>
 
-                <button onClick={handleNextQuestion} className={styles.btnNext}>
+                <button onClick={handleNextQuestion} disabled={!((currentQuestionIndex + 1) in userAnswers)} className={styles.btnNext}>
                     {currentQuestionIndex < questionsOptionsArray.length - 1 ? 'Next' : 'Finish'}
                 </button>
 
+            </div>
+
+            <div>
+                {notCompletedMessage}
             </div>
             
             <div className={styles.countQuestions}>
