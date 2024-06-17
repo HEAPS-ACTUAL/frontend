@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from '../../styles/LoadingPage.module.css';
+import styles from '../../../styles/LoadingPage.module.css';
 
 const LoadingPage = () => {
     const [progress, setProgress] = useState(0);

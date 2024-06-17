@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import styles from '../../styles/ResultsPage.module.css';
+import styles from '../../../styles/ResultsPage.module.css';
 import { TiTick } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
 

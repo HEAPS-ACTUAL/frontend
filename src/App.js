@@ -8,8 +8,9 @@ import Navbar from "./pages/main/NavBar";
 import SignIn from "./pages/main/SignIn";
 import QuizFeature from "./pages/home/Quiz/Quiz";
 import HomeRoute from "./pages/home/Home_route";
-import ResultsPage from "./pages/home/ResultsPage";
-import LoadingPage from "./pages/home/LoadingPage";
+import ResultsPage from "./pages/home/Quiz/ResultsPage";
+import LoadingPage from "./pages/home/Quiz/LoadingPage";
+
 
 
 // STYLES
