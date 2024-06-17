@@ -19,7 +19,10 @@ function Features() {
             <div className={styles.featureItem}>
                 <div className={styles.featureContent}>
                     <h2 className={styles.featureName}>Customized Spaced Repetition Scheduling</h2>
-                    <p>Utilize personalized spaced repetition scheduling to optimize learning by scheduling review sessions based on individual progress and memory retention. <a href="#spaced-repetition-info">Learn more about spaced repetition</a></p>
+                    <p>Utilize personalized spaced repetition scheduling to optimize learning by scheduling review sessions based on individual progress and memory retention.</p>
+                       <div>
+                        <a href="#spaced_repetition" > <br></br>Learn more about spaced repetition here</a>
+                        </div>
                 </div>
                 <div className={styles.featureImage}>
                     <img src="https://via.placeholder.com/400x300" alt="Spaced Repetition Scheduling" />
@@ -29,7 +32,8 @@ function Features() {
             <div className={styles.featureItem}>
                 <div className={styles.featureContent}>
                     <h2 className={styles.featureName}>Smart Quiz Pop-Ups</h2>
-                    <p>Experience smart quiz pop-ups that appear at strategic moments during your learning journey, reinforcing key concepts and boosting engagement through active recall. <a href="#active-recall-info">Learn more about active recall</a></p>
+                    <p>Experience smart quiz pop-ups that appear at strategic moments during your learning journey, reinforcing key concepts and boosting engagement through active recall.</p>
+                         <a href="#active_recall"><br></br>Learn more about active recall here</a>
                 </div>
                 <div className={styles.featureImage}>
                     <img src="https://via.placeholder.com/400x300" alt="Smart Quiz Pop-Ups" />
@@ -46,16 +50,30 @@ function Features() {
                 </div>
             </div>
 
-            {/* Anchor links section */}
-            <div id="spaced-repetition-info">
-                <h2 className={styles.featureName}>Learn more about Spaced Repetition</h2>
-                <p>Spaced repetition is a technique that helps optimize learning by scheduling review sessions based on individual progress and memory retention.</p>
+            <h2 className={styles.featureName}>Why Spaced Repetition and Active Recall?</h2>
+            <br></br>
+            <div id="active_recall">
+                
+                <h3>Active Recall</h3><br></br>
+
+                <p>Active Recall is a study method that involves activating, and therefore, strengthening, neural synapses to easier recall the information later. 
+                By practicing active recall you reinforce the neural connections that represent the knowledge in the brain.
+                <br></br><br></br>
+                By practicing it, we stregthen nerve cell axons with myeline and move information from short-term to long-term memory.
+                To retain that knowledge for longer periods, you can use spaced repetitions.
+                </p> <br></br>
+                
+                
+            </div>
+            <div id="spaced_repetition">
+                <h3>Spaced Repetition</h3><br></br>
+                <p>Spaced Repetition is a technique that helps optimize learning by scheduling review sessions based on individual progress and memory retention.<br></br><br></br>
+                Space in the brain is limited, and unused information is often replaced with more recent and valuable data.
+                The strategy is to repeat what you learned, evaluate, and then repeat it in the future, which helps decline the exponential rate of forgetting and retain information for a longer period.
+                </p>
             </div>
 
-            <div id="active-recall-info">
-                <h2 className={styles.featureName}>Learn more about Active Recall</h2>
-                <p>Active recall is a learning strategy that involves actively retrieving information from memory, enhancing retention and understanding.</p>
-            </div>
+            
         </div>
     );
 }
