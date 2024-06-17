@@ -2,11 +2,11 @@ import {Routes, Route, Navigate} from 'react-router-dom';
 
 //PAGES
 import SideBar from "./SideBar";
-import Quizzes from './Home';
+import Quizzes from './Quiz/Home';
 import RevisionSchedule from './RevisionSchedule';
 import MontitorProgress from './MonitorProgress';
 
-function Home(){
+function HomeRoute(){
     return (
         <div>
             <SideBar />
@@ -14,11 +14,11 @@ function Home(){
                 <Route path='/quizzes' element={<Quizzes />} />
                 <Route path="/monitor-progress" element={<MontitorProgress />} />
                 <Route path="/revision-schedule" element={<RevisionSchedule />} />
-                <Route path='/' element={ <Navigate to='/home/Quizzes' />} />
+                <Route path='/' element={ <Navigate to='/Home/Quizzes' />} />
              </Routes>
              
         </div>
     )
 }
 
-export default Home;
+export default HomeRoute;

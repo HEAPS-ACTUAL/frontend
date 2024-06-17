@@ -10,10 +10,10 @@ function Navbar() {
     const [logInOutButton, setLogInOutButton] = useState('');
 
     function updateLogInStatus() {
-        if (isLoggedIn()){
+        if (isLoggedIn()) {
             setLogInOutButton('Log out');
         }
-        else{
+        else {
             setLogInOutButton('Log in');
         }
     }

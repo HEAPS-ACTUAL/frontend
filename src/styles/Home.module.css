@@ -1,0 +1,156 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+} 
+
+.greeting {
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 2s ease-in; /* Apply the animation */
+    margin-bottom: 30px;
+    margin-left: 60px;
+    text-align: left;
+}
+
+.name {
+    font-size: 300%;
+    font-weight: 600;
+    margin-top: 10;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    display: block;
+    color: black;
+}
+
+.line{
+    font-size: 220%;
+    font-weight: 600;
+    line-height: 1.2;
+    display: block;
+    background: -webkit-linear-gradient(left, #3a7bd5, #3a6073); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+}
+
+.createQuiz, .yourQuizzes {
+    padding: 20px 20px 20px 0px;
+    margin: 10px 60px 0px 60px;
+  }
+
+h2 {
+    font-size: 28px;
+    color: #401818;
+}
+
+.createQuiz h2 {
+    margin-bottom: 20px;
+}
+  
+.createQuiz form {
+    display: flex;
+    flex-direction: column;
+}
+
+.createQuiz input[type='text'] {
+    padding: 10px;
+    border: 1px solid #253852;
+    border-radius: 4px;
+    width: 550px;
+    margin: 0px 0px 20px 0px;
+    background-color: transparent;
+}
+
+.difficultyAndChooseFile {
+    display: flex;
+    width: 560px;
+}
+
+.difficulty, .chooseFile {
+    padding: 10px;
+    border: 1px solid #253852;
+    border-radius: 4px;
+    margin: 0px 10px 20px 0px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.difficulty {
+    width: 300px;
+}
+
+.chooseFile {
+    width: 100%;
+}
+
+.createQuiz p {
+    margin-bottom: 20px;
+    color: #ed3b3b;
+    font-weight: 500;
+}
+
+.createQuiz button {
+    background-color: transparent;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: 2.2px solid #08293c;
+    width: fit-content;
+    transition: 0.2s;
+}
+
+.createQuiz button:hover {
+    background-color: #9fe7d1;
+    cursor: pointer;
+    transform: translate3d(0px, -2px, 0px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.quizList {
+    /* background-color: bisque; */
+    margin-top: 10px;
+    display: flex;
+    width: 900px;
+    height: 255px;
+    overflow-x: scroll;
+    white-space: nowrap;
+    /* border: solid grey;
+    border-radius: 12px; */
+}
+
+.yourQuizzes button {
+    margin: 10px 10px 0px 0px;
+    border: solid #78979a;
+    border-radius: 10px;
+    padding: 7px;
+    cursor: pointer;
+}
+
+.yourQuizzes .selectedButton {
+    background-color: #95d6dd;
+}
+
+.yourQuizzes .notSelectedButton {
+    background-color: transparent;
+    transition: 0.5s;
+}
+
+.yourQuizzes .notSelectedButton:hover{
+    background-color: #95d6dd;
+    transform: translate3d(0px, -2px, 0px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.noQuizMessage {
+    margin-top: 20px;
+    font-weight: 800;
+    /* color: #b02727; */
+}
