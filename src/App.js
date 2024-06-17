@@ -6,12 +6,11 @@ import About from "./pages/main/About";
 import Features from "./pages/main/Features";
 import Navbar from "./pages/main/NavBar";
 import SignIn from "./pages/main/SignIn";
-import QuizFeature from "./pages/home/Quiz/Quiz";
 import HomeRoute from "./pages/home/Home_route";
-import ResultsPage from "./pages/home/Quiz/ResultsPage";
+import QuizFeature from "./pages/home/Quiz/Quiz";
+import ResultsPage from './pages/home/Quiz/ResultsPage';
 import LoadingPage from "./pages/home/Quiz/LoadingPage";
-
-
+import Hello from "./pages/home/Quiz/Hello";
 
 // STYLES
 import "./styles/App.css";
@@ -42,9 +41,9 @@ function App() {
                     path="/home/*"
                     element={IsLoggedIn ? <HomeRoute /> : <Navigate to="/login" />} // REDIRECT TO SIGN IN PAGE IF NOT LOGGED IN
                 />
-                <Route path="/Quiz" element={<QuizFeature />} />
+                <Route path="/mcq" element={<QuizFeature />} />
                 <Route path="/ResultsPage" element={<ResultsPage />} />
-                <Route path="/Home/Quizzes/LoadingPage" element={<LoadingPage />} />
+                <Route path="/loadingPage" element={<LoadingPage />} />
             </Routes>
         </Router>
     );

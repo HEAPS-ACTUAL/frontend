@@ -7,12 +7,12 @@ import { RxCross2 } from "react-icons/rx";
 const ResultsPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { userAnswers, questions } = location.state;
+    const { userAnswers, questionsOptionsArray } = location.state;
 
     return (
         <div className={styles.QuizResultsContainer}>
             <div className={styles.Header}>Results</div>
-            {questions.map((question) => (
+            {questionsOptionsArray.map((question) => (
                 <div key={question.id} className={styles.QuestionBlock}>
                     <h2 className={styles.Question}>
                         {question.id}. {question.question}
