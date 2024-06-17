@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "../../../styles/Home.module.css";
+import { useNavigate } from "react-router-dom";
 
 // Functions
 import { getSalutation, getUserFirstName} from "../../../services (for backend)/UserService";
@@ -7,8 +8,10 @@ import { generateQuiz, getCompletedQuizzes, getToDoQuizzes} from "../../../servi
 
 // Pages
 import QuizCard from "./QuizCard";
+import LoadingPage from "./LoadingPage";
 
 function Home() {
+    const navigate = useNavigate();
     const email = sessionStorage.getItem("userEmail");
 
     const [firstName, setFirstName] = useState("");
@@ -59,7 +62,9 @@ function Home() {
                 .then((response) => {
                     console.log("Quiz generated successfully:", response);
                     fetchToDoQuizzes(); // fetch quizzes again to update the list
+                    navigate('./LoadingPage');
                     // window.location.reload();
+                    
                 })
                 .catch((error) => {
                     setCreateQuizMessage(`Error generating quiz: ${error}`);

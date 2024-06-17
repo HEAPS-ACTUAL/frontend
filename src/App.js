@@ -44,7 +44,7 @@ function App() {
                 />
                 <Route path="/Quiz" element={<QuizFeature />} />
                 <Route path="/ResultsPage" element={<ResultsPage />} />
-                <Route path="/LoadingPage" element={<LoadingPage />} />
+                <Route path="/Home/Quizzes/LoadingPage" element={<LoadingPage />} />
             </Routes>
         </Router>
     );
