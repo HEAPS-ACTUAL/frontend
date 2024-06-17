@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from '../../../styles/QuizCard.module.css';
 import { getNumberOfQuestions } from '../../../services (for backend)/QuestionService';
 
@@ -6,8 +7,16 @@ import { getNumberOfQuestions } from '../../../services (for backend)/QuestionSe
 import difficultyImage from '../../../images/difficultyImage.png';
 import calendarImage from '../../../images/calendar.png';
 
+
 function QuizCard({email, quizID, name, difficulty, dateCreated, selectedButton}){
-    const difficultyDict = {'E': 'Easy', 'M': 'Intermediate', 'H': 'Hard'};
+
+    const difficultyDict = 
+    {
+        'E': 'Easy', 
+        'M': 'Intermediate', 
+        'H': 'Hard'
+    };
+
     difficulty = difficultyDict[difficulty];
     dateCreated = dateCreated.slice(0,10);
     
@@ -22,10 +31,16 @@ function QuizCard({email, quizID, name, difficulty, dateCreated, selectedButton}
         fetchNumberOfQuestions();
     });
 
+    const navigate = useNavigate();
+
+    function goToQuiz(){
+        navigate('../../mcq', {state: {email, quizID}});
+    }
+
     // const numberOfQuestions = 10;
     return (
         <div className={selectedButton ==='to-do' ? styles.toDoQuizCard : styles.completedQuizCard}> 
-            <div className={styles.quizCard}>
+            <div className={styles.quizCard} onClick={goToQuiz}>
                 <h3>{name}</h3>
                 {/* <p> {quizID} </p> */}
                 <p>
