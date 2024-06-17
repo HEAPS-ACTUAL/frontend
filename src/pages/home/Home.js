@@ -37,7 +37,7 @@ function Quizzes() {
             <div className={styles.container}>
                 <div className={styles.greeting}>
                     <div className={styles.name}>Hello {firstName}, </div>
-                    <div className={styles.line}> ready to conquer some new knowledge today?</div>
+                    <div className={styles.line}> are you ready to conquer new knowledge today?</div>
                 </div>
 
                 <div className={styles.createQuiz}>
