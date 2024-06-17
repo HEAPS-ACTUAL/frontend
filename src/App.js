@@ -9,6 +9,7 @@ import SignIn from "./pages/main/SignIn";
 import QuizFeature from "./pages/home/Quiz/Quiz";
 import HomeRoute from "./pages/home/Home_route";
 import ResultsPage from "./pages/home/ResultsPage";
+import LoadingPage from "./pages/home/LoadingPage";
 
 
 // STYLES
@@ -42,6 +43,7 @@ function App() {
                 />
                 <Route path="/Quiz" element={<QuizFeature />} />
                 <Route path="/ResultsPage" element={<ResultsPage />} />
+                <Route path="/LoadingPage" element={<LoadingPage />} />
             </Routes>
         </Router>
     );
