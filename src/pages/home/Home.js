@@ -29,7 +29,7 @@ function Quizzes() {
     const handleFileUpload = async (event) => {
         event.preventDefault();
         await generateQuiz(email, 'sample quiz', 'E', file);
-        navigate('/loading'); // Redirect to loading page
+        navigate('/LoadingPage'); // Redirect to loading page
     };
 
     return (

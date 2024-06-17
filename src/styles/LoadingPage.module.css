@@ -1,11 +1,31 @@
+/* Styles for the overall loading page container */
 .loadingContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 70vh;
 }
 
 .loadingContainer h1 {
     margin-bottom: 20px;
+}
+
+/* Styles for the loading bar container */
+.loadingBarContainer {
+    width: 50%; 
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 20px;
+    display: flex;
+    border-radius: 10px;
+}
+
+/* Styles for the loading bar itself */
+.loadingBar {
+    height: 100%;
+    background-color: #3b82f6;
+    transition: width 0.1s ease-in-out;
 }

@@ -1,19 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import LoadingBar from './LoadingBar';
 import styles from '../../styles/LoadingPage.module.css';
 
 const LoadingPage = () => {
+    const [progress, setProgress] = useState(0);
     const navigate = useNavigate();
+    const duration = 10000; // Set the duration of the loading bar
 
-    const handleLoadingComplete = () => {
-        navigate('/quiz'); // Redirect to the quiz page after loading
-    };
+    useEffect(() => {
+        const intervalDuration = duration / 100;
+        const interval = setInterval(() => {
+            setProgress((prevProgress) => {
+                if (prevProgress >= 100) {
+                    clearInterval(interval);
+                    navigate('/Quiz'); // Redirect to the quiz page after loading
+                    return 100;
+                }
+                return prevProgress + 1;
+            });
+        }, intervalDuration);
+
+        return () => clearInterval(interval);
+    }, [navigate, duration]);
 
     return (
         <div className={styles.loadingContainer}>
-            <h1>Loading, please wait...</h1>
-            <LoadingBar duration={10000} onLoadingComplete={handleLoadingComplete} /> {/* 5 seconds duration */}
+            <h1>Generating quiz, please wait...</h1>
+            <div className={styles.loadingBarContainer}>
+                <div
+                    className={styles.loadingBar}
+                    style={{ width: `${progress}%` }}
+                ></div>
+            </div>
         </div>
     );
 };
