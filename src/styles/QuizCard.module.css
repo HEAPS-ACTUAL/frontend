@@ -9,6 +9,10 @@
     background-color: #c9ffd3;
 }
 
+.quizCardWrapper {
+    position: relative;
+}
+
 .quizCard {
     margin: 10px 20px 10px 0px;
     min-width: 340px;
@@ -29,7 +33,12 @@
     transform: translate3d(0px, 2px, 0px);
 }
 
-.quizCard img{
+.quizInfo {
+    display: flex;
+    align-items: center;
+}
+
+.difficultyImage, .calendarImage {
     width: 30px;
     height: 30px;
     margin-right: 10px;
@@ -52,4 +61,36 @@
     padding: 10px;
     border-radius: 50px;
     background-color: #c6c7db;
+}
+
+.deleteButton {
+    float: right;
+    width: 20px;
+    height: auto;
+    margin-right: 5px;
+    transition: transform 0.2s ease;
+}
+
+.deleteButton:hover {
+    transform: rotate(10deg); 
+}
+
+.deleteButton:active {
+    transform: rotate(0deg); 
+}
+
+.deleteConfirmation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    z-index: 10; /* Ensure overlay is above other content */
+    text-align: center;
+    padding: 10px;
 }

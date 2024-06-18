@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from '../../../styles/QuizCard.module.css';
-import { getNumberOfQuestions } from '../../../services (for backend)/QuestionService';
 
 // images
 import difficultyImage from '../../../images/difficultyImage.png';
 import calendarImage from '../../../images/calendar.png';
+import xButton from '../../../images/x-button.png';
 
+// functions
+import { getNumberOfQuestions } from '../../../services (for backend)/QuestionService';
+import { deleteQuiz } from '../../../services (for backend)/QuizService';
 
 function QuizCard({email, quizID, name, difficulty, dateCreated, selectedButton}){
 
@@ -37,23 +40,37 @@ function QuizCard({email, quizID, name, difficulty, dateCreated, selectedButton}
         navigate('../../mcq', {state: {email, quizID}});
     }
 
-    // const numberOfQuestions = 10;
+    async function handleDeleteQuiz(event){
+        event.stopPropagation();
+        
+    }
+    
+    const [deleteButtonPressed, setDeleteButtonPressed] = useState(true);
+    
     return (
         <div className={selectedButton ==='to-do' ? styles.toDoQuizCard : styles.completedQuizCard}> 
-            <div className={styles.quizCard} onClick={goToQuiz}>
-                <h3>{name}</h3>
-                {/* <p> {quizID} </p> */}
-                <p>
-                    <img src={difficultyImage} alt='man pushing boulder uphill'/>
-                    {difficulty}
-                </p>
-                <p>
-                    <img src={calendarImage} alt='calendar'/>
-                    {dateCreated}
-                </p>
-                <p className={styles.numOfQuestions}>
-                    {numberOfQuestions} questions
-                </p>
+            <div className={styles.quizCardWrapper}>
+                <div className={styles.quizCard} onClick={goToQuiz}>
+                    <img className={styles.deleteButton} src={xButton} onClick={handleDeleteQuiz} alt='delete button' />
+                    <h3>{name}</h3>
+                    <p className={styles.quizInfo}>
+                        <img className={styles.difficultyImage} src={difficultyImage} alt='man pushing boulder uphill'/>
+                        {difficulty}
+                    </p>
+                    <p className={styles.quizInfo}>
+                        <img className={styles.calendarImage} src={calendarImage} alt='calendar'/>
+                        {dateCreated}
+                    </p>
+                    <p className={styles.numOfQuestions}>
+                        {numberOfQuestions} questions
+                    </p>
+                </div>
+
+                {deleteButtonPressed && (
+                    <div className={styles.deleteConfirmation}>
+                        <p>Are you sure you want to delete this quiz?</p>
+                    </div>
+                )}
             </div>
         </div>
     )
