@@ -93,7 +93,7 @@ h2 {
 }
 
 .createQuiz p {
-    margin-bottom: 20px;
+    margin-top: 20px;
     color: #ed3b3b;
     font-weight: 500;
 }
@@ -114,16 +114,17 @@ h2 {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
 
+.createQuiz button:active {
+    transition: 0.2s;
+    transform: translate3d(0px, 2px, 0px);
+}
+
 .quizList {
-    /* background-color: bisque; */
     margin-top: 10px;
     display: flex;
-    width: 900px;
     height: 255px;
-    overflow-x: scroll;
+    overflow-x: auto;
     white-space: nowrap;
-    /* border: solid grey;
-    border-radius: 12px; */
 }
 
 .yourQuizzes button {

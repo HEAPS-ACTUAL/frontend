@@ -23,7 +23,7 @@ function QuizCard({email, quizID, name, difficulty, dateCreated, selectedButton}
     const [numberOfQuestions, setNumberOfQuestions] = useState(undefined);
     
     async function fetchNumberOfQuestions(){
-        const numberOfQuestions = await getNumberOfQuestions(email, quizID) - 2;
+        const numberOfQuestions = await getNumberOfQuestions(email, quizID);
         setNumberOfQuestions(numberOfQuestions);
     }
 
@@ -51,7 +51,7 @@ function QuizCard({email, quizID, name, difficulty, dateCreated, selectedButton}
                     <img src={calendarImage} alt='calendar'/>
                     {dateCreated}
                 </p>
-                <p>
+                <p className={styles.numOfQuestions}>
                     {numberOfQuestions} questions
                 </p>
             </div>
