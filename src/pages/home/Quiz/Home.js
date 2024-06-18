@@ -110,8 +110,53 @@ function Home() {
                 </form>
             </div>
 
+            {/* flashcards */}
             <div className={styles.yourQuizzes}>
-                <h2> Your quizzes </h2>
+                <h2> Your Flashcards </h2>
+                <button 
+                    className={
+                        selectedButton === 'to-do' ? styles.selectedButton : styles.notSelectedButton
+                    }
+                    onClick={() => {
+                        fetchToDoQuizzes(); 
+                        setSelectedButton('to-do');
+                    }}> 
+                    To-Do 
+                </button>
+
+                <button
+                    className={
+                        selectedButton === 'completed' ? styles.selectedButton : styles.notSelectedButton
+                    }
+                    onClick={() => {
+                        fetchCompletedQuizzes();
+                        setSelectedButton('completed');
+                    }}> 
+                    Completed 
+                </button>
+                <div className={styles.quizList}>
+                    {quizList.length === 0 
+                        ? <p className={styles.noQuizMessage}>{selectedButton === 'to-do' ? 'You do not have any quizzes. Create a quiz above!' : 'You have not completed any quizzes yet!'} </p>
+                        : quizList.map((quiz) => {
+                            return (
+                                <QuizCard 
+                                    key = {quiz.QuizID}
+                                    email = {quiz.UserEmail}
+                                    quizID = {quiz.QuizID}
+                                    name = {quiz.QuizName}
+                                    difficulty = {quiz.Difficulty}
+                                    dateCreated = {quiz.DateTimeCreated}
+                                    selectedButton = {selectedButton}
+                                />
+                            )
+                        })
+                    } 
+                </div>
+            </div>
+
+            {/* quizzes */}
+            <div className={styles.yourQuizzes}>
+                <h2> Your Quizzes </h2>
                 <button 
                     className={
                         selectedButton === 'to-do' ? styles.selectedButton : styles.notSelectedButton
