@@ -24,6 +24,11 @@
     cursor: pointer;
 }
 
+.quizCard:active{
+    transition: 0.2s;
+    transform: translate3d(0px, 2px, 0px);
+}
+
 .quizCard img{
     width: 30px;
     height: 30px;

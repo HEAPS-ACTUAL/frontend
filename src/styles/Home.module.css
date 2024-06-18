@@ -116,15 +116,14 @@ h2 {
 
 .createQuiz button:active {
     transition: 0.2s;
-    transform: translate3d(0px, 1px, 0px);
+    transform: translate3d(0px, 2px, 0px);
 }
 
 .quizList {
     margin-top: 10px;
     display: flex;
-    width: 900px;
     height: 255px;
-    overflow-x: scroll;
+    overflow-x: auto;
     white-space: nowrap;
 }
 
