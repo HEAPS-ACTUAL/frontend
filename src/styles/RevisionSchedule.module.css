@@ -1,66 +1,38 @@
 .calendarContainer {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Align items to the start */
+  align-items: center;
   padding: 20px;
   font-family: Arial, sans-serif;
 }
 
 .controls {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* Align items to the start */
+  justify-content: space-between;
   width: 100%;
   margin-bottom: 10px;
-}
-
-.dateSelector {
-  display: flex;
-  justify-content: flex-start; /* Align items to the start */
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-.selectButton,
-.generateButton {
-  padding: 10px 15px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  cursor: pointer;
-  margin-right: 10px;
 }
 
 .header {
   display: flex;
-  justify-content: center; /* Aligns items in the center */
+  justify-content: center;
   align-items: center;
-  padding: 0; /* Remove padding if unnecessary */
+  margin-bottom: 10px;
 }
 
-.header button {
-  padding: 10px 15px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  cursor: pointer;
-  margin: 0 5px; /* Reducing space around the buttons */
-}
-
+.header button,
 .header select {
-  padding: 10px 20px;
-  margin: 0 2px; /* Minimal space between month and year dropdowns */
-  cursor: pointer;
+  padding: 10px 15px;
+  margin: 0 5px;
   font-size: 16px;
 }
 
 .dayNames,
 .daysContainer {
   display: grid;
-  grid-template-columns: repeat(
-    7,
-    1fr
-  ); /* Seven columns for each day of the week */
-  gap: 4px; /* Small gap between cells */
-  width: 100%; /* Ensure the grid takes full width of its container */
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  width: 100%;
 }
 
 .dayName,
@@ -68,15 +40,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 40px; /* Maintaining smaller height for day names */
+  height: 80px; /* Ensuring consistent height */
   border: 1px solid #ccc;
+  background-color: #f0f0f0;
 }
 
 .day {
-  background-color: #f0f0f0;
   cursor: pointer;
-  position: relative;
-  height: 80px; /* Setting the day box height to previous smaller size */
 }
 
 .event {
@@ -89,12 +59,35 @@
   font-size: 0.8em;
 }
 
-.eventForm {
-  margin-top: 20px;
-}
-
 .selectedDay {
   background-color: #a2d9ff; /* Light blue background for selected days */
   color: white;
   border: 1px solid darkblue;
+}
+
+.selectedDate {
+  background-color: #007bff; /* Darker blue for clicked dates */
+  color: white;
+  border: 1px solid darkblue;
+}
+
+.selectButton,
+.generateButton {
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.selectButton:hover,
+.generateButton:hover {
+  background-color: #0056b3;
+}
+
+.selectButton:active,
+.generateButton:active {
+  background-color: #004494;
 }

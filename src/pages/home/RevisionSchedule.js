@@ -63,16 +63,13 @@ const CalendarFeature = () => {
   };
 
   const handleDayClick = (dateKey) => {
-    if (!selectingDates) return;
-
+    const date = new Date(dateKey);
     if (!startDate || (startDate && endDate)) {
       setStartDate(dateKey);
-      setEndDate(null); // Reset end date when start date is set/changed
-    } else if (!endDate && dateKey >= startDate) {
+      setEndDate(null);
+    } else if (!endDate && date >= new Date(startDate)) {
       setEndDate(dateKey);
-      setSelectingDates(false); // End date selection
-    } else if (startDate && endDate) {
-      // Reset to new start date if both dates are already selected
+    } else if (startDate && !endDate) {
       setStartDate(dateKey);
       setEndDate(null);
       setEvents({});
@@ -93,6 +90,12 @@ const CalendarFeature = () => {
     }
     setEvents(newEvents);
     alert("Revision schedule generated!");
+  };
+
+  const clearDates = () => {
+    setStartDate(null);
+    setEndDate(null);
+    setEvents({});
   };
 
   const renderDays = () => {
@@ -117,12 +120,10 @@ const CalendarFeature = () => {
         date.getMonth() + 1
       }-${date.getDate()}`;
       let dayClass = styles.day;
-      if (
-        (start && date >= start && (!end || date <= end)) ||
-        dateKey === startDate ||
-        dateKey === endDate
-      ) {
-        dayClass = styles.selectedDay; // Apply selected style
+      if (startDate && endDate && date >= start && date <= end) {
+        dayClass = styles.selectedDay;
+      } else if (dateKey === startDate || dateKey === endDate) {
+        dayClass = styles.selectedDate;
       }
       days.push(
         <div
@@ -144,11 +145,8 @@ const CalendarFeature = () => {
     <div className={styles.calendarContainer}>
       <div className={styles.controls}>
         <div className={styles.dateSelector}>
-          <button
-            onClick={() => setSelectingDates(true)}
-            className={styles.selectButton}
-          >
-            Choose Start/End Dates
+          <button onClick={clearDates} className={styles.selectButton}>
+            Clear Dates
           </button>
           <button
             onClick={generateRevisionSchedule}
