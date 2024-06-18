@@ -1,4 +1,6 @@
+/* Features.module.css */
 .Features {
+    background: linear-gradient(to right, #c4dfdf, #d2e9e9, #e3f4f4, #f8f6f4);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,47 +12,63 @@
 .centerText {
     text-align: center;
     margin-bottom: 40px;
-    font-size: 2.5rem; 
-    font-weight: bold; 
-    padding: 20px; 
+    font-size: 2.5rem; /* Increase font size */
+    font-weight: bold; /* Optional: make the text bold */
+    padding: 20px; /* Optional: add padding */
 }
 
 .featureItem {
     display: flex;
-    align-items: center;
-    margin: 20px 0;
-    width: 100%;
-    max-width: 1000px;
     justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 40px;
+    padding: 20px;
+    background: white;
+    border-radius: 30px; /* More rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid #e3f4f4; /* Adding a border to enhance the rectangle look */
 }
 
-.featureItem:nth-child(even) {
+.featureItem.reverse {
     flex-direction: row-reverse;
 }
 
 .featureContent {
     flex: 1;
-    padding: 20px;
+    margin-right: 20px;
+}
+
+.featureItem.reverse .featureContent {
+    margin-right: 0;
+    margin-left: 20px; /* Add space between image and text for reversed items */
 }
 
 .featureImage {
-    flex: 1;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    border-radius: 15px;
-    overflow: hidden; 
+    margin-left: 20px;
+    flex-shrink: 0; /* Prevent shrinking */
 }
 
 .featureImage img {
-    width: 300px;
-    height: 225px;
-    object-fit: cover; 
-    border-radius: 15px ;
+    width: 370px; /* Adjust the width */
+    height: 200px; /* Adjust the height */
+    border-radius: 15px; /* Make the corners rounded */
+    border: 5px solid white; /* Add a white border */
 }
 
-.featureName{
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-bottom: 10px;
+.infoSection {
+    max-width: 800px;
+    margin-top: 40px;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.learnMore {
+    display: block;
+    margin-top: 10px;
+    color: blue;
+    text-decoration: underline;
 }
