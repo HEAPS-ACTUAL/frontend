@@ -56,7 +56,6 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    
     width: 100%;   
     margin-top: 60px;   
 }
@@ -71,17 +70,17 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.25);   
     cursor: pointer;
     justify-content: center;
-    width:500px
+    width:500px;
+    background-color: #7d8e95;
 }
 
-.btnNext{
-    background-color: #337ab7;
-    
+
+.btnSubmit:hover{
+    background-color: #9bbec8;
 }
 
-.btnPrev{
-    background-color: #337ab7;
-    opacity: 0.9; 
+.btnNext:hover, .btnPrev:hover{
+    background-color: #9bbec8;
 }
 
 .btnPrev:disabled, .btnNext:disabled {
@@ -89,13 +88,6 @@
     cursor: not-allowed;
 }
 
-.btnSubmit:hover{
-    background-color: #9bbec8;
-}
-
-.btnNext:hover{
-    background-color: #9bbec8;
-}
 
 .countQuestions{
     margin-top: 80px;

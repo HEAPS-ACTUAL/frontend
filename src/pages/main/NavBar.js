@@ -10,10 +10,10 @@ function Navbar() {
     const [logInOutButton, setLogInOutButton] = useState('');
 
     function updateLogInStatus() {
-        if (isLoggedIn()){
+        if (isLoggedIn()) {
             setLogInOutButton('Log out');
         }
-        else{
+        else {
             setLogInOutButton('Log in');
         }
     }
@@ -31,10 +31,15 @@ function Navbar() {
             </Link>
 
             <div className={styles.navItems}>
-                <Link to="/" className={styles.navLink}>About</Link>
-                <Link to="/features" className={styles.navLink}>Features</Link>
-                <Link to="/Home" className={styles.navLink}>Home</Link>
-                <Link to="/Quiz" className={styles.navLink}>quiz(temp)</Link>
+                <p>
+                    <Link to="/" className={styles.navLink}>About</Link>
+                </p>
+                <p>
+                    <Link to="/features" className={styles.navLink}>Features</Link>
+                </p>
+                <p>
+                    <Link to="/Home" className={styles.navLink}>Home</Link>
+                </p>
             </div>
 
             <Link to="/login" className={styles.navLinkLogin}><button onClick={handleLogOut}>{logInOutButton}</button></Link>
@@ -43,3 +48,4 @@ function Navbar() {
 }
 
 export default Navbar;
+

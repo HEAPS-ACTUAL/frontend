@@ -6,11 +6,10 @@ import About from "./pages/main/About";
 import Features from "./pages/main/Features";
 import Navbar from "./pages/main/NavBar";
 import SignIn from "./pages/main/SignIn";
-import QuizFeature from "./pages/home/Quiz";
-import Home from "./pages/home/Home_route";
-import ResultsPage from "./pages/home/ResultsPage";
-
-
+import HomeRoute from "./pages/home/Home_route";
+import QuizFeature from "./pages/home/Quiz/Quiz";
+import ResultsPage from './pages/home/Quiz/ResultsPage';
+import LoadingPage from "./pages/home/Quiz/LoadingPage";
 
 // STYLES
 import "./styles/App.css";
@@ -19,7 +18,7 @@ import "./styles/App.css";
 import { isLoggedIn } from "./services (for backend)/ProtectionService";
 
 function App() {
-    const [IsLoggedIn, setIsLoggedIn] = useState();
+    const [IsLoggedIn, setIsLoggedIn] = useState(true);
 
     function updateLogInStatus() {
         setIsLoggedIn(isLoggedIn())
@@ -39,10 +38,11 @@ function App() {
                 <Route path="/login" element={<SignIn />} />
                 <Route
                     path="/home/*"
-                    element={IsLoggedIn ? <Home /> : <Navigate to="/login" />} // REDIRECT TO SIGN IN PAGE IF NOT LOGGED IN
+                    element={IsLoggedIn ? <HomeRoute /> : <Navigate to="/login" />} // REDIRECT TO SIGN IN PAGE IF NOT LOGGED IN
                 />
-                <Route path="/Quiz" element={<QuizFeature />} />
+                <Route path="/mcq" element={<QuizFeature />} />
                 <Route path="/ResultsPage" element={<ResultsPage />} />
+                <Route path="/loadingPage" element={<LoadingPage />} />
             </Routes>
         </Router>
     );
