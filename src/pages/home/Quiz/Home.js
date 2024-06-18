@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 // Functions
 import { getSalutation, getUserFirstName} from "../../../services (for backend)/UserService";
 import { generateQuiz, getCompletedQuizzes, getToDoQuizzes} from "../../../services (for backend)/QuizService";
+import { convertFileSizeTo2DP, fileSizeWithinLimit, fileTypeIsPDF } from "../../../services (for backend)/FileServices";
 
 // Pages
 import QuizCard from "./QuizCard";
@@ -50,25 +51,31 @@ function Home() {
     function handleFileUpload(event) {
         event.preventDefault();
 
-        if(quizName === ''){
+        if(quizName.trim() === ''){
             setCreateQuizMessage('Quiz name cannot be empty!');
         }
         else if(difficulty === ''){
             setCreateQuizMessage('Please indicate the difficulty level!');
         }
+        else if(!file){
+            setCreateQuizMessage('Please upload a file!');
+        }
         else{
-            console.log("Generating quiz with:", { email, quizName, difficulty, file });
-            generateQuiz(email, quizName, difficulty, file)
-                .then((response) => {
-                    console.log("Quiz generated successfully:", response);
-                    fetchToDoQuizzes(); // fetch quizzes again to update the list
-                    navigate('./LoadingPage');
-                    // window.location.reload();
-                    
-                })
-                .catch((error) => {
-                    setCreateQuizMessage(`Error generating quiz: ${error}`);
-                });
+            const fileSize = convertFileSizeTo2DP(file);
+
+            if(!fileTypeIsPDF(file)){
+                setCreateQuizMessage('File type must be PDF!')
+            }
+            else if(!fileSizeWithinLimit(file)){
+                setCreateQuizMessage(`Your file size has exceed the limit of 5MB.`)
+            }
+            else{
+                console.log("Generating quiz with:", { email, quizName, difficulty, file, fileSize: `${fileSize}MB`});
+                
+                generateQuiz(email, quizName, difficulty, file);
+                navigate('../../../LoadingPage');
+            }
+
         }
     }
 
@@ -97,10 +104,9 @@ function Home() {
                         {/* <p> Please select only one file </p> */}
                     </div>
 
-                    {createQuizMessage && <p>{createQuizMessage}</p>}
-                    
                     <button type="submit"> Generate Quiz! </button>
                    
+                    {createQuizMessage && <p>{createQuizMessage}</p>}
                 </form>
             </div>
 

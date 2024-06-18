@@ -39,7 +39,7 @@
     margin-bottom: 5px;
 }
 
-p:nth-child(4){
+.numOfQuestions {
     font-size: 12px;
     font-weight: 500;
     width: fit-content;

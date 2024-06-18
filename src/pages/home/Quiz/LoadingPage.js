@@ -5,7 +5,7 @@ import styles from '../../../styles/LoadingPage.module.css';
 const LoadingPage = () => {
     const [progress, setProgress] = useState(0);
     const navigate = useNavigate();
-    const duration = 10000; // Set the duration of the loading bar
+    const duration = 40000; // Set the duration of the loading bar
 
     useEffect(() => {
         const intervalDuration = duration / 100;
@@ -13,7 +13,7 @@ const LoadingPage = () => {
             setProgress((prevProgress) => {
                 if (prevProgress >= 100) {
                     clearInterval(interval);
-                    navigate('/Quiz'); // Redirect to the quiz page after loading
+                    navigate('/home'); // Redirect to the quiz page after loading
                     return 100;
                 }
                 return prevProgress + 1;
@@ -26,6 +26,7 @@ const LoadingPage = () => {
     return (
         <div className={styles.loadingContainer}>
             <h1>Generating quiz, please wait...</h1>
+            <h1> This may take up to a minute </h1>
             <div className={styles.loadingBarContainer}>
                 <div
                     className={styles.loadingBar}
