@@ -65,7 +65,7 @@ function QuizCard({email, quizID, name, difficulty, dateCreated, selectedButton}
             {state: 
                 {
                     duration: 1500, 
-                    messageArray: [`Deleting ${name} quiz...`], 
+                    messageArray: [`Deleting ${name}...`], 
                     redirect: '/home'
                 } 
             }
