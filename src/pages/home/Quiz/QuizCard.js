@@ -40,28 +40,36 @@ function QuizCard({email, quizID, name, difficulty, dateCreated, selectedButton}
         navigate('../../mcq', {state: {email, quizID}});
     }
     
-    const [deleteButtonPressed, setDeleteButtonPressed] = useState(false);
+    const [xButtonPressed, setXButtonPressed] = useState(false);
     const [cancelDelete, setCancelDelete] = useState(false);
 
-    function handleDeleteQuiz(event){
+    function handleXButtonPressed(event){
         event.stopPropagation();
-        setDeleteButtonPressed(true);
+        setXButtonPressed(true);
     }
 
     function handleCancelDelete(){
         setCancelDelete(true);
         
         setTimeout(() => {
-            setDeleteButtonPressed(false);
+            setXButtonPressed(false);
             setCancelDelete(false);
         }, 500);
+    }
+
+    async function handleConfirmDelete(){
+        const deleteOk = await deleteQuiz(email, quizID, name);
+        
+        if(deleteOk){
+            alert()
+        }
     }
     
     return (
         <div className={selectedButton ==='to-do' ? styles.toDoQuizCard : styles.completedQuizCard}> 
             <div className={styles.quizCardWrapper}>
                 <div className={styles.quizCard} onClick={goToQuiz}>
-                    <img className={styles.deleteButton} src={xButton} onClick={handleDeleteQuiz} alt='delete button' />
+                    <img className={styles.deleteButton} src={xButton} onClick={handleXButtonPressed} alt='delete button' />
                     <h3>{name}</h3>
                     <p className={styles.quizInfo}>
                         <img className={styles.difficultyImage} src={difficultyImage} alt='man pushing boulder uphill'/>
@@ -76,12 +84,14 @@ function QuizCard({email, quizID, name, difficulty, dateCreated, selectedButton}
                     </p>
                 </div>
 
-                {deleteButtonPressed && (
+                {xButtonPressed && (
                     <div className={`${styles.deleteConfirmation} ${cancelDelete == true ? styles.dontShowDelete : ''}`}>
-                        <p>Are you sure you want to delete this quiz?</p>
+                        <p>Are you sure you want to delete {name} quiz?</p>
+                        <br></br>
+                        <p> This action cannot be undone </p>
                         
                         <div>
-                            <button> yes </button>
+                            <button onClick={handleConfirmDelete}> yes </button>
                             <button onClick={handleCancelDelete}> no </button>
                         </div>
                     </div>
