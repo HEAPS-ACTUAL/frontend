@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import styles from '../../../styles/LoadingPage.module.css';
+import styles from '../../styles/LoadingPage.module.css'
 
 const LoadingPage = () => {
     const [progress, setProgress] = useState(0);
@@ -8,12 +8,6 @@ const LoadingPage = () => {
     const location = useLocation();
     
     const { duration, messageArray, redirect } = location.state; // Set the duration of the loading bar
-    
-    useEffect(() => {
-        console.log(duration);
-        console.log(messageArray);
-        console.log(redirect);
-    }, []);
 
     useEffect(() => {
         const intervalDuration = duration / 100;

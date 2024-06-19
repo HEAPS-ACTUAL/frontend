@@ -9,7 +9,6 @@ import { convertFileSizeTo2DP, fileSizeWithinLimit, fileTypeIsPDF } from "../../
 
 // Pages
 import QuizCard from "./QuizCard";
-import LoadingPage from "./LoadingPage";
 
 function Home() {
     const navigate = useNavigate();
