@@ -59,10 +59,10 @@ const Flashcard = () => {
             <div onClick={toggleFlip} className={`${styles.FlashcardContainer} ${isFlipped ? styles.isFlipped: '' }`}>
 
                     <div className={styles.FlashcardFace + " " + styles.FrontFlashcardContent}>
-                        What is the capital of France?
+                        {flashcardArray[CurrentFlashcardIndex].question}
                     </div>
                     <div className={styles.FlashcardFace + " " + styles.BackFlashcardContent}>
-                        Paris
+                        {flashcardArray[CurrentFlashcardIndex].answer}
                     </div>
             </div>
 
