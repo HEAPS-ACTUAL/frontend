@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from '../../../styles/Flashcard.module.css';
-
-import { TiTick } from "react-icons/ti";
-import { RxCross2 } from "react-icons/rx";
+import { BsArrowLeftShort } from "react-icons/bs";
 
 const Flashcard = () => {
     const location = useLocation();
@@ -30,6 +28,7 @@ const Flashcard = () => {
 
     const [CurrentFlashcardIndex, setCurrentFlashcardIndex] = useState(0);
     const [isFlipped, setIsFlipped] = useState(false);
+    const [canRememberCount, setCanRememberCount] = useState(0);
 
     const toggleFlip = () => {
         setIsFlipped(!isFlipped);
@@ -40,6 +39,7 @@ const Flashcard = () => {
 
         if(CurrentFlashcardIndex < flashcardArray.length -1){
             setCurrentFlashcardIndex(CurrentFlashcardIndex + 1)
+            setIsFlipped(false);
         }
         
         else{
@@ -48,9 +48,16 @@ const Flashcard = () => {
 
     }
 
+    const handleCanRemember = () => {
+        setCanRememberCount(canRememberCount + 1);
+        handleNextFlashcard(); // Move to the next card 
+    };
+
     const handlePreviousFlashcard = () =>{
         if(CurrentFlashcardIndex > 0){
-            setCurrentFlashcardIndex(CurrentFlashcardIndex - 1)
+            
+            setCurrentFlashcardIndex(CurrentFlashcardIndex - 1);
+            setIsFlipped(false); 
         }
     }
     return(
@@ -61,20 +68,34 @@ const Flashcard = () => {
                     <div className={styles.FlashcardFace + " " + styles.FrontFlashcardContent}>
                         {flashcardArray[CurrentFlashcardIndex].question}
                     </div>
+
                     <div className={styles.FlashcardFace + " " + styles.BackFlashcardContent}>
                         {flashcardArray[CurrentFlashcardIndex].answer}
                     </div>
+
+                    
+
             </div>
+
+            
 
             <div className={styles.buttons}>
 
-                <button className={styles.crossBtn}>
+                <button className={styles.previousBtn} onClick={handlePreviousFlashcard}>
+                    <BsArrowLeftShort />
+                </button>
+
+                <button className={styles.crossBtn} onClick={handleNextFlashcard}>
                     cannot remember
                 </button>
 
-                <button className={styles.tickBtn}>
+                <button className={styles.tickBtn} onClick={handleCanRemember}>
                     can remember
                 </button>
+            </div>
+
+            <div className={styles.counter}>     
+                {flashcardArray[CurrentFlashcardIndex]['id']} of {flashcardArray.length}
             </div>
         </div>
     )
