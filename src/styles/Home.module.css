@@ -127,7 +127,7 @@ h2 {
     white-space: nowrap;
 }
 
-.yourQuizzes button {
+.selectedButton, .notSelectedButton {
     margin: 10px 10px 0px 0px;
     border: solid #78979a;
     border-radius: 10px;

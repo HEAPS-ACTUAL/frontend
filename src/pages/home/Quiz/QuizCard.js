@@ -39,13 +39,23 @@ function QuizCard({email, quizID, name, difficulty, dateCreated, selectedButton}
     function goToQuiz(){
         navigate('../../mcq', {state: {email, quizID}});
     }
-
-    async function handleDeleteQuiz(event){
-        event.stopPropagation();
-        
-    }
     
-    const [deleteButtonPressed, setDeleteButtonPressed] = useState(true);
+    const [deleteButtonPressed, setDeleteButtonPressed] = useState(false);
+    const [cancelDelete, setCancelDelete] = useState(false);
+
+    function handleDeleteQuiz(event){
+        event.stopPropagation();
+        setDeleteButtonPressed(true);
+    }
+
+    function handleCancelDelete(){
+        setCancelDelete(true);
+        
+        setTimeout(() => {
+            setDeleteButtonPressed(false);
+            setCancelDelete(false);
+        }, 500);
+    }
     
     return (
         <div className={selectedButton ==='to-do' ? styles.toDoQuizCard : styles.completedQuizCard}> 
@@ -67,8 +77,13 @@ function QuizCard({email, quizID, name, difficulty, dateCreated, selectedButton}
                 </div>
 
                 {deleteButtonPressed && (
-                    <div className={styles.deleteConfirmation}>
+                    <div className={`${styles.deleteConfirmation} ${cancelDelete == true ? styles.dontShowDelete : ''}`}>
                         <p>Are you sure you want to delete this quiz?</p>
+                        
+                        <div>
+                            <button> yes </button>
+                            <button onClick={handleCancelDelete}> no </button>
+                        </div>
                     </div>
                 )}
             </div>

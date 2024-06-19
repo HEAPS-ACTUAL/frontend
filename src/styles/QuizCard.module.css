@@ -1,3 +1,25 @@
+@keyframes fadeIn {
+    from {
+        height: 0;
+        opacity: 0;
+    }
+    to {
+        height: 100%;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        height: 100%;
+        opacity: 1;
+    }
+    to {
+        height: 0;
+        opacity: 0;
+    }
+}
+
 .toDoQuizCard .quizCard {
     /* background-color: #ffc9c9; */
     /* background-color: #7ff8f2; */
@@ -65,10 +87,13 @@
 
 .deleteButton {
     float: right;
-    width: 20px;
+    position: relative;
+    bottom: 10px;
+    left: 2px;
+    width: 40px;
     height: auto;
-    margin-right: 5px;
     transition: transform 0.2s ease;
+    padding: 10px;
 }
 
 .deleteButton:hover {
@@ -85,12 +110,20 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.8);
+    background: #ffffffc9;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 20px;
-    z-index: 10; /* Ensure overlay is above other content */
+    z-index: 10;
     text-align: center;
-    padding: 10px;
+    padding: 30px;
+    margin: 0px 20px 0px 0px;
+    white-space: normal;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.dontShowDelete {
+    animation: fadeOut 0.5s ease forwards;
 }
