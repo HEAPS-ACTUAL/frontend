@@ -1,3 +1,25 @@
+@keyframes fadeIn {
+    from {
+        height: 0;
+        opacity: 0;
+    }
+    to {
+        height: 100%;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        height: 100%;
+        opacity: 1;
+    }
+    to {
+        height: 0;
+        opacity: 0;
+    }
+}
+
 .toDoQuizCard .quizCard {
     /* background-color: #ffc9c9; */
     /* background-color: #7ff8f2; */
@@ -7,6 +29,10 @@
 
 .completedQuizCard .quizCard {
     background-color: #c9ffd3;
+}
+
+.quizCardWrapper {
+    position: relative;
 }
 
 .quizCard {
@@ -29,7 +55,12 @@
     transform: translate3d(0px, 2px, 0px);
 }
 
-.quizCard img{
+.quizInfo {
+    display: flex;
+    align-items: center;
+}
+
+.difficultyImage, .calendarImage {
     width: 30px;
     height: 30px;
     margin-right: 10px;
@@ -52,4 +83,79 @@
     padding: 10px;
     border-radius: 50px;
     background-color: #c6c7db;
+}
+
+.deleteButton {
+    float: right;
+    position: relative;
+    bottom: 10px;
+    left: 2px;
+    width: 40px;
+    height: auto;
+    transition: transform 0.2s ease;
+    padding: 10px;
+}
+
+.deleteButton:hover {
+    transform: rotate(10deg); 
+}
+
+.deleteButton:active {
+    transform: rotate(0deg); 
+}
+
+.deleteConfirmation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #ffffffc9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    z-index: 10;
+    text-align: center;
+    padding: 30px;
+    margin: 0px 20px 0px 0px;
+    white-space: normal;
+    animation: fadeIn 0.5s ease forwards;
+    font-weight: bold;
+}
+
+.deleteConfirmation p:nth-child(3) {
+    color: #e23838;
+}
+
+.dontShowDelete {
+    animation: fadeOut 0.5s ease forwards;
+}
+
+.yesNoButtons {
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.yesNoButtons button {
+    margin: 0px 5px 0px 5px;
+    border: 1px solid black;
+    background-color: transparent;
+    padding: 5px 15px 5px 15px;
+    border-radius: 7px;
+}
+
+.confirmDelete:hover {
+    cursor: pointer;
+    background-color: #e2b0b0;;
+    transition: 0.3s;
+    transform: translateY(-2px);
+}
+
+.cancelDelete:hover {
+    cursor: pointer;
+    background-color: #b0d4e2;;
+    transition: 0.3s;
+    transform: translateY(-2px);
 }
