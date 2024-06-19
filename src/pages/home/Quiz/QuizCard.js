@@ -93,13 +93,13 @@ function QuizCard({email, quizID, name, difficulty, dateCreated, selectedButton}
 
                 {xButtonPressed && (
                     <div className={`${styles.deleteConfirmation} ${cancelDelete == true ? styles.dontShowDelete : ''}`}>
-                        <p>Are you sure you want to delete {name} quiz?</p>
+                        <p>Are you sure you want to delete {name}?</p>
                         <br></br>
-                        <p> This action cannot be undone </p>
+                        <p> This action cannot be undone!! </p>
                         
-                        <div>
-                            <button onClick={handleConfirmDelete}> yes </button>
-                            <button onClick={handleCancelDelete}> no </button>
+                        <div className={styles.yesNoButtons}>
+                            <button className={styles.confirmDelete} onClick={handleConfirmDelete}> Yes </button>
+                            <button className={styles.cancelDelete} onClick={handleCancelDelete}> No </button>
                         </div>
                     </div>
                 )}
