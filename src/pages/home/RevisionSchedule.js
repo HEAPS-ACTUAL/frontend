@@ -6,7 +6,13 @@ const CalendarFeature = () => {
   const [events, setEvents] = useState({});
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [selectingDates, setSelectingDates] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [eventData, setEventData] = useState({
+    date: "",
+    title: "",
+    description: "",
+    color: "#f39c12",
+  });
 
   const months = [
     "January",
@@ -66,36 +72,53 @@ const CalendarFeature = () => {
     const date = new Date(dateKey);
     if (!startDate || (startDate && endDate)) {
       setStartDate(dateKey);
-      setEndDate(null);
+      setEndDate(null); //Sets the start date and clears the end date.
     } else if (!endDate && date >= new Date(startDate)) {
-      setEndDate(dateKey);
+      setEndDate(dateKey); //If the clicked date is after the start date, it sets the end date.
     } else if (startDate && !endDate) {
       setStartDate(dateKey);
       setEndDate(null);
-      setEvents({});
+      setEvents({}); //If only the start date is set, it allows the user to change the start date and resets the end date and events.
     }
   };
 
-  const generateRevisionSchedule = () => {
-    if (!startDate || !endDate) {
-      alert("Please select both a start and an end date.");
-      return;
+  const handleEditEvent = (dateKey) => {
+    const event = events[dateKey];
+    setEventData({
+      date: dateKey,
+      title: event.title,
+      description: event.description,
+      color: event.color,
+    });
+    setIsEditing(true);
+  };
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const { date, title, description, color } = eventData;
+    if (date && title) {
+      setEvents({ ...events, [date]: { title, description, color } });
+      setEventData({ date: "", title: "", description: "", color: "#f39c12" });
+    } else {
+      alert("Please fill in the event title.");
     }
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-    let newEvents = {};
-    for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
-      const key = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
-      newEvents[key] = "Review"; // Example: set a review task
-    }
+  };
+
+  const handleEventDelete = (dateKey) => {
+    const newEvents = { ...events };
+    delete newEvents[dateKey];
     setEvents(newEvents);
-    alert("Revision schedule generated!");
+    setEventData({ date: "", title: "", description: "", color: "#f39c12" });
+    setIsEditing(false);
   };
 
-  const clearDates = () => {
-    setStartDate(null);
-    setEndDate(null);
-    setEvents({});
+  const generateQuiz = () => {
+    if (startDate && endDate) {
+      alert(`Generating quiz for the period from ${startDate} to ${endDate}`);
+      // Add your quiz generation logic here
+    } else {
+      alert("Please select both start and end dates.");
+    }
   };
 
   const renderDays = () => {
@@ -119,21 +142,34 @@ const CalendarFeature = () => {
       const dateKey = `${date.getFullYear()}-${
         date.getMonth() + 1
       }-${date.getDate()}`;
+      const event = events[dateKey];
       let dayClass = styles.day;
+
       if (startDate && endDate && date >= start && date <= end) {
-        dayClass = styles.selectedDay;
+        dayClass = styles.selectedRangeDay;
       } else if (dateKey === startDate || dateKey === endDate) {
-        dayClass = styles.selectedDate;
+        dayClass = styles.selectedDay;
       }
+
       days.push(
         <div
           key={i}
           className={dayClass}
           onClick={() => handleDayClick(dateKey)}
+          onDoubleClick={() => handleEditEvent(dateKey)}
+          style={{ backgroundColor: event ? event.color : "" }}
         >
           {i}
-          {events[dateKey] && (
-            <div className={styles.event}>{events[dateKey]}</div>
+          {event && (
+            <div className={styles.event}>
+              <span>{event.title}</span>
+              <button
+                className={styles.deleteButton}
+                onClick={() => handleEventDelete(dateKey)}
+              >
+                x
+              </button>
+            </div>
           )}
         </div>
       );
@@ -143,35 +179,120 @@ const CalendarFeature = () => {
 
   return (
     <div className={styles.calendarContainer}>
+      <form onSubmit={handleFormSubmit} className={styles.eventForm}>
+        <h3>{isEditing ? "Edit Event" : "Add Event"}</h3>
+        <label>
+          Date:
+          <input
+            type="date"
+            value={eventData.date}
+            onChange={(e) =>
+              setEventData({ ...eventData, date: e.target.value })
+            }
+            required
+          />
+        </label>
+        <label>
+          Title:
+          <input
+            type="text"
+            value={eventData.title}
+            onChange={(e) =>
+              setEventData({ ...eventData, title: e.target.value })
+            }
+            required
+          />
+        </label>
+        <label>
+          Description:
+          <textarea
+            value={eventData.description}
+            onChange={(e) =>
+              setEventData({ ...eventData, description: e.target.value })
+            }
+          />
+        </label>
+        <label>
+          Color:
+          <input
+            type="color"
+            value={eventData.color}
+            onChange={(e) =>
+              setEventData({ ...eventData, color: e.target.value })
+            }
+          />
+        </label>
+        <div className={styles.formButtons}>
+          <button type="submit" className={styles.saveButton}>
+            {isEditing ? "Save Changes" : "Add Event"}
+          </button>
+          {isEditing && (
+            <button
+              type="button"
+              onClick={() => handleEventDelete(eventData.date)}
+              className={styles.deleteButton}
+            >
+              Delete
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={() =>
+              setEventData({
+                date: "",
+                title: "",
+                description: "",
+                color: "#f39c12",
+              })
+            }
+            className={styles.cancelButton}
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
       <div className={styles.controls}>
         <div className={styles.dateSelector}>
-          <button onClick={clearDates} className={styles.selectButton}>
-            Clear Dates
+          <button onClick={() => setEvents({})} className={styles.clearButton}>
+            Clear Events
           </button>
           <button
-            onClick={generateRevisionSchedule}
+            onClick={generateQuiz}
             className={styles.generateButton}
+            disabled={!startDate || !endDate}
           >
-            Generate Revision Schedule
+            Generate Quiz
           </button>
         </div>
         <div className={styles.header}>
-          <button onClick={() => changeMonth(-1)}>Prev</button>
-          <select onChange={handleMonthChange} value={currentDate.getMonth()}>
+          <button onClick={() => changeMonth(-1)} className={styles.navButton}>
+            Prev
+          </button>
+          <select
+            onChange={handleMonthChange}
+            value={currentDate.getMonth()}
+            className={styles.monthSelect}
+          >
             {months.map((month, index) => (
               <option key={month} value={index}>
                 {month}
               </option>
             ))}
           </select>
-          <select onChange={handleYearChange} value={currentDate.getFullYear()}>
+          <select
+            onChange={handleYearChange}
+            value={currentDate.getFullYear()}
+            className={styles.yearSelect}
+          >
             {years.map((year) => (
               <option key={year} value={year}>
                 {year}
               </option>
             ))}
           </select>
-          <button onClick={() => changeMonth(1)}>Next</button>
+          <button onClick={() => changeMonth(1)} className={styles.navButton}>
+            Next
+          </button>
         </div>
       </div>
       <div className={styles.dayNames}>
