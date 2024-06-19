@@ -8,7 +8,7 @@ const ResultsPage = () => {
 
     const location = useLocation();
     const { email, quizID, userAnswers, questionsOptionsArray } = location.state;
-    console.log(location.state);
+    // console.log(location.state);
 
     const optionDict = {'A': 0, 'B': 1, 'C': 2, 'D': 3};
 

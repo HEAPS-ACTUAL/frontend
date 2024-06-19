@@ -73,7 +73,17 @@ function Home() {
                 console.log("Generating quiz with:", { email, quizName, difficulty, file, fileSize: `${fileSize}MB`});
                 
                 generateQuiz(email, quizName, difficulty, file);
-                navigate('../../../LoadingPage');
+                
+                navigate ( 
+                    '../../../LoadingPage', 
+                    {state: 
+                        {
+                            duration: 40000, 
+                            messageArray: [`Generating quiz, please wait...`, `This may take up to a minute`], 
+                            redirect: '/home'
+                        } 
+                    }
+                )
             }
 
         }

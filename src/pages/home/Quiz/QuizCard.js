@@ -59,10 +59,17 @@ function QuizCard({email, quizID, name, difficulty, dateCreated, selectedButton}
 
     async function handleConfirmDelete(){
         const deleteOk = await deleteQuiz(email, quizID, name);
-        
-        if(deleteOk){
-            alert()
-        }
+
+        navigate(
+            '../../../LoadingPage', 
+            {state: 
+                {
+                    duration: 1500, 
+                    messageArray: [`Deleting ${name} quiz...`], 
+                    redirect: '/home'
+                } 
+            }
+        )
     }
     
     return (
