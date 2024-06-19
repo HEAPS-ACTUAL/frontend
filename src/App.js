@@ -10,6 +10,7 @@ import HomeRoute from "./pages/home/Home_route";
 import QuizFeature from "./pages/home/Quiz/Quiz";
 import ResultsPage from './pages/home/Quiz/ResultsPage';
 import LoadingPage from "./pages/home/Quiz/LoadingPage";
+import Flashcard from "./pages/home/Quiz/Flashcard";
 
 // STYLES
 import "./styles/App.css";
@@ -43,6 +44,7 @@ function App() {
                 <Route path="/mcq" element={<QuizFeature />} />
                 <Route path="/ResultsPage" element={<ResultsPage />} />
                 <Route path="/loadingPage" element={<LoadingPage />} />
+                <Route path="/Flashcard" element={<Flashcard />} />
             </Routes>
         </Router>
     );
