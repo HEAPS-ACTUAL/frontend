@@ -7,7 +7,7 @@
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
+  max-width: 1200px; /* Increased width */
   margin: auto;
 }
 
@@ -126,7 +126,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80px;
+  height: 100px; /* Increased height */
   border: 1px solid #ccc;
   border-radius: 5px;
   transition: background-color 0.3s, border-color 0.3s;
@@ -139,21 +139,8 @@
 }
 
 .day:hover {
-  background-color: #e0e0e0;
+  background-color: #fdffaf;
 }
-
-.calendarContainer .day.selectedDay {
-  background-color: #ffeb3b !important; /* Yellow background */
-  color: black !important; /* Adjust text color if needed */
-}
-
-.calendarContainer .day.selectedRangeDay {
-  background-color: #ffd700 !important; /* Different shade of Yellow for distinction */
-  color: black !important; /* Adjust text color if needed */
-  border: 2px solid #ffeb3b !important; /* Slightly darker yellow border for distinction */
-  border-radius: 5px;
-}
-
 .event {
   position: absolute;
   bottom: 5px;
@@ -176,4 +163,16 @@
   color: white;
   font-size: 12px;
   cursor: pointer;
+}
+
+.calendarContainer .day.selectedDay {
+  background-color: #fdffaf !important; /* Yellow background */
+  color: black !important; /* Adjust text color if needed */
+}
+
+.calendarContainer .day.selectedRangeDay {
+  background-color: #fdffaf !important; /* Different shade of Yellow for distinction */
+  color: black !important; /* Adjust text color if needed */
+  border: 2px solid #ffeb3b !important; /* Slightly darker yellow border for distinction */
+  border-radius: 5px;
 }

@@ -72,13 +72,13 @@ const CalendarFeature = () => {
     const date = new Date(dateKey);
     if (!startDate || (startDate && endDate)) {
       setStartDate(dateKey);
-      setEndDate(null); //Sets the start date and clears the end date.
+      setEndDate(null);
     } else if (!endDate && date >= new Date(startDate)) {
-      setEndDate(dateKey); //If the clicked date is after the start date, it sets the end date.
+      setEndDate(dateKey);
     } else if (startDate && !endDate) {
       setStartDate(dateKey);
       setEndDate(null);
-      setEvents({}); //If only the start date is set, it allows the user to change the start date and resets the end date and events.
+      setEvents({});
     }
   };
 
@@ -98,7 +98,8 @@ const CalendarFeature = () => {
     const { date, title, description, color } = eventData;
     if (date && title) {
       setEvents({ ...events, [date]: { title, description, color } });
-      setEventData({ date: "", title: "", description: "", color: "#f39c12" });
+      setEventData({ date: "", title: "", description: "", color: "##7FFF00" });
+      setIsEditing(false);
     } else {
       alert("Please fill in the event title.");
     }
@@ -108,14 +109,13 @@ const CalendarFeature = () => {
     const newEvents = { ...events };
     delete newEvents[dateKey];
     setEvents(newEvents);
-    setEventData({ date: "", title: "", description: "", color: "#f39c12" });
+    setEventData({ date: "", title: "", description: "", color: "##7FFF00" });
     setIsEditing(false);
   };
 
   const generateQuiz = () => {
     if (startDate && endDate) {
       alert(`Generating quiz for the period from ${startDate} to ${endDate}`);
-      // Add your quiz generation logic here
     } else {
       alert("Please select both start and end dates.");
     }
@@ -146,9 +146,11 @@ const CalendarFeature = () => {
       let dayClass = styles.day;
 
       if (startDate && endDate && date >= start && date <= end) {
-        dayClass = styles.selectedRangeDay;
+        dayClass = `${styles.day} ${styles.selectedRangeDay}`;
+
+        //rmb here must concatenate the styles.day otherwise wont work
       } else if (dateKey === startDate || dateKey === endDate) {
-        dayClass = styles.selectedDay;
+        dayClass = `${styles.day} ${styles.selectedDay}`;
       }
 
       days.push(
