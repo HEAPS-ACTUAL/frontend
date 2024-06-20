@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../styles/RevisionSchedule.module.css";
 
 const CalendarFeature = () => {
@@ -36,10 +36,135 @@ const CalendarFeature = () => {
     (_, index) => currentYear - 10 + index
   );
 
-  const daysInMonth = (date) =>
-    new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-  const firstDayOfMonth = (date) =>
-    new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+  useEffect(() => {
+    console.log("CalendarFeature component mounted");
+  }, []);
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const { date, title, description, color } = eventData;
+    if (date && title) {
+      setEvents((prevEvents) => ({
+        ...prevEvents,
+        [date]: { title, description, color },
+      }));
+      console.log("Event added:", { date, title, description, color });
+      console.log("Updated events:", events);
+      setEventData({ date: "", title: "", description: "", color: "#f39c12" });
+      setIsEditing(false);
+    } else {
+      alert("Please fill in the event title.");
+    }
+  };
+
+  const handleEventDelete = (dateKey) => {
+    const newEvents = { ...events };
+    delete newEvents[dateKey];
+    setEvents(newEvents);
+    console.log("Event deleted:", dateKey);
+    console.log("Updated events:", events);
+    setEventData({ date: "", title: "", description: "", color: "#f39c12" });
+    setIsEditing(false);
+  };
+
+  const renderDays = () => {
+    console.log("Rendering days...");
+    const days = [];
+    const daysCount = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() + 1,
+      0
+    ).getDate();
+    const firstDay = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      1
+    ).getDay();
+
+    for (let i = 0; i < firstDay; i++) {
+      days.push(<div key={`empty-${i}`} className={styles.emptyDay}></div>);
+    }
+
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    for (let i = 1; i <= daysCount; i++) {
+      const date = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
+        i
+      );
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      const dateKey = `${year}-${month}-${day}`;
+      const event = events[dateKey];
+      let dayClass = styles.day;
+
+      if (startDate && endDate && date >= start && date <= end) {
+        dayClass = `${styles.day} ${styles.selectedRangeDay}`;
+      } else if (dateKey === startDate || dateKey === endDate) {
+        dayClass = `${styles.day} ${styles.selectedDay}`;
+      }
+
+      console.log("Rendering day:", i, "Date Key:", dateKey, "Event:", event);
+
+      days.push(
+        <div
+          key={i}
+          className={dayClass}
+          onClick={() => handleDayClick(dateKey)}
+          onDoubleClick={() => handleEditEvent(dateKey)}
+          style={{ backgroundColor: event ? event.color : "" }}
+        >
+          {i}
+          {event && (
+            <div
+              className={styles.event}
+              style={{ backgroundColor: event.color }}
+            >
+              <span>{event.title}</span>
+              <button
+                className={styles.deleteButton}
+                onClick={() => handleEventDelete(dateKey)}
+              >
+                x
+              </button>
+            </div>
+          )}
+        </div>
+      );
+    }
+    console.log("Rendering days with events:", events);
+    return days;
+  };
+
+  const handleDayClick = (dateKey) => {
+    console.log("Day clicked:", dateKey);
+    const date = new Date(dateKey);
+    if (!startDate || (startDate && endDate)) {
+      setStartDate(dateKey);
+      setEndDate(null);
+    } else if (!endDate && date >= new Date(startDate)) {
+      setEndDate(dateKey);
+    } else if (startDate && !endDate) {
+      setStartDate(dateKey);
+      setEndDate(null);
+      setEvents({});
+    }
+  };
+
+  const handleEditEvent = (dateKey) => {
+    console.log("Edit event:", dateKey);
+    const event = events[dateKey];
+    setEventData({
+      date: dateKey,
+      title: event.title,
+      description: event.description,
+      color: event.color,
+    });
+    setIsEditing(true);
+  };
 
   const changeMonth = (offset) => {
     const newDate = new Date(
@@ -68,115 +193,12 @@ const CalendarFeature = () => {
     setCurrentDate(newDate);
   };
 
-  const handleDayClick = (dateKey) => {
-    const date = new Date(dateKey);
-    if (!startDate || (startDate && endDate)) {
-      setStartDate(dateKey);
-      setEndDate(null);
-    } else if (!endDate && date >= new Date(startDate)) {
-      setEndDate(dateKey);
-    } else if (startDate && !endDate) {
-      setStartDate(dateKey);
-      setEndDate(null);
-      setEvents({});
-    }
-  };
-
-  const handleEditEvent = (dateKey) => {
-    const event = events[dateKey];
-    setEventData({
-      date: dateKey,
-      title: event.title,
-      description: event.description,
-      color: event.color,
-    });
-    setIsEditing(true);
-  };
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    const { date, title, description, color } = eventData;
-    if (date && title) {
-      setEvents({ ...events, [date]: { title, description, color } });
-      setEventData({ date: "", title: "", description: "", color: "##7FFF00" });
-      setIsEditing(false);
-    } else {
-      alert("Please fill in the event title.");
-    }
-  };
-
-  const handleEventDelete = (dateKey) => {
-    const newEvents = { ...events };
-    delete newEvents[dateKey];
-    setEvents(newEvents);
-    setEventData({ date: "", title: "", description: "", color: "##7FFF00" });
-    setIsEditing(false);
-  };
-
   const generateQuiz = () => {
     if (startDate && endDate) {
       alert(`Generating quiz for the period from ${startDate} to ${endDate}`);
     } else {
       alert("Please select both start and end dates.");
     }
-  };
-
-  const renderDays = () => {
-    const days = [];
-    const daysCount = daysInMonth(currentDate);
-    const firstDay = firstDayOfMonth(currentDate);
-
-    for (let i = 0; i < firstDay; i++) {
-      days.push(<div key={`empty-${i}`} className={styles.emptyDay}></div>);
-    }
-
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-
-    for (let i = 1; i <= daysCount; i++) {
-      const date = new Date(
-        currentDate.getFullYear(),
-        currentDate.getMonth(),
-        i
-      );
-      const dateKey = `${date.getFullYear()}-${
-        date.getMonth() + 1
-      }-${date.getDate()}`;
-      const event = events[dateKey];
-      let dayClass = styles.day;
-
-      if (startDate && endDate && date >= start && date <= end) {
-        dayClass = `${styles.day} ${styles.selectedRangeDay}`;
-
-        //rmb here must concatenate the styles.day otherwise wont work
-      } else if (dateKey === startDate || dateKey === endDate) {
-        dayClass = `${styles.day} ${styles.selectedDay}`;
-      }
-
-      days.push(
-        <div
-          key={i}
-          className={dayClass}
-          onClick={() => handleDayClick(dateKey)}
-          onDoubleClick={() => handleEditEvent(dateKey)}
-          style={{ backgroundColor: event ? event.color : "" }}
-        >
-          {i}
-          {event && (
-            <div className={styles.event}>
-              <span>{event.title}</span>
-              <button
-                className={styles.deleteButton}
-                onClick={() => handleEventDelete(dateKey)}
-              >
-                x
-              </button>
-            </div>
-          )}
-        </div>
-      );
-    }
-    return days;
   };
 
   return (

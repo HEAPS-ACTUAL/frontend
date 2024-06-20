@@ -7,7 +7,7 @@
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 1200px; /* Increased width */
+  max-width: 1000px; /* Adjusted width */
   margin: auto;
 }
 
@@ -25,25 +25,29 @@
 
 .eventForm h3 {
   margin-bottom: 10px;
+  font-size: 20px;
+  color: #333;
 }
 
 .eventForm label {
   display: flex;
   flex-direction: column;
-  font-size: 16px;
+  font-size: 14px;
+  color: #555;
 }
 
 .eventForm input,
 .eventForm textarea {
-  padding: 10px;
-  font-size: 16px;
+  padding: 8px;
+  font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  width: 100%;
 }
 
 .eventForm input[type="color"] {
   padding: 0;
-  width: 50px;
+  width: 40px;
   height: 30px;
   border: none;
 }
@@ -52,6 +56,7 @@
   display: flex;
   gap: 10px;
   margin-top: 10px;
+  justify-content: flex-end;
 }
 
 .controls {
@@ -69,6 +74,7 @@
 .header {
   display: flex;
   gap: 10px;
+  align-items: center;
 }
 
 .header button,
@@ -83,7 +89,7 @@
   color: white;
   border: none;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
   border-radius: 5px;
   transition: background-color 0.3s;
 }
@@ -126,26 +132,32 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100px; /* Increased height */
+  height: 80px; /* Adjusted height */
   border: 1px solid #ccc;
   border-radius: 5px;
   transition: background-color 0.3s, border-color 0.3s;
 }
 
+.dayName {
+  background-color: #f5f5f5;
+  font-weight: bold;
+  color: #333;
+}
+
 .day {
-  background-color: #f0f0f0;
+  background-color: #fafafa;
   cursor: pointer;
   position: relative;
+  flex-direction: column;
+  padding: 5px;
+  box-sizing: border-box;
 }
 
 .day:hover {
-  background-color: #fdffaf;
+  background-color: #e0e0e0; /* Changed hover color for better contrast */
 }
+
 .event {
-  position: absolute;
-  bottom: 5px;
-  left: 5px;
-  right: 5px;
   background-color: inherit;
   padding: 5px;
   border-radius: 5px;
@@ -155,6 +167,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 5px;
+}
+
+.event span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .deleteButton {
@@ -166,13 +185,13 @@
 }
 
 .calendarContainer .day.selectedDay {
-  background-color: #fdffaf !important; /* Yellow background */
-  color: black !important; /* Adjust text color if needed */
+  background-color: #a1c4fd !important; /* Updated selected day color */
+  color: black !important;
 }
 
 .calendarContainer .day.selectedRangeDay {
-  background-color: #fdffaf !important; /* Different shade of Yellow for distinction */
-  color: black !important; /* Adjust text color if needed */
-  border: 2px solid #ffeb3b !important; /* Slightly darker yellow border for distinction */
+  background-color: #c2e9fb !important; /* Updated range day color */
+  color: black !important;
+  border: 2px solid #a1c4fd !important;
   border-radius: 5px;
 }
