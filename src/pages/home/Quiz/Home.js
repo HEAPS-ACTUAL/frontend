@@ -45,10 +45,7 @@ function Home() {
     const [file, setFile] = useState(null);
     const [quizName, setQuizName] = useState("");
     const [difficulty, setDifficulty] = useState("");
-    const [testType, setTestType] = useState({
-        "quiz": false,
-        "flashcard": false
-    });
+    const [testType, setTestType] = useState([]);
     const [createQuizMessage, setCreateQuizMessage] = useState('');
 
     function handleFileUpload(event) { // isaiah to change
@@ -90,6 +87,10 @@ function Home() {
             }
 
         }
+    }
+
+    const handleCheckboxChange = (event) => {
+        const {value, checked} = event.target;
     }
 
     return (
