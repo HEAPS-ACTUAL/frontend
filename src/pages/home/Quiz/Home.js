@@ -139,7 +139,7 @@ function Home() {
                                     testID = {flashcard.TestID}
                                     name = {flashcard.TestName}
                                     dateCreated = {flashcard.DateTimeCreated}
-                                    difficulty = {flashcard.Difficulty}
+                                    difficulty = {null}
                                     numberOfQuestions = {flashcard.numOfQuestions}
                                     selectedButton = {null}
                                 />

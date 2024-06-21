@@ -65,10 +65,15 @@ function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, sel
                 <div className={styles.testCard} onClick={goToTest}>
                     <img className={styles.deleteButton} src={xButton} onClick={handleXButtonPressed} alt='delete button' />
                     <h3>{name}</h3>
-                    <p className={styles.testInfo}>
-                        <img className={styles.difficultyImage} src={difficultyImage} alt='man pushing boulder uphill'/>
-                        {difficulty}
-                    </p>
+
+                    {difficulty !== null 
+                        ? <p className={styles.testInfo}>
+                            <img className={styles.difficultyImage} src={difficultyImage} alt='man pushing boulder uphill'/>
+                            {difficulty}
+                        </p>
+                        : null
+                    }
+                   
                     <p className={styles.testInfo}>
                         <img className={styles.calendarImage} src={calendarImage} alt='calendar'/>
                         {dateCreated}

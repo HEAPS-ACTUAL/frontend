@@ -123,7 +123,7 @@ h2 {
 .quizList, .flashcardList {
     margin-top: 10px;
     display: flex;
-    height: 255px;
+    /* height: 255px; */
     overflow-x: auto;
     white-space: nowrap;
 }
