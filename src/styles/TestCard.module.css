@@ -1,3 +1,12 @@
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 @keyframes fadeIn {
     from {
         height: 0;
@@ -30,7 +39,7 @@
 
 .flashcard .testCard {
     /* background-color: #ffc9c9; */
-    background-color: #8be8e3;
+    background-color: #9acaff;
     /* background-color: #c9ffd3; */
 }
 
@@ -44,6 +53,7 @@
     border-radius: 20px;
     padding: 20px 20px 20px 25px;
     transition: 0.2s;
+    animation: appear 0.5s ease-in;
 }
 
 .testCard:hover{

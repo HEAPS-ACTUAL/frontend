@@ -45,6 +45,7 @@
 .createQuiz, .yourQuizzes, .yourFlashcards {
     padding: 20px 20px 20px 0px;
     margin: 10px 60px 0px 60px;
+    /* animation: fadeIn 2s ease-in; */
   }
 
 h2 {
