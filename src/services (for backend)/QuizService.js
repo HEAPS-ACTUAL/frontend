@@ -6,11 +6,12 @@ async function generateQuiz(email, quizName, difficulty, file) { // isaiah to ch
         formData.append("email", email);
         formData.append("quizName", quizName);
         formData.append("difficulty", difficulty);
+        // formData.append("testType", testType);
         formData.append("file", file);
 
         const response = await axiosInstance({
             method: "post",
-            url: "/quiz/generateAndStoreQuiz",
+            url: "/test/generateAndStoreTest",
             data: formData,
             headers: { "Content-Type": "multipart/form-data" },
         });

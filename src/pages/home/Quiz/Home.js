@@ -45,6 +45,10 @@ function Home() {
     const [file, setFile] = useState(null);
     const [quizName, setQuizName] = useState("");
     const [difficulty, setDifficulty] = useState("");
+    const [testType, setTestType] = useState({
+        "quiz": false,
+        "flashcard": false
+    });
     const [createQuizMessage, setCreateQuizMessage] = useState('');
 
     function handleFileUpload(event) { // isaiah to change
@@ -69,9 +73,9 @@ function Home() {
                 setCreateQuizMessage(`Your file size has exceed the limit of 5MB.`)
             }
             else{
-                console.log("Generating quiz with:", { email, quizName, difficulty, file, fileSize: `${fileSize}MB`});
+                console.log("Generating quiz with:", { email, quizName, testType, difficulty, file, fileSize: `${fileSize}MB`});
                 
-                generateQuiz(email, quizName, difficulty, file);
+                generateQuiz(email, quizName, testType, difficulty, file);
                 
                 navigate ( 
                     '../../../LoadingPage', 
@@ -96,10 +100,10 @@ function Home() {
             </div>
 
             <div className={styles.createQuiz}>
-                <h2> Create a quiz </h2>
+                <h2> Create </h2>
 
                 <form onSubmit={handleFileUpload}>
-                    <input type="text" placeholder="Enter Quiz Name" onChange={(event) => setQuizName(event.target.value)}/>
+                    <input type="text" placeholder="Enter a Name" onChange={(event) => setQuizName(event.target.value)}/>
 
                     <div className={styles.difficultyAndChooseFile}>
                         <select className={styles.difficulty} onChange={(event) => setDifficulty(event.target.value)}>
@@ -111,8 +115,12 @@ function Home() {
 
                         <input className={styles.chooseFile}type="file" onChange={(event) => setFile(event.target.files[0])}/>
                     </div>
-
-                    <button type="submit"> Generate Quiz! </button>
+                    <div className={styles.testTypeCheckbox} onChange={(event) => setTestType(event.target.checked)}>
+                    <label><input type='checkbox' name='testType' value='Q'/> Quiz</label>
+                    <label><input type='checkbox' name='testType' value='F'/> Flashcard</label>
+                    </div>
+                    <br/>
+                    <button type="submit"> Generate Now! </button> 
                    
                     {createQuizMessage && <p>{createQuizMessage}</p>}
                 </form>
