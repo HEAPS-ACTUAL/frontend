@@ -131,7 +131,7 @@ function Home() {
 
                 <div className={styles.flashcardList}>
                     {flashcardList.length === 0 
-                        ? <p className={styles.noQuizMessage}> {selectedButton === 'to-do' ? 'You do not have any quizzes. Create a quiz above!' : 'You have not completed any quizzes yet!'} </p>
+                        ? <p className={styles.noQuizMessage}> You do not have any flashcards. Create a flashcard above!</p>
                         : flashcardList.map((flashcard) => {
                             return (
                                 <TestCard 
