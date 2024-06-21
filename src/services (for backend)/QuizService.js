@@ -1,6 +1,6 @@
 import axiosInstance from "../utility/axiosInstance";
 
-async function generateQuiz(email, quizName, difficulty, file) {
+async function generateQuiz(email, quizName, difficulty, file) { // isaiah to change
     try {
         const formData = new FormData();
         formData.append("email", email);
@@ -28,8 +28,8 @@ async function getToDoQuizzes(email) {
     try {
         const response = await axiosInstance({
             method: "post",
-            url: "/quiz/getToDoQuizzes",
-            data: { email: email },
+            url: "/test/getTestInfo",
+            data: { email: email, testType: 'Q', testStatus: false },
         });
 
         return response.data;
@@ -43,8 +43,8 @@ async function getCompletedQuizzes(email) {
     try {
         const response = await axiosInstance({
             method: "post",
-            url: "/quiz/getCompletedQuizzes",
-            data: { email: email },
+            url: "/test/getTestInfo",
+            data: { email: email, testType: 'Q', testStatus: true },
         });
 
         return response.data;
@@ -54,19 +54,4 @@ async function getCompletedQuizzes(email) {
     }
 }
 
-async function deleteQuiz(email, quizID, quizName) {
-    try {
-        const response = await axiosInstance({
-            method: "post",
-            url: "/quiz/deleteQuiz",
-            data: { email, quizID, quizName },
-        });
-    
-        return response.data;
-    }
-    catch (error) {
-        return error.response.data.message;
-    }
-}
-
-export { generateQuiz, getToDoQuizzes, getCompletedQuizzes, deleteQuiz };
+export { generateQuiz, getToDoQuizzes, getCompletedQuizzes };

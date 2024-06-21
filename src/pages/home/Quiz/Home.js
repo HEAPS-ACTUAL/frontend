@@ -44,10 +44,10 @@ function Home() {
 
     const [file, setFile] = useState(null);
     const [quizName, setQuizName] = useState("");
-    const [difficulty, setDifficulty] = useState(""); // Default to 'Easy'
+    const [difficulty, setDifficulty] = useState("");
     const [createQuizMessage, setCreateQuizMessage] = useState('');
 
-    function handleFileUpload(event) {
+    function handleFileUpload(event) { // isaiah to change
         event.preventDefault();
 
         if(quizName.trim() === ''){
@@ -110,7 +110,6 @@ function Home() {
                         </select>
 
                         <input className={styles.chooseFile}type="file" onChange={(event) => setFile(event.target.files[0])}/>
-                        {/* <p> Please select only one file </p> */}
                     </div>
 
                     <button type="submit"> Generate Quiz! </button>
@@ -143,13 +142,14 @@ function Home() {
                     }}> 
                     Completed 
                 </button>
+
                 <div className={styles.quizList}>
                     {quizList.length === 0 
                         ? <p className={styles.noQuizMessage}>{selectedButton === 'to-do' ? 'You do not have any quizzes. Create a quiz above!' : 'You have not completed any quizzes yet!'} </p>
                         : quizList.map((quiz) => {
                             return (
                                 <QuizCard 
-                                    key = {quiz.QuizID}
+                                    key = {quiz.TestID}
                                     email = {quiz.UserEmail}
                                     quizID = {quiz.QuizID}
                                     name = {quiz.QuizName}

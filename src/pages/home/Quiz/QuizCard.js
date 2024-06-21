@@ -9,7 +9,7 @@ import xButton from '../../../images/x-button.png';
 
 // functions
 import { getNumberOfQuestions } from '../../../services (for backend)/QuestionService';
-import { deleteQuiz } from '../../../services (for backend)/QuizService';
+import { deleteQuiz } from '../../../services (for backend)/TestService';
 
 function QuizCard({email, quizID, name, difficulty, dateCreated, selectedButton}){
 
