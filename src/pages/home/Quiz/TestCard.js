@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from '../../../styles/QuizCard.module.css';
+import styles from '../../../styles/TestCard.module.css';
 
 // images
 import difficultyImage from '../../../images/difficultyImage.png';
@@ -8,36 +8,15 @@ import calendarImage from '../../../images/calendar.png';
 import xButton from '../../../images/x-button.png';
 
 // functions
-import { getNumberOfQuestions } from '../../../services (for backend)/QuestionService';
-import { deleteQuiz } from '../../../services (for backend)/TestService';
+import { deleteTest } from '../../../services (for backend)/TestService';
 
-function QuizCard({email, quizID, name, difficulty, dateCreated, selectedButton}){
-
-    const difficultyDict = 
-    {
-        'E': 'Easy', 
-        'M': 'Intermediate', 
-        'H': 'Hard'
-    };
-
-    difficulty = difficultyDict[difficulty];
+function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, selectedButton}){
     dateCreated = dateCreated.slice(0,10);
-    
-    const [numberOfQuestions, setNumberOfQuestions] = useState(undefined);
-    
-    async function fetchNumberOfQuestions(){
-        const numberOfQuestions = await getNumberOfQuestions(email, quizID);
-        setNumberOfQuestions(numberOfQuestions);
-    }
-
-    useEffect(() => {
-        fetchNumberOfQuestions();
-    });
 
     const navigate = useNavigate();
 
-    function goToQuiz(){
-        navigate('../../mcq', {state: {email, quizID}});
+    function goToTest(){
+        navigate('../../mcq', {state: {testID}});
     }
     
     const [xButtonPressed, setXButtonPressed] = useState(false);
@@ -58,7 +37,7 @@ function QuizCard({email, quizID, name, difficulty, dateCreated, selectedButton}
     }
 
     async function handleConfirmDelete(){
-        const deleteOk = await deleteQuiz(email, quizID, name);
+        const deleteOk = await deleteTest(testID, name);
 
         navigate(
             '../../../LoadingPage', 
@@ -73,16 +52,24 @@ function QuizCard({email, quizID, name, difficulty, dateCreated, selectedButton}
     }
     
     return (
-        <div className={selectedButton ==='to-do' ? styles.toDoQuizCard : styles.completedQuizCard}> 
-            <div className={styles.quizCardWrapper}>
-                <div className={styles.quizCard} onClick={goToQuiz}>
+        <div 
+            className=
+            {`
+                ${selectedButton ==='to-do' ? styles.toDoQuizCard : ''}
+                ${selectedButton === 'completed' ? styles.completedQuizCard : ''}
+                ${selectedButton === null ? styles.flashcard : ''}
+            `}
+        >
+            
+            <div className={styles.testCardWrapper}>
+                <div className={styles.testCard} onClick={goToTest}>
                     <img className={styles.deleteButton} src={xButton} onClick={handleXButtonPressed} alt='delete button' />
                     <h3>{name}</h3>
-                    <p className={styles.quizInfo}>
+                    <p className={styles.testInfo}>
                         <img className={styles.difficultyImage} src={difficultyImage} alt='man pushing boulder uphill'/>
                         {difficulty}
                     </p>
-                    <p className={styles.quizInfo}>
+                    <p className={styles.testInfo}>
                         <img className={styles.calendarImage} src={calendarImage} alt='calendar'/>
                         {dateCreated}
                     </p>
@@ -108,4 +95,4 @@ function QuizCard({email, quizID, name, difficulty, dateCreated, selectedButton}
     )
 }
 
-export default QuizCard;
+export default TestCard;

@@ -1,6 +1,6 @@
 import axiosInstance from "../utility/axiosInstance";
 
-async function deleteQuiz(email, quizID, quizName) { // isaiah to change
+async function deleteTest(email, quizID, quizName) { // isaiah to change
     try {
         const response = await axiosInstance({
             method: "post",
@@ -15,4 +15,4 @@ async function deleteQuiz(email, quizID, quizName) { // isaiah to change
     }
 }
 
-export {deleteQuiz};
+export {deleteTest};
