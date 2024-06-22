@@ -24,7 +24,7 @@ async function generateFlashcard(email, testName, testType, file) { // isaiah to
   }
 }
 
-async function getAllFlashcardsByUser(){
+async function getAllFlashcardsByUser(email){
     try {
         const response = await axiosInstance({
             method: "post",
