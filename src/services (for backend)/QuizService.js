@@ -70,5 +70,20 @@ async function getAllQuestionsAndOptionsFromAQuiz(testID){
     }
 }
 
+async function markQuizAsDone(testID){
+    try{
+        const response = await axiosInstance({
+            method: 'post',
+            url: '/quiz/markQuizAsDone',
+            data: {testID: testID}
+        })
+        
+        // console.log(response.data);
+        return response.data;
+    }
+    catch(error){
+        return error.response.data.message;
+    }
+}
 
-export { generateQuiz, getToDoQuizzes, getCompletedQuizzes, getAllQuestionsAndOptionsFromAQuiz };
+export { generateQuiz, getToDoQuizzes, getCompletedQuizzes, getAllQuestionsAndOptionsFromAQuiz, markQuizAsDone };
