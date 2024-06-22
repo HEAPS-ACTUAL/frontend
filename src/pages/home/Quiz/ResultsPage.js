@@ -7,7 +7,7 @@ const ResultsPage = () => {
     const navigate = useNavigate();
 
     const location = useLocation();
-    const { email, quizID, userAnswers, questionsOptionsArray } = location.state;
+    const {testID, userAnswers, questionsOptionsArray } = location.state;
     // console.log(location.state);
 
     const optionDict = {'A': 0, 'B': 1, 'C': 2, 'D': 3};
@@ -17,22 +17,22 @@ const ResultsPage = () => {
             <div className={styles.Header}>Results</div>
 
             {questionsOptionsArray.map((question_obj) => (
-                <div key={question_obj['number']} className={styles.QuestionBlock}>
+                <div key={question_obj['QuestionNo']} className={styles.QuestionBlock}>
 
                     <h2 className={styles.Question}>
-                        {question_obj['number']}. {question_obj['text']}
+                        {question_obj['QuestionNo']}. {question_obj['QuestionText']}
                     </h2>
                     
                     <div className={styles.OptionsContainer}>
-                        {question_obj['options'].map((option_obj) => (
-                            <div key={option_obj['letter']} className={`${styles.Option}
-                                ${option_obj['letter'] === userAnswers[question_obj['number']] ? styles.UserAnswer : ''}
-                                ${option_obj['isCorrect'] == true ? styles.CorrectAnswer : ''}
-                                ${!userAnswers[question_obj['number']] ? styles.UnselectedOption : ''}`}
+                        {JSON.parse(question_obj['Options']).map((option_obj) => (
+                            <div key={option_obj['OptionLetter']} className={`${styles.Option}
+                                ${option_obj['OptionLetter'] === userAnswers[question_obj['QuestionNo']] ? styles.UserAnswer : ''}
+                                ${option_obj['IsCorrect'] == true ? styles.CorrectAnswer : ''}
+                                ${!userAnswers[question_obj['QuestionNo']] ? styles.UnselectedOption : ''}`}
                             >
-                                {option_obj['isCorrect'] == true ? <TiTick className={styles.CorrectIcon} /> : null}
-                                {option_obj['isCorrect'] == false && userAnswers[question_obj['number']] === option_obj['letter'] ? <RxCross2 className={styles.IncorrectIcon} /> : null}
-                                {option_obj['text']}
+                                {option_obj['IsCorrect'] == true ? <TiTick className={styles.CorrectIcon} /> : null}
+                                {option_obj['IsCorrect'] == false && userAnswers[question_obj['QuestionNo']] === option_obj['OptionLetter'] ? <RxCross2 className={styles.IncorrectIcon} /> : null}
+                                {option_obj['OptionText']}
                             
                             </div>
                         ))}
@@ -41,15 +41,15 @@ const ResultsPage = () => {
                     
                     <div 
                         className={`${styles.Explanation}
-                        ${ question_obj['options'][optionDict[userAnswers[question_obj['number']]]]['isCorrect'] == true ? styles.ExplanationForCorrectAns : styles.ExplanationForIncorrectAns}`}
+                        ${ JSON.parse(question_obj['Options'])[optionDict[userAnswers[question_obj['QuestionNo']]]]['IsCorrect'] == true ? styles.ExplanationForCorrectAns : styles.ExplanationForIncorrectAns}`}
                     >
-                        Explanation: {question_obj['elaboration']}
+                        Explanation: {question_obj['Elaboration']}
                     </div>                    
                 </div>
             ))}
             
             <div className={styles.BtnContainer}>
-                <button className={styles.RestartButton} onClick={() => navigate('/mcq', {state: {email, quizID}})}>Restart Quiz</button>
+                <button className={styles.RestartButton} onClick={() => navigate('/mcq', {state: {testID}})}>Restart Quiz</button>
                 <button className={styles.HomeButton} onClick={() => navigate('/Home')}>Back to Home</button>
             </div>
             
