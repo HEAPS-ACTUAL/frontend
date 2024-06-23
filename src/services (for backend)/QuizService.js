@@ -87,4 +87,26 @@ async function markQuizAsDone(testID){
     }
 }
 
-export { generateQuiz, getToDoQuizzes, getCompletedQuizzes, getAllQuestionsAndOptionsFromAQuiz, markQuizAsDone };
+async function storeUserQuizAnswers(testID, userAnswers){
+    try{
+        const response = await axiosInstance({
+            method: 'post',
+            url: '/quiz/storeUserQuizAnswers',
+            data: {testID: testID, userAnswers: userAnswers}
+        })
+        
+        return response.data;
+    }
+    catch(error){
+        return error.response.data.message;
+    }
+}
+
+export { 
+    generateQuiz, 
+    getToDoQuizzes, 
+    getCompletedQuizzes, 
+    getAllQuestionsAndOptionsFromAQuiz, 
+    markQuizAsDone,
+    storeUserQuizAnswers
+};

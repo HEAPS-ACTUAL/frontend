@@ -3,6 +3,7 @@ import styles from '../../../styles/Quiz.module.css';
 import { useLocation, useNavigate } from 'react-router-dom'; 
 
 import { getAllQuestionsAndOptionsFromAQuiz, markQuizAsDone } from '../../../services (for backend)/QuizService';
+import { storeUserQuizAnswers } from '../../../services (for backend)/QuizService';
 
 const QuizFeature = () => {
     const location = useLocation(); 
@@ -42,6 +43,7 @@ const QuizFeature = () => {
 
         // no more questions to be answered, navigate to the results page
         else{
+            storeUserQuizAnswers(testID, userAnswers);
             markQuizAsDone(testID);
             navigate ( '/ResultsPage', { state: {testID, userAnswers, questionsOptionsArray} } )
             // passes additional state to the /results route. 
