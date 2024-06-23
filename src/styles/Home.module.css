@@ -169,6 +169,10 @@ h2 {
     align-items: center;
 }
 
+.testTypeCheckbox label:hover {
+   cursor: pointer;
+}
+
 /* Custom checkbox style */
 .testTypeCheckbox input[type="checkbox"] {
     width: 20px;
