@@ -1,7 +1,27 @@
 import axiosInstance from "../utility/axiosInstance";
 
-async function generateFlashcard() { // isaiah to change
-    
+async function generateFlashcard(email, testName, testType, file) { // isaiah to change
+  try {
+      const formData = new FormData();
+      formData.append("email", email);
+      formData.append("testName", testName);
+      formData.append("testType", testType);
+      formData.append("file", file);
+
+      const response = await axiosInstance({
+          method: "post",
+          url: "/test/generateAndStoreTest",
+          data: formData,
+          headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      return response.data.message;
+  }
+  catch (error) {
+      if (error.response) {
+          return error.response.data.message;
+      }
+  }
 }
 
 async function getAllFlashcardsByUser(email){
@@ -19,4 +39,4 @@ async function getAllFlashcardsByUser(email){
     }
 }
 
-export {generateFlashcard, getAllFlashcardsByUser}
+export {generateFlashcard, getAllFlashcardsByUser};

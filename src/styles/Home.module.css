@@ -106,6 +106,7 @@ h2 {
     border: 2.2px solid #08293c;
     width: fit-content;
     transition: 0.2s;
+    border-radius: 4px;
 }
 
 .createQuiz button:hover {
@@ -155,4 +156,50 @@ h2 {
     margin-top: 20px;
     font-weight: 800;
     /* color: #b02727; */
+}
+.testTypeCheckbox {
+    font-weight: bold;
+    align-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.testTypeCheckbox label {
+    margin-right: 20px;  /* Add space between checkboxes */
+    display: flex;
+    align-items: center;
+}
+
+.testTypeCheckbox label:hover {
+   cursor: pointer;
+}
+
+/* Custom checkbox style */
+.testTypeCheckbox input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    appearance: none;
+    border: 2.2px solid #08293c;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.testTypeCheckbox input[type="checkbox"]:checked {
+    background-color: #29b41f;
+    border-color: #29b41f;
+}
+
+.testTypeCheckbox input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 7px;
+    width: 3px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
 }
