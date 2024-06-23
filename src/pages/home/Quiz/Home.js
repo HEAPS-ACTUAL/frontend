@@ -46,7 +46,7 @@ function Home() {
     const testTypeDict = {
         Flashcard: false,
         Quiz: false,
-      }
+    }
 
     const [file, setFile] = useState(null);
     const [testName, setTestName] = useState("");
@@ -84,8 +84,13 @@ function Home() {
                         let testType = testKey[0];
                         console.log("Generating test with:", { email, testName, testType, difficulty, file, fileSize: `${fileSize}MB`});
                 
-                        if (testType === "Q"){generateQuiz(email, testName, testType, difficulty, file);}
-                        if (testType === "F"){generateFlashcard(email, testName, testType, file);}
+                        if (testType === "Q"){
+                            generateQuiz(email, testName, testType, difficulty, file);
+                        }
+
+                        if (testType === "F"){
+                            generateFlashcard(email, testName, testType, file);
+                        }
                     }
                     
                 }
