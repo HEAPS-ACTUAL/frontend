@@ -14,6 +14,7 @@ const CalendarFeature = () => {
     description: "",
     color: "#FFE4C4",
   });
+  const [revisionDates, setRevisionDates] = useState([]); // New state to store revision dates
 
   const months = [
     "January",
@@ -100,6 +101,7 @@ const CalendarFeature = () => {
       const day = String(date.getDate()).padStart(2, "0");
       const dateKey = `${year}-${month}-${day}`;
       const event = events[dateKey];
+      const isRevisionDate = revisionDates.includes(dateKey); // Check if it's a revision date
       let dayClass = styles.day;
 
       if (startDate && endDate && date >= start && date <= end) {
@@ -108,7 +110,16 @@ const CalendarFeature = () => {
         dayClass = `${styles.day} ${styles.selectedDay}`;
       }
 
-      console.log("Rendering day:", i, "Date Key:", dateKey, "Event:", event);
+      console.log(
+        "Rendering day:",
+        i,
+        "Date Key:",
+        dateKey,
+        "Event:",
+        event,
+        "Is Revision Date:",
+        isRevisionDate
+      );
 
       days.push(
         <div
@@ -116,7 +127,13 @@ const CalendarFeature = () => {
           className={dayClass}
           onClick={() => handleDayClick(dateKey)}
           onDoubleClick={() => handleEditEvent(dateKey)}
-          style={{ backgroundColor: event ? event.color : "" }}
+          style={{
+            backgroundColor: isRevisionDate
+              ? "#008000"
+              : event
+              ? event.color
+              : "",
+          }} // Change color here
         >
           {i}
           {event && (
@@ -201,6 +218,10 @@ const CalendarFeature = () => {
       new Date(endDate)
     );
     await saveRevisionDatesToDB(scheduleId, revisionDates);
+    setStartDate(null); // Clear start date
+    setEndDate(null); // Clear end date
+    setRevisionDates(revisionDates); // Update revisionDates state
+    console.log("Generated Revision Dates:", revisionDates); // Log revision dates
   };
 
   const saveScheduleToDB = async (startDate, endDate, examName) => {
