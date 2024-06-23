@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import styles from "../../styles/RevisionSchedule.module.css";
 
 const CalendarFeature = () => {
@@ -11,7 +12,7 @@ const CalendarFeature = () => {
     date: "",
     title: "",
     description: "",
-    color: "#f39c12",
+    color: "#FFE4C4",
   });
 
   const months = [
@@ -201,6 +202,49 @@ const CalendarFeature = () => {
     }
   };
 
+  const generateSpacedRepetitionSchedule = async (startDate, endDate) => {
+    const scheduleId = await saveScheduleToDB(startDate, endDate, "Exam");
+    const revisionDates = calculateSpacedRepetitionDates(
+      new Date(startDate),
+      new Date(endDate)
+    );
+    await saveRevisionDatesToDB(scheduleId, revisionDates);
+  };
+
+  const saveScheduleToDB = async (startDate, endDate, examName) => {
+    try {
+      const response = await axios.post("/api/schedules", {
+        startDate,
+        endDate,
+        examName,
+      });
+      return response.data.scheduleId;
+    } catch (error) {
+      console.error("Error saving schedule to DB:", error);
+    }
+  };
+
+  const saveRevisionDatesToDB = async (scheduleId, revisionDates) => {
+    try {
+      await axios.post("/api/revision-dates", { scheduleId, revisionDates });
+    } catch (error) {
+      console.error("Error saving revision dates to DB:", error);
+    }
+  };
+
+  const calculateSpacedRepetitionDates = (startDate, endDate) => {
+    // Your logic to calculate spaced repetition dates
+    const revisionDates = [];
+    // Example logic for spaced repetition
+    const oneDay = 24 * 60 * 60 * 1000;
+    let currentDate = startDate;
+    while (currentDate <= endDate) {
+      revisionDates.push(new Date(currentDate).toISOString().split("T")[0]);
+      currentDate = new Date(currentDate.getTime() + oneDay * 2); // Example: Every 2 days
+    }
+    return revisionDates;
+  };
+
   return (
     <div className={styles.calendarContainer}>
       <form onSubmit={handleFormSubmit} className={styles.eventForm}>
@@ -286,6 +330,13 @@ const CalendarFeature = () => {
             disabled={!startDate || !endDate}
           >
             Generate Quiz
+          </button>
+          <button
+            onClick={() => generateSpacedRepetitionSchedule(startDate, endDate)}
+            className={styles.generateButton}
+            disabled={!startDate || !endDate}
+          >
+            Generate Schedule
           </button>
         </div>
         <div className={styles.header}>
