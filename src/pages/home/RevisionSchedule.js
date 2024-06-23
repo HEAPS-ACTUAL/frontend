@@ -213,11 +213,12 @@ const CalendarFeature = () => {
 
   const saveScheduleToDB = async (startDate, endDate, examName) => {
     try {
-      const response = await axios.post("/api/schedules", {
+      const response = await axios.post("http://localhost:8001/api/schedules", {
         startDate,
         endDate,
         examName,
       });
+
       return response.data.scheduleId;
     } catch (error) {
       console.error("Error saving schedule to DB:", error);
@@ -226,7 +227,10 @@ const CalendarFeature = () => {
 
   const saveRevisionDatesToDB = async (scheduleId, revisionDates) => {
     try {
-      await axios.post("/api/revision-dates", { scheduleId, revisionDates });
+      await axios.post("http://localhost:8001/api/revision-dates", {
+        scheduleId,
+        revisionDates,
+      });
     } catch (error) {
       console.error("Error saving revision dates to DB:", error);
     }

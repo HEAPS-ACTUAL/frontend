@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 // PAGES
 import About from "./pages/main/About";
@@ -10,8 +15,7 @@ import QuizFeature from "./pages/home/Quiz/Quiz";
 import HomeRoute from "./pages/home/Home_route";
 import ResultsPage from "./pages/home/Quiz/ResultsPage";
 import LoadingPage from "./pages/home/Quiz/LoadingPage";
-
-
+import CalendarFeature from "./pages/home/RevisionSchedule"; // Add this import
 
 // STYLES
 import "./styles/App.css";
@@ -20,34 +24,36 @@ import "./styles/App.css";
 import { isLoggedIn } from "./services (for backend)/ProtectionService";
 
 function App() {
-    const [IsLoggedIn, setIsLoggedIn] = useState(true);
+  const [IsLoggedIn, setIsLoggedIn] = useState(true);
 
-    function updateLogInStatus() {
-        setIsLoggedIn(isLoggedIn())
-    };
+  function updateLogInStatus() {
+    setIsLoggedIn(isLoggedIn());
+  }
 
-    useEffect(() => {
-        updateLogInStatus();
-        window.addEventListener('logInOut', updateLogInStatus);
-    }, []);
+  useEffect(() => {
+    updateLogInStatus();
+    window.addEventListener("logInOut", updateLogInStatus);
+  }, []);
 
-    return (
-        <Router>
-            <Navbar />
-            <Routes>
-                <Route path="/" element={<About />} />
-                <Route path="/features" element={<Features />} />
-                <Route path="/login" element={<SignIn />} />
-                <Route
-                    path="/home/*"
-                    element={IsLoggedIn ? <HomeRoute /> : <Navigate to="/login" />} // REDIRECT TO SIGN IN PAGE IF NOT LOGGED IN
-                />
-                <Route path="/Quiz" element={<QuizFeature />} />
-                <Route path="/ResultsPage" element={<ResultsPage />} />
-                <Route path="/LoadingPage" element={<LoadingPage />} />
-            </Routes>
-        </Router>
-    );
+  return (
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<About />} />
+        <Route path="/features" element={<Features />} />
+        <Route path="/login" element={<SignIn />} />
+        <Route
+          path="/home/*"
+          element={IsLoggedIn ? <HomeRoute /> : <Navigate to="/login" />} // REDIRECT TO SIGN IN PAGE IF NOT LOGGED IN
+        />
+        <Route path="/Quiz" element={<QuizFeature />} />
+        <Route path="/ResultsPage" element={<ResultsPage />} />
+        <Route path="/LoadingPage" element={<LoadingPage />} />
+        <Route path="/calendar" element={<CalendarFeature />} />{" "}
+        {/* Add this route */}
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
