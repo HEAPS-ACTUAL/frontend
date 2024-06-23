@@ -194,14 +194,6 @@ const CalendarFeature = () => {
     setCurrentDate(newDate);
   };
 
-  const generateQuiz = () => {
-    if (startDate && endDate) {
-      alert(`Generating quiz for the period from ${startDate} to ${endDate}`);
-    } else {
-      alert("Please select both start and end dates.");
-    }
-  };
-
   const generateSpacedRepetitionSchedule = async (startDate, endDate) => {
     const scheduleId = await saveScheduleToDB(startDate, endDate, "Exam");
     const revisionDates = calculateSpacedRepetitionDates(
@@ -327,13 +319,6 @@ const CalendarFeature = () => {
         <div className={styles.dateSelector}>
           <button onClick={() => setEvents({})} className={styles.clearButton}>
             Clear Events
-          </button>
-          <button
-            onClick={generateQuiz}
-            className={styles.generateButton}
-            disabled={!startDate || !endDate}
-          >
-            Generate Quiz
           </button>
           <button
             onClick={() => generateSpacedRepetitionSchedule(startDate, endDate)}
