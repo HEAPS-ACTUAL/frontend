@@ -42,9 +42,10 @@
     -webkit-text-fill-color: transparent; 
 }
 
-.createQuiz, .yourQuizzes {
+.createQuiz, .yourQuizzes, .yourFlashcards {
     padding: 20px 20px 20px 0px;
     margin: 10px 60px 0px 60px;
+    /* animation: fadeIn 2s ease-in; */
   }
 
 h2 {
@@ -120,10 +121,10 @@ h2 {
     transform: translate3d(0px, 2px, 0px);
 }
 
-.quizList {
+.quizList, .flashcardList {
     margin-top: 10px;
     display: flex;
-    height: 255px;
+    /* height: 255px; */
     overflow-x: auto;
     white-space: nowrap;
 }

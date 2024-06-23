@@ -6,10 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { getSalutation, getUserFirstName} from "../../../services (for backend)/UserService";
 import { generateQuiz, getCompletedQuizzes, getToDoQuizzes} from "../../../services (for backend)/QuizService";
 import { convertFileSizeTo2DP, fileSizeWithinLimit, fileTypeIsPDF } from "../../../services (for backend)/FileServices";
-import { generateFlashcard } from "../../../services (for backend)/FlashcardService";
+import { generateFlashcard, getAllFlashcardsByUser } from "../../../services (for backend)/FlashcardService";
 
-// Pages
-import QuizCard from "./QuizCard";
+// Components
+import TestCard from "./TestCard";
 
 function Home() {
     const navigate = useNavigate();
@@ -18,6 +18,7 @@ function Home() {
     const [firstName, setFirstName] = useState("");
     const [salutation, setSalutation] = useState("");
     const [quizList, setQuizList] = useState([]);
+    const [flashcardList, setFlashcardList] = useState([]);
     const [selectedButton, setSelectedButton] = useState("to-do");    
 
     async function fetchUserInfo() {
@@ -38,9 +39,15 @@ function Home() {
         setQuizList(CompletedQuizzesArray);
     }
 
+    async function fetchFlashcards(){
+        const FlashcardsArray = await getAllFlashcardsByUser(email);
+        setFlashcardList(FlashcardsArray);
+    }
+
     useEffect(() => {
         fetchUserInfo();
         fetchToDoQuizzes();
+        fetchFlashcards();
     }, []);
     
     const testTypeDict = {
@@ -150,43 +157,22 @@ function Home() {
             </div>
 
             {/* flashcards */}
-            <div className={styles.yourQuizzes}>
+            <div className={styles.yourFlashcards}>
                 <h2> Your Flashcards </h2>
-                <button 
-                    className={
-                        selectedButton === 'to-do' ? styles.selectedButton : styles.notSelectedButton
-                    }
-                    onClick={() => {
-                        fetchToDoQuizzes(); 
-                        setSelectedButton('to-do');
-                    }}> 
-                    To-Do 
-                </button>
 
-                <button
-                    className={
-                        selectedButton === 'completed' ? styles.selectedButton : styles.notSelectedButton
-                    }
-                    onClick={() => {
-                        fetchCompletedQuizzes();
-                        setSelectedButton('completed');
-                    }}> 
-                    Completed 
-                </button>
-
-                <div className={styles.quizList}>
-                    {quizList.length === 0 
-                        ? <p className={styles.noQuizMessage}>{selectedButton === 'to-do' ? 'You do not have any quizzes. Create a quiz above!' : 'You have not completed any quizzes yet!'} </p>
-                        : quizList.map((quiz) => {
+                <div className={styles.flashcardList}>
+                    {flashcardList.length === 0 
+                        ? <p className={styles.noQuizMessage}> You do not have any flashcards. Create a flashcard above!</p>
+                        : flashcardList.map((flashcard) => {
                             return (
-                                <QuizCard 
-                                    key = {quiz.TestID}
-                                    email = {quiz.UserEmail}
-                                    quizID = {quiz.QuizID}
-                                    name = {quiz.QuizName}
-                                    difficulty = {quiz.Difficulty}
-                                    dateCreated = {quiz.DateTimeCreated}
-                                    selectedButton = {selectedButton}
+                                <TestCard 
+                                    key = {flashcard.TestID}
+                                    testID = {flashcard.TestID}
+                                    name = {flashcard.TestName}
+                                    dateCreated = {flashcard.DateTimeCreated}
+                                    difficulty = {null}
+                                    numberOfQuestions = {flashcard.numOfQuestions}
+                                    selectedButton = {null}
                                 />
                             )
                         })
@@ -222,14 +208,14 @@ function Home() {
                     {quizList.length === 0 
                         ? <p className={styles.noQuizMessage}>{selectedButton === 'to-do' ? 'You do not have any quizzes. Create a quiz above!' : 'You have not completed any quizzes yet!'} </p>
                         : quizList.map((quiz) => {
-                        return (
-                                <QuizCard 
-                                    key = {quiz.QuizID}
-                                    email = {quiz.UserEmail}
-                                    quizID = {quiz.QuizID}
-                                    name = {quiz.QuizName}
-                                    difficulty = {quiz.Difficulty}
+                            return (
+                                <TestCard 
+                                    key = {quiz.TestID}
+                                    testID = {quiz.TestID}
+                                    name = {quiz.TestName}
                                     dateCreated = {quiz.DateTimeCreated}
+                                    difficulty = {quiz.Difficulty}
+                                    numberOfQuestions = {quiz.numOfQuestions}
                                     selectedButton = {selectedButton}
                                 />
                             )

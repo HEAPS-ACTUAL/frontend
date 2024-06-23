@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import styles from '../../../styles/Quiz.module.css';
 import { useLocation, useNavigate } from 'react-router-dom'; 
 
-import { getAllQuestionsAndOptionsFromAQuiz } from '../../../services (for backend)/QuestionService';
+import { getAllQuestionsAndOptionsFromAQuiz, markQuizAsDone } from '../../../services (for backend)/QuizService';
 
 const QuizFeature = () => {
     const location = useLocation(); 
-    const {email, quizID} = (location.state); // to retrieve UserEmail and QuizID from QuizCard page
+    const {testID} = (location.state); // to retrieve testID from QuizCard page
     
     const [questionsOptionsArray, setQuestionsOptionsArray] = useState([]);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -17,8 +17,8 @@ const QuizFeature = () => {
     
     useEffect(() => {
         async function fetchQuizQuestionsAndOptions(){
-            const quizQuestionsAndOptions = await getAllQuestionsAndOptionsFromAQuiz(email, quizID);
-            setQuestionsOptionsArray(quizQuestionsAndOptions['questions']);
+            const quizQuestionsAndOptions = await getAllQuestionsAndOptionsFromAQuiz(testID);
+            setQuestionsOptionsArray(quizQuestionsAndOptions);
         }
 
         fetchQuizQuestionsAndOptions();
@@ -42,7 +42,8 @@ const QuizFeature = () => {
 
         // no more questions to be answered, navigate to the results page
         else{
-            navigate ( '/ResultsPage', { state: {email, quizID, userAnswers, questionsOptionsArray} } )
+            markQuizAsDone(testID);
+            navigate ( '/ResultsPage', { state: {testID, userAnswers, questionsOptionsArray} } )
             // passes additional state to the /results route. 
             // userAnswers - object containing all the answers given by the user
             // questions - array of questions
@@ -66,19 +67,19 @@ const QuizFeature = () => {
 
             {/* display the question */}
             <div className={styles.Question}>
-                {questionsOptionsArray[currentQuestionIndex]['number']}. {questionsOptionsArray[currentQuestionIndex]['text']}
+                {questionsOptionsArray[currentQuestionIndex]['QuestionNo']}. {questionsOptionsArray[currentQuestionIndex]['QuestionText']}
             </div>
 
             {/* display the options */}
             <div className={styles.optionsContainer}>
 
-                {questionsOptionsArray[currentQuestionIndex]['options'].map((option_obj) => (
+                {JSON.parse(questionsOptionsArray[currentQuestionIndex]['Options']).map((option_obj) => (
                     <div 
-                        key = {option_obj['letter']}
-                        onClick = {() => handleAnswerChange(questionsOptionsArray[currentQuestionIndex]['number'], option_obj['letter'])}
-                        className={`${styles.option} ${userAnswers[questionsOptionsArray[currentQuestionIndex]['number']] === option_obj['letter'] ? styles.selectedOption : ''}`}                
+                        key = {option_obj['OptionLetter']}
+                        onClick = {() => handleAnswerChange(questionsOptionsArray[currentQuestionIndex]['QuestionNo'], option_obj['OptionLetter'])}
+                        className={`${styles.option} ${userAnswers[questionsOptionsArray[currentQuestionIndex]['QuestionNo']] === option_obj['OptionLetter'] ? styles.selectedOption : ''}`}                
                     >
-                        {option_obj['text']}
+                        {option_obj['OptionText']}
                     </div>
                 ))}
             </div>
@@ -101,7 +102,7 @@ const QuizFeature = () => {
             </div>
             
             <div className={styles.countQuestions}>
-                <p>{questionsOptionsArray[currentQuestionIndex]['number']} of {questionsOptionsArray.length}</p>
+                <p>{questionsOptionsArray[currentQuestionIndex]['QuestionNo']} of {questionsOptionsArray.length}</p>
             </div>
         </div>
     )
