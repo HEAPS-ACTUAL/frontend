@@ -15,7 +15,12 @@ import QuizFeature from "./pages/home/Quiz/Quiz";
 import HomeRoute from "./pages/home/Home_route";
 import ResultsPage from "./pages/home/Quiz/ResultsPage";
 import LoadingPage from "./pages/home/Quiz/LoadingPage";
+<<<<<<< Updated upstream
 import CalendarFeature from "./pages/home/Calender/CalenderFeature.js"; // Add this import
+=======
+import CalendarFeature from "./pages/home/RevisionSchedule"; // Add this import
+import CalendarComponent from "./pages/home/RevisionSchedulearin";
+>>>>>>> Stashed changes
 
 // STYLES
 import "./styles/App.css";
@@ -50,6 +55,7 @@ function App() {
         <Route path="/ResultsPage" element={<ResultsPage />} />
         <Route path="/LoadingPage" element={<LoadingPage />} />
         <Route path="/calendar" element={<CalendarFeature />} />{" "}
+        <Route path="/SR" element={<CalendarComponent />} />{" "}
         {/* Add this route */}
       </Routes>
     </Router>

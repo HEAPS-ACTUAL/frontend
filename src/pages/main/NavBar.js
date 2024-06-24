@@ -34,6 +34,7 @@ function Navbar() {
                 <Link to="/" className={styles.navLink}>About</Link>
                 <Link to="/features" className={styles.navLink}>Features</Link>
                 <Link to="/Home" className={styles.navLink}>Home</Link>
+                <Link to="/SR" className={styles.navLink}>SR</Link>
           
             </div>
 
