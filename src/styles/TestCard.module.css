@@ -30,7 +30,7 @@
 }
 
 .toDoQuizCard .testCard {
-    background-color: #d2b296;
+    background-color: #d7d8ff;
 }
 
 .completedQuizCard .testCard {
@@ -38,10 +38,9 @@
 }
 
 .flashcard .testCard {
-    background-color: #d7d8ff;
-    /* background-color: #9acaff; */
+    /* background-color: #d2b296; */
+    background-color: #9acaff;
     /* background-color: #ffc9c9; */
-    /* background-color: #c9ffd3; */
 }
 
 .testCardWrapper {

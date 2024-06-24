@@ -63,7 +63,7 @@ function Home() {
     const testList = Object.keys(testTypeDict);
   
 
-    function handleFileUpload(event) { // isaiah to change
+    function handleFileUpload(event) {
         event.preventDefault();
 
         if(testName.trim() === ''){
@@ -74,6 +74,9 @@ function Home() {
         }
         else if(!file){
             setCreateTestMessage('Please upload a file!');
+        }
+        else if(testTypeChecked['Flashcard'] === false && testTypeChecked['Quiz'] === false){
+            setCreateTestMessage('Please select either flashcard or quiz!')
         }
         else{
             const fileSize = convertFileSizeTo2DP(file);
@@ -141,7 +144,7 @@ function Home() {
                     </div>
                     <div className={styles.testTypeCheckbox}>
                         {testList.map( test => 
-                            <label key={test}><input type='checkbox' name={test} value= {test} checked={testTypeChecked[test] === true} onChange={event => {
+                            <label key={test}><input type='checkbox' name={test} value={test} checked={testTypeChecked[test] === true} onChange={event => {
                                 setTestTypeChecked({
                                     ...testTypeChecked, [test]: event.target.checked,
                                 })
