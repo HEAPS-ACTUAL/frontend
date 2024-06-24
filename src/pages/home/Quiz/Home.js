@@ -6,9 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { getSalutation, getUserFirstName} from "../../../services (for backend)/UserService";
 import { generateQuiz, getCompletedQuizzes, getToDoQuizzes} from "../../../services (for backend)/QuizService";
 import { convertFileSizeTo2DP, fileSizeWithinLimit, fileTypeIsPDF } from "../../../services (for backend)/FileServices";
+import { generateFlashcard, getAllFlashcardsByUser } from "../../../services (for backend)/FlashcardService";
 
-// Pages
-import QuizCard from "./QuizCard";
+// Components
+import TestCard from "./TestCard";
 
 function Home() {
     const navigate = useNavigate();
@@ -17,6 +18,7 @@ function Home() {
     const [firstName, setFirstName] = useState("");
     const [salutation, setSalutation] = useState("");
     const [quizList, setQuizList] = useState([]);
+    const [flashcardList, setFlashcardList] = useState([]);
     const [selectedButton, setSelectedButton] = useState("to-do");    
 
     async function fetchUserInfo() {
@@ -37,56 +39,82 @@ function Home() {
         setQuizList(CompletedQuizzesArray);
     }
 
+    async function fetchFlashcards(){
+        const FlashcardsArray = await getAllFlashcardsByUser(email);
+        setFlashcardList(FlashcardsArray);
+    }
+
     useEffect(() => {
         fetchUserInfo();
         fetchToDoQuizzes();
+        fetchFlashcards();
     }, []);
+    
+    const testTypeDict = {
+        Flashcard: false,
+        Quiz: false,
+    }
 
     const [file, setFile] = useState(null);
-    const [quizName, setQuizName] = useState("");
-    const [difficulty, setDifficulty] = useState(""); // Default to 'Easy'
-    const [createQuizMessage, setCreateQuizMessage] = useState('');
+    const [testName, setTestName] = useState("");
+    const [difficulty, setDifficulty] = useState("");
+    const [testTypeChecked, setTestTypeChecked] = useState(testTypeDict);
+    const [createTestMessage, setCreateTestMessage] = useState('');
+    const testList = Object.keys(testTypeDict);
+  
 
-    function handleFileUpload(event) {
+    function handleFileUpload(event) { // isaiah to change
         event.preventDefault();
 
-        if(quizName.trim() === ''){
-            setCreateQuizMessage('Quiz name cannot be empty!');
+        if(testName.trim() === ''){
+            setCreateTestMessage('Quiz name cannot be empty!');
         }
         else if(difficulty === ''){
-            setCreateQuizMessage('Please indicate the difficulty level!');
+            setCreateTestMessage('Please indicate the difficulty level!');
         }
         else if(!file){
-            setCreateQuizMessage('Please upload a file!');
+            setCreateTestMessage('Please upload a file!');
         }
         else{
             const fileSize = convertFileSizeTo2DP(file);
 
             if(!fileTypeIsPDF(file)){
-                setCreateQuizMessage('File type must be PDF!')
+                setCreateTestMessage('File type must be PDF!')
             }
             else if(!fileSizeWithinLimit(file)){
-                setCreateQuizMessage(`Your file size has exceed the limit of 5MB.`)
+                setCreateTestMessage(`Your file size has exceed the limit of 5MB.`)
             }
             else{
-                console.log("Generating quiz with:", { email, quizName, difficulty, file, fileSize: `${fileSize}MB`});
+                console.log(testTypeChecked);
+                for (let testKey of testList){
+                    if (testTypeChecked[testKey]){
+                        let testType = testKey[0];
+                        console.log("Generating test with:", { email, testName, testType, difficulty, file, fileSize: `${fileSize}MB`});
                 
-                generateQuiz(email, quizName, difficulty, file);
+                        if (testType === "Q"){
+                            generateQuiz(email, testName, testType, difficulty, file);
+                        }
+
+                        if (testType === "F"){
+                            generateFlashcard(email, testName, testType, file);
+                        }
+                    }
+                    
+                }
                 
                 navigate ( 
                     '../../../LoadingPage', 
                     {state: 
                         {
                             duration: 40000, 
-                            messageArray: [`Generating quiz, please wait...`, `This may take up to a minute`], 
+                            messageArray: [`Generating, please wait...`, `This may take up to a minute`], 
                             redirect: '/home'
                         } 
                     }
                 )
+                }
             }
-
         }
-    }
 
     return (
         <div className={styles.container}>
@@ -96,66 +124,55 @@ function Home() {
             </div>
 
             <div className={styles.createQuiz}>
-                <h2> Create a quiz </h2>
+                <h2> Create </h2>
 
                 <form onSubmit={handleFileUpload}>
-                    <input type="text" placeholder="Enter Quiz Name" onChange={(event) => setQuizName(event.target.value)}/>
+                    <input type="text" placeholder="Enter a Name" onChange={(event) => setTestName(event.target.value)}/>
 
                     <div className={styles.difficultyAndChooseFile}>
                         <select className={styles.difficulty} onChange={(event) => setDifficulty(event.target.value)}>
                             <option value="">Select difficulty level</option>
-                            <option value="E">Easy</option>
-                            <option value="M">Intermediate</option>
-                            <option value="H">Hard</option>
+                            <option value="Easy">Easy</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Hard">Hard</option>
                         </select>
 
                         <input className={styles.chooseFile}type="file" onChange={(event) => setFile(event.target.files[0])}/>
-                        {/* <p> Please select only one file </p> */}
                     </div>
+                    <div className={styles.testTypeCheckbox}>
+                        {testList.map( test => 
+                            <label><input type='checkbox' name={test} value= {test} checked={testTypeChecked[test] === true} onChange={event => {
+                                setTestTypeChecked({
+                                    ...testTypeChecked, [test]: event.target.checked,
+                                })
+                            }}/> {test}</label>
 
-                    <button type="submit"> Generate Quiz! </button>
+                        )}
+                    </div>
+                    <br/>
+                    <button type="submit"> Generate Now! </button> 
                    
-                    {createQuizMessage && <p>{createQuizMessage}</p>}
+                    {createTestMessage && <p>{createTestMessage}</p>}
                 </form>
             </div>
 
             {/* flashcards */}
-            <div className={styles.yourQuizzes}>
+            <div className={styles.yourFlashcards}>
                 <h2> Your Flashcards </h2>
-                <button 
-                    className={
-                        selectedButton === 'to-do' ? styles.selectedButton : styles.notSelectedButton
-                    }
-                    onClick={() => {
-                        fetchToDoQuizzes(); 
-                        setSelectedButton('to-do');
-                    }}> 
-                    To-Do 
-                </button>
 
-                <button
-                    className={
-                        selectedButton === 'completed' ? styles.selectedButton : styles.notSelectedButton
-                    }
-                    onClick={() => {
-                        fetchCompletedQuizzes();
-                        setSelectedButton('completed');
-                    }}> 
-                    Completed 
-                </button>
-                <div className={styles.quizList}>
-                    {quizList.length === 0 
-                        ? <p className={styles.noQuizMessage}>{selectedButton === 'to-do' ? 'You do not have any quizzes. Create a quiz above!' : 'You have not completed any quizzes yet!'} </p>
-                        : quizList.map((quiz) => {
+                <div className={styles.flashcardList}>
+                    {flashcardList.length === 0 
+                        ? <p className={styles.noQuizMessage}> You do not have any flashcards. Create a flashcard above!</p>
+                        : flashcardList.map((flashcard) => {
                             return (
-                                <QuizCard 
-                                    key = {quiz.QuizID}
-                                    email = {quiz.UserEmail}
-                                    quizID = {quiz.QuizID}
-                                    name = {quiz.QuizName}
-                                    difficulty = {quiz.Difficulty}
-                                    dateCreated = {quiz.DateTimeCreated}
-                                    selectedButton = {selectedButton}
+                                <TestCard 
+                                    key = {flashcard.TestID}
+                                    testID = {flashcard.TestID}
+                                    name = {flashcard.TestName}
+                                    dateCreated = {flashcard.DateTimeCreated}
+                                    difficulty = {null}
+                                    numberOfQuestions = {flashcard.numOfQuestions}
+                                    selectedButton = {null}
                                 />
                             )
                         })
@@ -192,13 +209,13 @@ function Home() {
                         ? <p className={styles.noQuizMessage}>{selectedButton === 'to-do' ? 'You do not have any quizzes. Create a quiz above!' : 'You have not completed any quizzes yet!'} </p>
                         : quizList.map((quiz) => {
                             return (
-                                <QuizCard 
-                                    key = {quiz.QuizID}
-                                    email = {quiz.UserEmail}
-                                    quizID = {quiz.QuizID}
-                                    name = {quiz.QuizName}
-                                    difficulty = {quiz.Difficulty}
+                                <TestCard 
+                                    key = {quiz.TestID}
+                                    testID = {quiz.TestID}
+                                    name = {quiz.TestName}
                                     dateCreated = {quiz.DateTimeCreated}
+                                    difficulty = {quiz.Difficulty}
+                                    numberOfQuestions = {quiz.numOfQuestions}
                                     selectedButton = {selectedButton}
                                 />
                             )
