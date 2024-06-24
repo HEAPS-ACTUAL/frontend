@@ -14,6 +14,7 @@ function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, sel
     dateCreated = dateCreated.slice(0,10);
 
     const navigate = useNavigate();
+    const email = sessionStorage.getItem("userEmail");
 
     function goToTest(){
         navigate('../../mcq', {state: {testID}});
@@ -37,7 +38,7 @@ function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, sel
     }
 
     async function handleConfirmDelete(){
-        const deleteOk = await deleteTest(testID, name);
+        const deleteOk = await deleteTest(email, testID, name);
 
         navigate(
             '../../../LoadingPage', 
