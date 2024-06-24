@@ -45,7 +45,7 @@ const QuizFeature = () => {
         else{
             storeUserQuizAnswers(testID, userAnswers);
             markQuizAsDone(testID);
-            navigate ( '/ResultsPage', { state: {testID, userAnswers, questionsOptionsArray} } )
+            navigate ('/ResultsPage', {state: {testID: testID}})
             // passes additional state to the /results route. 
             // userAnswers - object containing all the answers given by the user
             // questions - array of questions

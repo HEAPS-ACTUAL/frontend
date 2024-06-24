@@ -78,4 +78,13 @@
     cursor: pointer;
     background: transparent;
     font-size: 16px;
+    transition: 0.2s;
+}
+
+.navLinkLogin button:hover {
+    background-color: #69c8ff75;
+}
+
+.navLinkLogin button:active {
+    transform: translateY(3px);
 }
