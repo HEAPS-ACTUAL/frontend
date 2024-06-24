@@ -3,17 +3,17 @@ import axios from "axios";
 import styles from "../../styles/RevisionSchedule.module.css";
 
 const CalendarFeature = () => {
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [events, setEvents] = useState({});
-  const [startDate, setStartDate] = useState(null);
+  const [currentDate, setCurrentDate] = useState(new Date()); // Current date state
+  const [events, setEvents] = useState({}); // State to store events
+  const [startDate, setStartDate] = useState(null); // State to store the start date
   const [endDate, setEndDate] = useState(null);
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(false); // State to track if editing mode is enabled
   const [eventData, setEventData] = useState({
     date: "",
     title: "",
     description: "",
     color: "#FFE4C4",
-  });
+  }); // State to store event data
   const [revisionDates, setRevisionDates] = useState([]); // New state to store revision dates
 
   const months = [
@@ -42,6 +42,8 @@ const CalendarFeature = () => {
     console.log("CalendarFeature component mounted");
   }, []);
 
+  // Handle form submission for adding/editing events
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const { date, title, description, color } = eventData;
@@ -59,6 +61,8 @@ const CalendarFeature = () => {
     }
   };
 
+  // Handle event deletion
+
   const handleEventDelete = (dateKey) => {
     const newEvents = { ...events };
     delete newEvents[dateKey];
@@ -69,6 +73,7 @@ const CalendarFeature = () => {
     setIsEditing(false);
   };
 
+  // Render the calendar days
   const renderDays = () => {
     console.log("Rendering days...");
     const days = [];
@@ -76,12 +81,12 @@ const CalendarFeature = () => {
       currentDate.getFullYear(),
       currentDate.getMonth() + 1,
       0
-    ).getDate();
+    ).getDate(); // Number of days in the current month
     const firstDay = new Date(
       currentDate.getFullYear(),
       currentDate.getMonth(),
       1
-    ).getDay();
+    ).getDay(); // First day of the month
 
     for (let i = 0; i < firstDay; i++) {
       days.push(<div key={`empty-${i}`} className={styles.emptyDay}></div>);
