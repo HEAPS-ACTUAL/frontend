@@ -3,36 +3,31 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styles from '../../../styles/Flashcard.module.css';
 import { BsArrowLeftShort } from "react-icons/bs";
 
+// Import functions
+import { getAllQuestionsAndOptionsFromATest } from '../../../services (for backend)/TestService';
+
+
 const Flashcard = () => {
     const location = useLocation();
-    const navigate = useNavigate();
-
-    const flashcardArray = [
-        {  
-            "id": 1,
-            "question": 'What is the capital of France?',
-            "answer": 'Paris'
-        },
-
-        {
-            "id": 2,
-            "question": 'What is the capital of switzerland?',
-            "answer": 'bern'
-        },
-        {
-            "id": 3,
-            "question": 'What is the capital of italy?',
-            "answer": 'rome'
-        }
-    ]
-
+    const {testID} = (location.state); // retrieve testID from Flashcard page
+    const [flashcardArray, setFlashcardArray] = useState([]);
     const [CurrentFlashcardIndex, setCurrentFlashcardIndex] = useState(0);
+    const navigate = useNavigate();
     const [isFlipped, setIsFlipped] = useState(false);
     const [canRememberCount, setCanRememberCount] = useState(0);
-
     const toggleFlip = () => {
         setIsFlipped(!isFlipped);
     }
+
+    useEffect(() => {
+        
+        async function fetchTestQuestions(){
+            const flashcardQuestions = await getAllQuestionsAndOptionsFromATest(testID);
+            setFlashcardArray(flashcardQuestions);
+            
+        }
+        fetchTestQuestions();
+    }, [])
 
     // control navigation through the array of flashcards
     const handleNextFlashcard = () => {
@@ -43,7 +38,7 @@ const Flashcard = () => {
         }
         
         else{
-            navigate('/FlashcardsResultsPage', {state: {}}) // pass in the percentage of correct attempts
+            navigate('/FlashcardsResultsPage', {state: {testID, canRememberCount}}) // pass in the percentage of correct attempts
         }
 
     }
@@ -60,17 +55,23 @@ const Flashcard = () => {
             setIsFlipped(false); 
         }
     }
+
+    if (flashcardArray.length === 0) {
+        return <div>Loading...</div>; // Display a loading state while questions are being fetched
+        // without this, the page will show error as the flashcardArray will be undefined while awaiting
+    }
+
     return(
         <div className={styles.wrapper} >
 
             <div onClick={toggleFlip} className={`${styles.FlashcardContainer} ${isFlipped ? styles.isFlipped: '' }`}>
 
                     <div className={styles.FlashcardFace + " " + styles.FrontFlashcardContent}>
-                        {flashcardArray[CurrentFlashcardIndex].question}
+                        {flashcardArray[CurrentFlashcardIndex]["QuestionText"]}
                     </div>
 
                     <div className={styles.FlashcardFace + " " + styles.BackFlashcardContent}>
-                        {flashcardArray[CurrentFlashcardIndex].answer}
+                        {flashcardArray[CurrentFlashcardIndex]["Elaboration"]}
                     </div>
 
                     
@@ -95,7 +96,7 @@ const Flashcard = () => {
             </div>
 
             <div className={styles.counter}>     
-                {flashcardArray[CurrentFlashcardIndex]['id']} of {flashcardArray.length}
+                {flashcardArray[CurrentFlashcardIndex]["QuestionNo"]} of {flashcardArray.length}
             </div>
         </div>
     )
@@ -103,8 +104,3 @@ const Flashcard = () => {
 }
 
 export default Flashcard;
-
-
-
-
-

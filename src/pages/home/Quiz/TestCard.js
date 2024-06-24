@@ -17,7 +17,16 @@ function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, sel
     const email = sessionStorage.getItem("userEmail");
 
     function goToTest(){
-        navigate('../../mcq', {state: {testID}});
+        if (difficulty === null){
+            navigate('../../flashcard', {state: {testID}});
+        }
+        else{
+            if(selectedButton === 'to-do'){
+                navigate('../../mcq', {state: {testID}});
+            }else if(selectedButton === 'completed'){
+                navigate('../../ResultsPage', {state: {testID}});
+            }
+        }
     }
     
     const [xButtonPressed, setXButtonPressed] = useState(false);

@@ -15,4 +15,21 @@ async function deleteTest(email, testID, testName) { // isaiah to change
     }
 }
 
-export {deleteTest};
+async function getAllQuestionsAndOptionsFromATest(testID){
+    try{
+        const response = await axiosInstance({
+            method: 'post',
+            url: '/test/getQuestionsAndOptions',
+            data: {testID: testID}
+        })
+        
+        // console.log(response.data);
+        return response.data;
+    }
+    catch(error){
+        return error.response.data.message;
+    }
+}
+
+
+export {deleteTest, getAllQuestionsAndOptionsFromATest};
