@@ -19,6 +19,7 @@ function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, att
     }
 
     const navigate = useNavigate();
+    const email = sessionStorage.getItem("userEmail");
 
     function goToTest(){
         if(difficulty === null){ // DIFFICULTY WILL BE NULL IF ITS A FLASHCARD
@@ -27,7 +28,7 @@ function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, att
         else{
             if(selectedButton === 'to-do'){
                 navigate('../../mcq', {state: {testID}});
-            }
+              }
             else if(selectedButton === 'completed'){
                 navigate('../../ResultsPage', {state: {testID}});
             }
@@ -52,7 +53,7 @@ function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, att
     }
 
     async function handleConfirmDelete(){
-        const deleteOk = await deleteTest(testID, name);
+        const deleteOk = await deleteTest(email, testID, name);
 
         navigate(
             '../../../LoadingPage', 
