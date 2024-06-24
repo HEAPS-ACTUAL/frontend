@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/RevisionSchedule.module.css";
+import styles from "../../../styles/RevisionSchedule.module.css";
 
 const CalendarControls = ({
   months,

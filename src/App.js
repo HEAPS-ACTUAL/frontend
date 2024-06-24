@@ -15,7 +15,7 @@ import QuizFeature from "./pages/home/Quiz/Quiz";
 import HomeRoute from "./pages/home/Home_route";
 import ResultsPage from "./pages/home/Quiz/ResultsPage";
 import LoadingPage from "./pages/home/Quiz/LoadingPage";
-import CalendarFeature from "./pages/Calender/CalenderFeature.js"; // Add this import
+import CalendarFeature from "./pages/home/Calender/CalenderFeature.js"; // Add this import
 
 // STYLES
 import "./styles/App.css";

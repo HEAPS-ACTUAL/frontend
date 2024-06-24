@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import styles from "../../styles/RevisionSchedule.module.css";
+import styles from "../../../styles/RevisionSchedule.module.css";
 import EventForm from "./EventForm";
 import CalendarControls from "./CalenderControls";
 import CalendarDays from "./CalenderDays";
@@ -8,7 +8,7 @@ import {
   calculateSpacedRepetitionDates,
   saveScheduleToDB,
   saveRevisionDatesToDB,
-} from "../../utility/utils";
+} from "../../../utility/utils";
 
 const CalendarFeature = () => {
   const [currentDate, setCurrentDate] = useState(new Date()); // Current date state
