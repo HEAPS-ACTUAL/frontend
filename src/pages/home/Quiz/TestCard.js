@@ -10,20 +10,26 @@ import xButton from '../../../images/x-button.png';
 // functions
 import { deleteTest } from '../../../services (for backend)/TestService';
 
-function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, selectedButton}){
+function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, attempts, selectedButton}){
     dateCreated = dateCreated.slice(0,10);
+
+    if(attempts !== undefined){
+        attempts = JSON.parse(attempts);
+        var score = attempts[0].NumOfCorrectAnswers
+    }
 
     const navigate = useNavigate();
     const email = sessionStorage.getItem("userEmail");
 
     function goToTest(){
-        if (difficulty === null){
+        if(difficulty === null){ // DIFFICULTY WILL BE NULL IF ITS A FLASHCARD
             navigate('../../flashcard', {state: {testID}});
         }
         else{
             if(selectedButton === 'to-do'){
                 navigate('../../mcq', {state: {testID}});
-            }else if(selectedButton === 'completed'){
+              }
+            else if(selectedButton === 'completed'){
                 navigate('../../ResultsPage', {state: {testID}});
             }
         }
@@ -88,9 +94,15 @@ function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, sel
                         <img className={styles.calendarImage} src={calendarImage} alt='calendar'/>
                         {dateCreated}
                     </p>
-                    <p className={styles.numOfQuestions}>
-                        {numberOfQuestions} questions
-                    </p>
+
+                    {attempts !== undefined
+                        ? <p className={styles.numOfQuestions}>
+                        Score: {score} / {numberOfQuestions}
+                        </p>
+                        : <p className={styles.numOfQuestions}>
+                            {numberOfQuestions} questions
+                        </p>
+                    }
                 </div>
 
                 {xButtonPressed && (
