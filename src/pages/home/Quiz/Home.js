@@ -141,7 +141,7 @@ function Home() {
                     </div>
                     <div className={styles.testTypeCheckbox}>
                         {testList.map( test => 
-                            <label><input type='checkbox' name={test} value= {test} checked={testTypeChecked[test] === true} onChange={event => {
+                            <label key={test}><input type='checkbox' name={test} value= {test} checked={testTypeChecked[test] === true} onChange={event => {
                                 setTestTypeChecked({
                                     ...testTypeChecked, [test]: event.target.checked,
                                 })
@@ -216,6 +216,7 @@ function Home() {
                                     dateCreated = {quiz.DateTimeCreated}
                                     difficulty = {quiz.Difficulty}
                                     numberOfQuestions = {quiz.numOfQuestions}
+                                    attempts = {quiz.Attempts}
                                     selectedButton = {selectedButton}
                                 />
                             )
