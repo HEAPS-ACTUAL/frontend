@@ -40,9 +40,6 @@ function Navbar() {
                 <p>
                     <Link to="/Home" className={styles.navLink}>Home</Link>
                 </p>
-                <p>
-                    <Link to="/Flashcard" className={styles.navLink}>flashcard temp</Link>
-                </p>
             </div>
 
             <Link to="/login" className={styles.navLinkLogin}><button onClick={handleLogOut}>{logInOutButton}</button></Link>
