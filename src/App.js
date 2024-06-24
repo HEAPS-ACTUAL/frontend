@@ -15,18 +15,18 @@ import QuizFeature from "./pages/home/Quiz/Quiz";
 import HomeRoute from "./pages/home/Home_route";
 import ResultsPage from "./pages/home/Quiz/ResultsPage";
 import LoadingPage from "./pages/home/Quiz/LoadingPage";
-<<<<<<< Updated upstream
-import CalendarFeature from "./pages/home/Calender/CalenderFeature.js"; // Add this import
-=======
-import CalendarFeature from "./pages/home/RevisionSchedule"; // Add this import
-import CalendarComponent from "./pages/home/RevisionSchedulearin";
->>>>>>> Stashed changes
+
+import CalendarFeature from "./pages/home/Calender/CalenderFeature.js";
+// import CalendarFeature from "./pages/home/RevisionSchedule"; 
+
+import MyCalendar from "./pages/home/RevisionSchedulearin";
 
 // STYLES
 import "./styles/App.css";
 
 // FUNCTIONS
 import { isLoggedIn } from "./services (for backend)/ProtectionService";
+import Calendar from "react-calendar";
 
 function App() {
   const [IsLoggedIn, setIsLoggedIn] = useState(true);
@@ -55,7 +55,7 @@ function App() {
         <Route path="/ResultsPage" element={<ResultsPage />} />
         <Route path="/LoadingPage" element={<LoadingPage />} />
         <Route path="/calendar" element={<CalendarFeature />} />{" "}
-        <Route path="/SR" element={<CalendarComponent />} />{" "}
+        <Route path="/SR" element={<MyCalendar />} />{" "}
         {/* Add this route */}
       </Routes>
     </Router>

@@ -5,10 +5,10 @@ import EventForm from "./EventForm";
 import CalendarControls from "./CalenderControls";
 import CalendarDays from "./CalenderDays";
 import {
-  calculateSpacedRepetitionDates,
+  CalculateSpacedRepetitionDates,
   saveScheduleToDB,
   saveRevisionDatesToDB,
-} from "../../../utility/utils";
+} from "../../../services (for backend)/SpacedRepetitionService.js";
 
 const CalendarFeature = () => {
   const [currentDate, setCurrentDate] = useState(new Date()); // Current date state
@@ -133,7 +133,7 @@ const CalendarFeature = () => {
 
   const generateSpacedRepetitionSchedule = async (startDate, endDate) => {
     const scheduleId = await saveScheduleToDB(startDate, endDate, "Exam");
-    const revisionDates = calculateSpacedRepetitionDates(
+    const revisionDates = CalculateSpacedRepetitionDates(
       new Date(startDate),
       new Date(endDate)
     );
