@@ -3,7 +3,6 @@ import styles from "../../../styles/Home.module.css";
 import { useNavigate } from "react-router-dom";
 
 // Functions
-
 import { getSalutation, getUserFirstName} from "../../../services (for backend)/UserService";
 import { generateQuiz, getCompletedQuizzes, getToDoQuizzes} from "../../../services (for backend)/QuizService";
 import { convertFileSizeTo2DP, fileSizeWithinLimit, fileTypeIsPDF } from "../../../services (for backend)/FileServices";
@@ -30,22 +29,14 @@ function Home() {
         setSalutation(salutation);
     }
 
-    try {
-      const salutation = await getSalutation(email);
-      setSalutation(salutation);
-    } catch (error) {
-      console.error("Error fetching salutation:", error);
+    async function fetchToDoQuizzes() {
+        const ToDoQuizzesArray = await getToDoQuizzes(email);
+        setQuizList(ToDoQuizzesArray);
     }
-  }
 
-  async function fetchToDoQuizzes() {
-    try {
-      const ToDoQuizzesArray = await getToDoQuizzes(email);
-      console.log("Fetched To-Do Quizzes:", ToDoQuizzesArray);
-      setQuizList(ToDoQuizzesArray || []); // Ensure quizList is an empty array if null
-    } catch (error) {
-      console.error("Error fetching to-do quizzes:", error);
-      setQuizList([]); // Ensure quizList is an empty array on error
+    async function fetchCompletedQuizzes() {
+        const CompletedQuizzesArray = await getCompletedQuizzes(email);
+        setQuizList(CompletedQuizzesArray);
     }
 
     async function fetchFlashcards(){
@@ -237,9 +228,7 @@ function Home() {
                 </div>
             </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default Home;
