@@ -1,51 +1,78 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from '../../../styles/ResultsPage.module.css';
 import { TiTick } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
 
+// Functions
+import { reviewQuiz } from '../../../services (for backend)/QuizService';
+
 const ResultsPage = () => {
-    const location = useLocation();
     const navigate = useNavigate();
-    const { userAnswers, questions } = location.state;
+
+    const location = useLocation();
+    const {testID} = location.state;
+
+    const [quizReviewArray, setQuizReviewArray] = useState([]);
+    const [userScore , setUserScore] = useState(null);
+    const [totalQns , setTotalQns] = useState(null);
+
+    async function fetchQuizReviewArray(){
+        let returnedArray = await reviewQuiz(testID);
+        setUserScore(returnedArray['NumOfCorrectAnswers']);
+        setTotalQns(returnedArray['TotalNumOfQuestions']);
+        returnedArray = JSON.parse(returnedArray['QuestionsAndAnswers']);
+        setQuizReviewArray(returnedArray);
+
+    }
+
+    useEffect(() => {
+        fetchQuizReviewArray();
+    }, []);
 
     return (
         <div className={styles.QuizResultsContainer}>
-            <div className={styles.Header}>Results</div>
-            {questions.map((question) => (
-                <div key={question.id} className={styles.QuestionBlock}>
+            <div className={styles.Header}> Results </div>
+            
+            <div className={styles.results}> Score: {userScore} / {totalQns} </div>
+
+            {quizReviewArray.map((question_obj) => (
+                <div key={question_obj['QuestionNo']} className={styles.QuestionBlock}>
+
                     <h2 className={styles.Question}>
-                        {question.id}. {question.question}
+                        {question_obj['QuestionNo']}. {question_obj['QuestionText']}
                     </h2>
                     
                     <div className={styles.OptionsContainer}>
-                        {question.options.map((option) => (
-
-                        <div key={option} className={`${styles.Option} 
-                            ${option === userAnswers[question.id] ? styles.UserAnswer : ''}
-                            ${option === question.correctAnswer ? styles.CorrectAnswer : ''}
-                            ${!userAnswers[question.id] ? styles.UnselectedOption : ''}`}>
-                                
-                            {option === question.correctAnswer ? <TiTick className={styles.CorrectIcon} /> : null}
-                            {option !== question.correctAnswer && option === userAnswers[question.id] ? <RxCross2 className={styles.IncorrectIcon} /> : null}
-                            {option}
-                        </div>
+                        {question_obj['Options'].map((option_obj) => (
+                            <div key={option_obj['OptionLetter']} className={`${styles.Option}
+                                ${option_obj['OptionLetter'] === question_obj['UserChoice'] ? styles.UserAnswer : ''}
+                                ${option_obj['OptionLetter'] === question_obj['CorrectOption'] ? styles.CorrectAnswer : ''}
+                                ${option_obj['OptionLetter'] !== question_obj['UserChoice'] ? styles.UnselectedOption : ''}`}
+                            >
+                                {option_obj['OptionLetter'] === question_obj['CorrectOption'] ? <TiTick className={styles.CorrectIcon} /> : null}
+                                {option_obj['OptionLetter'] !== question_obj['CorrectOption'] && option_obj['OptionLetter'] === question_obj['UserChoice'] ? <RxCross2 className={styles.IncorrectIcon} /> : null}
+                                {option_obj['OptionText']}
+                            
+                            </div>
                         ))}
 
                     </div>
                     
-                    <div className={`${styles.Explanation} 
-                        ${userAnswers[question.id] === question.correctAnswer ? styles.ExplanationForCorrectAns : styles.ExplanationForIncorrectAns}`}>
-                        Explanation: {question.explanation}
+                    <div 
+                        className={`${styles.Explanation}
+                        ${question_obj['UserChoice'] === question_obj['CorrectOption'] ? styles.ExplanationForCorrectAns : styles.ExplanationForIncorrectAns}`}
+                    >
+                        Explanation: {question_obj['Elaboration']}
                     </div>                    
                 </div>
             ))}
             
-
             <div className={styles.BtnContainer}>
-                <button className={styles.RestartButton} onClick={() => navigate('/Quiz')}>Restart Quiz</button>
+                {/* <button className={styles.RestartButton} onClick={() => navigate('/mcq', {state: {testID}})}>Restart Quiz</button>  */}
                 <button className={styles.HomeButton} onClick={() => navigate('/Home')}>Back to Home</button>
             </div>
+            
             <br></br>
             <br></br>
             <br></br>

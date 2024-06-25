@@ -17,6 +17,16 @@
     font-size: 40px;
 }
 
+.results {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    font-size: 32px;
+    font-weight: bold;
+    color: #dc3838;
+}
+
 .QuestionBlock {
     margin-bottom: 10px;
     padding: 15px;
@@ -82,12 +92,12 @@
     background-color: #ffdede; /* Light red for user's answer */
 }
 
-.CorrectAnswer {
-    background-color: #d4edda; /* Light green for correct answer */
-}
-
 .UnselectedOption {
     background-color: white; /* Light grey background for unselected options */
+}
+
+.CorrectAnswer {
+    background-color: #d4edda; /* Light green for correct answer */
 }
 
 
@@ -105,7 +115,7 @@
 }
 
 .ExplanationForCorrectAns {
-    background-color: lightgrey;
+    background-color: #80ccb3;
 }
 
 .ExplanationForIncorrectAns {

@@ -41,6 +41,11 @@ body {
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
 }
 
+.sidebarElement:active {
+    transition: 0.2s;
+    transform: translate3d(3px, -2px, 0px);
+}
+
 .icon {
   font-size: 20px;
   color: #427d9d;
