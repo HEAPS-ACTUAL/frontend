@@ -197,6 +197,10 @@ const CalendarFeature = () => {
         handleEditEvent={handleEditEvent}
         revisionDates={revisionDates}
       />
+      {/* Modal component: A reusable UI component for displaying overlay content like alerts, forms, or information.
+          - `isOpen`: A boolean state that controls the visibility of the modal. If true, the modal is displayed.
+          - `content`: The content to display inside the modal, which can be dynamically set based on user interactions or other logic.
+          - `onClose`: A handler function that sets the `modalOpen` state to false, effectively closing the modal. This function is triggered when the modal's close button is clicked. */}
       <Modal
         isOpen={modalOpen}
         content={modalContent}
