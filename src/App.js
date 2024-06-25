@@ -11,13 +11,14 @@ import About from "./pages/main/About";
 import Features from "./pages/main/Features";
 import Navbar from "./pages/main/NavBar";
 import SignIn from "./pages/main/SignIn";
-import QuizFeature from "./pages/home/Quiz/Quiz";
 import HomeRoute from "./pages/home/Home_route";
-import ResultsPage from "./pages/home/Quiz/ResultsPage";
-import LoadingPage from "./pages/home/Quiz/LoadingPage";
 
+import QuizFeature from "./pages/home/Quiz/Quiz";
+import ResultsPage from './pages/home/Quiz/ResultsPage';
+import LoadingPage from './pages/main/LoadingPage';
+import Flashcard from "./pages/home/Quiz/Flashcard";
 import CalendarFeature from "./pages/home/Calender/CalenderFeature.js";
-// import CalendarFeature from "./pages/home/RevisionSchedule"; 
+
 import MyCalendar from "./pages/home/MonitorProgress.js";
 
 
@@ -29,16 +30,17 @@ import { isLoggedIn } from "./services (for backend)/ProtectionService";
 import Calendar from "react-calendar";
 
 function App() {
-  const [IsLoggedIn, setIsLoggedIn] = useState(true);
+    const [IsLoggedIn, setIsLoggedIn] = useState(true);
 
-  function updateLogInStatus() {
-    setIsLoggedIn(isLoggedIn());
-  }
+    function updateLogInStatus() {
+        setIsLoggedIn(isLoggedIn())
+    };
 
-  useEffect(() => {
-    updateLogInStatus();
-    window.addEventListener("logInOut", updateLogInStatus);
-  }, []);
+    useEffect(() => {
+        updateLogInStatus();
+        window.addEventListener('logInOut', updateLogInStatus);
+    }, []);
+
 
   return (
     <Router>

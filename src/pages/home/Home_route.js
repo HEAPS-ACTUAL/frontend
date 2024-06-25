@@ -1,12 +1,15 @@
-import {Routes, Route, Navigate} from 'react-router-dom';
+import { Routes, Route, Navigate } from "react-router-dom";
 
 //PAGES
 import SideBar from "./SideBar";
+
 import Quizzes from './Quiz/Home';
 import RevisionSchedule from './RevisionSchedule';
 import MyCalendar from './MonitorProgress';
 
 
+import CalenderFeature from "./Calender/CalenderFeature";
+import MontitorProgress from "./MonitorProgress";
 function HomeRoute(){
     return (
         <div>
@@ -23,5 +26,8 @@ function HomeRoute(){
         </div>
     )
 }
+
+
+
 
 export default HomeRoute;

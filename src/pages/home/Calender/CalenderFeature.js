@@ -1,9 +1,13 @@
+//main container component
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "../../../styles/RevisionSchedule.module.css";
 import EventForm from "./EventForm";
 import CalendarControls from "./CalenderControls";
 import CalendarDays from "./CalenderDays";
+import Modal from "./Modal";
+
 import {
   CalculateSpacedRepetitionDates,
   saveScheduleToDB,
@@ -23,6 +27,8 @@ const CalendarFeature = () => {
     color: "#FFE4C4",
   }); // State to store event data
   const [revisionDates, setRevisionDates] = useState([]); // New state to store revision dates
+  const [modalOpen, setModalOpen] = useState(false); // State to manage modal visibility
+  const [modalContent, setModalContent] = useState(""); // State to manage modal content
 
   const months = [
     "January",
@@ -80,6 +86,15 @@ const CalendarFeature = () => {
   const handleDayClick = (dateKey) => {
     console.log("Day clicked:", dateKey);
     const date = new Date(dateKey);
+
+    if (revisionDates.includes(dateKey)) {
+      setModalContent(
+        `Revision scheduled for this date: ${dateKey}. Please review your materials.`
+      );
+      setModalOpen(true);
+      console.log("Modal should be open now");
+    }
+
     if (!startDate || (startDate && endDate)) {
       setStartDate(dateKey);
       setEndDate(null);
@@ -131,6 +146,7 @@ const CalendarFeature = () => {
     setCurrentDate(newDate);
   };
 
+  // Generates a spaced repetition schedule for revision based on selected dates
   const generateSpacedRepetitionSchedule = async (startDate, endDate) => {
     const scheduleId = await saveScheduleToDB(startDate, endDate, "Exam");
     const revisionDates = CalculateSpacedRepetitionDates(
@@ -143,7 +159,6 @@ const CalendarFeature = () => {
     setRevisionDates(revisionDates); // Update revisionDates state
     console.log("Generated Revision Dates:", revisionDates); // Log revision dates
   };
-
   return (
     <div className={styles.calendarContainer}>
       <EventForm
@@ -181,6 +196,15 @@ const CalendarFeature = () => {
         handleDayClick={handleDayClick}
         handleEditEvent={handleEditEvent}
         revisionDates={revisionDates}
+      />
+      {/* Modal component: A reusable UI component for displaying overlay content like alerts, forms, or information.
+          - `isOpen`: A boolean state that controls the visibility of the modal. If true, the modal is displayed.
+          - `content`: The content to display inside the modal, which can be dynamically set based on user interactions or other logic.
+          - `onClose`: A handler function that sets the `modalOpen` state to false, effectively closing the modal. This function is triggered when the modal's close button is clicked. */}
+      <Modal
+        isOpen={modalOpen}
+        content={modalContent}
+        onClose={() => setModalOpen(false)}
       />
     </div>
   );
