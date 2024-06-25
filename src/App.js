@@ -53,9 +53,10 @@ function App() {
           path="/home/*"
           element={IsLoggedIn ? <HomeRoute /> : <Navigate to="/login" />} // REDIRECT TO SIGN IN PAGE IF NOT LOGGED IN
         />
-        <Route path="/Quiz" element={<QuizFeature />} />
+        <Route path="/mcq" element={<QuizFeature />} />
         <Route path="/ResultsPage" element={<ResultsPage />} />
         <Route path="/LoadingPage" element={<LoadingPage />} />
+        <Route path="/Flashcard" element={<Flashcard />} />
        
       </Routes>
     </Router>
