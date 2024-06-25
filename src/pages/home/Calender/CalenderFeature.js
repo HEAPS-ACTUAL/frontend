@@ -1,9 +1,13 @@
+//main container component
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "../../../styles/RevisionSchedule.module.css";
 import EventForm from "./EventForm";
 import CalendarControls from "./CalenderControls";
 import CalendarDays from "./CalenderDays";
+import Modal from "./Modal";
+
 import {
   CalculateSpacedRepetitionDates,
   saveScheduleToDB,
@@ -23,6 +27,8 @@ const CalendarFeature = () => {
     color: "#FFE4C4",
   }); // State to store event data
   const [revisionDates, setRevisionDates] = useState([]); // New state to store revision dates
+  const [modalOpen, setModalOpen] = useState(false); // State to manage modal visibility
+  const [modalContent, setModalContent] = useState(""); // State to manage modal content
 
   const months = [
     "January",
@@ -80,6 +86,15 @@ const CalendarFeature = () => {
   const handleDayClick = (dateKey) => {
     console.log("Day clicked:", dateKey);
     const date = new Date(dateKey);
+
+    if (revisionDates.includes(dateKey)) {
+      setModalContent(
+        `Revision scheduled for this date: ${dateKey}. Please review your materials.`
+      );
+      setModalOpen(true);
+      console.log("Modal should be open now");
+    }
+
     if (!startDate || (startDate && endDate)) {
       setStartDate(dateKey);
       setEndDate(null);

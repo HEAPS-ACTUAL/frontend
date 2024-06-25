@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../../../styles/RevisionSchedule.module.css";
 
 const CalendarDays = ({
@@ -13,7 +13,6 @@ const CalendarDays = ({
 }) => {
   // Function to render calendar days based on the current date and month
   const renderDays = () => {
-    console.log("Rendering days...");
     const days = [];
     const daysCount = new Date(
       currentDate.getFullYear(),
@@ -56,43 +55,41 @@ const CalendarDays = ({
         dayClass = `${styles.day} ${styles.selectedDay}`;
       }
 
-      console.log(
-        "Rendering day:",
-        i,
-        "Date Key:",
-        dateKey,
-        "Event:",
-        event,
-        "Is Revision Date:",
-        isRevisionDate
-      );
-
       // Create a day block for the calendar with click and double-click handlers
       days.push(
         <div
-          key={i}
+          key={dateKey}
           className={dayClass}
-          onClick={() => handleDayClick(dateKey)}
+          onClick={() => {
+            console.log(
+              "Clicked day:",
+              dateKey,
+              "Revision date check:",
+              revisionDates.includes(dateKey)
+            );
+
+            handleDayClick(dateKey);
+          }}
           onDoubleClick={() => handleEditEvent(dateKey)}
           style={{
             backgroundColor: isRevisionDate
-              ? "#008000" // Green for revision dates
+              ? "#008000"
               : event
-              ? event.color // Color for regular events
+              ? event.color
               : "",
-          }} // Set background color based on event or revision status
+          }}
         >
-          {i} // Display the day number
+          {i}
           {event && (
             <div
               className={styles.event}
-              style={{ backgroundColor: event.color }} // Style for event indicator
+              style={{ backgroundColor: event.color }}
             >
-              <span>{event.title}</span> // Display the event title
+              <span>{event.title}</span>
               <button
                 className={styles.deleteButton}
                 onClick={(e) => {
-                  e.stopPropagation(); // Prevent day click event
+                  e.stopPropagation(); // Stop the click from propagating to the day div
                   handleEventDelete(dateKey);
                 }}
               >
@@ -103,7 +100,6 @@ const CalendarDays = ({
         </div>
       );
     }
-    console.log("Rendering days with events:", events);
     return days; // Return the array of day elements
   };
 
