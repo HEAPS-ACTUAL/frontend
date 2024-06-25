@@ -131,6 +131,7 @@ const CalendarFeature = () => {
     setCurrentDate(newDate);
   };
 
+  // Generates a spaced repetition schedule for revision based on selected dates
   const generateSpacedRepetitionSchedule = async (startDate, endDate) => {
     const scheduleId = await saveScheduleToDB(startDate, endDate, "Exam");
     const revisionDates = CalculateSpacedRepetitionDates(

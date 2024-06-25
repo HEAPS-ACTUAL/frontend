@@ -3,8 +3,8 @@ import styles from "../../../styles/RevisionSchedule.module.css";
 
 const EventForm = ({
   isEditing,
-  eventData,
-  setEventData,
+  eventData, // Object containing the event data (date, title, description, color)
+  setEventData, // Function to update the eventData state
   handleFormSubmit,
   handleEventDelete,
   setIsEditing,
