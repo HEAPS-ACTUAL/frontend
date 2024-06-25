@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 // PAGES
 import About from "./pages/main/About";
@@ -7,17 +12,21 @@ import Features from "./pages/main/Features";
 import Navbar from "./pages/main/NavBar";
 import SignIn from "./pages/main/SignIn";
 import HomeRoute from "./pages/home/Home_route";
+
 import QuizFeature from "./pages/home/Quiz/Quiz";
 import ResultsPage from './pages/home/Quiz/ResultsPage';
 import LoadingPage from './pages/main/LoadingPage';
 import Flashcard from "./pages/home/Quiz/Flashcard";
-
+import CalendarFeature from "./pages/home/Calender/CalenderFeature.js";
+// import CalendarFeature from "./pages/home/RevisionSchedule"; 
+import MyCalendar from "./pages/home/RevisionSchedulearin";
 
 // STYLES
 import "./styles/App.css";
 
 // FUNCTIONS
 import { isLoggedIn } from "./services (for backend)/ProtectionService";
+import Calendar from "react-calendar";
 
 function App() {
     const [IsLoggedIn, setIsLoggedIn] = useState(true);
@@ -46,6 +55,8 @@ function App() {
                 <Route path="/ResultsPage" element={<ResultsPage />} />
                 <Route path="/loadingPage" element={<LoadingPage />} />
                 <Route path="/Flashcard" element={<Flashcard />} />
+                <Route path="/calendar" element={<CalendarFeature />} />{" "}
+                <Route path="/SR" element={<MyCalendar />} />{" "}
 
             </Routes>
         </Router>
