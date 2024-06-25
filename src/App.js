@@ -56,8 +56,6 @@ function App() {
         <Route path="/Quiz" element={<QuizFeature />} />
         <Route path="/ResultsPage" element={<ResultsPage />} />
         <Route path="/LoadingPage" element={<LoadingPage />} />
-        <Route path="/calendar" element={<CalendarFeature />} />
-        <Route path="/calendar" element={<MyCalendar />} />
        
       </Routes>
     </Router>

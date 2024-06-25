@@ -5,8 +5,6 @@ import SideBar from "./SideBar";
 
 import Quizzes from './Quiz/Home';
 import MyCalendar from './MonitorProgress';
-
-
 import CalenderFeature from "./Calender/CalenderFeature";
 
 function HomeRoute(){
