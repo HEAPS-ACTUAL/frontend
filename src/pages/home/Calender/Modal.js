@@ -1,18 +1,26 @@
 import React from "react";
-import styles from "../../../styles/Modal.module.css"; // Create and import your own styles
+import styles from "../../../styles/Modal.module.css";
 
 const Modal = ({ isOpen, content, onClose }) => {
-  console.log("Modal isOpen:", isOpen); // Add this to check if modal is receiving 'true'
-
+  // Conditional rendering: Only render the Modal if 'isOpen' is true.
   if (!isOpen) return null;
 
   return (
     <div className={styles.modalOverlay}>
+      {" "}
+      {/* Full-screen overlay that dims the background and centers the modal content */}
       <div className={styles.modal}>
-        <button onClick={onClose} className={styles.closeButton}>
-          ×
+        {" "}
+        {}
+        <button
+          onClick={onClose} // Button to close the modal. Executes 'onClose' function passed as a prop.
+          className={styles.closeButton}
+        >
+          ×{" "}
+          {/* Visual representation of the close button using a multiplication symbol */}
         </button>
-        {content}
+        {content}{" "}
+        {/* Dynamic content passed to the modal, rendered inside the modal box */}
       </div>
     </div>
   );
