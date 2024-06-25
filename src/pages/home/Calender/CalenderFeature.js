@@ -159,7 +159,6 @@ const CalendarFeature = () => {
     setRevisionDates(revisionDates); // Update revisionDates state
     console.log("Generated Revision Dates:", revisionDates); // Log revision dates
   };
-
   return (
     <div className={styles.calendarContainer}>
       <EventForm
@@ -197,6 +196,11 @@ const CalendarFeature = () => {
         handleDayClick={handleDayClick}
         handleEditEvent={handleEditEvent}
         revisionDates={revisionDates}
+      />
+      <Modal
+        isOpen={modalOpen}
+        content={modalContent}
+        onClose={() => setModalOpen(false)}
       />
     </div>
   );
