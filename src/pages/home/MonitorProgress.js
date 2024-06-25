@@ -1,24 +1,3 @@
-// import React from 'react';
-// import FullCalendar from '@fullcalendar/react';
-// import dayGridPlugin from '@fullcalendar/daygrid';
-
-
-// function MyCalendar({ events }) {
-//   return (
-//     <div className="container mx-auto p-5 shadow-lg rounded-lg">
-//       <FullCalendar
-//         plugins={[dayGridPlugin]}
-//         initialView="dayGridMonth"
-//         events={events}
-//         height="auto"
-//         className="rounded-lg shadow"
-//       />
-//     </div>
-//   );
-// }
-
-// export default MyCalendar;
-
 import React from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -46,4 +25,8 @@ function MyCalendar({ events }) {
 }
 
 export default MyCalendar;
+
+// add input field to get start date and end date
+// end date always null unless user inputs end date 
+// color field to allow user to change colour
 

@@ -1,13 +1,20 @@
+/* fullcalendar-custom.css */
+
 /* Darken the grid lines */
 .fc-daygrid-day-frame {
-    border: px solid #444; 
+    border: 0px solid #444; 
 }
 
+.fc-daygrid-day-top {
+    /* border-bottom: 1px solid #444; */
+}
+
+/* Additional styles for better visibility */
 .fc-toolbar {
     padding: 10px;
     border-radius: 10px 10px 0 0; 
 }
-  
+
 .fc-button {
     background-color: #1d4ed8;
     color: #fff;
@@ -17,11 +24,11 @@
     border-radius: 4px;
     cursor: pointer;
 }
-  
+
 .fc-button:hover {
     background-color: #1e40af;
 }
-  
+
 .fc-daygrid-event {
     background-color: #2563eb;
     color: white;
@@ -29,17 +36,17 @@
     border-radius: 4px;
     padding: 5px;
 }
-  
+
 .fc-day-today {
     background-color: #e0f2fe;
 }
-  
+
 .fc-daygrid-event.fc-event.fc-event-end,
 .fc-daygrid-event.fc-event.fc-event-start {
     margin: 5px;
 }
 
+/* Make day numbers less bold */
 .fc-daygrid-day-number {
     font-weight: normal;
 }
-  
