@@ -1,0 +1,85 @@
+.calendarContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+
+
+}
+.inputContainerforMaunual {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around; 
+    padding: 15px;
+    border-radius: 5px; 
+    margin-top: 30px;
+}
+
+.calendar{
+    margin-top: 100px;
+    margin-right: 80;
+}
+
+.inputContainerforMaunual input,
+.inputContainerforMaunual button {
+    padding: 8px 12px;
+    margin: 20px; 
+    border: 2px solid #e0e0e0; 
+    border-radius: 5px;
+    font-size: 16px; 
+    width: auto; 
+    flex-grow: 1; 
+    background-color: #fafafa; 
+    box-shadow: none; 
+    align-items: center;
+    justify-content: center;
+}
+
+.inputContainerforMaunual input:focus,
+.inputContainerforMaunual button:focus {
+    border-color: #0056b3; 
+    box-shadow: none; 
+}
+
+.inputContainerforMaunual button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.inputContainerforMaunual button:hover {
+    background-color: #0056b3; 
+}
+
+
+.fc-daygrid-day-frame, .fc-toolbar, .fc-daygrid-event, .fc-day-today, .fc-daygrid-day-number {
+    border: none;
+    background-color: transparent;
+    color: #333; 
+}
+
+.fc-button:hover {
+    background-color: #0056b3;
+}
+
+.fc-daygrid-event {
+    background-color: #007bff; 
+    color: white;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.fc-day-today {
+    background-color: #e2e6ea;
+}
+
+.fc-daygrid-event.fc-event.fc-event-end,
+.fc-daygrid-event.fc-event.fc-event-start {
+    margin: 5px;
+}
+
+.fc-daygrid-day-number {
+    font-weight: bold; 
+}
