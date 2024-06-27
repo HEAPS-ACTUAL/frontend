@@ -1,20 +1,12 @@
 import axiosInstance from "../utility/axiosInstance";
 
-<<<<<<< Updated upstream
-async function generateSpacedRepDates(startDate, endDate){
-    const response = await axiosInstance({
-        method: "post",
-        url: ""
-    })
-}
-=======
 
-async function generateSpacedRepetitionSchedule(startDate, endDate) {
+async function generateSpacedRepetitionSchedule(StartDate, EndDate, EventName) {
     try {
         const response = await axiosInstance({
             method: "post",
-            url: "/test/generateSpacedRepetitionSchedule",
-            data: { startDate, endDate },
+            url: "/schedule/generateSpacedRepetitionSchedule",
+            data: { StartDate, EndDate },
         });
         return response.data;
     } catch (error) {
@@ -22,12 +14,12 @@ async function generateSpacedRepetitionSchedule(startDate, endDate) {
     }
 }
 
-async function getRevisionDates(scheduleId) {
+async function getRevisionDates(ScheduleId, RevisionDates) {
     try {
         const response = await axiosInstance({
             method: "post",
-            url: "/test/getRevisionDates",
-            data: { scheduleId },
+            url: "/schedule/getRevisionDates",
+            data: { ScheduleId },
         });
         return response.data;
     } catch (error) {
@@ -35,32 +27,32 @@ async function getRevisionDates(scheduleId) {
     }
 }
 
->>>>>>> Stashed changes
+export { generateSpacedRepetitionSchedule, getRevisionDates };
 
 // SHI HUI'S CODE
 
-export const saveScheduleToDB = async (startDate, endDate, examName) => {
-    try {
-        const response = await axiosInstance.post("/api/schedules", {
-            startDate,
-            endDate,
-            examName,
-        });
+// export const saveScheduleToDB = async (StartDate, EndDate, ExamName) => {
+//     try {
+//         const response = await axiosInstance.post("/api/schedules", {
+//             StartDate,
+//             EndDate,
+//             ExamName,
+//         });
 
-        return response.data.scheduleId;
-    } catch (error) {
-        console.error("Error saving schedule to DB:", error);
-    }
-};
+//         return response.data.scheduleId;
+//     } catch (error) {
+//         console.error("Error saving schedule to DB:", error);
+//     }
+// };
 
-export const saveRevisionDatesToDB = async (scheduleId, revisionDates) => {
-    try {
-        await axiosInstance.post("/api/revision-dates", {
-            scheduleId,
-            revisionDates,
-        });
-    } catch (error) {
-        console.error("Error saving revision dates to DB:", error);
-    }
-};
+// export const saveRevisionDatesToDB = async (scheduleId, revisionDates) => {
+//     try {
+//         await axiosInstance.post("/api/revision-dates", {
+//             scheduleId,
+//             revisionDates,
+//         });
+//     } catch (error) {
+//         console.error("Error saving revision dates to DB:", error);
+//     }
+// };
 

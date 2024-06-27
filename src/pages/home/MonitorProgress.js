@@ -53,7 +53,8 @@ function MyCalendar() {
   	return (
       	<div className='calendarContainer'> 
 
-			<h3>to manually add a subject (for my own reference)</h3>
+			<h3>Struggling to plan a revision schedule?</h3>
+			<h1>Fret not, Daddy;s got your back!</h1>
 			<div className='inputContainerforMaunual'>
 				<div className='input'>Subject Name: <input type="text" placeholder="Enter Subject" value={eventTitle} onChange={(e) => setEventTitle(e.target.value)}/></div>
 				<div className='input'> Start date: <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} /></div>
