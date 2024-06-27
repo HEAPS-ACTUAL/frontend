@@ -16,12 +16,7 @@ function MyCalendar() {
             return; 
         }
 
-		let newEvent = { title: eventTitle, start: startDate, color: eventColour };
-	
-		// Add end date only if user indicated
-		if (endDate) {
-			newEvent.end = endDate;
-		}
+		let newEvent = { title: eventTitle, start: startDate, color: eventColour, end: endDate || null };
 
 		setEvents(prevEvents => [...prevEvents, newEvent]);
 
