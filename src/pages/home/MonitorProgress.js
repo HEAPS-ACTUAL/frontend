@@ -28,7 +28,7 @@ function MyCalendar() {
 		setEvents(prevEvents => prevEvents.filter(event => event.title !== eventTitle && event.start !== startDate));
 	};
 
-	// for the cross button to delete an event
+	// click on the cross button to delete an event
 	const DeleteEvent = (eventInfo) => {
 		return (
 			<div>
@@ -42,7 +42,7 @@ function MyCalendar() {
 					}}
 					style={{ marginLeft: '160px', background: 'none', border: 'none', color: 'red', cursor: 'pointer' }}
 				>
-					&#x2715; {/* Unicode cross symbol */}
+					&#x2715; {/* cross symbol */}
 				</button>
 			</div>
 		);
@@ -85,7 +85,4 @@ function MyCalendar() {
 export default MyCalendar;
 
 
-// add input field to get start date and end date
-// end date always null unless user inputs end date 
-// color field to allow user to change colour
 

@@ -1,11 +1,41 @@
 import axiosInstance from "../utility/axiosInstance";
 
+<<<<<<< Updated upstream
 async function generateSpacedRepDates(startDate, endDate){
     const response = await axiosInstance({
         method: "post",
         url: ""
     })
 }
+=======
+
+async function generateSpacedRepetitionSchedule(startDate, endDate) {
+    try {
+        const response = await axiosInstance({
+            method: "post",
+            url: "/test/generateSpacedRepetitionSchedule",
+            data: { startDate, endDate },
+        });
+        return response.data;
+    } catch (error) {
+        return error.response.data.message;
+    }
+}
+
+async function getRevisionDates(scheduleId) {
+    try {
+        const response = await axiosInstance({
+            method: "post",
+            url: "/test/getRevisionDates",
+            data: { scheduleId },
+        });
+        return response.data;
+    } catch (error) {
+        return error.response.data.message;
+    }
+}
+
+>>>>>>> Stashed changes
 
 // SHI HUI'S CODE
 
