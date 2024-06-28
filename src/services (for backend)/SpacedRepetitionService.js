@@ -13,6 +13,7 @@ async function getRevisionDates(ScheduleId, RevisionDates) { // YET TO CHANGE, C
     }
 }
 
+// once i click generate schedule on the fe, this function will be called and will send data to the be
 async function createNewEvent(startDate, endDate, eventName){
     try {
         const response = await axiosInstance({
@@ -20,7 +21,7 @@ async function createNewEvent(startDate, endDate, eventName){
             url: "/schedule/createNewEvent",
             data: { startDate: startDate, endDate: endDate, eventName: eventName}
         });
-        return response.data;
+        return response.data; // retrieve success/ fail message from the backend
     } catch (error) {
         return error.response.data.message;
     }

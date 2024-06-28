@@ -19,7 +19,7 @@ import LoadingPage from './pages/main/LoadingPage';
 import Flashcard from "./pages/home/Quiz/Flashcard";
 import CalendarFeature from "./pages/home/Calender/CalenderFeature.js";
 
-import MyCalendar from "./pages/home/MonitorProgress.js";
+import Calendar from "./pages/home/MonitorProgress.js";
 
 
 // STYLES
@@ -27,7 +27,7 @@ import "./styles/App.css";
 
 // FUNCTIONS
 import { isLoggedIn } from "./services (for backend)/ProtectionService";
-import Calendar from "react-calendar";
+// import Calendar from "react-calendar";
 
 function App() {
     const [IsLoggedIn, setIsLoggedIn] = useState(true);

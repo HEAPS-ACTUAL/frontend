@@ -4,7 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import '../../styles/MonitorProgress.css'; 
 import { createNewEvent } from '../../services (for backend)/SpacedRepetitionService';
 
-function MyCalendar() {
+function Calendar() {
 
 	const [events, setEvents] = useState([]);
 	const [eventTitle, setEventTitle] = useState('') // eventTitle is the subject
@@ -13,19 +13,19 @@ function MyCalendar() {
 	const [eventColour, setEventColour] = useState('#3788d8'); // default colour is blue
 	
 	// for user to manually add their own revision dates
-	const HandleAddEvent = () => {
-		if (!startDate || !eventTitle) {
-            alert("Please enter a start date");
-            return; 
-        }
+	// const HandleAddEvent = () => {
+	// 	if (!startDate || !eventTitle) {
+    //         alert("Please enter a start date");
+    //         return; 
+    //     }
 
-		let newEvent = { title: eventTitle, start: startDate, color: eventColour, end: endDate || null };
+	// 	let newEvent = { title: eventTitle, start: startDate, color: eventColour, end: endDate || null };
 
-		setEvents(prevEvents => [...prevEvents, newEvent]);
+	// 	setEvents(prevEvents => [...prevEvents, newEvent]);
 
-        // Clear inputs after adding
-		setEventTitle(''); setStartDate(''); setEndDate(''); setEventColour('#3788d8');
-	}
+    //     // Clear inputs after adding
+	// 	setEventTitle(''); setStartDate(''); setEndDate(''); setEventColour('#3788d8');
+	// }
 	
 	
 	// delete event from the calendar
@@ -65,7 +65,7 @@ function MyCalendar() {
 				<div className='input'>Start date: <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} /></div>
 				<div className='input'>End date: <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} /></div>
 				<div className='input'>Colour: <input type="color" value={eventColour} onChange={(e) => setEventColour(e.target.value)} /></div>
-				<button onClick={HandleAddEvent}>Add Subject</button>
+				{/* <button onClick={HandleAddEvent}>Add Subject</button> */}
 				<button onClick={handleGenerateSchedule}>Generate Schedule</button>
 			</div>
 			<div className='calendar'>
@@ -81,7 +81,7 @@ function MyCalendar() {
 	);
 }
 
-export default MyCalendar;
+export default Calendar;
 
 
 
