@@ -54,6 +54,11 @@ function Calendar() {
         }
     };
 
+	// for testing
+	useEffect(() => {
+		console.log(events);
+	}, [events]);
+
 	return (
 		<div className='calendarContainer'> 
 			<h3>Struggling to plan a revision schedule?</h3>

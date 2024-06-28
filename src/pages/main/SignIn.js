@@ -23,15 +23,15 @@ const SignIn = () => {
         setSignInMessage("");
 
         if(email === "" || password === "" || firstName === "" || lastName === "" || gender === ""){
-            setRegisterMessage("All fields must be filled in!");
+            window.alert("All fields must be filled in!");
         }
         else{
             if(password !== confirmPassword){
-                setRegisterMessage("Passwords don't match!");
+                window.alert("Passwords don't match!");
             }
             else{
                 const returnedMessage = await createNewUser(email, password, firstName, lastName, gender);
-                setRegisterMessage(returnedMessage);
+                window.alert(returnedMessage);
                 setTimeout(() => {
                     window.location.reload();
                 }, 1500);
@@ -43,19 +43,19 @@ const SignIn = () => {
         event.preventDefault();
 
         if(email === "" || password === ""){
-            setSignInMessage("All fields must be filled in!");
+            window.alert("All fields must be filled in!");
         }
         else{
-            const returnedMessage = await authenticate (email, password);
-            setSignInMessage(returnedMessage);
+            // const returnedMessage = await authenticate (email, password);
+            // window.alert(returnedMessage);
 
-            if (returnedMessage !== 'Authentication Successful!'){
-                setSignInMessage(returnedMessage);
-            }
-            else{
+            // if (returnedMessage !== 'Authentication Successful!'){
+            //     window.alert(returnedMessage);
+            // }
+            // else{
                handleLogIn(email);
                navigate('/home');
-            }
+            // }
         }    
     }
 
