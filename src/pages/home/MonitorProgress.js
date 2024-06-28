@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import '../../styles/MonitorProgress.css'; 
-import { generateSpacedRepetitionSchedule, getRevisionDates } from '../../services (for backend)/SpacedRepetitionService';
+import { createNewEvent } from '../../services (for backend)/SpacedRepetitionService';
 
 function MyCalendar() {
 
@@ -44,7 +44,7 @@ function MyCalendar() {
         }
 
         try {
-            const result = await generateSpacedRepetitionSchedule(startDate, endDate, eventTitle);
+            const result = await createNewEvent(startDate, endDate, eventTitle);
             console.log('Schedule generated:', result);
             // Optionally fetch revision dates if needed here
             // const revisionDates = await getRevisionDates(result.scheduleId);
