@@ -54,8 +54,6 @@ function Calendar() {
         }
     };
 
-	
-
 	return (
 		<div className='calendarContainer'> 
 			<h3>Struggling to plan a revision schedule?</h3>
@@ -65,7 +63,6 @@ function Calendar() {
 				<div className='input'>Start date: <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} /></div>
 				<div className='input'>End date: <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} /></div>
 				<div className='input'>Colour: <input type="color" value={eventColour} onChange={(e) => setEventColour(e.target.value)} /></div>
-				{/* <button onClick={HandleAddEvent}>Add Subject</button> */}
 				<button onClick={handleGenerateSchedule}>Generate Schedule</button>
 			</div>
 			<div className='calendar'>
