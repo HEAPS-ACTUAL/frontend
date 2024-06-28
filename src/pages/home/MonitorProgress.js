@@ -9,7 +9,7 @@ function Calendar() {
 	const [events, setEvents] = useState([]);
 	const [eventTitle, setEventTitle] = useState('') // eventTitle is the subject
 	const [startDate, setStartDate] = useState('')
-	const [endDate, setEndDate] = useState('')
+	const [endDate, setEndDate] = useState(null)
 	const [eventColour, setEventColour] = useState('#3788d8'); // default colour is blue
 	
 	// for user to manually add their own revision dates
@@ -19,7 +19,7 @@ function Calendar() {
     //         return; 
     //     }
 
-	// 	let newEvent = { title: eventTitle, start: startDate, color: eventColour, end: endDate || null };
+		// let newEvent = { title: eventTitle, start: startDate, color: eventColour, end: endDate || null };
 
 	// 	setEvents(prevEvents => [...prevEvents, newEvent]);
 
@@ -44,9 +44,9 @@ function Calendar() {
         }
 
         try {
+			console.log(endDate);
             const result = await createNewEvent(startDate, endDate, eventTitle);
-            console.log('Schedule generated:', result);
-            // Optionally fetch revision dates if needed here
+            //  TODO :fetch revision dates from backend
             // const revisionDates = await getRevisionDates(result.scheduleId);
             // setEvents(revisionDates);
         } catch (error) {

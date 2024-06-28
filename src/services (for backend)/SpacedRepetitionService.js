@@ -21,6 +21,8 @@ async function createNewEvent(startDate, endDate, eventName){
             url: "/schedule/createNewEvent",
             data: { startDate: startDate, endDate: endDate, eventName: eventName}
         });
+
+        console.log(response.data);
         return response.data; // retrieve success/ fail message from the backend
     } catch (error) {
         return error.response.data.message;
