@@ -1,20 +1,6 @@
 import axiosInstance from "../utility/axiosInstance";
 
-
-async function generateSpacedRepetitionSchedule(StartDate, EndDate, EventName) {
-    try {
-        const response = await axiosInstance({
-            method: "post",
-            url: "/schedule/generateSpacedRepetitionSchedule",
-            data: { StartDate, EndDate },
-        });
-        return response.data;
-    } catch (error) {
-        return error.response.data.message;
-    }
-}
-
-async function getRevisionDates(ScheduleId, RevisionDates) {
+async function getRevisionDates(ScheduleId, RevisionDates) { // YET TO CHANGE, CAN BE USED NEXT TIME WHEN WANT TO RETRIEVE REVISION DATES TO SHOW ON THE CALENDAR
     try {
         const response = await axiosInstance({
             method: "post",
@@ -27,32 +13,17 @@ async function getRevisionDates(ScheduleId, RevisionDates) {
     }
 }
 
-export { generateSpacedRepetitionSchedule, getRevisionDates };
+async function createNewEvent(startDate, endDate, eventName){
+    try {
+        const response = await axiosInstance({
+            method: "post",
+            url: "/schedule/createNewEvent",
+            data: { startDate: startDate, endDate: endDate, eventName: eventName}
+        });
+        return response.data;
+    } catch (error) {
+        return error.response.data.message;
+    }
+}
 
-// SHI HUI'S CODE
-
-// export const saveScheduleToDB = async (StartDate, EndDate, ExamName) => {
-//     try {
-//         const response = await axiosInstance.post("/api/schedules", {
-//             StartDate,
-//             EndDate,
-//             ExamName,
-//         });
-
-//         return response.data.scheduleId;
-//     } catch (error) {
-//         console.error("Error saving schedule to DB:", error);
-//     }
-// };
-
-// export const saveRevisionDatesToDB = async (scheduleId, revisionDates) => {
-//     try {
-//         await axiosInstance.post("/api/revision-dates", {
-//             scheduleId,
-//             revisionDates,
-//         });
-//     } catch (error) {
-//         console.error("Error saving revision dates to DB:", error);
-//     }
-// };
-
+export { createNewEvent, getRevisionDates };
