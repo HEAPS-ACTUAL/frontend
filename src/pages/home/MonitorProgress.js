@@ -31,10 +31,11 @@ transform exams state into FullCalendar exam format
 ------------------------------------------------------------------------------------------------------------------------------------
 */
 const calendarEvents = exams.flatMap(exam =>
-    exam.revisionDates.map(date => ({   // Changed from 'exam.exams' to 'exam.revisionDates'
-        title: exam.examName,           // Make sure property names match those in state
+    exam.revisionDates.map(date => ({   
+        title: exam.examName,           
         start: date,
-        color: exam.examColour,         // Make sure property names match those in state
+        color: exam.examColour,        
+		id: exam.ScheduleID // for handleDeleteEvent function 
     }))
 );
 
@@ -65,18 +66,27 @@ delete exam from the calendar
 ------------------------------------------------------------------------------------------------------------------------------------
 */
 const handleDeleteEvent = async ({ event }) => {
-	if (window.confirm(`Are you sure you want to delete this exam: ${event.title}?`)) {
-		event.remove();  
-		// console.log(event.ScheduleID);
 
-		// try{
-		// 	// delete exam from the database
-		// 	const result = await DeleteExistingExam(exams.ScheduleID);
-		// 	window.alert('exam deleted:', event.title);
-		// }
-		// catch (error){
-		// 	window.alert('Failed to delete the exam, try again');
-		// }
+	if (window.confirm(`Are you sure you want to delete this exam: ${event.title}?`)) {
+		console.log("clicked event's scheduleID: ", event.id);
+
+		try{
+			// delete exam from the database
+			const result = await DeleteExistingExam(event.id);
+			console.log(result);
+			if (result === 'ok' ) {
+				window.alert(`Exam '${event.title}' deleted successfully.`);
+            	event.remove();
+			}
+			else {
+				window.alert('Failed to delete the exam, try again');
+			}
+              
+		}
+		catch (error){
+			console.log('error deleting the exam, try again');
+			window.alert('Failed to delete the exam, try again');
+		}
 	
 	}
 };

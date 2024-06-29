@@ -39,8 +39,10 @@ async function DeleteExistingExam(scheduleID){
             url: "/schedule/DeleteExistingExam",
             data: { scheduleID: scheduleID }
         });
+
         return response.data;
-    } catch (error) {
+    } 
+    catch (error) {
         return error.response.data.message;
     }
 }
