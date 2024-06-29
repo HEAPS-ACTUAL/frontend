@@ -3,6 +3,8 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import '../../styles/MonitorProgress.css'; 
 import { createNewEvent } from '../../services (for backend)/SpacedRepetitionService';
+import DayModal from './Calender/DayModal'; 
+import interactionPlugin from '@fullcalendar/interaction';
 
 function Calendar() {
 
@@ -11,7 +13,65 @@ function Calendar() {
 	const [startDate, setStartDate] = useState('')
 	const [endDate, setEndDate] = useState(null)
 	const [eventColour, setEventColour] = useState('#3788d8'); // default colour is blue
+	const [isOpen, setIsOpen] = useState(false); 
+    const [selectedDate, setSelectedDate] = useState('');
+    const [selectedEvents, setSelectedEvents] = useState([]);
+
+	//for testing 
 	
+	useEffect(() => {
+        const testEvent1 = {
+            id: '1',
+            title: 'Test Event 1',
+            start: '2024-06-30',
+            end: '2024-06-30',
+            color: '#ff0000',
+        };
+
+        const testEvent2 = {
+            id: '2',
+            title: 'Test Event 2',
+            start: '2024-06-30',
+            end: '2024-06-30',
+            color: '#00ff00',
+        };
+
+		const testEvent3 ={
+			id: '3',
+			title: 'Test Event 3',
+			start: '2024-06-29',
+			end: '2024-06-29',
+			color: '#0000ff',
+		}
+
+		const testEvent4 ={	
+			id: '4',
+			title: 'Test Event 4',
+			start: '2024-06-28',
+			end: '2024-06-',
+			color: '#0000ff',
+		}
+
+		const testEvent5 ={
+			id: '5',
+			title: 'Test Event 5',
+			start: '2024-06-28',
+			end: '2024-06-28',
+			color: '#0000ff',
+		}
+
+		const testEvent6 ={
+			id: '6',
+			title: 'Test Event 6',
+			start: '2024-06-28',
+			end: '2024-06-28',
+			color: '#0000ff',
+		}
+
+        setEvents([testEvent1, testEvent2, testEvent3, testEvent4, testEvent5, testEvent6]);
+    }, []);
+
+
 	// for user to manually add their own revision dates
 	// const HandleAddEvent = () => {
 	// 	if (!startDate || !eventName) {
@@ -51,6 +111,16 @@ function Calendar() {
         }
     };
 
+	// Function to handle date click and open modal
+    const handleDateClick = (arg) => {
+		const clickedDate = arg.dateStr;
+		setSelectedDate(clickedDate);	
+		const eventsOnDate = events.filter(event => event.start === clickedDate);
+		setSelectedEvents(eventsOnDate);
+		setIsOpen(true); // Open the modal
+	};
+	
+
 	// for testing
 	useEffect(() => {
 		console.log(events);
@@ -69,14 +139,23 @@ function Calendar() {
 			</div>
 			<div className='calendar'>
 				<FullCalendar
-					plugins={[dayGridPlugin]}
+					plugins={[dayGridPlugin,interactionPlugin]}
 					initialView="dayGridMonth"
 					events={events}
 					height="auto"
-					eventClick={handleDeleteEvent}  
+					eventClick={handleDeleteEvent}
+					dateClick={handleDateClick}  
 				/>
 			</div>
+			<DayModal
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                date={selectedDate}
+                events={selectedEvents}
+				
+            />
 		</div>
+
 	);
 }
 
