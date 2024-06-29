@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
 import '../../styles/MonitorProgress.css'; 
 import { createNewExam, GetExamDetailsForCalendar, DeleteExistingExam } from '../../services (for backend)/SpacedRepetitionService';
 
+// calendar component
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
+
+// modal component
+import DayModal from './Modal';
+import interactionPlugin from '@fullcalendar/interaction';
 function Calendar() {
 
 	const [exams, setExams] = useState([
@@ -18,6 +23,10 @@ function Calendar() {
 	const [examColour, setExamColour] = useState('#3788d8'); // default colour is blue
 
 
+	// State to manage modal visibility and data
+	const [isOpen, setIsOpen] = useState(false); 
+    const [selectedDate, setSelectedDate] = useState('');
+    const [selectedEvents, setSelectedEvents] = useState([]);
 /*
 ------------------------------------------------------------------------------------------------------------------------------------
 retreive revision dates from the backend @JERRICK UR CODE GOES HERE
@@ -74,7 +83,8 @@ const handleDeleteEvent = async ({ event }) => {
 			// delete exam from the database
 			const result = await DeleteExistingExam(event.id);
 			console.log(result);
-			if (result === 'ok' ) {
+
+			if (result === 'ok' ) { // this result is what the be returns me
 				window.alert(`Exam '${event.title}' deleted successfully.`);
             	event.remove();
 			}
@@ -87,10 +97,21 @@ const handleDeleteEvent = async ({ event }) => {
 			console.log('error deleting the exam, try again');
 			window.alert('Failed to delete the exam, try again');
 		}
-	
 	}
 };
 
+/*
+------------------------------------------------------------------------------------------------------------------------------------
+handles clicking on a day in the calendar -> opens the modal
+------------------------------------------------------------------------------------------------------------------------------------
+*/
+const handleDateClick = (arg) => {
+    const clickedDate = arg.dateStr;
+    setSelectedDate(clickedDate);	
+    const eventsOnDate = calendarEvents.filter(event => event.start === clickedDate);
+    setSelectedEvents(eventsOnDate);
+    setIsOpen(true); // Open the modal
+};
 
 	// for testing
 	useEffect(() => {
@@ -110,13 +131,22 @@ const handleDeleteEvent = async ({ event }) => {
 			</div>
 			<div className='calendar'>
 				<FullCalendar
-					plugins={[dayGridPlugin]}
+					plugins={[dayGridPlugin,interactionPlugin]}
 					initialView="dayGridMonth"
 					events={calendarEvents}
 					height="auto"
-					eventClick={handleDeleteEvent}  
+					eventClick={handleDeleteEvent}
+					dateClick={handleDateClick}    
 				/>
 			</div>
+			
+			<DayModal
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                date={selectedDate}
+                events={selectedEvents}
+				
+            />
 		</div>
 	);
 }
