@@ -17,7 +17,6 @@ import QuizFeature from "./pages/home/Quiz/Quiz";
 import ResultsPage from './pages/home/Quiz/ResultsPage';
 import LoadingPage from './pages/main/LoadingPage';
 import Flashcard from "./pages/home/Quiz/Flashcard";
-import CalendarFeature from "./pages/home/Calender/CalenderFeature.js";
 
 import Calendar from "./pages/home/MonitorProgress.js";
 
