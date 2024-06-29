@@ -75,20 +75,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f0f0f0;  /* Light gray background, similar to other buttons */
-    border: none;  /* No border, consistent with other buttons */
-    border-radius: 50%;  /* Circular shape */
+    background-color: #f0f0f0;
+    border: none; 
+    border-radius: 50%; 
     width: 45px;
     height: 45px;
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.25);  /* Consistent shadow with other buttons */
-    transition: background-color 0.3s, transform 0.3s;  /* Smooth transition for interactive effects */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25); 
+    transition: background-color 0.3s, transform 0.3s; 
+    margin-right: 50px;
+    margin-left: 50px;
 }
 
 .previousBtn:hover, .previousBtn:focus {
-    background-color: #e0e0e0;  /* Slightly darker on hover/focus */
-    transform: scale(1.1);  /* Slight scale for emphasis */
-    outline: none;  /* Remove outline to maintain clean look */
+    background-color: #e0e0e0; 
+    transform: scale(1.1);  
+    outline: none; 
 }
 
 
@@ -97,25 +99,25 @@
     justify-content: center;
     align-items: center;
     margin-top: 60px;
-    gap: 20px;  /* Increase gap if needed for better spacing */
+    gap: 20px; 
 }
 
-.tickBtn, .crossBtn {
+.HomeButton {
     padding: 10px 20px;
-    background-color: #f0f0f0;  /* Match background color */
+    background-color: #f0f0f0; 
     border-radius: 10px;
     color: black;
     font-size: 16px;
     border: none;
     box-shadow: 0 2px 4px rgba(0,0,0,0.25);
     cursor: pointer;
-    width: 300px;  
+    width: 500px;  
     transition: background-color 0.3s, box-shadow 0.3s;  
 }
 
-.tickBtn:hover, .crossBtn:hover {
+.HomeButton:hover {
     background-color: #e0e0e0;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);  /* Enhanced shadow on hover */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
 }
 
 
@@ -124,11 +126,11 @@
     background-color: #ffdede;
 }
 
-.tickBtn{
-    background-color:#d4edda;
+.HomeButton{
+    background-color:#D3D3D3;
 }
 
-.crossBtn:hover , .tickBtn:hover{
+.crossBtn:hover , .HomeButton:hover{
     background-color: #9bbec8;
 } 
 
