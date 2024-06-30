@@ -1,15 +1,16 @@
 
 .modalContainer {
     position: fixed;
-    transform: translate(-225%,20%);
-    width: 20%;
+    bottom: 100px;
+    left: 60px;
+    width: 310px;
     background-color: white;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     border-radius: 20px;
     display: f'${props => props.isOpen ? 'block' : 'none'}';
-    height: 370px;
+    height: 400px;
     overflow-y: auto;
 }
 
