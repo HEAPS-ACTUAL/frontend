@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../../../styles/DayModal.module.css'; 
+import styles from '../../../styles/DayModal.module.css'; 
 import { FaCalendar } from "react-icons/fa";
 
 function DayModal({ isOpen, onClose, date, events }) {
@@ -39,26 +39,26 @@ function DayModal({ isOpen, onClose, date, events }) {
     };
 
     return (
-        <div className="modalContainer">
-            <div className="modalHeader">
+        <div className={styles.modalContainer}>
+            <div className={styles.modalHeader}>
                 <div><FaCalendar style={{color: '#57788b'}} /> Today's Events</div>
-                <button className="closeButton" onClick={onClose}>X</button>
+                <button className={styles.closeButton} onClick={onClose}>X</button>
             </div>
-            <div className="modalDate">{formattedDate}</div>
-            <div className="modalEvents">
-                <div className="eventsContainer">
+            <div className={styles.modalDate}>{formattedDate}</div>
+            <div className={styles.modalEvents}>
+                <div className={styles.DateeventsContainer}>
                     {events.length === 0 ? (
-                        <p className="noEventsMessage">-No Events Today-</p>
+                        <p className={styles.noEventsMessage}>-No Events Today-</p>
                     ) : (
                         events.map(event => (
-                            <div key={event.id} className="eventItem" style={{ backgroundColor: event.color || '#57788b' }}>
-                                <label className="checkboxContainer">
+                            <div key={event.id} className={styles.eventItem} style={{ backgroundColor: event.color || '#57788b' }}>
+                                <label className={styles.checkboxContainer}>
                                     <input
                                         type="checkbox"
                                         checked={checkedEvents[event.id]}
                                         onChange={() => handleCheckboxChange(event.id)}
                                     />
-                                    <span className="checkmark"></span>
+                                    <span className={styles.checkmark}></span>
                                 </label>
                                 <p>{event.title}</p>
                             </div>

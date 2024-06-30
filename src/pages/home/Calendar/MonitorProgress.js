@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../../../styles/MonitorProgress.css'; 
-import { createNewExam, GetExamDetailsForCalendar, DeleteExistingExam } from '../../../services (for backend)/SpacedRepetitionService';
+import { createNewExam, GetExamDetailsForCalendar, DeleteExistingExam, DeleteSpecificRevisionDate } from '../../../services (for backend)/SpacedRepetitionService';
 
 // calendar component
 import FullCalendar from '@fullcalendar/react';
@@ -9,6 +9,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 // modal component
 import DayModal from './DayModal';
 import interactionPlugin from '@fullcalendar/interaction';
+import DeleteConfirmationModal from './DeleteConfirmationModal';
+
 function Calendar() {
 
 	const [exams, setExams] = useState([
@@ -23,10 +25,15 @@ function Calendar() {
 	const [examColour, setExamColour] = useState('#3788d8'); // default colour is blue
 
 
-	// State to manage modal visibility and data
+	// State for day modal
 	const [isOpen, setIsOpen] = useState(false); 
     const [selectedDate, setSelectedDate] = useState('');
     const [selectedEvents, setSelectedEvents] = useState([]);
+
+	// State for delete confirmation modal
+	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // State for delete confirmation modal
+    const [eventToDelete, setEventToDelete] = useState(null); // State to store event to delete
+
 /*
 ------------------------------------------------------------------------------------------------------------------------------------
 retreive revision dates from the backend @ JERRICK UR CODE GOES HERE
@@ -81,7 +88,14 @@ when user clicks generate schedule -> send data to the backend
 delete exam from the calendar
 ------------------------------------------------------------------------------------------------------------------------------------
 */
-const handleDeleteEvent = async ({ event }) => {
+
+const handleDeleteEvent = ({ event }) => {
+	console.log(event);
+	setEventToDelete(event); // Store the event to be deleted
+	setIsDeleteModalOpen(true); // Open the delete confirmation modal
+};
+
+const handleDeleteAll = async ({ event }) => {
 
 	if (window.confirm(`Are you sure you want to delete this exam: ${event.title}?`)) {
 		console.log("clicked event's scheduleID: ", event.id);
@@ -103,6 +117,35 @@ const handleDeleteEvent = async ({ event }) => {
 		catch (error){
 			console.log('error deleting the exam, try again');
 			window.alert('Failed to delete the exam, try again');
+		}
+	}
+};
+
+
+const handleDeleteOne = async () => {
+	if (eventToDelete) {
+		try {
+			const result = await DeleteSpecificRevisionDate(eventToDelete.id, eventToDelete.start); 
+			if (result === 'ok') {
+				window.alert(`Date '${eventToDelete.start}' for exam '${eventToDelete.title}' deleted successfully.`);
+				setExams(prevExams => prevExams.map(exam => {
+					if (exam.ScheduleID === eventToDelete.id) {
+						return {
+							...exam,
+							revisionDates: exam.revisionDates.filter(date => date !== eventToDelete.start)
+						};
+					}
+					return exam;
+				}));
+			} else {
+				window.alert('Failed to delete the specific date, try again');
+			}
+		} catch (error) {
+			console.log('Error deleting the specific date, try again');
+			window.alert('Failed to delete the specific date, try again');
+		} finally {
+			setIsDeleteModalOpen(false); // Close the delete confirmation modal
+			setEventToDelete(null); // Reset the event to delete
 		}
 	}
 };
@@ -157,6 +200,13 @@ for testing
                 date={selectedDate}
                 events={selectedEvents}
 				
+            />
+
+			<DeleteConfirmationModal
+                isOpen={isDeleteModalOpen}
+                onClose={() => setIsDeleteModalOpen(false)}
+                onDeleteAll={handleDeleteAll}
+                onDeleteOne={handleDeleteOne}
             />
 		</div>
 	);

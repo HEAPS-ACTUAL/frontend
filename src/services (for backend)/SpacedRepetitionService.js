@@ -47,4 +47,17 @@ async function DeleteExistingExam(scheduleID){
     }
 }
 
-export { createNewExam, GetExamDetailsForCalendar, DeleteExistingExam };
+async function DeleteSpecificRevisionDate(scheduleID, revisionDate){
+    try {
+        const response = await axiosInstance({
+            method: "post",
+            url: "/schedule/DeleteSpecificDate",
+            data: { scheduleID: scheduleID, revisionDate: revisionDate }
+        });
+        return response.data;
+    }   
+    catch (error) {
+        return error.response.data.message;
+    }
+}
+export { createNewExam, GetExamDetailsForCalendar, DeleteExistingExam, DeleteSpecificRevisionDate };
