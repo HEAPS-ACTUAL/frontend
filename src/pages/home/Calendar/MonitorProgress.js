@@ -106,14 +106,10 @@ delete exam from the calendar
 ------------------------------------------------------------------------------------------------------------------------------------
 */
 
-const handleDeleteEvent = (arg) => {
-    const clickedDate = arg.dateStr; // This should already be in YYYY-MM-DD format
-	console.log('clickedDate: ' , clickedDate);
-    setSelectedDate(clickedDate);
-    const eventsOnDate = calendarEvents.filter(event => event.start === clickedDate);
-    setSelectedEvents(eventsOnDate);
-    setIsOpen(true); 
-    console.log("Clicked date:", clickedDate); // Debug to ensure date is set correctly
+const handleDeleteEvent = ({ event }) => {
+	setEventToDelete(event); // store the event to be deleted
+	setIsDeleteModalOpen(true); // open the delete confirmation modal
+	console.log("Event to delete:", event);
 };
 
 const handleDeleteAll = async () => {
@@ -124,7 +120,7 @@ const handleDeleteAll = async () => {
             const result = await DeleteExistingExam(eventToDelete.id);
 
             if (result === 'ok deleted entire exam from db') { // message from the backend
-                window.alert(`Exam '${eventToDelete.title}' deleted successfully.`);
+                window.alert(`Exam '${eventToDelete.title}' deleted successfully.`); // WHY IS THIS SHOWING EVEN THOUGH THERES NO CORRESPONDING EVENT TO DELETE IN THE DB?
                 setExams(exams.filter(exam => exam.ScheduleID !== eventToDelete.id));
             } 
 			else { window.alert('Failed to delete the exam, try again') ; }
@@ -141,39 +137,39 @@ const handleDeleteAll = async () => {
 	else { console.error("No eventToDelete found") ; }
 };
 
-
 const handleDeleteOne = async () => {
-	if (eventToDelete) {
-		try {
-			const formattedDate = new Date(eventToDelete.start).toISOString().split('T')[0];
-			console.log(formattedDate);
-			const result = await DeleteSpecificRevisionDate(eventToDelete.id, formattedDate); 
-
-			if (result === 'ok deleted specific date from db') {
-				window.alert(`Date '${formattedDate}' for exam '${eventToDelete.title}' deleted successfully.`);
-				setExams(prevExams => prevExams.map(exam => {
-					// Find the exam with the matching scheduleID
-					if (exam.ScheduleID === eventToDelete.id) {
-						return {
-							...exam,
-							revisionDates: exam.revisionDates.filter(date => date !== eventToDelete.start)
-						};
-					}
-					return exam;
-				}));
-			} 
-			else { window.alert('Failed to delete the specific date, try again') ; }
-		} 
+    if (eventToDelete && selectedDate) {
+        try {			
+            const result = await DeleteSpecificRevisionDate(eventToDelete.id, selectedDate); 
+            console.log(selectedDate);
+            
+            if (result === 'ok deleted specific date from db') {
+                window.alert(`Date '${selectedDate}' for exam '${eventToDelete.title}' deleted successfully.`);
+                setExams(prevExams => prevExams.map(exam => {
+                    if (exam.ScheduleID === eventToDelete.id) {
+                        return {
+                            ...exam,
+                            revisionDates: exam.revisionDates.filter(date => date !== selectedDate)
+                        };
+                    }
+                    return exam;
+                }));
+            } 
+			else {
+                window.alert('Failed to delete the specific date, try again');
+            }
+        } 
 		catch (error) {
-			console.log('Error deleting the specific date, try again');
-			window.alert('Failed to delete the specific date, try again');
-		} 
+            console.log('Error deleting the specific date, try again');
+            window.alert('Failed to delete the specific date, try again');
+        } 
 		finally {
-			setIsDeleteModalOpen(false); 
-			setEventToDelete(null); 
-		}
-	}
+            setIsDeleteModalOpen(false); 
+            setEventToDelete(null); 
+        }
+    }
 };
+
 
 /*
 ------------------------------------------------------------------------------------------------------------------------------------
@@ -181,11 +177,12 @@ handles clicking on a day in the calendar -> opens the modal
 ------------------------------------------------------------------------------------------------------------------------------------
 */
 const handleDateClick = (arg) => {
-    const clickedDate = arg.dateStr;
-    setSelectedDate(clickedDate);	
+    const clickedDate = arg.dateStr; // YYYY-MM-DD format
+    setSelectedDate(clickedDate);
     const eventsOnDate = calendarEvents.filter(event => event.start === clickedDate);
     setSelectedEvents(eventsOnDate);
     setIsOpen(true); // Open the modal
+    console.log("Clicked date:", clickedDate); // Debug
 };
 
 /*
@@ -236,5 +233,4 @@ show all the exams in the calendar in the console
 		</div>
 	);
 }
-
 export default Calendar;
