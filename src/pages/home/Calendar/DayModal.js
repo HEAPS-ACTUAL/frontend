@@ -46,21 +46,22 @@ function DayModal({ isOpen, onClose, date, events }) {
             </div>
             <div className={styles.modalDate}>{formattedDate}</div>
             <div className={styles.modalEvents}>
-                <div className={styles.DateeventsContainer}>
+                <div className={styles.eventsContainer}>
                     {events.length === 0 ? (
                         <p className={styles.noEventsMessage}>-No Events Today-</p>
                     ) : (
                         events.map(event => (
                             <div key={event.id} className={styles.eventItem} style={{ backgroundColor: event.color || '#57788b' }}>
-                                <label className={styles.checkboxContainer}>
+                                <label className={styles.eventLabel} htmlFor={`checkbox-${event.id}`}>
                                     <input
+                                        id={`checkbox-${event.id}`}
                                         type="checkbox"
                                         checked={checkedEvents[event.id]}
                                         onChange={() => handleCheckboxChange(event.id)}
                                     />
-                                    <span className={styles.checkmark}></span>
+                                    <span className={styles.customCheckbox}></span>
+                                    <p>{event.title}</p>
                                 </label>
-                                <p>{event.title}</p>
                             </div>
                         ))
                     )}
