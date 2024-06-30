@@ -1,12 +1,13 @@
 import axiosInstance from "../utility/axiosInstance";
 
-async function GetExamDetailsForCalendar(scheduleID, examName, examColour, revisionDates) { 
+async function retrieveAllRevisionDates(email) { 
     try {
         const response = await axiosInstance({
             method: "post",
-            url: "/schedule/GetExamDetailsForCalendar",
-            data: { scheduleID: scheduleID, examName: examName, examColour: examColour, revisionDates: revisionDates },
+            url: "/schedule/retrieveAllRevisionDates",
+            data: { email: email }
         });
+        
         return response.data;
     }
     catch (error) {
@@ -60,4 +61,4 @@ async function DeleteSpecificRevisionDate(scheduleID, revisionDate){
         return error.response.data.message;
     }
 }
-export { createNewExam, GetExamDetailsForCalendar, DeleteExistingExam, DeleteSpecificRevisionDate };
+export { createNewExam, retrieveAllRevisionDates, DeleteExistingExam, DeleteSpecificRevisionDate };

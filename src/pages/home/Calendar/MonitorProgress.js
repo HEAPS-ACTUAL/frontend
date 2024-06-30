@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../../../styles/MonitorProgress.css'; 
-import { createNewExam, GetExamDetailsForCalendar, DeleteExistingExam, DeleteSpecificRevisionDate } from '../../../services (for backend)/SpacedRepetitionService';
+import { createNewExam, DeleteExistingExam, DeleteSpecificRevisionDate, retrieveAllRevisionDates } from '../../../services (for backend)/ScheduleService';
 
 // calendar component
 import FullCalendar from '@fullcalendar/react';
@@ -12,18 +12,12 @@ import interactionPlugin from '@fullcalendar/interaction';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
 
 function Calendar() {
-
-	const [exams, setExams] = useState([
-        { ScheduleID: 1, examName: 'Exam 1', examColour: '#2788d8', revisionDates: ['2024-06-01', '2024-06-02', '2024-06-03', '2024-06-04']},
-        { ScheduleID: 2, examName: 'Exam 2', examColour: '#a020f0', revisionDates: ['2024-06-11', '2024-06-12', '2024-06-13', '2024-06-14']},
-        { ScheduleID: 3, examName: 'Exam 3', examColour: '#ff0000', revisionDates: ['2024-06-18', '2024-06-19', '2024-06-20', '2024-06-21']},
-        { ScheduleID: 4, examName: 'Exam 4', examColour: '#ffc0cb', revisionDates: ['2024-06-27', '2024-06-28', '2024-06-29', '2024-06-30']},
-    ]);
+    const [exams, setExams] = useState([]);
 	const [examName, setExamName] = useState('') // examName is the subject
 	const [startDate, setStartDate] = useState('')
 	const [endDate, setEndDate] = useState(null)
 	const [examColour, setExamColour] = useState('#3788d8'); // default colour is blue
-
+    const [arrayOfAvailableFlashcards, setArrayOfAvailableFlashcards] = useState([]);
 
 	// State for day modal
 	const [isOpen, setIsOpen] = useState(false); 
@@ -34,18 +28,35 @@ function Calendar() {
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // State for delete confirmation modal
     const [eventToDelete, setEventToDelete] = useState(null); // State to store event to delete
 
+    async function fetchRevisonDates(){
+        const email = sessionStorage.getItem('userEmail');
+        const returnedArray = await retrieveAllRevisionDates(email);
+        setExams(returnedArray);
+    }
+
+    useEffect(() => {
+        fetchRevisonDates();
+    }, []);
+
+    // TRANSFORM EXAMS INTO FULL CALENDAR EVENT FORMAT
+    const calendarEvents = exams.flatMap(exam =>
+        JSON.parse(exam.RevisionDates).map(date => ({   
+            id: [exam.ScheduleID, date], // for handleDeleteEvent function
+            title: exam.ExamName,      
+            start: date,
+            color: exam.Colour,
+            flashcards: JSON.parse(exam.Flashcards)
+        }))
+    );
+
+    // TO TEST
+    useEffect(() => {
+		console.log(exams);
+        console.log(calendarEvents);
+	}, [exams, calendarEvents]);
 
 
-
-
-
-/*
-------------------------------------------------------------------------------------------------------------------------------------
-retreive revision dates from the backend @ JERRICK UR CODE GOES HERE
-------------------------------------------------------------------------------------------------------------------------------------
-*/
-
-
+	
 /*
 ------------------------------------------------------------------------------------------------------------------------------------
 retrieve names of flashcards from backend to display as dropdown menu @ SHI HUI UR CODE HERE
@@ -69,17 +80,10 @@ retrieve names of flashcards from backend to display as dropdown menu @ SHI HUI 
 
 /*
 ------------------------------------------------------------------------------------------------------------------------------------
-transform exams state into FullCalendar exam format
+transform exams into FullCalendar event format
 ------------------------------------------------------------------------------------------------------------------------------------
 */
-const calendarEvents = exams.flatMap(exam =>
-    exam.revisionDates.map(date => ({   
-        title: exam.examName,           
-        start: date,
-        color: exam.examColour,        
-		id: exam.ScheduleID // for handleDeleteEvent function 
-    }))
-);
+    
 
 /*
 ------------------------------------------------------------------------------------------------------------------------------------
@@ -185,15 +189,6 @@ const handleDateClick = (arg) => {
     console.log("Clicked date:", clickedDate); // Debug
 };
 
-/*
-------------------------------------------------------------------------------------------------------------------------------------
-show all the exams in the calendar in the console
-------------------------------------------------------------------------------------------------------------------------------------
-*/
-	useEffect(() => {
-		console.log('updated exam state:', exams); 
-	}, [exams]);
-
 	return (
 		<div className='calendarContainer'> 
 			<h3>Struggling to plan a revision schedule?</h3>
@@ -212,7 +207,8 @@ show all the exams in the calendar in the console
 					events={calendarEvents}
 					height="auto"
 					eventClick={handleDeleteEvent}
-					dateClick={handleDateClick}    
+					dateClick={handleDateClick}
+                    showNonCurrentDates={false}
 				/>
 			</div>
 			
