@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '../../styles/Features.module.css';
-import quizImage from '../images/quiz.jpg'; // Adjust the import path according to your project structure
+import quizImage from '../images/quiz.jpg'; 
 
 function Features() {
     return (
@@ -52,7 +52,7 @@ function Features() {
             </div>
 
             <div className={styles.infoSection}>
-                <h2 className={styles.featureName}>Why Active Recall and Spaced Repetition?</h2><br/>
+                <h2 className={styles.centerText}>Why Active Recall and Spaced Repetition?</h2><br/>
                 <p><b>Active Recall</b> is a study method that involves activating, and therefore, strengthening, neural synapses to easier recall the information later.
                 It includes active involvement of the brain, resulting in reinforcement of the synapses which leads to more efficient memorization. You do not need to reread the information or repeat it, you should try to recall it several times to establish a firm neural connection that represents the knowledge.
                 To retain that knowledge for longer periods, you can use spaced repetitions.</p>
