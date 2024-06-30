@@ -13,12 +13,14 @@ import Navbar from "./pages/main/NavBar";
 import SignIn from "./pages/main/SignIn";
 import HomeRoute from "./pages/home/Home_route";
 
+// QUIZ
 import QuizFeature from "./pages/home/Quiz/Quiz";
 import ResultsPage from './pages/home/Quiz/ResultsPage';
 import LoadingPage from './pages/main/LoadingPage';
 import Flashcard from "./pages/home/Quiz/Flashcard";
 
-import Calendar from "./pages/home/MonitorProgress.js";
+// CALENDAR SCHEDULE
+
 
 
 // STYLES

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import '../../styles/MonitorProgress.css'; 
-import { createNewExam, GetExamDetailsForCalendar, DeleteExistingExam } from '../../services (for backend)/SpacedRepetitionService';
+import '../../../styles/MonitorProgress.css'; 
+import { createNewExam, GetExamDetailsForCalendar, DeleteExistingExam } from '../../../services (for backend)/SpacedRepetitionService';
 
 // calendar component
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
 // modal component
-import DayModal from './Modal';
+import DayModal from './DayModal';
 import interactionPlugin from '@fullcalendar/interaction';
 function Calendar() {
 
@@ -29,7 +29,14 @@ function Calendar() {
     const [selectedEvents, setSelectedEvents] = useState([]);
 /*
 ------------------------------------------------------------------------------------------------------------------------------------
-retreive revision dates from the backend @JERRICK UR CODE GOES HERE
+retreive revision dates from the backend @ JERRICK UR CODE GOES HERE
+------------------------------------------------------------------------------------------------------------------------------------
+*/
+
+
+/*
+------------------------------------------------------------------------------------------------------------------------------------
+retrieve names of flashcards from backend to display as dropdown menu @ SHI HUI UR CODE HERE
 ------------------------------------------------------------------------------------------------------------------------------------
 */
 
@@ -113,7 +120,11 @@ const handleDateClick = (arg) => {
     setIsOpen(true); // Open the modal
 };
 
-	// for testing
+/*
+------------------------------------------------------------------------------------------------------------------------------------
+for testing
+------------------------------------------------------------------------------------------------------------------------------------
+*/
 	useEffect(() => {
 		console.log('updated exam state:', exams);
 	}, [exams]);

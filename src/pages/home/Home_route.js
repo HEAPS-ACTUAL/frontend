@@ -4,7 +4,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import SideBar from "./SideBar";
 
 import Quizzes from './Quiz/Home';
-import Calendar from './MonitorProgress';
+import Calendar from "./Calendar/MonitorProgress";
 
 function HomeRoute(){
     return (
@@ -12,8 +12,7 @@ function HomeRoute(){
             <SideBar />
              <Routes>
                 <Route path='/quizzes' element={<Quizzes />} />
-                <Route path="/monitor-progress" element={<Calendar />} />
-                {/* <Route path="/revision-schedule" element={<CalenderFeature />} /> */}
+                <Route path="/revision-schedule" element={<Calendar />} />
                 <Route path='/' element={ <Navigate to='/Home/Quizzes' />} />
 
              </Routes>

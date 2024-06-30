@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../../styles/Modal.module.css'; 
+import '../../../styles/DayModal.module.css'; 
 import { FaCalendar } from "react-icons/fa";
 
 function DayModal({ isOpen, onClose, date, events }) {
