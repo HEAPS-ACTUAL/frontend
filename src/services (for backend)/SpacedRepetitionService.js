@@ -32,7 +32,7 @@ async function createNewExam(startDate, endDate, examName, examColour, arrayOfTe
 
 // ask jerrick to check
 async function DeleteExistingExam(scheduleID){
-    console.log(scheduleID);
+    console.log('retrieving scheduleID: ' , scheduleID);
     try {
         const response = await axiosInstance({
             method: "post",
@@ -51,7 +51,7 @@ async function DeleteSpecificRevisionDate(scheduleID, revisionDate){
     try {
         const response = await axiosInstance({
             method: "post",
-            url: "/schedule/DeleteSpecificDate",
+            url: "/schedule/DeleteSpecificRevisionDate",
             data: { scheduleID: scheduleID, revisionDate: revisionDate }
         });
         return response.data;

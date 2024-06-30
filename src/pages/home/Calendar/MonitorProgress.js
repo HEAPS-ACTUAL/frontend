@@ -34,6 +34,11 @@ function Calendar() {
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // State for delete confirmation modal
     const [eventToDelete, setEventToDelete] = useState(null); // State to store event to delete
 
+
+
+
+
+
 /*
 ------------------------------------------------------------------------------------------------------------------------------------
 retreive revision dates from the backend @ JERRICK UR CODE GOES HERE
@@ -46,6 +51,20 @@ retreive revision dates from the backend @ JERRICK UR CODE GOES HERE
 retrieve names of flashcards from backend to display as dropdown menu @ SHI HUI UR CODE HERE
 ------------------------------------------------------------------------------------------------------------------------------------
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*
@@ -72,11 +91,9 @@ when user clicks generate schedule -> send data to the backend
             window.alert("Please enter subject name and start date before generating the schedule.");
             return;
         }
-
         try {
             const result = await createNewExam(startDate, endDate, examName, examColour, [1,2,3]); // hard code the testIDs for now 
 			console.log('this is the exam object: ' , startDate, endDate, examName, examColour, [1,2,3]);	
-
         } 
 		catch (error) {
             console.error('Failed to generate schedule:', error.message || 'Error');
@@ -89,46 +106,53 @@ delete exam from the calendar
 ------------------------------------------------------------------------------------------------------------------------------------
 */
 
-const handleDeleteEvent = ({ event }) => {
-	console.log(event);
-	setEventToDelete(event); // Store the event to be deleted
-	setIsDeleteModalOpen(true); // Open the delete confirmation modal
+const handleDeleteEvent = (arg) => {
+    const clickedDate = arg.dateStr; // This should already be in YYYY-MM-DD format
+	console.log('clickedDate: ' , clickedDate);
+    setSelectedDate(clickedDate);
+    const eventsOnDate = calendarEvents.filter(event => event.start === clickedDate);
+    setSelectedEvents(eventsOnDate);
+    setIsOpen(true); 
+    console.log("Clicked date:", clickedDate); // Debug to ensure date is set correctly
 };
 
-const handleDeleteAll = async ({ event }) => {
+const handleDeleteAll = async () => {
+    if (eventToDelete) {
+        console.log("trying to delete entire schedule for exam with schedule ID:", eventToDelete.id);
 
-	if (window.confirm(`Are you sure you want to delete this exam: ${event.title}?`)) {
-		console.log("clicked event's scheduleID: ", event.id);
+        try {
+            const result = await DeleteExistingExam(eventToDelete.id);
 
-		try{
-			// delete exam from the database
-			const result = await DeleteExistingExam(event.id);
-			console.log(result);
-
-			if (result === 'ok' ) { // this result is what the be returns me
-				window.alert(`Exam '${event.title}' deleted successfully.`);
-            	event.remove();
-			}
-			else {
-				window.alert('Failed to delete the exam, try again');
-			}
-              
-		}
-		catch (error){
-			console.log('error deleting the exam, try again');
-			window.alert('Failed to delete the exam, try again');
-		}
-	}
+            if (result === 'ok deleted entire exam from db') { // message from the backend
+                window.alert(`Exam '${eventToDelete.title}' deleted successfully.`);
+                setExams(exams.filter(exam => exam.ScheduleID !== eventToDelete.id));
+            } 
+			else { window.alert('Failed to delete the exam, try again') ; }
+        } 
+		catch (error) {
+            console.log('Error deleting the exam');
+            window.alert('Failed to delete the exam, try again');
+        } 
+		finally {
+            setIsDeleteModalOpen(false); // close the delete confirmation modal
+            setEventToDelete(null); // reset the event to delete
+        }
+    } 
+	else { console.error("No eventToDelete found") ; }
 };
 
 
 const handleDeleteOne = async () => {
 	if (eventToDelete) {
 		try {
-			const result = await DeleteSpecificRevisionDate(eventToDelete.id, eventToDelete.start); 
-			if (result === 'ok') {
-				window.alert(`Date '${eventToDelete.start}' for exam '${eventToDelete.title}' deleted successfully.`);
+			const formattedDate = new Date(eventToDelete.start).toISOString().split('T')[0];
+			console.log(formattedDate);
+			const result = await DeleteSpecificRevisionDate(eventToDelete.id, formattedDate); 
+
+			if (result === 'ok deleted specific date from db') {
+				window.alert(`Date '${formattedDate}' for exam '${eventToDelete.title}' deleted successfully.`);
 				setExams(prevExams => prevExams.map(exam => {
+					// Find the exam with the matching scheduleID
 					if (exam.ScheduleID === eventToDelete.id) {
 						return {
 							...exam,
@@ -137,15 +161,16 @@ const handleDeleteOne = async () => {
 					}
 					return exam;
 				}));
-			} else {
-				window.alert('Failed to delete the specific date, try again');
-			}
-		} catch (error) {
+			} 
+			else { window.alert('Failed to delete the specific date, try again') ; }
+		} 
+		catch (error) {
 			console.log('Error deleting the specific date, try again');
 			window.alert('Failed to delete the specific date, try again');
-		} finally {
-			setIsDeleteModalOpen(false); // Close the delete confirmation modal
-			setEventToDelete(null); // Reset the event to delete
+		} 
+		finally {
+			setIsDeleteModalOpen(false); 
+			setEventToDelete(null); 
 		}
 	}
 };
@@ -165,11 +190,11 @@ const handleDateClick = (arg) => {
 
 /*
 ------------------------------------------------------------------------------------------------------------------------------------
-for testing
+show all the exams in the calendar in the console
 ------------------------------------------------------------------------------------------------------------------------------------
 */
 	useEffect(() => {
-		console.log('updated exam state:', exams);
+		console.log('updated exam state:', exams); 
 	}, [exams]);
 
 	return (

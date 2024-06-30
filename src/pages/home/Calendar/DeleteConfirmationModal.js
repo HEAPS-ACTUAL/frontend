@@ -8,8 +8,8 @@ const DeleteConfirmationModal = ({ isOpen, onClose, onDeleteAll, onDeleteOne }) 
         <div className={styles.modalOverlay}>
             <div className={styles.modalContent}>
                 <h2>Delete Confirmation</h2>
-                <p>Are you sure you want to delete the entire exam schedule for this exam?</p>
-                <button onClick={onDeleteAll}>Delete Entire Schedule</button>
+                <p>Are you sure you want to delete all revision dates for this exam?</p>
+                <button onClick={onDeleteAll}>Delete All Revision Dates</button>
                 <button onClick={onDeleteOne}>Delete Just This Date</button>
                 <button onClick={onClose}>Cancel</button>
             </div>

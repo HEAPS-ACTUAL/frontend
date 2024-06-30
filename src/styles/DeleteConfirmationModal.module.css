@@ -1,4 +1,4 @@
-/* Add this CSS to your CSS file, e.g., DeleteConfirmationModal.css */
+/* DayModal.module.css */
 
 /* Modal overlay to cover the entire screen */
 .modalOverlay {
@@ -7,7 +7,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.5); 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -20,13 +20,33 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 300px; /* Adjust the width as needed */
-    max-width: 80%; /* Ensure it doesn't overflow on smaller screens */
+    width: 300px; 
+    max-width: 80%; 
     text-align: center;
+    animation: fadeIn 0.3s ease; /* Adding a fade-in animation */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .modalContent h2 {
     margin-top: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.modalContent p {
+    font-size: 16px;
+    color: #666;
+    margin: 10px 0 20px;
 }
 
 .modalContent button {
@@ -35,28 +55,32 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    background-color: #007bff; /* Button color */
+    background-color: #007bff; 
     color: white;
     font-size: 14px;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .modalContent button:hover {
-    background-color: #0056b3; /* Darker button color on hover */
+    background-color: #0056b3; 
+    transform: scale(1.05); /* Adding a slight scale effect on hover */
 }
 
 .modalContent button:nth-child(2) {
-    background-color: #dc3545; /* Different color for the second button */
+    background-color: #dc3545; 
 }
 
 .modalContent button:nth-child(2):hover {
-    background-color: #c82333; /* Darker color for the second button on hover */
+    background-color: #c82333;
+    transform: scale(1.05); /* Adding a slight scale effect on hover */
 }
 
 .modalContent button:nth-child(3) {
-    background-color: #6c757d; /* Different color for the third button */
+    background-color: #6c757d; 
 }
 
 .modalContent button:nth-child(3):hover {
-    background-color: #5a6268; /* Darker color for the third button on hover */
+    background-color: #5a6268;
+    transform: scale(1.05); /* Adding a slight scale effect on hover */
 }
+
