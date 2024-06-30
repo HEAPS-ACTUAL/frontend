@@ -33,6 +33,7 @@
 }
 
 .inputContainerforMaunual input,
+.inputContainerforMaunual select,
 .inputContainerforMaunual button {
     padding: 8px 12px;
     margin: 20px; 

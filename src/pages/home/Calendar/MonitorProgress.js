@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../../styles/MonitorProgress.css'; 
 import { createNewExam, DeleteExistingExam, DeleteSpecificRevisionDate, retrieveAllRevisionDates } from '../../../services (for backend)/ScheduleService';
+import { getAllFlashcardsWithoutSchedule } from '../../../services (for backend)/FlashcardService';
 
 // calendar component
 import FullCalendar from '@fullcalendar/react';
@@ -12,12 +13,34 @@ import interactionPlugin from '@fullcalendar/interaction';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
 
 function Calendar() {
+    // GET EMAIL OF USER TO BE USED IN SOME OF THE FUNCTIONS BELOW
+    const email = sessionStorage.getItem('userEmail');
+
+    const [arrayOfAvailableFlashcards, setArrayOfAvailableFlashcards] = useState([]);
     const [exams, setExams] = useState([]);
+    
+    // INPUT FIELDS FOR SCHEDULE GENERATION
+    const [selectedTestIDs, setSelectedTestIDs] = useState([]);
 	const [examName, setExamName] = useState('') // examName is the subject
 	const [startDate, setStartDate] = useState('')
 	const [endDate, setEndDate] = useState(null)
 	const [examColour, setExamColour] = useState('#3788d8'); // default colour is blue
-    const [arrayOfAvailableFlashcards, setArrayOfAvailableFlashcards] = useState([]);
+
+    async function fetchAllFlashcardsWithoutSchedule(){
+        const returnedArray = await getAllFlashcardsWithoutSchedule(email);
+        setArrayOfAvailableFlashcards(returnedArray);
+    }
+
+    async function fetchRevisonDates(){
+        const returnedArray = await retrieveAllRevisionDates(email);
+        setExams(returnedArray);
+    }
+
+    // FETCH RELEVANT DATA WHEN THE PAGE IS RENDERED FOR THE FIRST TIME
+    useEffect(() => {
+        fetchAllFlashcardsWithoutSchedule();
+        fetchRevisonDates();
+    }, []);
 
 	// State for day modal
 	const [isOpen, setIsOpen] = useState(false); 
@@ -27,16 +50,6 @@ function Calendar() {
 	// State for delete confirmation modal
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // State for delete confirmation modal
     const [eventToDelete, setEventToDelete] = useState(null); // State to store event to delete
-
-    async function fetchRevisonDates(){
-        const email = sessionStorage.getItem('userEmail');
-        const returnedArray = await retrieveAllRevisionDates(email);
-        setExams(returnedArray);
-    }
-
-    useEffect(() => {
-        fetchRevisonDates();
-    }, []);
 
     // TRANSFORM EXAMS INTO FULL CALENDAR EVENT FORMAT
     const calendarEvents = exams.flatMap(exam =>
@@ -50,10 +63,10 @@ function Calendar() {
     );
 
     // TO TEST
-    useEffect(() => {
-		console.log(exams);
-        console.log(calendarEvents);
-	}, [exams, calendarEvents]);
+    // useEffect(() => {
+	// 	console.log(exams);
+    //     console.log(calendarEvents);
+	// }, [exams, calendarEvents]);
 
 
 	
@@ -73,16 +86,6 @@ retrieve names of flashcards from backend to display as dropdown menu @ SHI HUI 
 
 
 
-
-
-
-
-
-/*
-------------------------------------------------------------------------------------------------------------------------------------
-transform exams into FullCalendar event format
-------------------------------------------------------------------------------------------------------------------------------------
-*/
     
 
 /*
@@ -96,8 +99,9 @@ when user clicks generate schedule -> send data to the backend
             return;
         }
         try {
-            const result = await createNewExam(startDate, endDate, examName, examColour, [1,2,3]); // hard code the testIDs for now 
-			console.log('this is the exam object: ' , startDate, endDate, examName, examColour, [1,2,3]);	
+            await createNewExam(startDate, endDate, examName, examColour, selectedTestIDs); 
+			console.log({startdate: startDate, enddate: endDate, examname: examName, examcolour: examColour, testIDs: selectedTestIDs});            
+            window.location.reload(); // REFRESH THE PAGE SO FORM INPUT FIELDS WILL BE RESET
         } 
 		catch (error) {
             console.error('Failed to generate schedule:', error.message || 'Error');
@@ -180,20 +184,32 @@ const handleDeleteOne = async () => {
 handles clicking on a day in the calendar -> opens the modal
 ------------------------------------------------------------------------------------------------------------------------------------
 */
-const handleDateClick = (arg) => {
-    const clickedDate = arg.dateStr; // YYYY-MM-DD format
-    setSelectedDate(clickedDate);
-    const eventsOnDate = calendarEvents.filter(event => event.start === clickedDate);
-    setSelectedEvents(eventsOnDate);
-    setIsOpen(true); // Open the modal
-    console.log("Clicked date:", clickedDate); // Debug
-};
+    const handleDateClick = (arg) => {
+        const clickedDate = arg.dateStr; // YYYY-MM-DD format
+        setSelectedDate(clickedDate);
+        const eventsOnDate = calendarEvents.filter(event => event.start === clickedDate);
+        setSelectedEvents(eventsOnDate);
+        setIsOpen(true); // Open the modal
+        console.log("Clicked date:", clickedDate); // Debug
+    };
 
 	return (
 		<div className='calendarContainer'> 
 			<h3>Struggling to plan a revision schedule?</h3>
 			<h1>Daddy's got your back!</h1>
 			<div className='inputContainerforMaunual'>
+                <div className='input'>
+                    Flashcard:
+                    <select onChange={(e) => setSelectedTestIDs([e.target.value])}>
+                        <option disabled selected> Choose a flashcard </option>
+                        {arrayOfAvailableFlashcards.length === 0 
+                            ? <option> No flashcards available </option> 
+                            : arrayOfAvailableFlashcards.map((flashcard) => (
+                                <option key={flashcard.TestID} value={flashcard.TestID}> {flashcard.TestName} </option>
+                            ))
+                        }
+                    </select>
+                </div>
 				<div className='input'>Exam Name: <input type="text" placeholder="Enter Subject" value={examName} onChange={(e) => setExamName(e.target.value)}/></div>
 				<div className='input'>Start date: <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} /></div>
 				<div className='input'>End date: <input type="date" value={endDate || ''} onChange={(e) => setEndDate(e.target.value)} /></div>
@@ -217,7 +233,6 @@ const handleDateClick = (arg) => {
                 onClose={() => setIsOpen(false)}
                 date={selectedDate}
                 events={selectedEvents}
-				
             />
 
 			<DeleteConfirmationModal
