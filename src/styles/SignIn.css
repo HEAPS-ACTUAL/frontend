@@ -32,11 +32,11 @@
 }
 
 .container button{
-    background-color: #427d9d;
-    color: #fff;
+    background-color: #fff;
+    color: #0172F2;
     font-size: 12px;
     padding: 10px 45px;
-    border: 1px solid transparent;
+    border: 1px solid #0172F2;
     border-radius: 8px;
     font-weight: 600;
     letter-spacing: 0.5px;
@@ -45,10 +45,16 @@
     cursor: pointer;
 }
 
+.container button:hover{
+    background-color: #0172F2;
+    color: #fff;
+}
+
 .container button.hidden{
     background-color: transparent;
     border-color: #fff;
     margin-top: 20px;
+    color: #fff
 }
 
 .container form{
@@ -155,7 +161,7 @@
 .toggle{
     background-color: #164863;
     height: 100%;
-    background: linear-gradient(to right, #c4dfdf, #427d9d);
+    background: linear-gradient(to right, #DAEBFF, #0172F2);
     color: #fff;
     position: relative;
     left: -100%;
