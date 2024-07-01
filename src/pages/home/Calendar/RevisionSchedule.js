@@ -188,10 +188,10 @@ function Calendar() {
 			<h3>Struggling to plan a revision schedule?</h3>
 			<h1>Daddy's got your back!</h1>
 			<div className='inputContainerforMaunual'>
-                <div>
-                    {/* Flashcard: */}
-                    <select multiple onChange={(e) => setSelectedTestIDs([e.target.value])}>
-                        {/* <option disabled selected> Choose a flashcard </option> */}
+                <div className='input'>
+                    Flashcard:
+                    <select onChange={(e) => setSelectedTestIDs([e.target.value])}>
+                        <option disabled selected> Choose a flashcard </option>
                         {arrayOfAvailableFlashcards.length === 0 
                             ? <option> No flashcards available </option> 
                             : arrayOfAvailableFlashcards.map((flashcard) => (
@@ -200,10 +200,10 @@ function Calendar() {
                         }
                     </select>
                 </div>
-				<div> <input type="text" placeholder="Exam Name" value={examName} onChange={(e) => setExamName(e.target.value)}/></div>
-				<div> <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} /></div>
-				<div> <input type="date" value={endDate || ''} onChange={(e) => setEndDate(e.target.value)} /></div>
-				<div> <input type="color" value={examColour} onChange={(e) => setExamColour(e.target.value)} /></div>
+				<div className='input'>Exam Name: <input type="text" placeholder="Enter Subject" value={examName} onChange={(e) => setExamName(e.target.value)}/></div>
+				<div className='input'>Start date: <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} /></div>
+				<div className='input'>End date: <input type="date" value={endDate || ''} onChange={(e) => setEndDate(e.target.value)} /></div>
+				<div className='input'>Colour: <input type="color" value={examColour} onChange={(e) => setExamColour(e.target.value)} /></div>
 				<button onClick={handleGenerateSchedule}>Generate Schedule</button>
 			</div>
 			<div className='calendar'>
