@@ -1,86 +1,53 @@
-/* DayModal.module.css */
-
-/* Modal overlay to cover the entire screen */
-.modalOverlay {
+.modalContainer {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); 
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 1000; /* Ensure the modal is above other content */
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000; /* Adjust the z-index to ensure it's above other content */
 }
 
-/* Modal content box */
 .modalContent {
-    background-color: white;
+    background: white;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 300px; 
-    max-width: 80%; 
+    border-radius: 5px;
     text-align: center;
-    animation: fadeIn 0.3s ease; /* Adding a fade-in animation */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.buttonGroup {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
-.modalContent h2 {
-    margin-top: 0;
-    font-size: 24px;
-    color: #333;
-}
-
-.modalContent p {
-    font-size: 16px;
-    color: #666;
-    margin: 10px 0 20px;
-}
-
-.modalContent button {
-    margin: 10px;
+.buttonGroup button {
     padding: 10px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
-    background-color: #007bff; 
+    margin: 0 10px;
+    background-color: transparent;
+    color: #57788b; 
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+.buttonGroup button:first-child {
+    background-color: #ff6b6b;
     color: white;
-    font-size: 14px;
-    transition: background-color 0.3s, transform 0.3s;
 }
 
-.modalContent button:hover {
-    background-color: #0056b3; 
-    transform: scale(1.05); /* Adding a slight scale effect on hover */
+.buttonGroup button:nth-child(2) {
+    background-color: #f1c40f;
+    color: white;
 }
 
-.modalContent button:nth-child(2) {
-    background-color: #dc3545; 
+.buttonGroup button:last-child {
+    background-color: #57788b;
+    color: white;
 }
-
-.modalContent button:nth-child(2):hover {
-    background-color: #c82333;
-    transform: scale(1.05); /* Adding a slight scale effect on hover */
-}
-
-.modalContent button:nth-child(3) {
-    background-color: #6c757d; 
-}
-
-.modalContent button:nth-child(3):hover {
-    background-color: #5a6268;
-    transform: scale(1.05); /* Adding a slight scale effect on hover */
-}
-
