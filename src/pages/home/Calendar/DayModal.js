@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../../../styles/DayModal.module.css'; 
-import { FaCalendar } from "react-icons/fa";
+import { FaCalendar, FaTrash } from "react-icons/fa";
+import { FaTrashCan } from "react-icons/fa6";
 
-function DayModal({ isOpen, onClose, date, events }) {
+function DayModal({ isOpen, onClose, date, events, onDeleteEvent }) {
     const [formattedDate, setFormattedDate] = useState('');
     const [checkedEvents, setCheckedEvents] = useState({});
 
@@ -38,6 +39,11 @@ function DayModal({ isOpen, onClose, date, events }) {
         }));
     };
 
+    const handleDeleteButtonClick = (event) => {
+        onDeleteEvent(event); // 
+        onClose();
+    }
+
     return (
         <div className={styles.modalContainer}>
             <div className={styles.modalHeader}>
@@ -62,6 +68,9 @@ function DayModal({ isOpen, onClose, date, events }) {
                                     <span className={styles.customCheckbox}></span>
                                     <p>{event.title}</p>
                                 </label>
+                                <button className={styles.deleteButton} onClick={() => handleDeleteButtonClick(event)}>
+                                    <FaTrashCan style={{ opacity: 0.5 }} />
+                                </button>
                             </div>
                         ))
                     )}

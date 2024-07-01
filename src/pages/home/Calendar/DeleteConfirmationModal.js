@@ -1,20 +1,22 @@
 import React from 'react';
-import styles from '../../../styles/DayModal.module.css'; 
+import styles from '../../../styles/DeleteConfirmationModal.module.css';
 
-const DeleteConfirmationModal = ({ isOpen, onClose, onDeleteAll, onDeleteOne }) => {
+function DeleteConfirmationModal({ isOpen, onClose, onDeleteAll, onDeleteOne, event }) {
     if (!isOpen) return null;
 
     return (
-        <div className={styles.modalOverlay}>
+        <div className={styles.modalContainer}>
             <div className={styles.modalContent}>
-                <h2>Delete Confirmation</h2>
-                <p>Are you sure you want to delete all revision dates for this exam?</p>
-                <button onClick={onDeleteAll}>Delete All Revision Dates</button>
-                <button onClick={onDeleteOne}>Delete Just This Date</button>
-                <button onClick={onClose}>Cancel</button>
+                <h2>Delete Event</h2>
+                <p>Do you want to delete all revision dates or just one?</p>
+                <div className={styles.buttonGroup}>
+                    <button onClick={onDeleteAll}>Delete All</button>
+                    <button onClick={onDeleteOne}>Delete One</button>
+                    <button onClick={onClose}>Cancel</button>
+                </div>
             </div>
         </div>
     );
-};
+}
 
 export default DeleteConfirmationModal;
