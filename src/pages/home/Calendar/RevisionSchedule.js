@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../../../styles/MonitorProgress.css'; 
+import '../../../styles/RevisionSchedule.css'; 
 import { createNewExam, DeleteExistingExam, DeleteSpecificRevisionDate, retrieveAllRevisionDates } from '../../../services (for backend)/ScheduleService';
 import { getAllFlashcardsWithoutSchedule } from '../../../services (for backend)/FlashcardService';
 

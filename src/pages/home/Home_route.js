@@ -4,7 +4,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import SideBar from "./SideBar";
 
 import Quizzes from './Quiz/Home';
-import Calendar from "./Calendar/MonitorProgress";
+import Calendar from "./Calendar/RevisionSchedule";
 
 function HomeRoute(){
     return (
