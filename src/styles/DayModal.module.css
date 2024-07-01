@@ -31,7 +31,20 @@
 }
 
 .closeButton {
+    float: right;
     cursor: pointer;
+    border: transparent;
+    background-color: transparent;
+    font-size: 20px;
+    transition: transform 0.2s ease;
+}
+
+.closeButton:hover {
+    transform: rotate(10deg); 
+}
+
+.closeButton:active {
+    transform: rotate(0deg); 
 }
 
 .modalEvents {

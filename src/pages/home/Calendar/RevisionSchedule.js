@@ -31,7 +31,7 @@ function Calendar() {
 	const [examName, setExamName] = useState('') // examName is the subject
 	const [startDate, setStartDate] = useState('')
 	const [endDate, setEndDate] = useState(null)
-	const [examColour, setExamColour] = useState('#3788d8'); // default colour is blue
+	const [examColour, setExamColour] = useState(''); // default colour is blue
 
     // State for day modal
 	const [isOpen, setIsOpen] = useState(false); 
@@ -41,7 +41,6 @@ function Calendar() {
 	// State for delete confirmation modal
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // State for delete confirmation modal
     const [eventToDelete, setEventToDelete] = useState(null); // State to store event to delete
-
 
     /*
     ------------------------------------------------------------------------------------------------------------------------------------
@@ -61,12 +60,12 @@ function Calendar() {
         setExams(returnedArray);
 
         // TRANSFORM EXAMS INTO A FORMAT THAT IS RECOGNISED BY THE CALENDAR EVENT
-        const formattedCalendarEventsArray = exams.flatMap(exam =>
+        const formattedCalendarEventsArray = returnedArray.flatMap(exam =>
             JSON.parse(exam.RevisionDates).map(date => ({   
                 id: [exam.ScheduleID, date], // for handleDeleteEvent function
                 title: exam.ExamName,
                 start: date,
-                color: exam.Colour,
+                color: exam.ExamColour,
                 flashcards: JSON.parse(exam.Flashcards)
             }))
         );
