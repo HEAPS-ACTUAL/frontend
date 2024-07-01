@@ -39,4 +39,19 @@ async function getAllFlashcardsByUser(email){
     }
 }
 
-export {generateFlashcard, getAllFlashcardsByUser};
+async function getAllFlashcardsWithoutSchedule(email){
+    try {
+        const response = await axiosInstance({
+            method: "post",
+            url: "/flashcard/getAllFlashcardsWithoutSchedule",
+            data: {email: email}
+        });
+
+        return response.data; 
+    }
+    catch (error) {
+        return error.response.data.message;
+    }
+}
+
+export {generateFlashcard, getAllFlashcardsByUser, getAllFlashcardsWithoutSchedule};

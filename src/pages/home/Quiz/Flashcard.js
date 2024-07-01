@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from '../../../styles/Flashcard.module.css';
-import { BsArrowLeftShort } from "react-icons/bs";
+import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
 
 // Import functions
 import { getAllQuestionsAndOptionsFromATest } from '../../../services (for backend)/TestService';
@@ -86,12 +86,10 @@ const Flashcard = () => {
                     <BsArrowLeftShort />
                 </button>
 
-                <button className={styles.crossBtn} onClick={handleNextFlashcard}>
-                    cannot remember
-                </button>
+                <button className={styles.HomeButton} onClick={() => navigate('/Home')}>Back to Home</button>
 
-                <button className={styles.tickBtn} onClick={handleCanRemember}>
-                    can remember
+                <button className={styles.previousBtn} onClick={handleNextFlashcard}>
+                    <BsArrowRightShort />
                 </button>
             </div>
 
