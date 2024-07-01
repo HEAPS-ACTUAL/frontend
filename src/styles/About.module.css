@@ -3,7 +3,7 @@
     color: #333;
     text-align: center;
     padding: 100px 20px;
-    background: linear-gradient(to right, #c4dfdf, #d2e9e9, #e3f4f4, #f8f6f4);
+    background: #DAEBFF;
 }
   
 .main{
@@ -32,7 +32,7 @@
     cursor: pointer;
     font-size: 1rem;
     transition: background-color 0.3s ease;
-    background-color: #007bff;
+    background-color: #0172F2;
     color: white;
     font-size: 33px;
 
