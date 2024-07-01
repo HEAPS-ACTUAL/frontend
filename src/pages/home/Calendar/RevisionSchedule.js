@@ -31,7 +31,7 @@ function Calendar() {
 	const [examName, setExamName] = useState('') // examName is the subject
 	const [startDate, setStartDate] = useState('')
 	const [endDate, setEndDate] = useState(null)
-	const [examColour, setExamColour] = useState(''); // default colour is blue
+	const [examColour, setExamColour] = useState('#3788d8'); // default colour is blue
 
     // State for day modal
 	const [isOpen, setIsOpen] = useState(false); 
