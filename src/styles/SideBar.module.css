@@ -3,33 +3,27 @@ body {
 }
 
 .allSidebarWords {
-  /* background-color: antiquewhite; */
   border-left: 3px solid black;
+  height: fit-content;
 }
 
 .sidebar {
   float: left;
-  /* width: 300px; */
-  /* margin-left: 30px; */
   font-size: 18px;
   font-weight: bold;
   display: flex;
   flex-direction: column;
   padding: 20px;
   height: calc(100vh - 80px);
-  /* background-color: aliceblue; */
   position: sticky;
   top: 80px;
 }
 
 .sidebarElement {
-  /* background: #7ca9cd; */
-  /* border-radius: 25px; */
   margin: 10px 0;
   padding: 10px 20px;
   display: flex;
   align-items: center;
-  /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
   transition: all 0.3s ease; /* Smooth transition for hover effects */
   text-decoration: none;
 }

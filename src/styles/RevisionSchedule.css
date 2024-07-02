@@ -1,68 +1,138 @@
-.calendarContainer {
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.entirePage {
     display: flex;
     flex-direction: column;
     align-items: left;
     padding: 30px 150px 50px 30px
 }
-.inputContainerforMaunual {
+
+.entirePage>p {
+    font-weight: 600;
+    animation: fadeIn 2s ease-in;
+}
+
+.entirePage .topline {
+    font-size: 260%;
+    margin-bottom: 20px;
+    background: -webkit-linear-gradient(left, #0172F2, #3a6073); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+}
+
+.entirePage .bottomline {
+    font-size: 230%;
+}
+
+.generateSchedule {
+    margin-top: 60px;
+    padding: 20px 0px;
+}
+
+.generateSchedule h3 {
+    font-size: 28px;
+    color: #0172F2;
+}
+
+.inputFields {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    /* padding: 15px; */
-    margin-top: 30px;
-    font-weight: bold;
+    flex-direction: row;
+    margin-top: 20px;
 }
 
-.calendar {
-    margin-top: 100px;
-    margin-right: 80;
-    cursor: pointer;
+.inputFields p {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: 600;
 }
 
-.calendar .fc-day {
-    position: relative;
-    transition: background-color 0.3s ease; 
-}
-
-.calendar .fc-day:hover {
-    background-color: #7aa4ce; 
-    cursor: pointer; 
-}
-
-.inputContainerforMaunual input,
-.inputContainerforMaunual select,
-.inputContainerforMaunual button {
-    padding: 12px;
-    margin: 20px; 
-    border: 2px solid black; 
-    border-radius: 5px;
-    font-size: 16px; 
-    width: auto;
-    flex-grow: 1;
-    /* background-color: #fafafa; */
+.inputFields select,
+.inputFields input {
     background-color: transparent;
-    box-shadow: none; 
-    align-items: center;
+    border: 1px solid black; 
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.selectFlashcards {
+    margin-right: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.selectFlashcards select {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.selectFlashcards select option {
+    margin-top: 3%;
+}
+
+.inputExamNameAndStartDate, .inputColourAndEndDate {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputExamNameAndStartDate input, .endDate input {
+    padding: 10px;
+    margin-right: 30px;
+    width: calc(100% - 20px);
+}
+
+.examColour input {
+    padding: 5px;
+    width: 50%;
+    height: 40px;
+}
+
+/* .inputFields input,
+.inputFields select,
+.inputFields button {
+    margin: 20px; 
     justify-content: center;
 }
 
-.inputContainerforMaunual input:focus,
-.inputContainerforMaunual button:focus {
+.inputFields input:focus,
+.inputFields button:focus {
     border-color: #0056b3; 
     box-shadow: none; 
 }
 
-.inputContainerforMaunual button {
+.inputFields button {
     background-color: #007bff;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.inputContainerforMaunual button:hover {
+.inputFields button:hover {
     background-color: #0056b3; 
+} */
+
+.calendarContainer {
+    margin-top: 50px;
+    margin-right: 80;
+    cursor: pointer;
 }
 
+.calendarContainer .fc-day {
+    position: relative;
+    transition: background-color 0.3s ease; 
+}
+
+.calendarContainer .fc-day:hover {
+    background-color: #7aa4ce; 
+    cursor: pointer; 
+}
 
 .fc-daygrid-day-frame, .fc-toolbar, .fc-daygrid-event, .fc-day-today, .fc-daygrid-day-number {
     border: none;

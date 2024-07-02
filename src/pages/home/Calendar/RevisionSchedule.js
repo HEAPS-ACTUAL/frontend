@@ -184,29 +184,52 @@ function Calendar() {
     // }, []);
 
 	return (
-		<div className='calendarContainer'> 
-			<h3>Struggling to plan a revision schedule?</h3>
-			<h1>Daddy's got your back!</h1>
-			<div className='inputContainerforMaunual'>
-                <div>
-                    {/* Flashcard: */}
-                    <select multiple onChange={(e) => setSelectedTestIDs([e.target.value])}>
-                        {/* <option disabled selected> Choose a flashcard </option> */}
-                        {arrayOfAvailableFlashcards.length === 0 
-                            ? <option> No flashcards available </option> 
-                            : arrayOfAvailableFlashcards.map((flashcard) => (
-                                <option key={flashcard.TestID} value={flashcard.TestID}> {flashcard.TestName} </option>
-                            ))
-                        }
-                    </select>
+		<div className='entirePage'> 
+			<p className='topline'>Struggling to plan a revision schedule?</p>
+			<p className='bottomline'> Daddy's got your back!</p>
+
+			<div className='generateSchedule'>
+                <h3> Generate revision schedule </h3>
+                <div className='inputFields'>
+                    <div className='selectFlashcards'>
+                        <p> Choose Your Flashcard(s): </p>
+                        <select multiple onChange={(e) => setSelectedTestIDs([e.target.value])}>
+                            {/* <option disabled> Choose a flashcard: </option> */}
+                            {arrayOfAvailableFlashcards.length === 0
+                                ? <option> No flashcards available </option>
+                                : arrayOfAvailableFlashcards.map((flashcard) => (
+                                    <option key={flashcard.TestID} value={flashcard.TestID}> {flashcard.TestName} </option>
+                                ))
+                            }
+                        </select>
+                    </div>
+                    <div className='inputExamNameAndStartDate'>
+                        <div className='examName'> 
+                            <p> Enter Exam Name: </p> 
+                            <input type="text" placeholder="Exam Name" value={examName} onChange={(e) => setExamName(e.target.value)}/>
+                        </div>
+
+                        <div className='startDate'> 
+                            <p>Start Date:</p> 
+                            <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+                        </div>
+                    </div>
+
+                    <div className='inputColourAndEndDate'>
+                        <div className='examColour'> 
+                            <p>Choose Exam Colour:</p> 
+                            <input type="color" value={examColour} onChange={(e) => setExamColour(e.target.value)}/>
+                        </div>
+
+                        <div className='endDate'> 
+                            <p>Exam Date:</p> 
+                            <input type="date" value={endDate || ''} onChange={(e) => setEndDate(e.target.value)} />
+                        </div>
+                    </div>
                 </div>
-				<div> <input type="text" placeholder="Exam Name" value={examName} onChange={(e) => setExamName(e.target.value)}/></div>
-				<div> <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} /></div>
-				<div> <input type="date" value={endDate || ''} onChange={(e) => setEndDate(e.target.value)} /></div>
-				<div> <input type="color" value={examColour} onChange={(e) => setExamColour(e.target.value)} /></div>
-				<button onClick={handleGenerateSchedule}>Generate Schedule</button>
+                <button onClick={handleGenerateSchedule}>Generate Schedule</button>
 			</div>
-			<div className='calendar'>
+			<div className='calendarContainer'>
 				<FullCalendar
 					plugins={[dayGridPlugin,interactionPlugin]}
 					initialView="dayGridMonth"
