@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: column;
     align-items: left;
-    padding: 30px 150px 50px 30px
+    padding: 30px 150px 50px 30px;
 }
 
 .entirePage>p {
@@ -32,7 +32,7 @@
 }
 
 .generateSchedule {
-    margin-top: 60px;
+    margin-top: 30px;
     padding: 20px 0px;
 }
 
@@ -44,13 +44,14 @@
 .inputFields {
     display: flex;
     flex-direction: row;
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 .inputFields p {
-    margin-top: 20px;
-    margin-bottom: 10px;
+    margin-top: 30px;
+    margin-bottom: 15px;
     font-weight: 600;
+    color: #363636;
 }
 
 .inputFields select,
@@ -71,6 +72,7 @@
     width: 100%;
     height: 100%;
     text-align: center;
+    padding: 0px 10px;
 }
 
 .selectFlashcards select option {
@@ -80,6 +82,7 @@
 .inputExamNameAndStartDate, .inputColourAndEndDate {
     display: flex;
     flex-direction: column;
+    width: 330px;
 }
 
 .inputExamNameAndStartDate input, .endDate input {
@@ -90,25 +93,34 @@
 
 .examColour input {
     padding: 5px;
-    width: 50%;
+    width: 25%;
     height: 40px;
 }
 
-/* .inputFields input,
-.inputFields select,
-.inputFields button {
-    margin: 20px; 
-    justify-content: center;
+.generateScheduleButton {
+    margin-top: 25px;
+    background-color: transparent;
+    padding: 10px 25px;
+    border: 2.2px solid #08293c;    
+    border-radius: 4px;
+    font-weight: 600;
+    transition: 0.2s;
 }
 
-.inputFields input:focus,
-.inputFields button:focus {
-    border-color: #0056b3; 
-    box-shadow: none; 
+.generateScheduleButton:hover {
+    background-color: #9fe7d1;
+    cursor: pointer;
+    transform: translate3d(0px, -2px, 0px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
 
+.generateScheduleButton:active {
+    transition: 0.2s;
+    transform: translate3d(0px, 2px, 0px);
+}
+
+/*
 .inputFields button {
-    background-color: #007bff;
     color: white;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -120,8 +132,20 @@
 
 .calendarContainer {
     margin-top: 50px;
-    margin-right: 80;
+    margin-right: 70px;
     cursor: pointer;
+    position: relative;
+}
+
+.testing {
+    position: absolute;
+    top: 0px;
+    left: 645px;
+    background-color: var(--fc-button-bg-color);
+    padding: 10px;
+    border-radius: 5px;
+    border-color: var(--fc-button-border-color);
+    color: var(--fc-button-text-color);
 }
 
 .calendarContainer .fc-day {

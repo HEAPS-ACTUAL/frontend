@@ -31,7 +31,7 @@ function Calendar() {
 	const [examName, setExamName] = useState('') // examName is the subject
 	const [startDate, setStartDate] = useState('')
 	const [endDate, setEndDate] = useState(null)
-	const [examColour, setExamColour] = useState('#3788d8'); // default colour is blue
+	const [examColour, setExamColour] = useState('#808080'); // default colour is blue
 
     // State for day modal
 	const [isOpen, setIsOpen] = useState(false); 
@@ -188,6 +188,35 @@ function Calendar() {
 			<p className='topline'>Struggling to plan a revision schedule?</p>
 			<p className='bottomline'> Daddy's got your back!</p>
 
+            <div className='calendarContainer'>
+                <button className='testing'> Add exam to calendar </button>
+
+				<FullCalendar
+					plugins={[dayGridPlugin,interactionPlugin]}
+					initialView="dayGridMonth"
+					events={calendarEvents}
+					height="auto"
+					dateClick={handleDateClick}
+                    showNonCurrentDates={false}
+				/>
+			</div>
+			
+			<DayModal
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                date={selectedDate}
+                events={selectedEvents}
+                onDeleteEvent={handleDeleteEvent}
+            />
+
+			<DeleteConfirmationModal
+                isOpen={isDeleteModalOpen}
+                onClose={() => setIsDeleteModalOpen(false)}
+                onDeleteAll={handleDeleteAll}
+                onDeleteOne={handleDeleteOne}
+                eventToDelete={eventToDelete}
+            />
+
 			<div className='generateSchedule'>
                 <h3> Generate revision schedule </h3>
                 <div className='inputFields'>
@@ -217,7 +246,7 @@ function Calendar() {
 
                     <div className='inputColourAndEndDate'>
                         <div className='examColour'> 
-                            <p>Choose Exam Colour:</p> 
+                            <p> Exam Colour:</p> 
                             <input type="color" value={examColour} onChange={(e) => setExamColour(e.target.value)}/>
                         </div>
 
@@ -227,34 +256,8 @@ function Calendar() {
                         </div>
                     </div>
                 </div>
-                <button onClick={handleGenerateSchedule}>Generate Schedule</button>
+                <button className='generateScheduleButton' onClick={handleGenerateSchedule}>Generate Schedule! </button>
 			</div>
-			<div className='calendarContainer'>
-				<FullCalendar
-					plugins={[dayGridPlugin,interactionPlugin]}
-					initialView="dayGridMonth"
-					events={calendarEvents}
-					height="auto"
-					dateClick={handleDateClick}
-                    showNonCurrentDates={false}
-				/>
-			</div>
-			
-			<DayModal
-                isOpen={isOpen}
-                onClose={() => setIsOpen(false)}
-                date={selectedDate}
-                events={selectedEvents}
-                onDeleteEvent={handleDeleteEvent}
-            />
-
-			<DeleteConfirmationModal
-                isOpen={isDeleteModalOpen}
-                onClose={() => setIsDeleteModalOpen(false)}
-                onDeleteAll={handleDeleteAll}
-                onDeleteOne={handleDeleteOne}
-                eventToDelete={eventToDelete}
-            />
 		</div>
 	);
 }
