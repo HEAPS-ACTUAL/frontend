@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import styles from '../../styles/NavBar.module.css';
-import quizDaddyLogo from '../../images/logo.png';
+import quizDaddyLogo from '../../images/logo-no-background.png';
 
 import { handleLogOut, isLoggedIn } from '../../services (for backend)/ProtectionService';
 

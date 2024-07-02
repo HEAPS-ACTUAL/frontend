@@ -3,7 +3,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    background: linear-gradient(to right, #c4dfdf, #d2e9e9, #e3f4f4, #f8f6f4);
+    background: #DAEBFF;
     position: sticky;
     top: 0;
     height: 80px;
@@ -25,7 +25,7 @@
 
 .logoText {
     font-size: 20px;
-    color: black;
+    color: #0172F2;
     font-weight: bold;
     text-decoration: none;
 }
