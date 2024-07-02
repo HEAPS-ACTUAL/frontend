@@ -188,35 +188,6 @@ function Calendar() {
 			<p className='topline'>Struggling to plan a revision schedule?</p>
 			<p className='bottomline'> Daddy's got your back!</p>
 
-            <div className='calendarContainer'>
-                <button className='testing'> Add exam to calendar </button>
-
-				<FullCalendar
-					plugins={[dayGridPlugin,interactionPlugin]}
-					initialView="dayGridMonth"
-					events={calendarEvents}
-					height="auto"
-					dateClick={handleDateClick}
-                    showNonCurrentDates={false}
-				/>
-			</div>
-			
-			<DayModal
-                isOpen={isOpen}
-                onClose={() => setIsOpen(false)}
-                date={selectedDate}
-                events={selectedEvents}
-                onDeleteEvent={handleDeleteEvent}
-            />
-
-			<DeleteConfirmationModal
-                isOpen={isDeleteModalOpen}
-                onClose={() => setIsDeleteModalOpen(false)}
-                onDeleteAll={handleDeleteAll}
-                onDeleteOne={handleDeleteOne}
-                eventToDelete={eventToDelete}
-            />
-
 			<div className='generateSchedule'>
                 <h3> Generate revision schedule </h3>
                 <div className='inputFields'>
@@ -258,6 +229,35 @@ function Calendar() {
                 </div>
                 <button className='generateScheduleButton' onClick={handleGenerateSchedule}>Generate Schedule! </button>
 			</div>
+
+            <div className='calendarContainer'>
+                {/* <button className='testing'> Add exam to calendar </button> */}
+
+				<FullCalendar
+					plugins={[dayGridPlugin,interactionPlugin]}
+					initialView="dayGridMonth"
+					events={calendarEvents}
+					height="auto"
+					dateClick={handleDateClick}
+                    showNonCurrentDates={false}
+				/>
+			</div>
+			
+			<DayModal
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                date={selectedDate}
+                events={selectedEvents}
+                onDeleteEvent={handleDeleteEvent}
+            />
+
+			<DeleteConfirmationModal
+                isOpen={isDeleteModalOpen}
+                onClose={() => setIsDeleteModalOpen(false)}
+                onDeleteAll={handleDeleteAll}
+                onDeleteOne={handleDeleteOne}
+                eventToDelete={eventToDelete}
+            />
 		</div>
 	);
 }
