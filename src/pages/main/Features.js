@@ -1,8 +1,7 @@
 import React from 'react';
 import styles from '../../styles/Features.module.css';
-import quizImage from '../../images/quiz.jpg'; 
-
-function Features() {
+import { FaCalendarAlt } from "react-icons/fa";
+import { FaBrain } from "react-icons/fa6";function Features() {
     return (
         <div className={styles.Features}>
             <h1 className={styles.centerText}>Transform Your PDFs with quizDaddy</h1>
@@ -37,6 +36,7 @@ function Features() {
             <div className={styles.featureItem}>
                 <h2 className={styles.featureName}>Optimize Learning with Spaced Repetition</h2>
                 <p className={styles.description}>Utilize personalized spaced repetition scheduling to optimize learning by scheduling review sessions based on individual progress and memory retention.</p>
+                <a href="#spaced-repetition" className={styles.learnMore}>Learn More about Spaced Repetition</a>
                 <div className={styles.featureImage}>
                     <img src="https://via.placeholder.com/400x300" alt="Spaced Repetition Scheduling" />
                 </div>
@@ -44,11 +44,17 @@ function Features() {
     
             <div className={styles.BoxContainer}>
                 <div className={styles.Box}>
-                    <h4>Active Recall</h4>
+                    <p className={styles.icon}><FaBrain /></p>
+                    <h3 id='active-recall'>Active Recall</h3>
+                    <br></br>
+                    <p className={styles.activespaced} id='active-recall'>Active Recall strengthens neural connections through active engagement of the brain. By recalling information multiple
+                    times instead of re-reading or repeating, you solidify these connections, ensuring efficient memorization. </p>
                 </div>
     
                 <div className={styles.Box}>
-                    <h4>Spaced Repetition</h4>
+                    <p className={styles.icon}><FaCalendarAlt /></p>
+                    <h3 id='spaced-repetition'>Spaced Repetition</h3><br></br>
+                    <p className={styles.activespaced}>Enhance learning by scheduling review sessions based on memory retention. By strategically repeating and evaluating information, spaced repetition counters the natural tendency to forget, ensuring that knowledge is retained effectively over time.</p>
                 </div>
             </div>
 
