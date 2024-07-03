@@ -1,3 +1,7 @@
+:root {
+    --fc-border-color: #998e8e3d;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -9,32 +13,95 @@
 
 .entirePage {
     display: flex;
-    flex-direction: column;
-    align-items: left;
-    padding: 30px 150px 50px 30px;
 }
 
-.entirePage>p {
+.schedule {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 50px 50px 50px;
+    background-color: #b1d2f854;
+    width: min-content;
+}
+
+.schedule>p {
     font-weight: 600;
     animation: fadeIn 2s ease-in;
+    width: fit-content;
 }
 
-.entirePage .topline {
-    font-size: 260%;
+.schedule .topline {
+    font-size: 240%;
     margin-bottom: 20px;
     background: -webkit-linear-gradient(left, #0172F2, #3a6073); 
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; 
+    -webkit-text-fill-color: transparent;
+    width: 770px;
 }
 
-.entirePage .bottomline {
-    font-size: 230%;
+.schedule .bottomline {
+    font-size: 190%;
+}
+
+.calendarContainer {
+    width: 95%;
+    margin-top: 50px;
+    cursor: pointer;
+}
+
+.calendarContainer .fc-day {
+    position: relative;
+    transition: background-color 0.3s ease; 
+}
+
+.calendarContainer .fc-day:hover {
+    background-color: #7aa4ce; 
+    cursor: pointer; 
+}
+
+.fc-daygrid-day-frame, .fc-toolbar, .fc-daygrid-event, .fc-day-today, .fc-daygrid-day-number {
+    border: none;
+    background-color: transparent;
+    color: #333; 
+}
+
+.fc-button:hover {
+    background-color: #0056b3;
+}
+
+.fc-daygrid-event {
+    background-color: #007bff; 
+    color: white;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.fc-day-today {
+    background-color: #e2e6ea;
+}
+
+.fc-daygrid-event.fc-event.fc-event-end,
+.fc-daygrid-event.fc-event.fc-event-start {
+    margin: 5px;
+}
+
+.fc-event {
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+}
+
+.fc-daygrid-day-number {
+    font-weight: bold; 
+}
+
+.todaysEventsAndGenerateSchedule {
+    padding: 0px 15px 0px 25px;
+    flex-grow: 1;
 }
 
 .generateSchedule {
-    margin-top: 30px;
-    padding: 20px 0px;
+    margin-top: 20px;
 }
+/* 
 
 .generateSchedule h3 {
     font-size: 28px;
@@ -117,79 +184,4 @@
 .generateScheduleButton:active {
     transition: 0.2s;
     transform: translate3d(0px, 2px, 0px);
-}
-
-/*
-.inputFields button {
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.inputFields button:hover {
-    background-color: #0056b3; 
 } */
-
-.calendarContainer {
-    margin-top: 50px;
-    cursor: pointer;
-    position: relative;
-}
-
-.testing {
-    position: absolute;
-    top: 0px;
-    left: 645px;
-    background-color: var(--fc-button-bg-color);
-    padding: 10px;
-    border-radius: 5px;
-    border-color: var(--fc-button-border-color);
-    color: var(--fc-button-text-color);
-}
-
-.calendarContainer .fc-day {
-    position: relative;
-    transition: background-color 0.3s ease; 
-}
-
-.calendarContainer .fc-day:hover {
-    background-color: #7aa4ce; 
-    cursor: pointer; 
-}
-
-.fc-daygrid-day-frame, .fc-toolbar, .fc-daygrid-event, .fc-day-today, .fc-daygrid-day-number {
-    border: none;
-    background-color: transparent;
-    color: #333; 
-}
-
-.fc-button:hover {
-    background-color: #0056b3;
-}
-
-.fc-daygrid-event {
-    background-color: #007bff; 
-    color: white;
-    border-radius: 4px;
-    padding: 5px;
-}
-
-.fc-day-today {
-    background-color: #e2e6ea;
-}
-
-.fc-daygrid-event.fc-event.fc-event-end,
-.fc-daygrid-event.fc-event.fc-event-start {
-    margin: 5px;
-}
-
-
-.fc-event {
-    cursor: pointer; 
-    transition: background-color 0.3s; 
-}
-
-
-.fc-daygrid-day-number {
-    font-weight: bold; 
-}

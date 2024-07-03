@@ -34,8 +34,8 @@ function Calendar() {
 	const [examColour, setExamColour] = useState('#808080'); // default colour is blue
 
     // State for day modal
-	const [isOpen, setIsOpen] = useState(false); 
-    const [selectedDate, setSelectedDate] = useState('');
+	// const [isOpen, setIsOpen] = useState(true);
+    const [selectedDate, setSelectedDate] = useState(null);
     const [selectedEvents, setSelectedEvents] = useState([]);
 
 	// State for delete confirmation modal
@@ -90,12 +90,27 @@ function Calendar() {
     };
 
     // OPEN THE MODAL WHEN USER CLICKS ON A DATE IN THE CALENDAR
-    const handleDateClick = (arg) => {
+    function fetchTodaysDate(){
+        const dateLocaleString = new Date().toLocaleString();
+
+        const day = dateLocaleString.slice(0, 2);
+        const month = dateLocaleString.slice(3, 5);
+        const year = dateLocaleString.slice(6, 10);
+
+        const formattedDate = `${year}-${month}-${day}`;
+        const eventsOnDate = calendarEvents.filter(event => event.start === formattedDate);
+        
+        // console.log(dateLocaleString);
+        // console.log(formattedDate)
+        setSelectedDate(formattedDate);
+        setSelectedEvents(eventsOnDate);
+    }
+
+    const handleDateChange = (arg) => {
         const clickedDate = arg.dateStr; // YYYY-MM-DD format
         setSelectedDate(clickedDate);
         const eventsOnDate = calendarEvents.filter(event => event.start === clickedDate);
         setSelectedEvents(eventsOnDate);
-        setIsOpen(true); // Open the modal
         console.log("Clicked date:", clickedDate); // Debug
     };
 
@@ -104,8 +119,6 @@ function Calendar() {
         setEventToDelete(event);
         setIsDeleteModalOpen(true); // open the delete confirmation modal
     };
-
- 
     
     // DELETE ENTIRE SCHEDULE
     const handleDeleteAll = async () => {
@@ -171,6 +184,7 @@ function Calendar() {
     useEffect(() => {
         fetchAllFlashcardsWithoutSchedule();
         fetchRevisonDates();
+        fetchTodaysDate();
     }, []);
 
     //TESTING PURPOSES
@@ -184,81 +198,76 @@ function Calendar() {
     // }, []);
 
 	return (
-		<div className='entirePage'> 
-			<p className='topline'>Struggling to plan a revision schedule?</p>
-			<p className='bottomline'> Daddy's got your back!</p>
-
-			<div className='generateSchedule'>
-                <h3> Generate revision schedule </h3>
-                <div className='inputFields'>
-                    <div className='selectFlashcards'>
-                        <p> Choose Your Flashcard(s): </p>
-                        <select multiple onChange={(e) => setSelectedTestIDs([e.target.value])}>
-                            {/* <option disabled> Choose a flashcard: </option> */}
-                            {arrayOfAvailableFlashcards.length === 0
-                                ? <option> No flashcards available </option>
-                                : arrayOfAvailableFlashcards.map((flashcard) => (
-                                    <option key={flashcard.TestID} value={flashcard.TestID}> {flashcard.TestName} </option>
-                                ))
-                            }
-                        </select>
-                    </div>
-                    <div className='inputExamNameAndStartDate'>
-                        <div className='examName'> 
-                            <p> Enter Exam Name: </p> 
-                            <input type="text" placeholder="Exam Name" value={examName} onChange={(e) => setExamName(e.target.value)}/>
-                        </div>
-
-                        <div className='startDate'> 
-                            <p>Start Date:</p> 
-                            <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
-                        </div>
-                    </div>
-
-                    <div className='inputColourAndEndDate'>
-                        <div className='examColour'> 
-                            <p> Exam Colour:</p> 
-                            <input type="color" value={examColour} onChange={(e) => setExamColour(e.target.value)}/>
-                        </div>
-
-                        <div className='endDate'> 
-                            <p>Exam Date:</p> 
-                            <input type="date" value={endDate || ''} onChange={(e) => setEndDate(e.target.value)} />
-                        </div>
-                    </div>
+		<div className='entirePage'>
+            <div className='schedule'>
+                <p className='topline'>Struggling to plan a revision schedule?</p>
+                <p className='bottomline'> Daddy's got your back!</p>
+            
+                <div className='calendarContainer'>
+                    <FullCalendar
+                        plugins={[dayGridPlugin,interactionPlugin]}
+                        initialView="dayGridMonth"
+                        events={calendarEvents}
+                        height="auto"
+                        dateClick={handleDateChange}
+                        showNonCurrentDates={false}
+                        fixedWeekCount={false}
+                />
                 </div>
-                <button className='generateScheduleButton' onClick={handleGenerateSchedule}>Generate Schedule! </button>
-			</div>
-
-            <div className='calendarContainer'>
-                {/* <button className='testing'> Add exam to calendar </button> */}
-
-				<FullCalendar
-					plugins={[dayGridPlugin,interactionPlugin]}
-					initialView="dayGridMonth"
-					events={calendarEvents}
-					height="auto"
-					dateClick={handleDateClick}
-                    showNonCurrentDates={false}
-				/>
-			</div>
-			
-			<DayModal
-                isOpen={isOpen}
-                onClose={() => setIsOpen(false)}
-                date={selectedDate}
-                events={selectedEvents}
-                onDeleteEvent={handleDeleteEvent}
-            />
-
-			<DeleteConfirmationModal
-                isOpen={isDeleteModalOpen}
-                onClose={() => setIsDeleteModalOpen(false)}
-                onDeleteAll={handleDeleteAll}
-                onDeleteOne={handleDeleteOne}
-                eventToDelete={eventToDelete}
-            />
-		</div>
+            </div>
+            <div className='todaysEventsAndGenerateSchedule'>
+                <DayModal
+                    date={selectedDate}
+                    events={selectedEvents}
+                    onDeleteEvent={handleDeleteEvent}
+                />
+                <DeleteConfirmationModal
+                    isOpen={isDeleteModalOpen}
+                    onClose={() => setIsDeleteModalOpen(false)}
+                    onDeleteAll={handleDeleteAll}
+                    onDeleteOne={handleDeleteOne}
+                    eventToDelete={eventToDelete}
+                />
+                <div className='generateSchedule'>
+                    <h3> Add exam to calendar </h3>
+                    <div className='inputFields'>
+                        <div className='selectFlashcards'>
+                            <p> Choose Your Flashcard(s): </p>
+                            <select  onChange={(e) => setSelectedTestIDs([e.target.value])}>
+                                {/* <option disabled> Choose a flashcard: </option> */}
+                                {arrayOfAvailableFlashcards.length === 0
+                                    ? <option> No flashcards available </option>
+                                    : arrayOfAvailableFlashcards.map((flashcard) => (
+                                        <option key={flashcard.TestID} value={flashcard.TestID}> {flashcard.TestName} </option>
+                                    ))
+                                }
+                            </select>
+                        </div>
+                        <div className='inputExamNameAndStartDate'>
+                            <div className='examName'>
+                                <p> Enter Exam Name: </p>
+                                <input type="text" placeholder="Exam Name" value={examName} onChange={(e) => setExamName(e.target.value)}/>
+                            </div>
+                            <div className='startDate'>
+                                <p>Start Date:</p>
+                                <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+                            </div>
+                        </div>
+                        <div className='inputColourAndEndDate'>
+                            <div className='examColour'>
+                                <p> Exam Colour:</p>
+                                <input type="color" value={examColour} onChange={(e) => setExamColour(e.target.value)}/>
+                            </div>
+                            <div className='endDate'>
+                                <p>Exam Date:</p>
+                                <input type="date" value={endDate || ''} onChange={(e) => setEndDate(e.target.value)} />
+                            </div>
+                        </div>
+                    </div>
+                    <button className='generateScheduleButton' onClick={handleGenerateSchedule}>Generate Schedule! </button>
+                </div>
+            </div>
+        </div>
 	);
 }
 

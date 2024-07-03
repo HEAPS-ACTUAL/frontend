@@ -3,7 +3,7 @@ import styles from '../../../styles/DayModal.module.css';
 import { FaCalendar, FaTrash } from "react-icons/fa";
 import { FaTrashCan } from "react-icons/fa6";
 
-function DayModal({ isOpen, onClose, date, events, onDeleteEvent }) {
+function DayModal({ date, events, onDeleteEvent }) {
     const [formattedDate, setFormattedDate] = useState('');
     const [checkedEvents, setCheckedEvents] = useState({});
 
@@ -30,8 +30,6 @@ function DayModal({ isOpen, onClose, date, events, onDeleteEvent }) {
         localStorage.setItem('checkedEvents', JSON.stringify(checkedEvents));
     }, [checkedEvents]);
 
-    if (!isOpen) return null;
-
     const handleCheckboxChange = (eventId) => {
         setCheckedEvents(prevState => ({
             ...prevState,
@@ -41,14 +39,13 @@ function DayModal({ isOpen, onClose, date, events, onDeleteEvent }) {
 
     const handleDeleteButtonClick = (event) => {
         onDeleteEvent(event); // 
-        onClose();
     }
 
     return (
         <div className={styles.modalContainer}>
             <div className={styles.modalHeader}>
                 <div><FaCalendar style={{color: '#57788b'}} /> Today's Events</div>
-                <button className={styles.closeButton} onClick={onClose}>X</button>
+                {/* <button className={styles.closeButton} onClick={onClose}>X</button> */}
             </div>
             <div className={styles.modalDate}>{formattedDate}</div>
             <div className={styles.modalEvents}>
