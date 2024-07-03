@@ -9,8 +9,9 @@ import 'aos/dist/aos.css';
 function Features() {
     useEffect(() => {
         AOS.init({
-            duration: 1000, 
-            once: true 
+            duration: 1500, 
+            easing: 'ease-in-out-back', 
+            offset: 117, 
         });
     }, []);
     
