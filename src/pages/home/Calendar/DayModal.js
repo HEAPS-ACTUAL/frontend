@@ -49,11 +49,11 @@ function DayModal({ date, events, onDeleteEvent }) {
             <div className={styles.modalContent}>
                 
                 <div className={styles.modalHeader}> 
-                    Today's Events 
+                    Today's Events
                 </div>
 
                 <div className={styles.modalDate}>
-                    <img className={styles.calendarIcon} src={calendarIcon} />
+                    {/* <img className={styles.calendarIcon} src={calendarIcon} /> */}
                     <div> {formattedDate} </div>
                 </div>
 
