@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../../../styles/DayModal.module.css'; 
-import { FaCalendar, FaTrash } from "react-icons/fa";
+import calendarIcon from '../../../images/todaysEvents.png'
+import { FaCalendar } from "react-icons/fa";
 import { FaTrashCan } from "react-icons/fa6";
+import postItIcon from '../../../images/post-it.png'
 
 function DayModal({ date, events, onDeleteEvent }) {
     const [formattedDate, setFormattedDate] = useState('');
@@ -43,34 +45,37 @@ function DayModal({ date, events, onDeleteEvent }) {
 
     return (
         <div className={styles.modalContainer}>
-            <div className={styles.modalHeader}>
-                <div><FaCalendar style={{color: '#57788b'}} /> Today's Events</div>
-                {/* <button className={styles.closeButton} onClick={onClose}>X</button> */}
-            </div>
-            <div className={styles.modalDate}>{formattedDate}</div>
-            <div className={styles.modalEvents}>
-                <div className={styles.eventsContainer}>
-                    {events.length === 0 ? (
-                        <p className={styles.noEventsMessage}>-No Events Today-</p>
-                    ) : (
-                        events.map(event => (
-                            <div key={event.id} className={styles.eventItem} style={{ backgroundColor: event.color || '#57788b' }}>
-                                <label className={styles.eventLabel} htmlFor={`checkbox-${event.id}`}>
-                                    <input
-                                        id={`checkbox-${event.id}`}
-                                        type="checkbox"
-                                        checked={checkedEvents[event.id]}
-                                        onChange={() => handleCheckboxChange(event.id)}
-                                    />
-                                    <span className={styles.customCheckbox}></span>
-                                    <p>{event.title}</p>
-                                </label>
-                                <button className={styles.deleteButton} onClick={() => handleDeleteButtonClick(event)}>
-                                    <FaTrashCan style={{ opacity: 0.5 }} />
-                                </button>
-                            </div>
-                        ))
-                    )}
+            <img className={styles.postItIcon} src={postItIcon} />
+            <div className={styles.modalContent}>
+                <div className={styles.modalHeader}> Today's Events </div>
+                <div className={styles.modalDate}>
+                    <img className={styles.calendarIcon} src={calendarIcon} />
+                    <div> {formattedDate} </div>
+                </div>
+                <div className={styles.modalEvents}>
+                    <div className={styles.eventsContainer}>
+                        {events.length === 0 ? (
+                            <p className={styles.noEventsMessage}>-No Events Today-</p>
+                        ) : (
+                            events.map(event => (
+                                <div key={event.id} className={styles.eventItem} style={{ backgroundColor: event.color || '#57788b' }}>
+                                    <label className={styles.eventLabel} htmlFor={`checkbox-${event.id}`}>
+                                        <input
+                                            id={`checkbox-${event.id}`}
+                                            type="checkbox"
+                                            checked={checkedEvents[event.id]}
+                                            onChange={() => handleCheckboxChange(event.id)}
+                                        />
+                                        <span className={styles.customCheckbox}></span>
+                                        <p>{event.title}</p>
+                                    </label>
+                                    <button className={styles.deleteButton} onClick={() => handleDeleteButtonClick(event)}>
+                                        <FaTrashCan style={{ opacity: 0.5 }} />
+                                    </button>
+                                </div>
+                            ))
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

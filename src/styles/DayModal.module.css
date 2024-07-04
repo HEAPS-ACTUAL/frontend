@@ -1,10 +1,13 @@
 .modalContainer {
-    /* background-color: #c1d7f5; */
-    padding: 20px;
+    background-color: #c1d7f5;
+    /* box-shadow: 0px 0px 10px #999; */
+    margin-top: 10px;
+    width: 265px;
+    height: 270px;
+    /* background-color: #ffffb8; */
+    background-color: transparent;
+
     /* box-shadow: 0px 0px 10px rgba(0.1, 0.1, 0.1, 0.1); */
-    height: 250px;
-    overflow-y: auto;
-    width: 100%;
     /* position: fixed; */
     /* bottom: 100px;
     display: f'${props => props.isOpen ? 'block' : 'none'}';
@@ -12,22 +15,40 @@
     max-width: 320px;
     z-index: 1000;
     */
+    position: relative;
+}
+
+.postItIcon {
+    position: absolute;
+    top: -14px;
+    left: 0px;
+    width: 250px;
+    height: 300px;
+    z-index: -1;
+}
+
+.modalContent {
+    margin: 22px 0px 0px 17px;
 }
 
 .modalHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     font-size: 20px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 22px;
+}
+
+.calendarIcon {
+    width: 23px;
+    margin-right: 10px;
 }
 
 .modalDate {
+    display: flex;
     font-size: 16px;
-    margin-bottom: 10px;
+    align-items: center;
     color: gray;
     font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .closeButton {
@@ -54,7 +75,7 @@
 .eventsContainer {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    overflow-y: auto;
 }
 
 .eventItem {

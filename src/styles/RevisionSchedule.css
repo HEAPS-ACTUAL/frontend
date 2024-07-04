@@ -19,14 +19,16 @@
     display: flex;
     flex-direction: column;
     padding: 30px 50px 50px 50px;
+    /* border-left: 1px solid black; */
+    /* border-right: 1px solid black; */
     background-color: #b1d2f854;
-    width: min-content;
+    /* box-shadow: 0px 0px 10px #999; */
+    margin-top: 10px;
 }
 
 .schedule>p {
     font-weight: 600;
     animation: fadeIn 2s ease-in;
-    width: fit-content;
 }
 
 .schedule .topline {
@@ -35,7 +37,6 @@
     background: -webkit-linear-gradient(left, #0172F2, #3a6073); 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    width: 770px;
 }
 
 .schedule .bottomline {
@@ -43,7 +44,6 @@
 }
 
 .calendarContainer {
-    width: 95%;
     margin-top: 50px;
     cursor: pointer;
 }
@@ -95,11 +95,11 @@
 
 .todaysEventsAndGenerateSchedule {
     padding: 0px 15px 0px 25px;
-    flex-grow: 1;
 }
 
 .generateSchedule {
-    margin-top: 20px;
+    margin-top: 80px;
+    /* padding: 20px; */
 }
 /* 
 
