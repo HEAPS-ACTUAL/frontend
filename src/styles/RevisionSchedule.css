@@ -16,13 +16,28 @@
 }
 
 .schedule {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     padding: 30px 50px 50px 50px;
     background-color: #b1d2f854;
-    margin-top: 10px;
-}
+    /* background-color: #fbfff1; */
+    /* margin-top: 10px;
+    flex: 0 0 80%;   */
+} 
 
+.schedule {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 50px 50px 50px;
+    /* background-color: #b1d2f854; */
+    background-color: rgba(255, 255, 255, 0.7); 
+    /* background-color: rgba(244, 242,/ 241, 0.8); */
+    margin-top: 10px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    flex: 0 0 80%; 
+    margin-top: 30px;
+}
 .schedule>p {
     font-weight: 600;
     animation: fadeIn 2s ease-in;
@@ -30,14 +45,18 @@
 
 .schedule .topline {
     font-size: 240%;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px;
     background: -webkit-linear-gradient(left, #0172F2, #3a6073); 
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: transparent; */
+    color: #355070;
+    margin-bottom: 20px;
 }
 
 .schedule .bottomline {
     font-size: 190%;
+    color: #4663ac;
+
 }
 
 .calendarContainer {
@@ -61,8 +80,8 @@
     color: #333; 
 }
 
-.fc-button:hover {
-    background-color: #0056b3;
+.fc-toolbar-title {
+    color: #4663ac;
 }
 
 .fc-daygrid-event {
@@ -91,15 +110,19 @@
 }
 
 .todaysEventsAndGenerateSchedule {
+    flex: 0 0 20%; 
     padding: 0px 15px 0px 25px;
+    margin-top: 20px;
 }
 
 .generateSchedule {
     margin-top: 60px;
-    background-color: white;
-    padding: 10px 20px;
+    /* background-color: rgba(255, 255, 255, 0.7);  */
+    background-color: rgba(255, 244, 204, 0.7);
+    padding: 20px 20px;
     border-radius: 8px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    margin-right: 0px;
 }
 
 .generateSchedule h3 {
@@ -119,10 +142,11 @@
 }
 
 .generateScheduleButton:hover {
-    background-color: #9fe7d1;
+    background-color: rgba(53, 80, 112, 0.4);
     transform: translate3d(0px, -2px, 0px);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
+
 
 .generateScheduleButton:active {
     transition: 0.2s;
@@ -153,77 +177,15 @@
 }
 
 .css-13cymwt-control, .css-t3ipsp-control {
-    min-height: 43px !important; 
-    background-color: transparent !important;
-    border-color: black !important;
+    min-height: 43px; 
+    background-color: transparent;
+    border-color: black;
 }
 
 .css-1xc3v61-indicatorContainer {
-    color: black !important;
+    color: black;
 }
 
 .css-1u9des2-indicatorSeparator {
-    background-color: black !important;
+    background-color: black;
 }
-/* 
-
-
-.inputFields {
-    display: flex;
-    flex-direction: row;
-    margin-top: 0px;
-}
-
-.inputFields p {
-    margin-top: 30px;
-    margin-bottom: 15px;
-    font-weight: 600;
-    color: #363636;
-}
-
-
-
-.selectFlashcards select {
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    padding: 0px 10px;
-}
-
-.selectFlashcards select option {
-    margin-top: 3%;
-}
-
-.inputExamNameAndStartDate, .inputColourAndEndDate {
-    display: flex;
-    flex-direction: column;
-    width: 330px;
-}
-
-.examColour input {
-    padding: 5px;
-    width: 25%;
-    height: 40px;
-}
-
-.generateScheduleButton {
-    margin-top: 25px;
-    background-color: transparent;
-    padding: 10px 25px;
-    border: 2.2px solid #08293c;    
-    border-radius: 4px;
-    font-weight: 600;
-    transition: 0.2s;
-}
-
-.generateScheduleButton:hover {
-    background-color: #9fe7d1;
-    cursor: pointer;
-    transform: translate3d(0px, -2px, 0px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-}
-
-.generateScheduleButton:active {
-    transition: 0.2s;
-    transform: translate3d(0px, 2px, 0px);
-} */

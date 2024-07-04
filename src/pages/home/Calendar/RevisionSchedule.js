@@ -218,7 +218,7 @@ function Calendar() {
                     eventToDelete={eventToDelete}
                 />
                 <div className='generateSchedule'>
-                    <h3> Add exam to calendar </h3>
+                    <h3>Generate Your Revision Schedule</h3>
                     <div className='inputFields'>
 
                         <div className='examName'>
@@ -264,7 +264,7 @@ function Calendar() {
                         </div>
 
                     </div>
-                    <button className='generateScheduleButton' onClick={handleGenerateSchedule}>Generate Schedule! </button>
+                    <button className='generateScheduleButton' onClick={handleGenerateSchedule}>Im Ready! </button>
                 </div>
             </div>
         </div>
