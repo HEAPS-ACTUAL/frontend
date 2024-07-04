@@ -48,7 +48,7 @@ function About() {
                 <div className={styles.box} data-aos="fade-up" data-aos-delay="600">
                     <GiMaterialsScience className={styles.icon} />
                     <div className={styles.title}>Scientifically Proven Methods</div>
-                    <div className={styles.info}>Using active recall and spaced repetition customized to your study needs ensures maximum retentions</div>
+                    <div className={styles.info}>Using active recall and spaced repetition ensures maximum retentions</div>
                 </div>
 
             </div>
