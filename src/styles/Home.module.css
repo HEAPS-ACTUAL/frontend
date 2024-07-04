@@ -30,6 +30,8 @@
     line-height: 1.2;
     display: block;
     color: black;
+    color: #ffb703;
+    color: #355070;
 }
 
 .line{
@@ -37,10 +39,8 @@
     font-weight: 600;
     line-height: 1.2;
     display: block;
-    color: #333333;
-    background: -webkit-linear-gradient(left, 	#4663ac, #3a6073); 
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; 
+    color: #4663ac;
+    
 }
 
 .createQuiz, .yourQuizzes, .yourFlashcards {
@@ -51,8 +51,8 @@
 
 h2 {
     font-size: 28px;
-    color: #4663ac;
-    /* color: #08293c; */ /* black */
+    /* color: #4663ac; */
+    color: #08293c; /* black */
 }
 
 .createQuiz h2 {

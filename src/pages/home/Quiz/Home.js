@@ -127,7 +127,7 @@ function Home() {
             </div>
 
             <div className={styles.createQuiz}>
-                <h2> Create </h2>
+                <h2> Create! </h2>
 
                 <form onSubmit={handleFileUpload}>
                     <input type="text" placeholder="Enter a Name" onChange={(event) => setTestName(event.target.value)}/>
