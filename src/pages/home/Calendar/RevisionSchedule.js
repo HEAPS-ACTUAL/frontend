@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Select from 'react-select';
 import '../../../styles/RevisionSchedule.css'; 
 import { createNewExam, DeleteExistingExam, DeleteSpecificRevisionDate, retrieveAllRevisionDates } from '../../../services (for backend)/ScheduleService';
 import { getAllFlashcardsWithoutSchedule } from '../../../services (for backend)/FlashcardService';
@@ -11,6 +12,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import DayModal from './DayModal';
 import interactionPlugin from '@fullcalendar/interaction';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
+import { faL } from '@fortawesome/free-solid-svg-icons';
 
 function Calendar() {
     // GET EMAIL OF USER TO BE USED IN SOME OF THE FUNCTIONS BELOW
@@ -216,38 +218,49 @@ function Calendar() {
                 <div className='generateSchedule'>
                     <h3> Add exam to calendar </h3>
                     <div className='inputFields'>
-                        <div className='selectFlashcards'>
-                            <p> Choose Your Flashcard(s): </p>
-                            <select  onChange={(e) => setSelectedTestIDs([e.target.value])}>
-                                {/* <option disabled> Choose a flashcard: </option> */}
-                                {arrayOfAvailableFlashcards.length === 0
-                                    ? <option> No flashcards available </option>
-                                    : arrayOfAvailableFlashcards.map((flashcard) => (
-                                        <option key={flashcard.TestID} value={flashcard.TestID}> {flashcard.TestName} </option>
-                                    ))
-                                }
-                            </select>
+
+                        <div className='examName'>
+                            <input type="text" placeholder="Enter Exam Name" value={examName} onChange={(e) => setExamName(e.target.value)}/>
                         </div>
-                        <div className='inputExamNameAndStartDate'>
-                            <div className='examName'>
-                                <p> Enter Exam Name: </p>
-                                <input type="text" placeholder="Exam Name" value={examName} onChange={(e) => setExamName(e.target.value)}/>
-                            </div>
-                            <div className='startDate'>
-                                <p>Start Date:</p>
-                                <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
-                            </div>
+
+                        {/* <p> Choose Your Flashcard(s): </p> */}
+
+                        {/* <select multiple onChange={(e) => setSelectedTestIDs([e.target.value])}>
+                            <option disabled> Choose a flashcard: </option>
+                            {arrayOfAvailableFlashcards.length === 0
+                                ? <option> No flashcards available </option>
+                                : arrayOfAvailableFlashcards.map((flashcard) => (
+                                    <option key={flashcard.TestID} value={flashcard.TestID}> {flashcard.TestName} </option>
+                                ))
+                            }
+                        </select> */}
+
+                        <Select
+                            className='selectFlashcards'
+                            options={arrayOfAvailableFlashcards}
+                            isMulti={true}
+                            hideSelectedOptions={true}
+                            isClearable={true}
+                            // maxMenuHeight={30}
+                            placeholder='Select Flashcard(s)'
+                            
+                        /> 
+
+                        <div className='startDate'>
+                            <p>Start Date:</p>
+                            <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                         </div>
-                        <div className='inputColourAndEndDate'>
-                            <div className='examColour'>
-                                <p> Exam Colour:</p>
-                                <input type="color" value={examColour} onChange={(e) => setExamColour(e.target.value)}/>
-                            </div>
-                            <div className='endDate'>
-                                <p>Exam Date:</p>
-                                <input type="date" value={endDate || ''} onChange={(e) => setEndDate(e.target.value)} />
-                            </div>
+
+                        <div className='examColour'>
+                            <p> Exam Colour:</p>
+                            <input type="color" value={examColour} onChange={(e) => setExamColour(e.target.value)}/>
                         </div>
+
+                        <div className='endDate'>
+                            <p>Exam Date:</p>
+                            <input type="date" value={endDate || ''} onChange={(e) => setEndDate(e.target.value)} />
+                        </div>
+
                     </div>
                     <button className='generateScheduleButton' onClick={handleGenerateSchedule}>Generate Schedule! </button>
                 </div>
