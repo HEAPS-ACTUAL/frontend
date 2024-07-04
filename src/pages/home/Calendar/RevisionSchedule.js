@@ -31,7 +31,7 @@ function Calendar() {
 	const [examName, setExamName] = useState('') // examName is the subject
 	const [startDate, setStartDate] = useState('')
 	const [endDate, setEndDate] = useState(null)
-	const [examColour, setExamColour] = useState(''); // default colour is blue
+	const [examColour, setExamColour] = useState('#3788d8'); // default colour is blue
 
     // State for day modal
 	const [isOpen, setIsOpen] = useState(false); 
@@ -99,11 +99,13 @@ function Calendar() {
         console.log("Clicked date:", clickedDate); // Debug
     };
 
-    const handleDeleteEvent = ({ event }) => {
-        setEventToDelete(event); // store the event to be deleted
+
+    const handleDeleteEvent = (event) => {
+        setEventToDelete(event);
         setIsDeleteModalOpen(true); // open the delete confirmation modal
-        console.log("Event to delete:", event);
     };
+
+ 
     
     // DELETE ENTIRE SCHEDULE
     const handleDeleteAll = async () => {
@@ -171,6 +173,16 @@ function Calendar() {
         fetchRevisonDates();
     }, []);
 
+    //TESTING PURPOSES
+    // useEffect(() => {
+    //     const exampleEvents = [
+    //         { id: '1', title: 'Math Exam', start: '2024-07-01', color: '#ff9f89', flashcards: [] },
+    //         { id: '2', title: 'Science Exam', start: '2024-07-02', color: '#f1c40f', flashcards: [] },
+    //         { id: '3', title: 'History Exam', start: '2024-07-01', color: '#2ecc71', flashcards: [] },
+    //     ];
+    //     setCalendarEvents(exampleEvents);
+    // }, []);
+
 	return (
 		<div className='calendarContainer'> 
 			<h3>Struggling to plan a revision schedule?</h3>
@@ -200,7 +212,6 @@ function Calendar() {
 					initialView="dayGridMonth"
 					events={calendarEvents}
 					height="auto"
-					eventClick={handleDeleteEvent}
 					dateClick={handleDateClick}
                     showNonCurrentDates={false}
 				/>
@@ -211,6 +222,7 @@ function Calendar() {
                 onClose={() => setIsOpen(false)}
                 date={selectedDate}
                 events={selectedEvents}
+                onDeleteEvent={handleDeleteEvent}
             />
 
 			<DeleteConfirmationModal
@@ -218,6 +230,7 @@ function Calendar() {
                 onClose={() => setIsDeleteModalOpen(false)}
                 onDeleteAll={handleDeleteAll}
                 onDeleteOne={handleDeleteOne}
+                eventToDelete={eventToDelete}
             />
 		</div>
 	);
