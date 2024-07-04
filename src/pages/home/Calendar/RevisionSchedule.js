@@ -54,8 +54,8 @@ function Calendar() {
         setArrayOfAvailableFlashcards(returnedArray);
     }
 
-    // retreive revision dates from the backend @ JERRICK UR CODE GOES HERE
-    async function fetchRevisonDates(){
+    // retreive revision dates from the backend and retrieve today's date and events to display in modal
+    async function fetchRevisonDatesAndTodaysEvents(){
         const returnedArray = await retrieveAllRevisionDates(email);
         setExams(returnedArray);
 
@@ -71,6 +71,19 @@ function Calendar() {
         );
 
         setCalendarEvents(formattedCalendarEventsArray);
+
+        // FETCHING TODAY'S DATE AND EVENTS
+        const dateLocaleString = new Date().toLocaleString();
+
+        const day = dateLocaleString.slice(0, 2);
+        const month = dateLocaleString.slice(3, 5);
+        const year = dateLocaleString.slice(6, 10);
+
+        const formattedDate = `${year}-${month}-${day}`;
+        const todaysEvents = formattedCalendarEventsArray.filter(event => event.start === formattedDate);
+        
+        setSelectedDate(formattedDate);
+        setSelectedEvents(todaysEvents);
     }
 
     // WHEN USER CLICKS GENERATE SCHEDULE -> SEND DATA TO THE BACKEND
@@ -89,31 +102,14 @@ function Calendar() {
         }
     };
 
-    // OPEN THE MODAL WHEN USER CLICKS ON A DATE IN THE CALENDAR
-    function fetchTodaysDate(){
-        const dateLocaleString = new Date().toLocaleString();
-
-        const day = dateLocaleString.slice(0, 2);
-        const month = dateLocaleString.slice(3, 5);
-        const year = dateLocaleString.slice(6, 10);
-
-        const formattedDate = `${year}-${month}-${day}`;
-        const eventsOnDate = calendarEvents.filter(event => event.start === formattedDate);
-        
-        // console.log(dateLocaleString);
-        // console.log(formattedDate)
-        setSelectedDate(formattedDate);
-        setSelectedEvents(eventsOnDate);
-    }
-
+    // WHEN USER CLICKS ON A DATE IN THE CALENDAR
     const handleDateChange = (arg) => {
         const clickedDate = arg.dateStr; // YYYY-MM-DD format
         setSelectedDate(clickedDate);
         const eventsOnDate = calendarEvents.filter(event => event.start === clickedDate);
         setSelectedEvents(eventsOnDate);
-        console.log("Clicked date:", clickedDate); // Debug
+        // console.log("Clicked date:", clickedDate); // Debug
     };
-
 
     const handleDeleteEvent = (event) => {
         setEventToDelete(event);
@@ -183,19 +179,8 @@ function Calendar() {
     // FETCH RELEVANT DATA WHEN THE PAGE IS RENDERED FOR THE FIRST TIME
     useEffect(() => {
         fetchAllFlashcardsWithoutSchedule();
-        fetchRevisonDates();
-        fetchTodaysDate();
+        fetchRevisonDatesAndTodaysEvents();
     }, []);
-
-    //TESTING PURPOSES
-    // useEffect(() => {
-    //     const exampleEvents = [
-    //         { id: '1', title: 'Math Exam', start: '2024-07-01', color: '#ff9f89', flashcards: [] },
-    //         { id: '2', title: 'Science Exam', start: '2024-07-02', color: '#f1c40f', flashcards: [] },
-    //         { id: '3', title: 'History Exam', start: '2024-07-01', color: '#2ecc71', flashcards: [] },
-    //     ];
-    //     setCalendarEvents(exampleEvents);
-    // }, []);
 
 	return (
 		<div className='entirePage'>

@@ -1,21 +1,12 @@
 .modalContainer {
-    background-color: #c1d7f5;
-    /* box-shadow: 0px 0px 10px #999; */
     margin-top: 10px;
     width: 265px;
     height: 270px;
-    /* background-color: #ffffb8; */
     background-color: transparent;
-
-    /* box-shadow: 0px 0px 10px rgba(0.1, 0.1, 0.1, 0.1); */
-    /* position: fixed; */
-    /* bottom: 100px;
-    display: f'${props => props.isOpen ? 'block' : 'none'}';
-    left: 60px;
-    max-width: 320px;
-    z-index: 1000;
-    */
     position: relative;
+    /* box-shadow: 0px 0px 10px #999; */
+    /* background-color: #ffffb8; */ 
+    /* background-color: #c1d7f5; */
 }
 
 .postItIcon {
@@ -34,7 +25,7 @@
 .modalHeader {
     font-size: 20px;
     font-weight: bold;
-    margin-bottom: 22px;
+    margin-bottom: 25px;
 }
 
 .calendarIcon {
@@ -48,40 +39,30 @@
     align-items: center;
     color: gray;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
-.closeButton {
-    float: right;
-    cursor: pointer;
-    border: transparent;
-    background-color: transparent;
-    font-size: 20px;
-    transition: transform 0.2s ease;
+.noEventsMessage {
+    margin-top: 20px;
 }
 
-.closeButton:hover {
-    transform: rotate(10deg); 
-}
-
-.closeButton:active {
-    transform: rotate(0deg); 
-}
-
-.modalEvents {
-    padding-top: 10px;
-}
-
-.eventsContainer {
+.haveEvents {
     display: flex;
     flex-direction: column;
+    width: 200px;
+    height: 110px;
+    padding: 10px;
     overflow-y: auto;
+    /* border-radius: 5px; */
+    /* border: 0.5px solid black; */
+    /* box-shadow: 0px 0px 2px #999; */
+    /* background-color: white; */
 }
 
 .eventItem {
     padding: 10px 15px;
     border-radius: 20px;
-    color: white;
+    color: black;
     display: flex;
     align-items: center;
     font-size: 16px;
