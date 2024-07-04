@@ -4,6 +4,7 @@
     text-align: center;
     padding: 100px 20px;
     background: #DAEBFF;
+    /* background: #c1d8f0; */
 }
   
 .main{
@@ -32,9 +33,11 @@
     cursor: pointer;
     font-size: 1rem;
     transition: background-color 0.3s ease;
-    background-color: #0172F2;
+    background-color: 	#4663ac;
     color: white;
     font-size: 33px;
+    justify-content: center;
+    align-items: center;
 
 }   
 
@@ -44,7 +47,7 @@
 }
 
 .btn:hover {
-    background-color: #000080;
+    background-color: #9BBEC8;
 }
   
 .featuresBox {

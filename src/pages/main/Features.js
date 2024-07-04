@@ -26,7 +26,7 @@ function Features() {
             
             <div className={styles.featureItem} data-aos="fade-up">
                 <h2 className={styles.featureName}>Create Flashcards Effortlessly</h2>
-                <p className={styles.description}>Explore interactive flashcards with customizable content, multimedia features, and progress tracking for an enriched learning experience.</p>
+                <p className={styles.description}>Explore interactive flashcards for an enriching learning experience.</p>
                 <div className={styles.featureImage}>
                     <img src="https://via.placeholder.com/400x300" alt="Interactive Flashcards" />
                 </div>
@@ -34,7 +34,7 @@ function Features() {
 
             <div className={styles.featureItem} data-aos="fade-up">
                 <h2 className={styles.featureName}>Generate Quizzes Instantly</h2>
-                <p className={styles.description}>Experience smart quiz pop-ups that appear at strategic moments during your learning journey, reinforcing key concepts and boosting engagement through active recall.</p>
+                <p className={styles.description}>Perfect for quick reviews or comprehensive tests. We use your content to produce tailored questions that enhance your learning and retention.</p>
                 <a href="#active-recall" className={styles.learnMore}>Learn More about Active Recall</a>
                 <div className={styles.featureImage}>
                     <img src="https://via.placeholder.com/400x300" alt="Quizzes" />
@@ -53,7 +53,7 @@ function Features() {
 
             <div className={styles.featureItem} data-aos="fade-up">
                 <h2 className={styles.featureName}>Optimize Learning with Spaced Repetition</h2>
-                <p className={styles.description}>Utilize personalized spaced repetition scheduling to optimize learning by scheduling review sessions based on individual progress and memory retention.</p>
+                <p className={styles.description}>Boost your memory retention effectively with our spaced repetition algorithm. This feature schedules reviews at optimal intervals, ensuring you retain information longer and more efficiently.</p>
                 <a href="#spaced-repetition" className={styles.learnMore}>Learn More about Spaced Repetition</a>
                 <div className={styles.featureImage}>
                     <img src="https://via.placeholder.com/400x300" alt="Spaced Repetition Scheduling" />
@@ -61,10 +61,10 @@ function Features() {
             </div>
     
             <div className={styles.featureName} data-aos="fade-up">
-                <h2 className={styles.featureName}>Our Learning Strategy: Active Recall and Spaced Repetition</h2>
+                <h2 className={styles.featureName}>Our Learning Strategy: Active Recall & Spaced Repetition</h2>
             </div>
             <div className={styles.BoxContainer} data-aos="fade-up">
-                <div className={styles.Box}>
+                <div className={styles.Box} data-aos="fade-up">
                     <p className={styles.icon}><FaBrain /></p>
                     <h3 id='active-recall'>Active Recall</h3>
                     <br></br>
@@ -74,7 +74,8 @@ function Features() {
     
                 <div className={styles.Box} data-aos="fade-up">
                     <p className={styles.icon}><FaCalendarAlt /></p>
-                    <h3 id='spaced-repetition'>Spaced Repetition</h3><br></br>
+                    <h3 id='spaced-repetition'>Spaced Repetition</h3>
+                    <br></br>
                     <p className={styles.activespaced}>Enhance learning by scheduling review sessions based on memory retention. By strategically repeating and evaluating information, spaced repetition counters the natural tendency to forget, ensuring that knowledge is retained effectively over time.</p>
                 </div>
             </div>

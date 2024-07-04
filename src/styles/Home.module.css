@@ -37,7 +37,8 @@
     font-weight: 600;
     line-height: 1.2;
     display: block;
-    background: -webkit-linear-gradient(left, #0172F2, #3a6073); 
+    color: #333333;
+    background: -webkit-linear-gradient(left, 	#4663ac, #3a6073); 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; 
 }
@@ -50,7 +51,8 @@
 
 h2 {
     font-size: 28px;
-    color: #0172F2;
+    color: #4663ac;
+    /* color: #08293c; */ /* black */
 }
 
 .createQuiz h2 {
