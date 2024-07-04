@@ -64,7 +64,8 @@ function Calendar() {
         // TRANSFORM EXAMS INTO A FORMAT THAT IS RECOGNISED BY THE CALENDAR EVENT
         const formattedCalendarEventsArray = returnedArray.flatMap(exam =>
             JSON.parse(exam.RevisionDates).map(date => ({   
-                id: [exam.ScheduleID, date], // for handleDeleteEvent function
+                // id: [exam.ScheduleID, date], // for handleDeleteEvent function
+                id: exam.ScheduleID,
                 title: exam.ExamName,
                 start: date,
                 color: exam.ExamColour,
@@ -98,6 +99,7 @@ function Calendar() {
             await createNewExam(startDate, endDate, examName, examColour, selectedTestIDs); 
 			console.log({startdate: startDate, enddate: endDate, examname: examName, examcolour: examColour, testIDs: selectedTestIDs});            
             window.location.reload(); // REFRESH THE PAGE SO FORM INPUT FIELDS WILL BE RESET
+            window.alert('Schedule generated successfully!');
         } 
 		catch (error) {
             console.error('Failed to generate schedule:', error.message || 'Error');
