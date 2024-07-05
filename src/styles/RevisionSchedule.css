@@ -13,6 +13,9 @@
 
 .entirePage {
     display: flex;
+    /* gap: 20px; */
+    padding: 20px;
+    align-items: stretch;
 }
 
 .schedule {
@@ -35,9 +38,11 @@
     margin-top: 10px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    flex: 0 0 80%; 
-    margin-top: 30px;
+    /* flex: 0 0 80%;  */
+    flex: 1;
+    margin: 0;
 }
+
 .schedule>p {
     font-weight: 600;
     animation: fadeIn 2s ease-in;
@@ -74,7 +79,11 @@
     cursor: pointer; 
 }
 
-.fc-daygrid-day-frame, .fc-toolbar, .fc-daygrid-event, .fc-day-today, .fc-daygrid-day-number {
+.fc-daygrid-day-frame,
+.fc-toolbar, 
+.fc-daygrid-event, 
+.fc-day-today, 
+.fc-daygrid-day-number {
     border: none;
     background-color: transparent;
     color: #333; 
@@ -112,13 +121,13 @@
 .todaysEventsAndGenerateSchedule {
     flex: 0 0 20%; 
     padding: 0px 15px 0px 25px;
-    margin-top: 20px;
+    margin: 0;
 }
 
 .generateSchedule {
-    margin-top: 60px;
+    margin-top: 20px;
     /* background-color: rgba(255, 255, 255, 0.7);  */
-    background-color: rgba(255, 244, 204, 0.7);
+    background-color: rgba(255, 255, 255, 0.4); 
     padding: 20px 20px;
     border-radius: 8px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
@@ -188,4 +197,14 @@
 
 .css-1u9des2-indicatorSeparator {
     background-color: black;
+}
+
+/* Styling for the yellow post-it note */
+.todaysEvents {
+    background-color: #fffacc; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px; /* Adjust this to control spacing between elements */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for prominence */
 }

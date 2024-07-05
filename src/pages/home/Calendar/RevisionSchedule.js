@@ -95,6 +95,10 @@ function Calendar() {
             window.alert("Please enter subject name and start date before generating the schedule.");
             return;
         }
+        if (endDate && startDate > endDate) {
+            window.alert("Start date cannot be after end date.");
+            return;
+        }
         try {
             await createNewExam(startDate, endDate, examName, examColour, selectedTestIDs); 
 			console.log({startdate: startDate, enddate: endDate, examname: examName, examcolour: examColour, testIDs: selectedTestIDs});            
@@ -205,11 +209,7 @@ function Calendar() {
                 </div>
             </div>
             <div className='todaysEventsAndGenerateSchedule'>
-                <DayModal
-                    date={selectedDate}
-                    events={selectedEvents}
-                    onDeleteEvent={handleDeleteEvent}
-                />
+                
                 <DeleteConfirmationModal
                     isOpen={isDeleteModalOpen}
                     onClose={() => setIsDeleteModalOpen(false)}
@@ -218,6 +218,13 @@ function Calendar() {
                     eventToDelete={eventToDelete}
                 />
                 <div className='generateSchedule'>
+                    <DayModal
+                        date={selectedDate}
+                        events={selectedEvents}
+                        onDeleteEvent={handleDeleteEvent}
+                    />
+
+                    <div className='generateScheduleContent'>
                     <h3>Generate Your Revision Schedule</h3>
                     <div className='inputFields'>
 
@@ -262,7 +269,7 @@ function Calendar() {
                             <p>Exam Date:</p>
                             <input type="date" value={endDate || ''} onChange={(e) => setEndDate(e.target.value)} />
                         </div>
-
+                    </div>
                     </div>
                     <button className='generateScheduleButton' onClick={handleGenerateSchedule}>Im Ready! </button>
                 </div>
