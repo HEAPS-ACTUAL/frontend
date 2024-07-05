@@ -257,18 +257,21 @@ function Calendar() {
                             <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                         </div>
 
-                        <div className='examColour'>
-                            <p> Exam Colour:</p>
-                            <input type="color" value={examColour} onChange={(e) => setExamColour(e.target.value)}/>
-                        </div>
-
                         <div className='endDate'>
-                            <p>Exam Date:</p>
+                            <p>Exam Date (if applicable):</p>
                             <input type="date" value={endDate || ''} onChange={(e) => setEndDate(e.target.value)} />
                         </div>
+                        
+                        <div className='examColourAndSubmit'>
+                            <div className='examColour'>
+                                <p> Colour:</p>
+                                <input type="color" value={examColour} onChange={(e) => setExamColour(e.target.value)}/>
+                            </div>
 
+                            <button className='generateScheduleButton' onClick={handleGenerateSchedule}> Submit! </button>
+                        
+                        </div>
                     </div>
-                    <button className='generateScheduleButton' onClick={handleGenerateSchedule}>Generate Schedule! </button>
                 </div>
             </div>
         </div>

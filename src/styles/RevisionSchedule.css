@@ -21,9 +21,10 @@
 .schedule {
     display: flex;
     flex-direction: column;
-    padding: 30px 50px 50px 50px;
+    padding: 30px 50px 60px 50px;
     background-color: #b1d2f854;
     margin-top: 10px;
+    height: fit-content;
 }
 
 .schedule>p {
@@ -32,7 +33,7 @@
 }
 
 .schedule .topline {
-    font-size: 220%;
+    font-size: 200%;
     margin-bottom: 20px;
     background: -webkit-linear-gradient(left, #0172F2, #3a6073); 
     -webkit-background-clip: text;
@@ -40,7 +41,7 @@
 }
 
 .schedule .bottomline {
-    font-size: 190%;
+    font-size: 170%;
 }
 
 .calendarContainer {
@@ -105,14 +106,17 @@
 .generateSchedule {
     margin-top: 60px;
     background-color: white;
+    background-color: #fff3c8;
     padding: 10px 20px;
     border-radius: 8px;
     /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); */
+    width: 220px;
 }
 
 .generateSchedule h3 {
     font-size: 14.4px;
     text-decoration: underline;
+    margin-top: 8px;
 }
 
 .inputFields select,
@@ -123,17 +127,24 @@
     font-size: 13px;
 }
 
-.examName, .selectFlashcards, .startDate, .endDate {
+.examName, .selectFlashcards, .startDate, .endDate, .examColour {
     margin-top: 20px;
+    font-size: 13px;
 }
 
 .examName input, .startDate input, .endDate input {
-    width: calc(50%);
+    width: 181px;
     padding: 10px;
+    margin-top: 5px;
+}
+
+.examColour input {
+    margin-top: 5px;
+    
 }
 
 .selectFlashcards {
-    width: calc(100% - 20px);
+    width: 181px;
     /* padding: 10px; */
 
 }
@@ -153,20 +164,28 @@
     background-color: black !important;
 }
 
+.examColourAndSubmit {
+    display: flex;
+    margin-bottom: 10px;
+}
+
 .generateScheduleButton {
-    margin-top: 15px;
+    margin: 34px 0px 0px 20px;
     background-color: transparent;
-    padding: 8px 20px;
+    width: 110px;
+    height: 35px;
+    padding: 8px;
     border: 2px solid #08293c;    
     border-radius: 4px;
     font-weight: 600;
     transition: 0.2s;
     cursor: pointer;
     text-align: center;
+    font-size: 13px;
 }
 
 .generateScheduleButton:hover {
-    background-color: #9fe7d1;
+    background-color: rgba(70, 99, 172, 0.4);
     transform: translate3d(0px, -2px, 0px);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
