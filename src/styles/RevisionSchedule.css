@@ -21,16 +21,23 @@
 .schedule {
     display: flex;
     flex-direction: column;
-    align-items: left;
-    padding: 30px 150px 50px 30px
+    padding: 30px 50px 60px 50px;
+    background-color: #b1d2f854;
+    margin-top: 10px;
+    height: fit-content;
 }
-.inputContainerforMaunual {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    /* padding: 15px; */
-    margin-top: 30px;
-    font-weight: bold;
+
+.schedule>p {
+    font-weight: 600;
+    animation: fadeIn 2s ease-in;
+}
+
+.schedule .topline {
+    font-size: 200%;
+    margin-bottom: 20px;
+    background: -webkit-linear-gradient(left, #0172F2, #3a6073); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .schedule .bottomline {
@@ -53,8 +60,11 @@
     cursor: pointer; 
 }
 
-
-.fc-daygrid-day-frame, .fc-toolbar, .fc-daygrid-event, .fc-day-today, .fc-daygrid-day-number {
+.fc-daygrid-day-frame,
+.fc-toolbar, 
+.fc-daygrid-event, 
+.fc-day-today, 
+.fc-daygrid-day-number {
     border: none;
     background-color: transparent;
     color: #333; 
@@ -184,119 +194,3 @@
     transition: 0.2s;
     transform: translate3d(0px, 2px, 0px);
 }
-/* 
-
-
-.inputFields {
-    display: flex;
-    flex-direction: row;
-    margin-top: 0px;
-}
-
-.inputFields p {
-    margin-top: 30px;
-    margin-bottom: 15px;
-    font-weight: 600;
-    color: #363636;
-}
-
-
-
-.selectFlashcards select {
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    padding: 0px 10px;
-}
-
-.selectFlashcards select option {
-    margin-top: 3%;
-}
-
-.inputExamNameAndStartDate, .inputColourAndEndDate {
-    display: flex;
-    flex-direction: column;
-    width: 330px;
-}
-
-.examColour input {
-    padding: 5px;
-    width: 25%;
-    height: 40px;
-}
-
-.css-13cymwt-control, .css-t3ipsp-control {
-    min-height: 43px !important; 
-    background-color: transparent !important;
-    border-color: black !important;
-}
-
-.css-1xc3v61-indicatorContainer {
-    color: black !important;
-}
-
-.css-1u9des2-indicatorSeparator {
-    background-color: black !important;
-}
-/* 
-
-
-.inputFields {
-    display: flex;
-    flex-direction: row;
-    margin-top: 0px;
-}
-
-.inputFields p {
-    margin-top: 30px;
-    margin-bottom: 15px;
-    font-weight: 600;
-    color: #363636;
-}
-
-
-
-.selectFlashcards select {
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    padding: 0px 10px;
-}
-
-.selectFlashcards select option {
-    margin-top: 3%;
-}
-
-.inputExamNameAndStartDate, .inputColourAndEndDate {
-    display: flex;
-    flex-direction: column;
-    width: 330px;
-}
-
-.examColour input {
-    padding: 5px;
-    width: 25%;
-    height: 40px;
-}
-
-.generateScheduleButton {
-    margin-top: 25px;
-    background-color: transparent;
-    padding: 10px 25px;
-    border: 2.2px solid #08293c;    
-    border-radius: 4px;
-    font-weight: 600;
-    transition: 0.2s;
-}
-
-.generateScheduleButton:hover {
-    background-color: #9fe7d1;
-    cursor: pointer;
-    transform: translate3d(0px, -2px, 0px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-}
-
-.generateScheduleButton:active {
-    transition: 0.2s;
-    transform: translate3d(0px, 2px, 0px);
-} */
