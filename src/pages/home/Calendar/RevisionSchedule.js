@@ -226,7 +226,7 @@ function Calendar() {
                     <div className='inputFields'>
 
                         <div className='examName'>
-                            <input type="text" placeholder="Enter Exam Name" value={examName} onChange={(e) => setExamName(e.target.value)}/>
+                            <input type="text" placeholder="Exam Name" value={examName} onChange={(e) => setExamName(e.target.value)}/>
                         </div>
 
                         {/* <p> Choose Your Flashcard(s): </p> */}
