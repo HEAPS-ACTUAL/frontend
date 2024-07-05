@@ -222,7 +222,7 @@ function Calendar() {
                     eventToDelete={eventToDelete}
                 />
                 <div className='generateSchedule'>
-                    <h3> Add exam to calendar </h3>
+                    <h3>Generate revision Schedule</h3>
                     <div className='inputFields'>
 
                         <div className='examName'>
