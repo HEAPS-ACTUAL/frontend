@@ -64,8 +64,8 @@ function Calendar() {
         // TRANSFORM EXAMS INTO A FORMAT THAT IS RECOGNISED BY THE CALENDAR EVENT
         const formattedCalendarEventsArray = returnedArray.flatMap(exam =>
             JSON.parse(exam.RevisionDates).map(date => ({   
-                // id: [exam.ScheduleID, date], // for handleDeleteEvent function
-                id: exam.ScheduleID,
+                id: [exam.ScheduleID, date], // for handleDeleteEvent function
+                // id: exam.ScheduleID,
                 title: exam.ExamName,
                 start: date,
                 color: exam.ExamColour,
@@ -209,7 +209,11 @@ function Calendar() {
                 </div>
             </div>
             <div className='todaysEventsAndGenerateSchedule'>
-                
+                <DayModal
+                    date={selectedDate}
+                    events={selectedEvents}
+                    onDeleteEvent={handleDeleteEvent}
+                />
                 <DeleteConfirmationModal
                     isOpen={isDeleteModalOpen}
                     onClose={() => setIsDeleteModalOpen(false)}
@@ -218,14 +222,7 @@ function Calendar() {
                     eventToDelete={eventToDelete}
                 />
                 <div className='generateSchedule'>
-                    <DayModal
-                        date={selectedDate}
-                        events={selectedEvents}
-                        onDeleteEvent={handleDeleteEvent}
-                    />
-
-                    <div className='generateScheduleContent'>
-                    <h3>Generate Your Revision Schedule</h3>
+                    <h3> Add exam to calendar </h3>
                     <div className='inputFields'>
 
                         <div className='examName'>
@@ -269,10 +266,12 @@ function Calendar() {
                             <p>Exam Date:</p>
                             <input type="date" value={endDate || ''} onChange={(e) => setEndDate(e.target.value)} />
                         </div>
+
                     </div>
-                    </div>
-                    <button className='generateScheduleButton' onClick={handleGenerateSchedule}>Im Ready! </button>
+                    <button className='generateScheduleButton' onClick={handleGenerateSchedule}>Generate Schedule! </button>
                 </div>
+                
+                <button className='generateScheduleButton' onClick={handleGenerateSchedule}>Generate Schedule! </button>
             </div>
         </div>
 	);
