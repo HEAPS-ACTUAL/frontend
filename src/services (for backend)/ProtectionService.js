@@ -1,6 +1,6 @@
 function isLoggedIn() {
-  // return !!sessionStorage.getItem("userEmail");
-  return true; // UNCOMMENT THIS LINE AND COMMENT THE ABOVE TO BYPASS THE PROTECTION
+  return !!sessionStorage.getItem("userEmail");
+  // return true; // UNCOMMENT THIS LINE AND COMMENT THE ABOVE TO BYPASS THE PROTECTION
 }
 
 function handleLogOut() {
