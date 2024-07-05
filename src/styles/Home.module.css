@@ -30,6 +30,8 @@
     line-height: 1.2;
     display: block;
     color: black;
+    color: #ffb703;
+    color: #355070;
 }
 
 .line{
@@ -37,9 +39,8 @@
     font-weight: 600;
     line-height: 1.2;
     display: block;
-    background: -webkit-linear-gradient(left, #0172F2, #3a6073); 
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; 
+    color: #4663ac;
+    
 }
 
 .createQuiz, .yourQuizzes, .yourFlashcards {
@@ -50,7 +51,8 @@
 
 h2 {
     font-size: 28px;
-    color: #0172F2;
+    /* color: #4663ac; */
+    color: #08293c; /* black */
 }
 
 .createQuiz h2 {
@@ -110,7 +112,7 @@ h2 {
 }
 
 .createQuiz button:hover {
-    background-color: #9fe7d1;
+    background-color:rgba(70, 99, 172, 0.5);
     cursor: pointer;
     transform: translate3d(0px, -2px, 0px);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);

@@ -1,70 +1,58 @@
 .Features {
     background: #DAEBFF;
+    /* background:#EBF2FA; */
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 20px;
     padding: 20px;
     border-radius: 15px;
+    text-align: center;
+    margin-top: 60px; 
 }
 
 .centerText {
     text-align: center;
-    margin-bottom: 20px;
-    font-size: 2rem; 
+    margin-bottom: 5px; 
+    font-size: 3.5rem;
     font-weight: bold;
+    margin-top: 60px;
 }
 
 .featureItem {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
     width: 100%;
     max-width: 1000px;
-    margin-bottom: 20px;
-    padding: 20px;
+    margin-bottom: 40px;
+    padding: 30px;
     border-radius: 15px;
-}
-
-.featureItem.reverse {
-    flex-direction: row-reverse;
 }
 
 .featureContent {
-    flex: 1;
-    margin-right: 20px;
-}
-
-.featureItem.reverse .featureContent {
-    margin-right: 0;
-    margin-left: 20px;
-}
-
-.featureImage {
-    margin-left: 20px;
-    flex-shrink: 0;
-}
-
-.featureItem.reverse .featureImage {
-    margin-left: 0;
-    margin-right: 20px;
+    margin-bottom: 20px;
 }
 
 .featureImage img {
-    width: 500px;
+    width: 100%;
+    max-width: 1000px;
     height: auto;
-    max-width: 100%;
     object-fit: cover;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
 }
 
 .infoSection {
-    max-width: 1000px;
-    margin-top: 20px;
+    max-width: 800px;
+    margin-top: 40px;
     padding: 20px;
     border-radius: 15px;
-    line-height: 1.6;
+    line-height: 1.8;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
 .learnMore {
@@ -75,8 +63,78 @@
 }
 
 .infoSection h2 {
-    text-align: center;
     margin-bottom: 20px;
     font-size: 1.6rem; 
     font-weight: bold;
+}
+
+
+.description {
+    margin-bottom: 10px;
+    margin-top: 20px;
+    font-size: 1.5rem;
+    color: #363737;
+    
+}
+
+
+.featureName {
+    text-align: center;
+    margin-bottom: 10px; 
+    font-size: 2.7rem;
+    font-weight: bold;
+    margin-top: 80px;
+    flex-wrap: wrap;
+    width: 100%;
+    
+
+}
+
+.BoxContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+}
+
+.Box {
+    flex: 1 1 calc(50% - 20px);
+    background-color: white;
+    border-radius: 10px;
+    height: 300px;
+    width: 500px;
+    max-width: 50%;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-right: 30px;
+    padding-top: 50px;
+    text-align: left;
+    padding-left:30px ;
+    padding-right: 30px;
+    box-sizing: border-box;
+
+}
+
+.Box:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+.icon{
+    background-color:#0172F2 ;
+    padding: 10px;
+    border-radius: 30%;
+    width: 50px;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    display: flex;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.activespaced{
+    font-size: 0.9rem;
+    color: #363737;
 }

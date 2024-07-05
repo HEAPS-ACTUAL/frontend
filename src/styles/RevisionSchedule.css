@@ -21,23 +21,16 @@
 .schedule {
     display: flex;
     flex-direction: column;
-    padding: 30px 50px 60px 50px;
-    background-color: #b1d2f854;
-    margin-top: 10px;
-    height: fit-content;
+    align-items: left;
+    padding: 30px 150px 50px 30px
 }
-
-.schedule>p {
-    font-weight: 600;
-    animation: fadeIn 2s ease-in;
-}
-
-.schedule .topline {
-    font-size: 200%;
-    margin-bottom: 20px;
-    background: -webkit-linear-gradient(left, #0172F2, #3a6073); 
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.inputContainerforMaunual {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    /* padding: 15px; */
+    margin-top: 30px;
+    font-weight: bold;
 }
 
 .schedule .bottomline {
@@ -60,11 +53,8 @@
     cursor: pointer; 
 }
 
-.fc-daygrid-day-frame,
-.fc-toolbar, 
-.fc-daygrid-event, 
-.fc-day-today, 
-.fc-daygrid-day-number {
+
+.fc-daygrid-day-frame, .fc-toolbar, .fc-daygrid-event, .fc-day-today, .fc-daygrid-day-number {
     border: none;
     background-color: transparent;
     color: #333; 

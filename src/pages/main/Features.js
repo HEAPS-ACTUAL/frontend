@@ -1,64 +1,87 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from '../../styles/Features.module.css';
-import quizImage from '../../images/quiz.jpg'; 
+import { FaCalendarAlt } from "react-icons/fa";
+import { FaBrain } from "react-icons/fa6";
+import homepage from "../images/homepage.jpg";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 function Features() {
+    useEffect(() => {
+        AOS.init({
+            duration: 1500, 
+            easing: 'ease-in-out-back', 
+            offset: 117, 
+        });
+    }, []);
+    
     return (
         <div className={styles.Features}>
-            <h1 className={styles.centerText}>Our Features</h1>
+            <h1 className={styles.centerText} data-aos="fade-up">Transform Your PDFs with quizDaddy</h1>
+
+            <div className={styles.featureImage} data-aos="fade-up">
+                <img src={homepage} ></img>
             
-            <div className={styles.featureItem}>
-                <div className={styles.featureContent}>
-                    <h2 className={styles.featureName}>Interactive Flashcards</h2><br/>
-                    <p>Explore interactive flashcards with customizable content, multimedia features, and progress tracking for an enriched learning experience.</p>
-                </div>
+            </div>
+            
+            <div className={styles.featureItem} data-aos="fade-up">
+                <h2 className={styles.featureName}>Create Flashcards Effortlessly</h2>
+                <p className={styles.description}>Explore interactive flashcards for an enriching learning experience.</p>
                 <div className={styles.featureImage}>
                     <img src="https://via.placeholder.com/400x300" alt="Interactive Flashcards" />
                 </div>
             </div>
 
-            <div className={`${styles.featureItem} ${styles.reverse}`}>
-                <div className={styles.featureContent}>
-                    <h2 className={styles.featureName}>Customized Spaced Repetition Scheduling</h2><br/>
-                    <p>Utilize personalized spaced repetition scheduling to optimize learning by scheduling review sessions based on individual progress and memory retention.</p>
-                    <br/>
-                    <a href="#spaced-repetition" className={styles.learnMore}>Learn More about Spaced Repetition</a>
-                </div>
+            <div className={styles.featureItem} data-aos="fade-up">
+                <h2 className={styles.featureName}>Generate Quizzes Instantly</h2>
+                <p className={styles.description}>Perfect for quick reviews or comprehensive tests. We use your content to produce tailored questions that enhance your learning and retention.</p>
+                <a href="#active-recall" className={styles.learnMore}>Learn More about Active Recall</a>
                 <div className={styles.featureImage}>
-                    <img src="https://via.placeholder.com/400x300" alt="Spaced Repetition Scheduling" />
+                    <img src="https://via.placeholder.com/400x300" alt="Quizzes" />
                 </div>
+                
             </div>
 
-            <div className={styles.featureItem}>
-                <div className={styles.featureContent}>
-                    <h2 className={styles.featureName}>Smart Quiz Pop-Ups</h2><br/>
-                    <p>Experience smart quiz pop-ups that appear at strategic moments during your learning journey, reinforcing key concepts and boosting engagement through active recall.</p>
-                    <br/>
-                    <a href="#active-recall" className={styles.learnMore}>Learn More about Active Recall</a>
-                </div>
-                <div className={styles.featureImage}>
-                    <img src={quizImage} alt="Smart Quiz Pop-Ups" />
-                </div>
-            </div>
-
-            <div className={`${styles.featureItem} ${styles.reverse}`}>
-                <div className={styles.featureContent}>
-                    <h2 className={styles.featureName}>Quiz Tracker</h2><br/>
-                    <p>Track completed and pending quizzes to monitor your progress effortlessly.</p>
-                </div>
+        
+            <div className={styles.featureItem} data-aos="fade-up">
+                <h2 className={styles.featureName}>Monitor Your Quiz Progress</h2>
+                <p className={styles.description}>Track completed and pending quizzes to monitor your progress effortlessly.</p>
                 <div className={styles.featureImage}>
                     <img src="https://via.placeholder.com/400x300" alt="Quiz Tracker" />
                 </div>
             </div>
 
-            <div className={styles.infoSection}>
-                <h2 className={styles.centerText}>Why Active Recall and Spaced Repetition?</h2><br/>
-                <p><b>Active Recall</b> is a study method that involves activating, and therefore, strengthening, neural synapses to easier recall the information later.
-                It includes active involvement of the brain, resulting in reinforcement of the synapses which leads to more efficient memorization. You do not need to reread the information or repeat it, you should try to recall it several times to establish a firm neural connection that represents the knowledge.
-                To retain that knowledge for longer periods, you can use spaced repetitions.</p>
-                <br/>
-                <p><b>Spaced Repetition</b> is a technique that helps optimize learning by scheduling review sessions based on individual progress and memory retention. Space in the brain is limited, and unused information is often replaced with more recent and valuable data. The strategy is to repeat what you learned, evaluate, and then repeat it in the future, which helps decline the exponential rate of forgetting and retain information for a longer period.</p>
+            <div className={styles.featureItem} data-aos="fade-up">
+                <h2 className={styles.featureName}>Optimize Learning with Spaced Repetition</h2>
+                <p className={styles.description}>Boost your memory retention effectively with our spaced repetition algorithm. This feature schedules reviews at optimal intervals, ensuring you retain information longer and more efficiently.</p>
+                <a href="#spaced-repetition" className={styles.learnMore}>Learn More about Spaced Repetition</a>
+                <div className={styles.featureImage}>
+                    <img src="https://via.placeholder.com/400x300" alt="Spaced Repetition Scheduling" />
+                </div>
             </div>
+    
+            <div className={styles.featureName} data-aos="fade-up">
+                <h2 className={styles.featureName}>Our Learning Strategy: Active Recall & Spaced Repetition</h2>
+            </div>
+            <div className={styles.BoxContainer} data-aos="fade-up">
+                <div className={styles.Box} data-aos="fade-up">
+                    <p className={styles.icon}><FaBrain /></p>
+                    <h3 id='active-recall'>Active Recall</h3>
+                    <br></br>
+                    <p className={styles.activespaced} id='active-recall'>Active Recall strengthens neural connections through active engagement of the brain. By recalling information multiple
+                    times instead of re-reading or repeating, you solidify these connections, ensuring efficient memorization. </p>
+                </div>
+    
+                <div className={styles.Box} data-aos="fade-up">
+                    <p className={styles.icon}><FaCalendarAlt /></p>
+                    <h3 id='spaced-repetition'>Spaced Repetition</h3>
+                    <br></br>
+                    <p className={styles.activespaced}>Enhance learning by scheduling review sessions based on memory retention. By strategically repeating and evaluating information, spaced repetition counters the natural tendency to forget, ensuring that knowledge is retained effectively over time.</p>
+                </div>
+            </div>
+
+
+            
         </div>
     );
 }
