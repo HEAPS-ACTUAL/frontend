@@ -13,10 +13,12 @@ function About() {
 
     useEffect(() => {
         AOS.init({
-            duration: 1500, 
-            easing: 'ease-in-out-back', 
+            duration: 1500,
+            easing: 'ease-in-out-back',
         });
     }, []);
+    
+    
 
   return (
     <div className={styles.heroSection} >
