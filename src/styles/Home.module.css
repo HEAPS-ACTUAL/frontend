@@ -112,7 +112,7 @@ h2 {
 }
 
 .createQuiz button:hover {
-    background-color: #9fe7d1;
+    background-color:rgba(70, 99, 172, 0.5);
     cursor: pointer;
     transform: translate3d(0px, -2px, 0px);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
