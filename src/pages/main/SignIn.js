@@ -46,16 +46,15 @@ const SignIn = () => {
             window.alert("All fields must be filled in!");
         }
         else{
-            // const returnedMessage = await authenticate (email, password);
-            // window.alert(returnedMessage);
+            const returnedMessage = await authenticate (email, password);
 
-            // if (returnedMessage !== 'Authentication Successful!'){
-            //     window.alert(returnedMessage);
-            // }
-            // else{
+            if (returnedMessage !== 'Authentication Successful!'){
+                window.alert(returnedMessage);
+            }
+            else{
                handleLogIn(email);
                navigate('/home');
-            // }
+            }
         }    
     }
 

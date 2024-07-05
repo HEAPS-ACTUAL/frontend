@@ -100,7 +100,7 @@ function Calendar() {
             return;
         }
         try {
-            await createNewExam(startDate, endDate, examName, examColour, selectedTestIDs); 
+            await createNewExam(startDate, endDate, examName, examColour, selectedTestIDs);
 			console.log({startdate: startDate, enddate: endDate, examname: examName, examcolour: examColour, testIDs: selectedTestIDs});            
             window.location.reload(); // REFRESH THE PAGE SO FORM INPUT FIELDS WILL BE RESET
             window.alert('Schedule generated successfully!');
@@ -184,6 +184,12 @@ function Calendar() {
         }
     };
 
+    const handleSelectChange = (selectedOptions) => {
+        const selectedIDs = selectedOptions ? selectedOptions.map(option => option.value) : [];
+        setSelectedTestIDs(selectedIDs);
+        console.log(selectedIDs);
+    };
+
     // FETCH RELEVANT DATA WHEN THE PAGE IS RENDERED FOR THE FIRST TIME
     useEffect(() => {
         fetchAllFlashcardsWithoutSchedule();
@@ -249,7 +255,7 @@ function Calendar() {
                             isClearable={true}
                             // maxMenuHeight={30}
                             placeholder='Select Flashcard(s)'
-                            
+                            onChange={handleSelectChange}
                         /> 
 
                         <div className='startDate'>
