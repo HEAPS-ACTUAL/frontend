@@ -1,68 +1,56 @@
-.calendarContainer {
+:root {
+    --fc-border-color: #998e8e3d;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.entirePage {
+    display: flex;
+    /* gap: 20px; */
+    padding: 20px;
+    align-items: stretch;
+}
+
+.schedule {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 150px;
-
-
+    align-items: left;
+    padding: 30px 150px 50px 30px
 }
 .inputContainerforMaunual {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-around; 
-    padding: 15px;
-    border-radius: 5px; 
+    /* padding: 15px; */
     margin-top: 30px;
+    font-weight: bold;
 }
 
-.calendar {
-    margin-top: 100px;
-    margin-right: 80;
+.schedule .bottomline {
+    font-size: 170%;
+}
+
+.calendarContainer {
+    margin-top: 50px;
     cursor: pointer;
+    font-size: 13px;
 }
 
-.calendar .fc-day {
+.calendarContainer .fc-day {
     position: relative;
     transition: background-color 0.3s ease; 
 }
 
-.calendar .fc-day:hover {
+.calendarContainer .fc-day:hover {
     background-color: #7aa4ce; 
     cursor: pointer; 
-}
-
-.inputContainerforMaunual input,
-.inputContainerforMaunual select,
-.inputContainerforMaunual button {
-    padding: 8px 12px;
-    margin: 20px; 
-    border: 2px solid #e0e0e0; 
-    border-radius: 5px;
-    font-size: 16px; 
-    width: auto; 
-    flex-grow: 1; 
-    background-color: #fafafa; 
-    box-shadow: none; 
-    align-items: center;
-    justify-content: center;
-}
-
-.inputContainerforMaunual input:focus,
-.inputContainerforMaunual button:focus {
-    border-color: #0056b3; 
-    box-shadow: none; 
-}
-
-.inputContainerforMaunual button {
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.inputContainerforMaunual button:hover {
-    background-color: #0056b3; 
 }
 
 
@@ -92,13 +80,223 @@
     margin: 5px;
 }
 
-
 .fc-event {
     cursor: pointer; 
     transition: background-color 0.3s; 
 }
 
-
 .fc-daygrid-day-number {
     font-weight: bold; 
 }
+
+.todaysEventsAndGenerateSchedule {
+    padding: 0px 15px 0px 25px;
+}
+
+.generateSchedule {
+    margin-top: 60px;
+    background-color: white;
+    background-color: #fff3c8;
+    padding: 10px 20px;
+    border-radius: 8px;
+    /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); */
+    width: 220px;
+}
+
+.generateSchedule h3 {
+    font-size: 14.4px;
+    text-decoration: underline;
+    margin-top: 8px;
+}
+
+.inputFields select,
+.inputFields input {
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.examName, .selectFlashcards, .startDate, .endDate, .examColour {
+    margin-top: 20px;
+    font-size: 13px;
+}
+
+.examName input, .startDate input, .endDate input {
+    width: 181px;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+.examColour input {
+    margin-top: 5px;
+    
+}
+
+.selectFlashcards {
+    width: 181px;
+    /* padding: 10px; */
+
+}
+
+.css-13cymwt-control, .css-t3ipsp-control {
+    min-height: 43px !important; 
+    background-color: transparent !important;
+    border-color: black !important;
+    font-size: 13px;
+}
+
+.css-1xc3v61-indicatorContainer {
+    color: black !important;
+}
+
+.css-1u9des2-indicatorSeparator {
+    background-color: black !important;
+}
+
+.examColourAndSubmit {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.generateScheduleButton {
+    margin: 34px 0px 0px 20px;
+    background-color: transparent;
+    width: 110px;
+    height: 35px;
+    padding: 8px;
+    border: 2px solid #08293c;    
+    border-radius: 4px;
+    font-weight: 600;
+    transition: 0.2s;
+    cursor: pointer;
+    text-align: center;
+    font-size: 13px;
+}
+
+.generateScheduleButton:hover {
+    background-color: rgba(70, 99, 172, 0.4);
+    transform: translate3d(0px, -2px, 0px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.generateScheduleButton:active {
+    transition: 0.2s;
+    transform: translate3d(0px, 2px, 0px);
+}
+/* 
+
+
+.inputFields {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0px;
+}
+
+.inputFields p {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #363636;
+}
+
+
+
+.selectFlashcards select {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 0px 10px;
+}
+
+.selectFlashcards select option {
+    margin-top: 3%;
+}
+
+.inputExamNameAndStartDate, .inputColourAndEndDate {
+    display: flex;
+    flex-direction: column;
+    width: 330px;
+}
+
+.examColour input {
+    padding: 5px;
+    width: 25%;
+    height: 40px;
+}
+
+.css-13cymwt-control, .css-t3ipsp-control {
+    min-height: 43px !important; 
+    background-color: transparent !important;
+    border-color: black !important;
+}
+
+.css-1xc3v61-indicatorContainer {
+    color: black !important;
+}
+
+.css-1u9des2-indicatorSeparator {
+    background-color: black !important;
+}
+/* 
+
+
+.inputFields {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0px;
+}
+
+.inputFields p {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #363636;
+}
+
+
+
+.selectFlashcards select {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 0px 10px;
+}
+
+.selectFlashcards select option {
+    margin-top: 3%;
+}
+
+.inputExamNameAndStartDate, .inputColourAndEndDate {
+    display: flex;
+    flex-direction: column;
+    width: 330px;
+}
+
+.examColour input {
+    padding: 5px;
+    width: 25%;
+    height: 40px;
+}
+
+.generateScheduleButton {
+    margin-top: 25px;
+    background-color: transparent;
+    padding: 10px 25px;
+    border: 2.2px solid #08293c;    
+    border-radius: 4px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.generateScheduleButton:hover {
+    background-color: #9fe7d1;
+    cursor: pointer;
+    transform: translate3d(0px, -2px, 0px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.generateScheduleButton:active {
+    transition: 0.2s;
+    transform: translate3d(0px, 2px, 0px);
+} */

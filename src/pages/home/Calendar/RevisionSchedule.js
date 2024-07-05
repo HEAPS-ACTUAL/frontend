@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Select from 'react-select';
 import '../../../styles/RevisionSchedule.css'; 
 import { createNewExam, DeleteExistingExam, DeleteSpecificRevisionDate, retrieveAllRevisionDates } from '../../../services (for backend)/ScheduleService';
 import { getAllFlashcardsWithoutSchedule } from '../../../services (for backend)/FlashcardService';
@@ -11,6 +12,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import DayModal from './DayModal';
 import interactionPlugin from '@fullcalendar/interaction';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
+import { faL } from '@fortawesome/free-solid-svg-icons';
 
 function Calendar() {
     // GET EMAIL OF USER TO BE USED IN SOME OF THE FUNCTIONS BELOW
@@ -31,11 +33,11 @@ function Calendar() {
 	const [examName, setExamName] = useState('') // examName is the subject
 	const [startDate, setStartDate] = useState('')
 	const [endDate, setEndDate] = useState(null)
-	const [examColour, setExamColour] = useState('#3788d8'); // default colour is blue
+	const [examColour, setExamColour] = useState('#808080'); // default colour is blue
 
     // State for day modal
-	const [isOpen, setIsOpen] = useState(false); 
-    const [selectedDate, setSelectedDate] = useState('');
+	// const [isOpen, setIsOpen] = useState(true);
+    const [selectedDate, setSelectedDate] = useState(null);
     const [selectedEvents, setSelectedEvents] = useState([]);
 
 	// State for delete confirmation modal
@@ -54,8 +56,8 @@ function Calendar() {
         setArrayOfAvailableFlashcards(returnedArray);
     }
 
-    // retreive revision dates from the backend @ JERRICK UR CODE GOES HERE
-    async function fetchRevisonDates(){
+    // retreive revision dates from the backend and retrieve today's date and events to display in modal
+    async function fetchRevisonDatesAndTodaysEvents(){
         const returnedArray = await retrieveAllRevisionDates(email);
         setExams(returnedArray);
 
@@ -63,6 +65,7 @@ function Calendar() {
         const formattedCalendarEventsArray = returnedArray.flatMap(exam =>
             JSON.parse(exam.RevisionDates).map(date => ({   
                 id: [exam.ScheduleID, date], // for handleDeleteEvent function
+                // id: exam.ScheduleID,
                 title: exam.ExamName,
                 start: date,
                 color: exam.ExamColour,
@@ -71,6 +74,19 @@ function Calendar() {
         );
 
         setCalendarEvents(formattedCalendarEventsArray);
+
+        // FETCHING TODAY'S DATE AND EVENTS
+        const dateLocaleString = new Date().toLocaleString();
+
+        const day = dateLocaleString.slice(0, 2);
+        const month = dateLocaleString.slice(3, 5);
+        const year = dateLocaleString.slice(6, 10);
+
+        const formattedDate = `${year}-${month}-${day}`;
+        const todaysEvents = formattedCalendarEventsArray.filter(event => event.start === formattedDate);
+        
+        setSelectedDate(formattedDate);
+        setSelectedEvents(todaysEvents);
     }
 
     // WHEN USER CLICKS GENERATE SCHEDULE -> SEND DATA TO THE BACKEND
@@ -79,33 +95,34 @@ function Calendar() {
             window.alert("Please enter subject name and start date before generating the schedule.");
             return;
         }
+        if (endDate && startDate > endDate) {
+            window.alert("Start date cannot be after end date.");
+            return;
+        }
         try {
             await createNewExam(startDate, endDate, examName, examColour, selectedTestIDs); 
 			console.log({startdate: startDate, enddate: endDate, examname: examName, examcolour: examColour, testIDs: selectedTestIDs});            
             window.location.reload(); // REFRESH THE PAGE SO FORM INPUT FIELDS WILL BE RESET
+            window.alert('Schedule generated successfully!');
         } 
 		catch (error) {
             console.error('Failed to generate schedule:', error.message || 'Error');
         }
     };
 
-    // OPEN THE MODAL WHEN USER CLICKS ON A DATE IN THE CALENDAR
-    const handleDateClick = (arg) => {
+    // WHEN USER CLICKS ON A DATE IN THE CALENDAR
+    const handleDateChange = (arg) => {
         const clickedDate = arg.dateStr; // YYYY-MM-DD format
         setSelectedDate(clickedDate);
         const eventsOnDate = calendarEvents.filter(event => event.start === clickedDate);
         setSelectedEvents(eventsOnDate);
-        setIsOpen(true); // Open the modal
-        console.log("Clicked date:", clickedDate); // Debug
+        // console.log("Clicked date:", clickedDate); // Debug
     };
-
 
     const handleDeleteEvent = (event) => {
         setEventToDelete(event);
         setIsDeleteModalOpen(true); // open the delete confirmation modal
     };
-
- 
     
     // DELETE ENTIRE SCHEDULE
     const handleDeleteAll = async () => {
@@ -170,69 +187,94 @@ function Calendar() {
     // FETCH RELEVANT DATA WHEN THE PAGE IS RENDERED FOR THE FIRST TIME
     useEffect(() => {
         fetchAllFlashcardsWithoutSchedule();
-        fetchRevisonDates();
+        fetchRevisonDatesAndTodaysEvents();
     }, []);
 
-    //TESTING PURPOSES
-    // useEffect(() => {
-    //     const exampleEvents = [
-    //         { id: '1', title: 'Math Exam', start: '2024-07-01', color: '#ff9f89', flashcards: [] },
-    //         { id: '2', title: 'Science Exam', start: '2024-07-02', color: '#f1c40f', flashcards: [] },
-    //         { id: '3', title: 'History Exam', start: '2024-07-01', color: '#2ecc71', flashcards: [] },
-    //     ];
-    //     setCalendarEvents(exampleEvents);
-    // }, []);
-
 	return (
-		<div className='calendarContainer'> 
-			<h3>Struggling to plan a revision schedule?</h3>
-			<h1>Daddy's got your back!</h1>
-			<div className='inputContainerforMaunual'>
-                <div className='input'>
-                    Flashcard:
-                    <select onChange={(e) => setSelectedTestIDs([e.target.value])}>
-                        <option disabled selected> Choose a flashcard </option>
-                        {arrayOfAvailableFlashcards.length === 0 
-                            ? <option> No flashcards available </option> 
-                            : arrayOfAvailableFlashcards.map((flashcard) => (
-                                <option key={flashcard.TestID} value={flashcard.TestID}> {flashcard.TestName} </option>
-                            ))
-                        }
-                    </select>
+		<div className='entirePage'>
+            <div className='schedule'>
+                <p className='topline'>Struggling to plan a revision schedule?</p>
+                <p className='bottomline'> Daddy's got your back!</p>
+            
+                <div className='calendarContainer'>
+                    <FullCalendar
+                        plugins={[dayGridPlugin,interactionPlugin]}
+                        initialView="dayGridMonth"
+                        events={calendarEvents}
+                        height="auto"
+                        dateClick={handleDateChange}
+                        showNonCurrentDates={false}
+                        fixedWeekCount={false}
+                />
                 </div>
-				<div className='input'>Exam Name: <input type="text" placeholder="Enter Subject" value={examName} onChange={(e) => setExamName(e.target.value)}/></div>
-				<div className='input'>Start date: <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} /></div>
-				<div className='input'>End date: <input type="date" value={endDate || ''} onChange={(e) => setEndDate(e.target.value)} /></div>
-				<div className='input'>Colour: <input type="color" value={examColour} onChange={(e) => setExamColour(e.target.value)} /></div>
-				<button onClick={handleGenerateSchedule}>Generate Schedule</button>
-			</div>
-			<div className='calendar'>
-				<FullCalendar
-					plugins={[dayGridPlugin,interactionPlugin]}
-					initialView="dayGridMonth"
-					events={calendarEvents}
-					height="auto"
-					dateClick={handleDateClick}
-                    showNonCurrentDates={false}
-				/>
-			</div>
-			
-			<DayModal
-                isOpen={isOpen}
-                onClose={() => setIsOpen(false)}
-                date={selectedDate}
-                events={selectedEvents}
-                onDeleteEvent={handleDeleteEvent}
-            />
+            </div>
+            <div className='todaysEventsAndGenerateSchedule'>
+                <DayModal
+                    date={selectedDate}
+                    events={selectedEvents}
+                    onDeleteEvent={handleDeleteEvent}
+                />
+                <DeleteConfirmationModal
+                    isOpen={isDeleteModalOpen}
+                    onClose={() => setIsDeleteModalOpen(false)}
+                    onDeleteAll={handleDeleteAll}
+                    onDeleteOne={handleDeleteOne}
+                    eventToDelete={eventToDelete}
+                />
+                <div className='generateSchedule'>
+                    <h3> Add exam to calendar </h3>
+                    <div className='inputFields'>
 
-			<DeleteConfirmationModal
-                isOpen={isDeleteModalOpen}
-                onClose={() => setIsDeleteModalOpen(false)}
-                onDeleteAll={handleDeleteAll}
-                onDeleteOne={handleDeleteOne}
-                eventToDelete={eventToDelete}
-            />
-		</div>
+                        <div className='examName'>
+                            <input type="text" placeholder="Exam Name" value={examName} onChange={(e) => setExamName(e.target.value)}/>
+                        </div>
+
+                        {/* <p> Choose Your Flashcard(s): </p> */}
+
+                        {/* <select multiple onChange={(e) => setSelectedTestIDs([e.target.value])}>
+                            <option disabled> Choose a flashcard: </option>
+                            {arrayOfAvailableFlashcards.length === 0
+                                ? <option> No flashcards available </option>
+                                : arrayOfAvailableFlashcards.map((flashcard) => (
+                                    <option key={flashcard.TestID} value={flashcard.TestID}> {flashcard.TestName} </option>
+                                ))
+                            }
+                        </select> */}
+
+                        <Select
+                            className='selectFlashcards'
+                            options={arrayOfAvailableFlashcards}
+                            isMulti={true}
+                            hideSelectedOptions={true}
+                            isClearable={true}
+                            // maxMenuHeight={30}
+                            placeholder='Select Flashcard(s)'
+                            
+                        /> 
+
+                        <div className='startDate'>
+                            <p>Start Date:</p>
+                            <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+                        </div>
+
+                        <div className='endDate'>
+                            <p>Exam Date (if applicable):</p>
+                            <input type="date" value={endDate || ''} onChange={(e) => setEndDate(e.target.value)} />
+                        </div>
+                        
+                        <div className='examColourAndSubmit'>
+                            <div className='examColour'>
+                                <p> Colour:</p>
+                                <input type="color" value={examColour} onChange={(e) => setExamColour(e.target.value)}/>
+                            </div>
+
+                            <button className='generateScheduleButton' onClick={handleGenerateSchedule}> Submit! </button>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 	);
 }
 
