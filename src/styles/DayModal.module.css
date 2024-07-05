@@ -1,7 +1,7 @@
 .modalContainer {
     margin-top: 10px;
-    width: 265px;
-    height: 270px;
+    width: 235px;
+    height: 220px;
     background-color: transparent;
     position: relative;
     /* box-shadow: 0px 0px 10px #999; */
@@ -13,8 +13,8 @@
     position: absolute;
     top: -14px;
     left: 0px;
-    width: 250px;
-    height: 300px;
+    width: 220px;
+    height: 270px;
     z-index: -1;
 }
 
@@ -23,7 +23,7 @@
 }
 
 .modalHeader {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     margin-bottom: 25px;
 }
@@ -35,15 +35,16 @@
 
 .modalDate {
     display: flex;
-    font-size: 16px;
+    font-size: 14.4px;
     align-items: center;
     color: gray;
     font-weight: bold;
     margin-bottom: 15px;
 }
 
-.noEventsMessage {
-    margin-top: 20px;
+.noEvents {
+    margin-top: 10px;
+    font-size: 14px;
 }
 
 .haveEvents {

@@ -270,8 +270,6 @@ function Calendar() {
                     </div>
                     <button className='generateScheduleButton' onClick={handleGenerateSchedule}>Generate Schedule! </button>
                 </div>
-                
-                <button className='generateScheduleButton' onClick={handleGenerateSchedule}>Generate Schedule! </button>
             </div>
         </div>
 	);
