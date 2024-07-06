@@ -13,7 +13,7 @@ function SideBar(){
             <div className={styles.allSidebarWords}>
             <Link to="/home/quizzes" className={styles.sidebarElement}>
                 <div className={styles.icon}><FaQuestion /></div>
-                <div className={styles.word}>Quizzes</div>
+                <div className={styles.word}>Flashcards & Quizzes</div>
             </Link>
 
             <Link to="/home/revision-schedule" className={styles.sidebarElement}>
