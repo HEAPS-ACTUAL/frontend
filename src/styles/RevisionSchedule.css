@@ -13,9 +13,7 @@
 
 .entirePage {
     display: flex;
-    /* gap: 20px; */
     padding: 20px;
-    align-items: stretch;
 }
 
 .schedule {
@@ -108,7 +106,7 @@
     background-color: #fff3c8;
     padding: 10px 20px;
     border-radius: 8px;
-    /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
     width: 220px;
 }
 

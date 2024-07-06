@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../../../styles/DayModal.module.css'; 
-import calendarIcon from '../../../images/todaysEvents.png'
-import { FaCalendar } from "react-icons/fa";
 import { FaTrashCan } from "react-icons/fa6";
 import postItIcon from '../../../images/post-it.png'
 
@@ -40,7 +38,7 @@ function DayModal({ date, events, onDeleteEvent }) {
     };
 
     const handleDeleteButtonClick = (event) => {
-        onDeleteEvent(event); // 
+        onDeleteEvent(event);
     }
 
     return (
@@ -53,7 +51,6 @@ function DayModal({ date, events, onDeleteEvent }) {
                 </div>
 
                 <div className={styles.modalDate}>
-                    {/* <img className={styles.calendarIcon} src={calendarIcon} /> */}
                     <div> {formattedDate} </div>
                 </div>
 
@@ -61,25 +58,18 @@ function DayModal({ date, events, onDeleteEvent }) {
                     {events.length === 0 
                         ? <p className={styles.noEventsMessage}>-No Events Today-</p> 
                         : events.map(event => (
-                            <div key={event.id} className={styles.eventItem} >
-                                <label className={styles.eventLabel} htmlFor={`checkbox-${event.id}`}>
-                                    <input
-                                        id={`checkbox-${event.id}`}
-                                        type="checkbox"
-                                        checked={checkedEvents[event.id]}
-                                        onChange={() => handleCheckboxChange(event.id)}
-                                    />
-                                    <span className={styles.customCheckbox}></span>
-                                    <p>{event.title}</p>
-                                </label>
+                            <button key={event.id} className={styles.eventItem}>
+
+                                <p>{event.title}</p>
+
                                 <button className={styles.deleteButton} onClick={() => handleDeleteButtonClick(event)}>
                                     <FaTrashCan style={{ opacity: 0.5 }} />
                                 </button>
-                            </div>
+
+                            </button>
                         ))
                     }
                 </div>
-                
             </div>
         </div>
     );
