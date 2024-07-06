@@ -5,6 +5,7 @@ import { FaBrain } from "react-icons/fa6";
 import homepage from "../../images/homepage.jpg";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { HashLink } from 'react-router-hash-link';
 
 function Features() {
     useEffect(() => {
@@ -35,7 +36,7 @@ function Features() {
             <div className={styles.featureItem} data-aos="fade-up">
                 <h2 className={styles.featureName}>Generate Quizzes Instantly</h2>
                 <p className={styles.description}>Perfect for quick reviews or comprehensive tests. We use your content to produce tailored questions that enhance your learning and retention.</p>
-                <a href="#active-recall" className={styles.learnMore}>Learn More about Active Recall</a>
+                <p className={styles.learnMore}> <HashLink smooth to='#active-recall'> Learn More about Active Recall </HashLink> </p>
                 <div className={styles.featureImage}>
                     <img src="https://via.placeholder.com/400x300" alt="Quizzes" />
                 </div>
@@ -54,7 +55,7 @@ function Features() {
             <div className={styles.featureItem} data-aos="fade-up">
                 <h2 className={styles.featureName}>Optimize Learning with Spaced Repetition</h2>
                 <p className={styles.description}>Boost your memory retention effectively with our spaced repetition algorithm. This feature schedules reviews at optimal intervals, ensuring you retain information longer and more efficiently.</p>
-                <a href="#spaced-repetition" className={styles.learnMore}>Learn More about Spaced Repetition</a>
+                <p className={styles.learnMore}> <HashLink smooth to='#spaced-repetition'> Learn More about Spaced Repetition </HashLink> </p>
                 <div className={styles.featureImage}>
                     <img src="https://via.placeholder.com/400x300" alt="Spaced Repetition Scheduling" />
                 </div>
