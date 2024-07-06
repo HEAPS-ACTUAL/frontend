@@ -1,6 +1,7 @@
 import React,  { useEffect } from 'react';
 import styles from '../../styles/About.module.css'; 
-
+import { useNavigate } from 'react-router-dom';
+import { isLoggedIn } from '../../services (for backend)/ProtectionService';
 
 //react icons
 import { RxLightningBolt } from "react-icons/rx";
@@ -19,6 +20,8 @@ import Reviews from './Reviews';
 
 function About() {
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         AOS.init({
             duration: 1500,
@@ -26,7 +29,14 @@ function About() {
         });
     }, []);
     
-    
+    const handleLaunchClick = () => {
+        if (isLoggedIn()) {
+            navigate('/home'); // navigate to the home page if the user is logged in
+        } else {
+            navigate('/login'); // navigate to the login page if the user is not logged in
+        }
+    };
+  
 
   return (
     <div className={styles.heroSection} >
@@ -34,7 +44,11 @@ function About() {
         <div className={styles.main}  data-aos="fade-up">
             <h1>The parent you never knew you needed</h1>
             <p>Half your study time and double the fun.</p>
-            <button className={styles.btn}><IoSparkles className={styles.iconSparkles}/> Launch Your Learning</button>
+            
+            <button className={styles.btn} onClick={handleLaunchClick}>
+                <IoSparkles className={styles.iconSparkles}/> Launch Your Learning
+            </button>
+
         </div>
 
         <div className={styles.features}>

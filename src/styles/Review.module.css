@@ -1,0 +1,41 @@
+.reviewsContainer {
+    padding: 0 500px; 
+    border-radius: 10px;
+    margin-bottom: 100px;
+    margin-top: 100px;
+  }
+  
+
+.reviewsHeader {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+/* Customizing arrows for closer positioning */
+.slick-prev,
+.slick-next {
+  color: #000; /* Arrow color */
+  z-index: 1; /* Ensuring arrows are above other elements */
+}
+
+.slick-prev {
+  left: 10px; /* Closer to the content */
+}
+
+.slick-next {
+  right: 10px; /* Closer to the content */
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 20px; /* Adjust size as needed */
+  opacity: 1;
+  color: #000; /* Arrow color */
+}
+
+.slick-prev,
+.slick-next {
+  top: 50%; /* Align vertically to the center */
+  transform: translateY(-50%); /* Ensure they are perfectly centered */
+}
