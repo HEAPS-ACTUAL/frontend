@@ -89,25 +89,35 @@ function Calendar() {
         setSelectedEvents(todaysEvents);
     }
 
+    // TAKES IN THE SELECTED FLASHCARDS TO GENERATE THE SCHEDULE
+    function handleSelectChange(selectedOptions){
+        const selectedIDs = selectedOptions.map(option => option.value);
+        setSelectedTestIDs(selectedIDs);
+    }
+
     // WHEN USER CLICKS GENERATE SCHEDULE -> SEND DATA TO THE BACKEND
     const handleGenerateSchedule = async () => {
         if (!startDate || !examName) {
-            window.alert("Please enter subject name and start date before generating the schedule.");
-            return;
+            window.alert("Please enter exam name and start date!");
         }
-        if (endDate && startDate > endDate) {
-            window.alert("Start date cannot be after end date.");
-            return;
+        else if (selectedTestIDs.length === 0){
+            window.alert("Please select at least 1 flashcard!");
         }
-        try {
-            await createNewExam(startDate, endDate, examName, examColour, selectedTestIDs);
-			console.log({startdate: startDate, enddate: endDate, examname: examName, examcolour: examColour, testIDs: selectedTestIDs});            
-            window.location.reload(); // REFRESH THE PAGE SO FORM INPUT FIELDS WILL BE RESET
-            window.alert('Schedule generated successfully!');
-        } 
-		catch (error) {
-            console.error('Failed to generate schedule:', error.message || 'Error');
+        else if (endDate && startDate > endDate) {
+            window.alert("Start date cannot be after end date!");
         }
+        else {
+            try {
+                await createNewExam(startDate, endDate, examName, examColour, selectedTestIDs);
+                console.log({startdate: startDate, enddate: endDate, examname: examName, examcolour: examColour, testIDs: selectedTestIDs});            
+                window.location.reload(); // REFRESH THE PAGE SO FORM INPUT FIELDS WILL BE RESET
+                window.alert('Schedule generated successfully!');
+            } 
+            catch (error) {
+                console.error('Failed to generate schedule:', error.message || 'Error');
+            }
+        }
+
     };
 
     // WHEN USER CLICKS ON A DATE IN THE CALENDAR
@@ -184,12 +194,6 @@ function Calendar() {
         }
     };
 
-    const handleSelectChange = (selectedOptions) => {
-        const selectedIDs = selectedOptions ? selectedOptions.map(option => option.value) : [];
-        setSelectedTestIDs(selectedIDs);
-        console.log(selectedIDs);
-    };
-
     // FETCH RELEVANT DATA WHEN THE PAGE IS RENDERED FOR THE FIRST TIME
     useEffect(() => {
         fetchAllFlashcardsWithoutSchedule();
@@ -235,25 +239,12 @@ function Calendar() {
                             <input type="text" placeholder="Exam Name" value={examName} onChange={(e) => setExamName(e.target.value)}/>
                         </div>
 
-                        {/* <p> Choose Your Flashcard(s): </p> */}
-
-                        {/* <select multiple onChange={(e) => setSelectedTestIDs([e.target.value])}>
-                            <option disabled> Choose a flashcard: </option>
-                            {arrayOfAvailableFlashcards.length === 0
-                                ? <option> No flashcards available </option>
-                                : arrayOfAvailableFlashcards.map((flashcard) => (
-                                    <option key={flashcard.TestID} value={flashcard.TestID}> {flashcard.TestName} </option>
-                                ))
-                            }
-                        </select> */}
-
                         <Select
                             className='selectFlashcards'
                             options={arrayOfAvailableFlashcards}
                             isMulti={true}
                             hideSelectedOptions={true}
                             isClearable={true}
-                            // maxMenuHeight={30}
                             placeholder='Select Flashcard(s)'
                             onChange={handleSelectChange}
                         /> 
