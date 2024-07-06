@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styles from '../../styles/Features.module.css';
 import { FaCalendarAlt } from "react-icons/fa";
 import { FaBrain } from "react-icons/fa6";
-import homepage from "../images/homepage.jpg";
+import homepage from "../../images/homepage.jpg";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 

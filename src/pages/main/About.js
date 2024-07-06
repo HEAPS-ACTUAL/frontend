@@ -1,13 +1,21 @@
 import React,  { useEffect } from 'react';
 import styles from '../../styles/About.module.css'; 
 
+
+//react icons
 import { RxLightningBolt } from "react-icons/rx";
 import { FaRegBell } from "react-icons/fa";
 import { GiMaterialsScience } from "react-icons/gi";
 import { IoSparkles } from "react-icons/io5";
 
+// transitions
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+
+// meet the team and reviews
+import MeetTheTeam from './MeetTheTeam';
+import Reviews from './Reviews';
+
 
 function About() {
 
@@ -56,8 +64,12 @@ function About() {
             </div>
 
         </div>
-
+        <Reviews />
+        <MeetTheTeam />
+        
     </div>
+
+
   );
 }
 
