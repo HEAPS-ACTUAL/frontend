@@ -89,15 +89,20 @@
 }
 
 .previousBtn:hover, .previousBtn:focus, .nextBtn:hover, .nextBtn:focus {
-    background-color: #0172F2; 
+    background-color: rgba(70, 99, 172, 0.6);
     transform: scale(1.1);  
     outline: none; 
 }
   
-  .nextBtn:disabled {
+.nextBtn:disabled {
     background-color: #CCCCCC;  
     cursor: not-allowed;       
-  }
+}
+
+.previousBtn:disabled {
+    background-color: #CCCCCC;  
+    cursor: not-allowed;       
+}
 
 .buttons {
     display: flex;
@@ -109,7 +114,6 @@
 
 .HomeButton {
     padding: 10px 20px;
-    background-color: #f0f0f0; 
     border-radius: 10px;
     color: black;
     font-size: 16px;
@@ -118,26 +122,14 @@
     cursor: pointer;
     width: 500px;  
     transition: background-color 0.3s, box-shadow 0.3s;  
+    background-color: rgba(70, 99, 172, 0.4);
 }
 
 .HomeButton:hover {
-    background-color: #e0e0e0;
+    background-color: rgba(70, 99, 172, 0.7);
     box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
 }
 
-
-
-.crossBtn{
-    background-color: #ffdede;
-}
-
-.HomeButton{
-    background-color:#D3D3D3;
-}
-
-.crossBtn:hover , .HomeButton:hover{
-    background-color: #9bbec8;
-} 
 
 .counter{
    
