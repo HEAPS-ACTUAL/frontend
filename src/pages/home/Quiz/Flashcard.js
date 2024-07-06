@@ -88,9 +88,14 @@ const Flashcard = () => {
 
                 <button className={styles.HomeButton} onClick={() => navigate('/Home')}>Back to Home</button>
 
-                <button className={styles.previousBtn} onClick={handleNextFlashcard}>
+                <button 
+                    className={styles.nextBtn} 
+                    onClick={handleNextFlashcard}
+                    disabled={CurrentFlashcardIndex === flashcardArray.length - 1} 
+                >
                     <BsArrowRightShort />
                 </button>
+
             </div>
 
             <div className={styles.counter}>     

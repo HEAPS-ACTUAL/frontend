@@ -71,7 +71,7 @@
 }
 
 /* buttons */
-.previousBtn {
+.previousBtn, .nextBtn {
     font-size: 35px;
     display: flex;
     justify-content: center;
@@ -88,12 +88,16 @@
     margin-left: 50px;
 }
 
-.previousBtn:hover, .previousBtn:focus {
+.previousBtn:hover, .previousBtn:focus, .nextBtn:hover, .nextBtn:focus {
     background-color: #0172F2; 
     transform: scale(1.1);  
     outline: none; 
 }
-
+  
+  .nextBtn:disabled {
+    background-color: #CCCCCC;  
+    cursor: not-allowed;       
+  }
 
 .buttons {
     display: flex;
@@ -140,3 +144,7 @@
     margin-top: 80px;
         color: gray;
 }
+
+
+
+  
