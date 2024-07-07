@@ -27,11 +27,15 @@ const SignIn = () => {
                 window.alert("Passwords don't match!");
             }
             else{
+            
                 const returnedMessage = await createNewUser(email, password, firstName, lastName, gender);
                 window.alert(returnedMessage);
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1500);
+                
+                if(returnedMessage === 'Account created! Click ok to sign in'){
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 500);
+                }                
             }
         }
     }
