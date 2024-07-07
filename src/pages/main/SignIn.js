@@ -13,14 +13,11 @@ const SignIn = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [gender, setGender] = useState('');
-    const [signInMessage, setSignInMessage] = useState('');
-    const [registerMessage, setRegisterMessage] = useState('');
     
     const navigate = useNavigate();
 
     async function handleRegistration(event) {
         event.preventDefault();
-        setSignInMessage("");
 
         if(email === "" || password === "" || firstName === "" || lastName === "" || gender === ""){
             window.alert("All fields must be filled in!");
@@ -83,7 +80,6 @@ const SignIn = () => {
                         <input type="password" placeholder="Confirm Password" onChange={(event) => setConfirmPassword(event.target.value)}/>
                     </div>
                     <button type="submit">Register</button>
-                    {registerMessage && <p> {registerMessage} </p>}
                 </form>
             </div>
             <div className="form-container sign-in">
@@ -93,7 +89,6 @@ const SignIn = () => {
                     <input type="email" placeholder="Email" onChange={(event) => setEmail(event.target.value)}/>
                     <input type="password" placeholder="Password" onChange={(event) => setPassword(event.target.value)}/>
                     <button type="submit">Sign In</button>
-                    {signInMessage && <p> {signInMessage} </p>}
                 </form>
             </div>
             <div className="toggle-container">

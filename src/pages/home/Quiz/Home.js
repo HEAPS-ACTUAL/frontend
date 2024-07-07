@@ -3,7 +3,7 @@ import styles from "../../../styles/Home.module.css";
 import { useNavigate } from "react-router-dom";
 
 // Functions
-import { getSalutation, getUserFirstName} from "../../../services (for backend)/UserService";
+import { /* getSalutation, */ getUserFirstName} from "../../../services (for backend)/UserService";
 import { generateQuiz, getCompletedQuizzes, getToDoQuizzes} from "../../../services (for backend)/QuizService";
 import { convertFileSizeTo2DP, fileSizeWithinLimit, fileTypeIsPDF } from "../../../services (for backend)/FileServices";
 import { generateFlashcard, getAllFlashcardsByUser } from "../../../services (for backend)/FlashcardService";
@@ -16,7 +16,7 @@ function Home() {
     const email = sessionStorage.getItem("userEmail");
 
     const [firstName, setFirstName] = useState("");
-    const [salutation, setSalutation] = useState("");
+    // const [salutation, setSalutation] = useState("");
     const [quizList, setQuizList] = useState([]);
     const [flashcardList, setFlashcardList] = useState([]);
     const [selectedButton, setSelectedButton] = useState("to-do");    
@@ -25,8 +25,8 @@ function Home() {
         const firstName = await getUserFirstName(email);
         setFirstName(firstName);
 
-        const salutation = await getSalutation(email);
-        setSalutation(salutation);
+        // const salutation = await getSalutation(email);
+        // setSalutation(salutation);
     }
 
     async function fetchToDoQuizzes() {

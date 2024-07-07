@@ -59,21 +59,25 @@
     align-items: center;
     position: relative;
     padding: 10px 15px 0px 15px;
-    background-color: transparent;
-    border: none;
-    text-align: left;
     transition: background-color 0.3s ease;
     justify-content: space-between;
-}
-
-.eventItem p {
-    width: 120px;
-    margin-bottom: 10px;
 }
 
 .eventItem:hover {
     background-color: #d6dabb;
     cursor: pointer;
+}
+
+.eventTitle {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;    
+    text-align: left;
+}
+
+.eventTitle p {
+    width: 120px;
+    margin-bottom: 10px;
 }
 
 .deleteButton {

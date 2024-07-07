@@ -3,7 +3,6 @@ import styles from '../../styles/SideBar.module.css';
 
 // icons
 import { FaQuestion } from 'react-icons/fa';
-import { GiProgression } from "react-icons/gi";
 import { AiOutlineSchedule } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 
