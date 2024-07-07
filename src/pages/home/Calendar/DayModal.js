@@ -3,7 +3,7 @@ import styles from '../../../styles/DayModal.module.css';
 import { FaTrashCan } from "react-icons/fa6";
 import postItIcon from '../../../images/post-it.png'
 
-function DayModal({ date, events, onDeleteEvent }) {
+function DayModal({ date, events, handleDeleteClicked }) {
     const [formattedDate, setFormattedDate] = useState('');
 
     // Format the date when component mounts or when date changes
@@ -15,10 +15,6 @@ function DayModal({ date, events, onDeleteEvent }) {
         });
         setFormattedDate(formatted);
     }, [date]);
-
-    const handleDeleteButtonClick = (event) => {
-        onDeleteEvent(event);
-    }
 
     return (
         <div className={styles.modalContainer}>
@@ -42,7 +38,7 @@ function DayModal({ date, events, onDeleteEvent }) {
                                     <p>{event.title}</p>
                                 </button>
 
-                                <button className={styles.deleteButton} onClick={() => handleDeleteButtonClick(event)}>
+                                <button className={styles.deleteButton} onClick={() => handleDeleteClicked(event)}>
                                     <FaTrashCan style={{ opacity: 0.5 }} />
                                 </button>
                             </div>

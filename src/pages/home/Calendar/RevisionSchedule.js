@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import '../../../styles/RevisionSchedule.css'; 
-import { createNewExam, DeleteExistingExam, DeleteSpecificRevisionDate, retrieveAllRevisionDates } from '../../../services (for backend)/ScheduleService';
+import { createNewExam, retrieveAllRevisionDates } from '../../../services (for backend)/ScheduleService';
 import { getAllFlashcardsWithoutSchedule } from '../../../services (for backend)/FlashcardService';
 
 // calendar component
@@ -48,8 +48,6 @@ function Calendar() {
     FUNCTIONS
     ------------------------------------------------------------------------------------------------------------------------------------
     */
-
-   
    // FETCH RELEVANT DATA WHEN THE PAGE IS RENDERED FOR THE FIRST TIME
    useEffect(() => {
        
@@ -61,36 +59,35 @@ function Calendar() {
     
        // retreive revision dates from the backend and retrieve today's date and events to display in modal
        async function fetchRevisonDatesAndTodaysEvents(){
-           const returnedArray = await retrieveAllRevisionDates(email);
-           setExams(returnedArray);
+            const returnedArray = await retrieveAllRevisionDates(email);
+            setExams(returnedArray);
+
+            // TRANSFORM EXAMS INTO A FORMAT THAT IS RECOGNISED BY THE CALENDAR EVENT
+            const formattedCalendarEventsArray = returnedArray.flatMap(exam =>
+                JSON.parse(exam.RevisionDates).map(date => ({   
+                    id: [exam.ScheduleID, date], // for handleDeleteEvent function
+                    title: exam.ExamName,
+                    start: date,
+                    color: exam.ExamColour,
+                    flashcards: JSON.parse(exam.Flashcards)
+                }))
+            );
     
-           // TRANSFORM EXAMS INTO A FORMAT THAT IS RECOGNISED BY THE CALENDAR EVENT
-           const formattedCalendarEventsArray = returnedArray.flatMap(exam =>
-               JSON.parse(exam.RevisionDates).map(date => ({   
-                   id: [exam.ScheduleID, date], // for handleDeleteEvent function
-                   // id: exam.ScheduleID,
-                   title: exam.ExamName,
-                   start: date,
-                   color: exam.ExamColour,
-                   flashcards: JSON.parse(exam.Flashcards)
-               }))
-           );
-    
-           setCalendarEvents(formattedCalendarEventsArray);
-    
-           // FETCHING TODAY'S DATE AND EVENTS
-           const dateLocaleString = new Date().toLocaleString();
-    
-           const day = dateLocaleString.slice(0, 2);
-           const month = dateLocaleString.slice(3, 5);
-           const year = dateLocaleString.slice(6, 10);
-    
-           const formattedDate = `${year}-${month}-${day}`;
-           const todaysEvents = formattedCalendarEventsArray.filter(event => event.start === formattedDate);
-           
-           setSelectedDate(formattedDate);
-           setSelectedEvents(todaysEvents);
-       }
+            setCalendarEvents(formattedCalendarEventsArray);
+
+            // FETCHING TODAY'S DATE AND EVENTS
+            const dateLocaleString = new Date().toLocaleString();
+
+            const day = dateLocaleString.slice(0, 2);
+            const month = dateLocaleString.slice(3, 5);
+            const year = dateLocaleString.slice(6, 10);
+
+            const formattedDate = `${year}-${month}-${day}`;
+            const todaysEvents = formattedCalendarEventsArray.filter(event => event.start === formattedDate);
+            
+            setSelectedDate(formattedDate);
+            setSelectedEvents(todaysEvents);
+        }
 
         fetchAllFlashcardsWithoutSchedule();
         fetchRevisonDatesAndTodaysEvents();
@@ -118,8 +115,8 @@ function Calendar() {
             try {
                 await createNewExam(startDate, endDate, examName, examColour, selectedTestIDs);
                 console.log({startdate: startDate, enddate: endDate, examname: examName, examcolour: examColour, testIDs: selectedTestIDs});            
-                window.location.reload(); // REFRESH THE PAGE SO FORM INPUT FIELDS WILL BE RESET
                 window.alert('Schedule generated successfully!');
+                window.location.reload(); // REFRESH THE PAGE SO FORM INPUT FIELDS WILL BE RESET
             } 
             catch (error) {
                 console.error('Failed to generate schedule:', error.message || 'Error');
@@ -137,69 +134,9 @@ function Calendar() {
         // console.log("Clicked date:", clickedDate); // Debug
     };
 
-    const handleDeleteEvent = (event) => {
+    const showDeleteModal = (event) => {
         setEventToDelete(event);
         setIsDeleteModalOpen(true); // open the delete confirmation modal
-    };
-    
-    // DELETE ENTIRE SCHEDULE
-    const handleDeleteAll = async () => {
-        if (eventToDelete) {
-            console.log("trying to delete entire schedule for exam with schedule ID:", eventToDelete.id);
-    
-            try {
-                const result = await DeleteExistingExam(eventToDelete.id);
-    
-                if (result === 'ok deleted entire exam from db') { // message from the backend
-                    window.alert(`Exam '${eventToDelete.title}' deleted successfully.`); // WHY IS THIS SHOWING EVEN THOUGH THERES NO CORRESPONDING EVENT TO DELETE IN THE DB?
-                    setExams(exams.filter(exam => exam.ScheduleID !== eventToDelete.id));
-                } 
-                else { window.alert('Failed to delete the exam, try again') ; }
-            } 
-            catch (error) {
-                console.log('Error deleting the exam');
-                window.alert('Failed to delete the exam, try again');
-            } 
-            finally {
-                setIsDeleteModalOpen(false); // close the delete confirmation modal
-                setEventToDelete(null); // reset the event to delete
-            }
-        } 
-        else { console.error("No eventToDelete found") ; }
-    };
-    
-    // DELETE A SINGLE REVISION DATE
-    const handleDeleteOne = async () => {
-        if (eventToDelete && selectedDate) {
-            try {			
-                const result = await DeleteSpecificRevisionDate(eventToDelete.id, selectedDate); 
-                console.log(selectedDate);
-                
-                if (result === 'ok deleted specific date from db') {
-                    window.alert(`Date '${selectedDate}' for exam '${eventToDelete.title}' deleted successfully.`);
-                    setExams(prevExams => prevExams.map(exam => {
-                        if (exam.ScheduleID === eventToDelete.id) {
-                            return {
-                                ...exam,
-                                revisionDates: exam.revisionDates.filter(date => date !== selectedDate)
-                            };
-                        }
-                        return exam;
-                    }));
-                } 
-                else {
-                    window.alert('Failed to delete the specific date, try again');
-                }
-            } 
-            catch (error) {
-                console.log('Error deleting the specific date, try again');
-                window.alert('Failed to delete the specific date, try again');
-            } 
-            finally {
-                setIsDeleteModalOpen(false); 
-                setEventToDelete(null); 
-            }
-        }
     };
 
 	return (
@@ -224,14 +161,12 @@ function Calendar() {
                 <DayModal
                     date={selectedDate}
                     events={selectedEvents}
-                    onDeleteEvent={handleDeleteEvent}
+                    handleDeleteClicked={showDeleteModal}
                 />
                 <DeleteConfirmationModal
                     isOpen={isDeleteModalOpen}
-                    onClose={() => setIsDeleteModalOpen(false)}
-                    onDeleteAll={handleDeleteAll}
-                    onDeleteOne={handleDeleteOne}
-                    eventToDelete={eventToDelete}
+                    closeModal={() => setIsDeleteModalOpen(false)}
+                    event={eventToDelete}
                 />
                 <div className='generateSchedule'>
                     <h3>Generate revision Schedule</h3>
