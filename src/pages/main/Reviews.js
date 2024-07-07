@@ -18,21 +18,24 @@ export default function SimpleSlider() {
       <Slider {...settings}>
         <div className={`${styles.review} slick-slide`}>
           <StarRating />
-          &nbsp;
-          <h3>quizDaddy is the best!</h3>&nbsp;
-          <p className={styles.description }>"QuizDaddy has transformed the way I study. The flashcards and quizzes are so helpful!"</p>
+          <h3>quizDaddy is the best!</h3><br></br>
+          <p className={styles.description }>"QuizDaddy has transformed the way I study. The flashcards and quizzes are so helpful!"</p><br></br>
+          <i style={{textAlign: "center"}}>Anonymous</i>
         </div>
         <div className={`${styles.review} slick-slide`}>
           <StarRating />
-          &nbsp;
-          <h3>I lurf quizDaddy</h3>&nbsp;
-          <p className={styles.description }>"The spaced repetition schedule has really helped me retain information better."</p>
+          <h3>I lurf quizDaddy</h3><br></br>
+          <p className={styles.description }>"The spaced repetition schedule has really helped me retain information better."</p><br></br>
+          <i style={{textAlign: "center"}}>Anonymous</i>
+
         </div>
         <div className={`${styles.review} slick-slide`}>
           <StarRating />
-          &nbsp;
-          <h3>Meow</h3>&nbsp;
-          <p className={styles.description }>"QuizDaddy makes studying fun and engaging. I love it!"</p>
+          <h3>Meow</h3><br></br>
+          <p className={styles.description }>"QuizDaddy makes studying fun and engaging. I love it!"</p><br></br>
+          <i style={{textAlign: "center"}}>Anonymous</i>
+
+
         </div>
       </Slider>
     </div>
