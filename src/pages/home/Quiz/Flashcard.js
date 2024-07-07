@@ -14,7 +14,6 @@ const Flashcard = () => {
     const [CurrentFlashcardIndex, setCurrentFlashcardIndex] = useState(0);
     const navigate = useNavigate();
     const [isFlipped, setIsFlipped] = useState(false);
-    const [canRememberCount, setCanRememberCount] = useState(0);
     const toggleFlip = () => {
         setIsFlipped(!isFlipped);
     }
@@ -36,17 +35,7 @@ const Flashcard = () => {
             setCurrentFlashcardIndex(CurrentFlashcardIndex + 1)
             setIsFlipped(false);
         }
-        
-        else{
-            navigate('/FlashcardsResultsPage', {state: {testID, canRememberCount}}) // pass in the percentage of correct attempts
-        }
-
     }
-
-    const handleCanRemember = () => {
-        setCanRememberCount(canRememberCount + 1);
-        handleNextFlashcard(); // Move to the next card 
-    };
 
     const handlePreviousFlashcard = () =>{
         if(CurrentFlashcardIndex > 0){

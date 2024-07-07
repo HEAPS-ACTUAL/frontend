@@ -21,7 +21,7 @@ function Features() {
             <h1 className={styles.centerText} data-aos="fade-up">Transform Your PDFs with quizDaddy</h1>
 
             <div className={styles.featureImage} data-aos="fade-up">
-                <img src={homepage} ></img>
+                <img alt='homepage' src={homepage} ></img>
             
             </div>
             

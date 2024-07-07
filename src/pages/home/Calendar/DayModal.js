@@ -5,7 +5,6 @@ import postItIcon from '../../../images/post-it.png'
 
 function DayModal({ date, events, onDeleteEvent }) {
     const [formattedDate, setFormattedDate] = useState('');
-    const [checkedEvents, setCheckedEvents] = useState({});
 
     // Format the date when component mounts or when date changes
     useEffect(() => {
@@ -17,33 +16,13 @@ function DayModal({ date, events, onDeleteEvent }) {
         setFormattedDate(formatted);
     }, [date]);
 
-    // Load checked events from localStorage on component mount
-    useEffect(() => {
-        const storedCheckedEvents = localStorage.getItem('checkedEvents');
-        if (storedCheckedEvents) {
-            setCheckedEvents(JSON.parse(storedCheckedEvents));
-        }
-    }, []);
-
-    // Update localStorage whenever checkedEvents change
-    useEffect(() => {
-        localStorage.setItem('checkedEvents', JSON.stringify(checkedEvents));
-    }, [checkedEvents]);
-
-    const handleCheckboxChange = (eventId) => {
-        setCheckedEvents(prevState => ({
-            ...prevState,
-            [eventId]: !prevState[eventId]
-        }));
-    };
-
     const handleDeleteButtonClick = (event) => {
         onDeleteEvent(event);
     }
 
     return (
         <div className={styles.modalContainer}>
-            <img className={styles.postItIcon} src={postItIcon} />
+            <img alt='picture-of-a-post-it' className={styles.postItIcon} src={postItIcon} />
             <div className={styles.modalContent}>
                 
                 <div className={styles.modalHeader}> 
@@ -58,15 +37,15 @@ function DayModal({ date, events, onDeleteEvent }) {
                     {events.length === 0 
                         ? <p className={styles.noEventsMessage}>-No Events Today-</p> 
                         : events.map(event => (
-                            <button key={event.id} className={styles.eventItem}>
-
-                                <p>{event.title}</p>
+                            <div key={event.id} className={styles.eventItem}>
+                                <button className={styles.eventTitle}>
+                                    <p>{event.title}</p>
+                                </button>
 
                                 <button className={styles.deleteButton} onClick={() => handleDeleteButtonClick(event)}>
                                     <FaTrashCan style={{ opacity: 0.5 }} />
                                 </button>
-
-                            </button>
+                            </div>
                         ))
                     }
                 </div>

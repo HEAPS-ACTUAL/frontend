@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from '../../../styles/TestCard.module.css';
 
@@ -53,7 +53,7 @@ function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, att
     }
 
     async function handleConfirmDelete(){
-        const deleteOk = await deleteTest(email, testID, name);
+        await deleteTest(email, testID, name);
 
         navigate(
             '../../../LoadingPage', 
@@ -106,7 +106,7 @@ function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, att
                 </div>
 
                 {xButtonPressed && (
-                    <div className={`${styles.deleteConfirmation} ${cancelDelete == true ? styles.dontShowDelete : ''}`}>
+                    <div className={`${styles.deleteConfirmation} ${cancelDelete === true ? styles.dontShowDelete : ''}`}>
                         <p>Are you sure you want to delete {name}?</p>
                         <br></br>
                         <p> This action cannot be undone!! </p>

@@ -12,7 +12,6 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import DayModal from './DayModal';
 import interactionPlugin from '@fullcalendar/interaction';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
-import { faL } from '@fortawesome/free-solid-svg-icons';
 
 function Calendar() {
     // GET EMAIL OF USER TO BE USED IN SOME OF THE FUNCTIONS BELOW
