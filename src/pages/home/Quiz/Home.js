@@ -20,31 +20,32 @@ function Home() {
     const [quizList, setQuizList] = useState([]);
     const [flashcardList, setFlashcardList] = useState([]);
     const [selectedButton, setSelectedButton] = useState("to-do");    
-
+    
     async function fetchUserInfo() {
         const firstName = await getUserFirstName(email);
         setFirstName(firstName);
-
+        
         // const salutation = await getSalutation(email);
         // setSalutation(salutation);
     }
-
+    
     async function fetchToDoQuizzes() {
         const ToDoQuizzesArray = await getToDoQuizzes(email);
         setQuizList(ToDoQuizzesArray);
     }
-
+    
     async function fetchCompletedQuizzes() {
         const CompletedQuizzesArray = await getCompletedQuizzes(email);
         setQuizList(CompletedQuizzesArray);
     }
-
+    
     async function fetchFlashcards(){
         const FlashcardsArray = await getAllFlashcardsByUser(email);
         setFlashcardList(FlashcardsArray);
     }
 
     useEffect(() => {
+
         fetchUserInfo();
         fetchToDoQuizzes();
         fetchFlashcards();

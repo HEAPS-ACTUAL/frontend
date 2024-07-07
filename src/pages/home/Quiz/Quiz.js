@@ -24,7 +24,7 @@ const QuizFeature = () => {
 
         fetchQuizQuestionsAndOptions();
 
-    }, [])
+    }, [testID])
 
     // update userAnswers object if the user change his answers
     const handleAnswerChange = (questionNo, answer) => {

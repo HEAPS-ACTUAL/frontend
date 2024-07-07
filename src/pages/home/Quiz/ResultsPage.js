@@ -17,18 +17,19 @@ const ResultsPage = () => {
     const [userScore , setUserScore] = useState(null);
     const [totalQns , setTotalQns] = useState(null);
 
-    async function fetchQuizReviewArray(){
-        let returnedArray = await reviewQuiz(testID);
-        setUserScore(returnedArray['NumOfCorrectAnswers']);
-        setTotalQns(returnedArray['TotalNumOfQuestions']);
-        returnedArray = JSON.parse(returnedArray['QuestionsAndAnswers']);
-        setQuizReviewArray(returnedArray);
-
-    }
-
+    
     useEffect(() => {
+        async function fetchQuizReviewArray(){
+            let returnedArray = await reviewQuiz(testID);
+            setUserScore(returnedArray['NumOfCorrectAnswers']);
+            setTotalQns(returnedArray['TotalNumOfQuestions']);
+            returnedArray = JSON.parse(returnedArray['QuestionsAndAnswers']);
+            setQuizReviewArray(returnedArray);
+        }
+        
         fetchQuizReviewArray();
-    }, []);
+
+    }, [testID]);
 
     return (
         <div className={styles.QuizResultsContainer}>

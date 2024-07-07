@@ -49,44 +49,53 @@ function Calendar() {
     ------------------------------------------------------------------------------------------------------------------------------------
     */
 
-    // retrieve names of flashcards from backend to display as dropdown menu @ SHI HUI UR CODE HERE
-    async function fetchAllFlashcardsWithoutSchedule(){
-        const returnedArray = await getAllFlashcardsWithoutSchedule(email);
-        setArrayOfAvailableFlashcards(returnedArray);
-    }
+   
+   // FETCH RELEVANT DATA WHEN THE PAGE IS RENDERED FOR THE FIRST TIME
+   useEffect(() => {
+       
+        // retrieve names of flashcards from backend to display as dropdown menu @ SHI HUI UR CODE HERE
+       async function fetchAllFlashcardsWithoutSchedule(){
+           const returnedArray = await getAllFlashcardsWithoutSchedule(email);
+           setArrayOfAvailableFlashcards(returnedArray);
+       }
+    
+       // retreive revision dates from the backend and retrieve today's date and events to display in modal
+       async function fetchRevisonDatesAndTodaysEvents(){
+           const returnedArray = await retrieveAllRevisionDates(email);
+           setExams(returnedArray);
+    
+           // TRANSFORM EXAMS INTO A FORMAT THAT IS RECOGNISED BY THE CALENDAR EVENT
+           const formattedCalendarEventsArray = returnedArray.flatMap(exam =>
+               JSON.parse(exam.RevisionDates).map(date => ({   
+                   id: [exam.ScheduleID, date], // for handleDeleteEvent function
+                   // id: exam.ScheduleID,
+                   title: exam.ExamName,
+                   start: date,
+                   color: exam.ExamColour,
+                   flashcards: JSON.parse(exam.Flashcards)
+               }))
+           );
+    
+           setCalendarEvents(formattedCalendarEventsArray);
+    
+           // FETCHING TODAY'S DATE AND EVENTS
+           const dateLocaleString = new Date().toLocaleString();
+    
+           const day = dateLocaleString.slice(0, 2);
+           const month = dateLocaleString.slice(3, 5);
+           const year = dateLocaleString.slice(6, 10);
+    
+           const formattedDate = `${year}-${month}-${day}`;
+           const todaysEvents = formattedCalendarEventsArray.filter(event => event.start === formattedDate);
+           
+           setSelectedDate(formattedDate);
+           setSelectedEvents(todaysEvents);
+       }
 
-    // retreive revision dates from the backend and retrieve today's date and events to display in modal
-    async function fetchRevisonDatesAndTodaysEvents(){
-        const returnedArray = await retrieveAllRevisionDates(email);
-        setExams(returnedArray);
+        fetchAllFlashcardsWithoutSchedule();
+        fetchRevisonDatesAndTodaysEvents();
 
-        // TRANSFORM EXAMS INTO A FORMAT THAT IS RECOGNISED BY THE CALENDAR EVENT
-        const formattedCalendarEventsArray = returnedArray.flatMap(exam =>
-            JSON.parse(exam.RevisionDates).map(date => ({   
-                id: [exam.ScheduleID, date], // for handleDeleteEvent function
-                // id: exam.ScheduleID,
-                title: exam.ExamName,
-                start: date,
-                color: exam.ExamColour,
-                flashcards: JSON.parse(exam.Flashcards)
-            }))
-        );
-
-        setCalendarEvents(formattedCalendarEventsArray);
-
-        // FETCHING TODAY'S DATE AND EVENTS
-        const dateLocaleString = new Date().toLocaleString();
-
-        const day = dateLocaleString.slice(0, 2);
-        const month = dateLocaleString.slice(3, 5);
-        const year = dateLocaleString.slice(6, 10);
-
-        const formattedDate = `${year}-${month}-${day}`;
-        const todaysEvents = formattedCalendarEventsArray.filter(event => event.start === formattedDate);
-        
-        setSelectedDate(formattedDate);
-        setSelectedEvents(todaysEvents);
-    }
+    }, [email]);
 
     // TAKES IN THE SELECTED FLASHCARDS TO GENERATE THE SCHEDULE
     function handleSelectChange(selectedOptions){
@@ -192,12 +201,6 @@ function Calendar() {
             }
         }
     };
-
-    // FETCH RELEVANT DATA WHEN THE PAGE IS RENDERED FOR THE FIRST TIME
-    useEffect(() => {
-        fetchAllFlashcardsWithoutSchedule();
-        fetchRevisonDatesAndTodaysEvents();
-    }, []);
 
 	return (
 		<div className='entirePage'>

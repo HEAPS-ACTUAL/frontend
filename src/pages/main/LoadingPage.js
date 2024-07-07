@@ -23,7 +23,7 @@ const LoadingPage = () => {
         }, intervalDuration);
 
         return () => clearInterval(interval);
-    }, [navigate, duration]);
+    }, [navigate, redirect, duration]);
 
     return (
         <div className={styles.loadingContainer}>

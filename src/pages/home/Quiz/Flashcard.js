@@ -26,7 +26,7 @@ const Flashcard = () => {
             
         }
         fetchTestQuestions();
-    }, [])
+    }, [testID])
 
     // control navigation through the array of flashcards
     const handleNextFlashcard = () => {
