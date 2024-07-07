@@ -6,6 +6,13 @@ import homepage from "../../images/homepage.jpg";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { HashLink } from 'react-router-hash-link';
+import flashcards from "../images/flashcards.jpg";
+import calendar from "../images/calendar.jpg";
+import home from "../images/home.jpg";
+import quiz from "../images/quiz.jpg";
+
+
+
 
 function Features() {
     useEffect(() => {
@@ -29,7 +36,7 @@ function Features() {
                 <h2 className={styles.featureName}>Create Flashcards Effortlessly</h2>
                 <p className={styles.description}>Explore interactive flashcards for an enriching learning experience.</p>
                 <div className={styles.featureImage}>
-                    <img src="https://via.placeholder.com/400x300" alt="Interactive Flashcards" />
+                    <img src={flashcards} alt="Interactive Flashcards" />
                 </div>
             </div>
 
@@ -38,17 +45,17 @@ function Features() {
                 <p className={styles.description}>Perfect for quick reviews or comprehensive tests. We use your content to produce tailored questions that enhance your learning and retention.</p>
                 <p className={styles.learnMore}> <HashLink smooth to='#active-recall'> Learn More about Active Recall </HashLink> </p>
                 <div className={styles.featureImage}>
-                    <img src="https://via.placeholder.com/400x300" alt="Quizzes" />
+                    <img src={quiz} alt="Quizzes" />
                 </div>
                 
             </div>
 
         
             <div className={styles.featureItem} data-aos="fade-up">
-                <h2 className={styles.featureName}>Monitor Your Quiz Progress</h2>
-                <p className={styles.description}>Track completed and pending quizzes to monitor your progress effortlessly.</p>
+                <h2 className={styles.featureName}>Your Learning Hub</h2>
+                <p className={styles.description}>Easily access flashcards and track completed and pending quizzes to monitor your progress effortlessly.</p>
                 <div className={styles.featureImage}>
-                    <img src="https://via.placeholder.com/400x300" alt="Quiz Tracker" />
+                    <img src={home} alt="Quiz Tracker" />
                 </div>
             </div>
 
@@ -57,7 +64,7 @@ function Features() {
                 <p className={styles.description}>Boost your memory retention effectively with our spaced repetition algorithm. This feature schedules reviews at optimal intervals, ensuring you retain information longer and more efficiently.</p>
                 <p className={styles.learnMore}> <HashLink smooth to='#spaced-repetition'> Learn More about Spaced Repetition </HashLink> </p>
                 <div className={styles.featureImage}>
-                    <img src="https://via.placeholder.com/400x300" alt="Spaced Repetition Scheduling" />
+                    <img src={calendar} alt="Spaced Repetition Scheduling" />
                 </div>
             </div>
     
