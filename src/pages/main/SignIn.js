@@ -76,7 +76,6 @@ const SignIn = () => {
                         <option value="">Select Gender</option> 
                         <option value="M">Male</option>
                         <option value="F">Female</option>
-                        <option value="other">Other</option>
                     </select> 
                     <input type="email" placeholder="Email" onChange={(event) => setEmail(event.target.value)}/>
                     <div>
