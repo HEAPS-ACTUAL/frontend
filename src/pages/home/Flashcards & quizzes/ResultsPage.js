@@ -70,20 +70,15 @@ const ResultsPage = () => {
             ))}
             
             <div className={styles.BtnContainer}>
-                {/* <button className={styles.RestartButton} onClick={() => navigate('/mcq', {state: {testID}})}>Restart Quiz</button>  */}
-                <button className={styles.HomeButton} onClick={() => navigate('/Home')}>Back to Home</button>
+                <button className={styles.HomeButton} onClick={() => navigate('/home')}>Back to Home</button>
             </div>
             
             <br></br>
             <br></br>
             <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-        </div>
 
-    );
+        </div>
+    )
 };
 
 export default ResultsPage;

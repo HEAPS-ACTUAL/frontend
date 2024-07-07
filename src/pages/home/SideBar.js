@@ -10,7 +10,7 @@ function SideBar(){
     return(
         <div className={styles.sidebar}>
             <div className={styles.allSidebarWords}>
-            <Link to="/home/quizzes" className={styles.sidebarElement}>
+            <Link to="/home/flashcards-and-quizzes" className={styles.sidebarElement}>
                 <div className={styles.icon}><FaQuestion /></div>
                 <div className={styles.word}>Flashcards & Quizzes</div>
             </Link>

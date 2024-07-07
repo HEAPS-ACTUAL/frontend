@@ -1,17 +1,21 @@
 import React, { useEffect } from 'react';
+import AOS from 'aos';
+import { HashLink } from 'react-router-hash-link';
+
+// STYLES
 import styles from '../../styles/Features.module.css';
+import 'aos/dist/aos.css';
+
+// ICONS
 import { FaCalendarAlt } from "react-icons/fa";
 import { FaBrain } from "react-icons/fa6";
+
+// IMAGES
 import homepage from "../../images/homepage.jpg";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import { HashLink } from 'react-router-hash-link';
-import flashcards from "../images/flashcards.jpg";
-import calendar from "../images/calendar.jpg";
-import home from "../images/home.jpg";
-import quiz from "../images/quiz.jpg";
-
-
+import flashcards from "../../images/flashcards.jpg";
+import calendar from "../../images/calendar.jpg";
+import home from "../../images/home.jpg";
+import quiz from "../../images/quiz.jpg";
 
 
 function Features() {

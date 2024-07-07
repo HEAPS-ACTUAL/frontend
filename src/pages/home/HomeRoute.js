@@ -2,8 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 //PAGES
 import SideBar from "./SideBar";
-
-import Quizzes from './Quiz/Home';
+import Home from './Flashcards & quizzes/Home';
 import Calendar from "./Calendar/RevisionSchedule";
 
 function HomeRoute(){
@@ -11,18 +10,12 @@ function HomeRoute(){
         <div>
             <SideBar />
              <Routes>
-                <Route path='/quizzes' element={<Quizzes />} />
+                <Route path='/' element={ <Navigate to='/home/flashcards-and-quizzes' />} />
+                <Route path='/flashcards-and-quizzes' element={<Home />} />
                 <Route path="/revision-schedule" element={<Calendar />} />
-                <Route path='/' element={ <Navigate to='/Home/Quizzes' />} />
-
              </Routes>
-
-             
         </div>
     )
 }
-
-
-
 
 export default HomeRoute;

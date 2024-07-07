@@ -23,14 +23,14 @@ function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, att
 
     function goToTest(){
         if(difficulty === null){ // DIFFICULTY WILL BE NULL IF ITS A FLASHCARD
-            navigate('../../flashcard', {state: {testID}});
+            navigate('../../test/flashcard', {state: {testID}});
         }
         else{
             if(selectedButton === 'to-do'){
-                navigate('../../mcq', {state: {testID}});
+                navigate('../../test/quiz', {state: {testID}});
               }
             else if(selectedButton === 'completed'){
-                navigate('../../ResultsPage', {state: {testID}});
+                navigate('../../test/results-page', {state: {testID}});
             }
         }
     }
@@ -56,7 +56,7 @@ function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, att
         await deleteTest(email, testID, name);
 
         navigate(
-            '../../../LoadingPage', 
+            '../../../loading-page', 
             {state: 
                 {
                     duration: 1500, 

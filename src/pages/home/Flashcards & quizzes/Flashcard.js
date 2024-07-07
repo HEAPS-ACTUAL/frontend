@@ -75,7 +75,7 @@ const Flashcard = () => {
                     <BsArrowLeftShort />
                 </button>
 
-                <button className={styles.HomeButton} onClick={() => navigate('/Home')}>Back to Home</button>
+                <button className={styles.HomeButton} onClick={() => navigate('/home')}>Back to Home</button>
 
                 <button className={styles.nextBtn} onClick={handleNextFlashcard} disabled={CurrentFlashcardIndex === flashcardArray.length - 1} >
                     <BsArrowRightShort />

@@ -107,7 +107,7 @@ function Home() {
                 }
                 
                 navigate ( 
-                    '../../../LoadingPage', 
+                    '../../../loading-page', 
                     {state: 
                         {
                             duration: 40000, 
