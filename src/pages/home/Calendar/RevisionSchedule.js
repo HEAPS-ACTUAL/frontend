@@ -52,13 +52,13 @@ function Calendar() {
    useEffect(() => {
        
         // retrieve names of flashcards from backend to display as dropdown menu @ SHI HUI UR CODE HERE
-       async function fetchAllFlashcardsWithoutSchedule(){
-           const returnedArray = await getAllFlashcardsWithoutSchedule(email);
-           setArrayOfAvailableFlashcards(returnedArray);
-       }
+        async function fetchAllFlashcardsWithoutSchedule(){
+            const returnedArray = await getAllFlashcardsWithoutSchedule(email);
+            setArrayOfAvailableFlashcards(returnedArray);
+        }
     
        // retreive revision dates from the backend and retrieve today's date and events to display in modal
-       async function fetchRevisonDatesAndTodaysEvents(){
+        async function fetchRevisonDatesAndTodaysEvents(){
             const returnedArray = await retrieveAllRevisionDates(email);
             setExams(returnedArray);
 
@@ -76,7 +76,7 @@ function Calendar() {
             setCalendarEvents(formattedCalendarEventsArray);
 
             // FETCHING TODAY'S DATE AND EVENTS
-            const dateLocaleString = new Date().toLocaleString();
+            const dateLocaleString = new Date().toLocaleString(); // example of the dateLocaleString format: "20/12/2012, 03:00:00"
 
             const day = dateLocaleString.slice(0, 2);
             const month = dateLocaleString.slice(3, 5);
