@@ -76,15 +76,14 @@ function Calendar() {
             setCalendarEvents(formattedCalendarEventsArray);
 
             // FETCHING TODAY'S DATE AND EVENTS
-            const dateLocaleString = new Date().toLocaleString(); // example of the dateLocaleString format: "20/12/2012, 03:00:00"
-
-            const day = dateLocaleString.slice(0, 2);
-            const month = dateLocaleString.slice(3, 5);
-            const year = dateLocaleString.slice(6, 10);
+            const dateLocaleString = new Date().toLocaleString("en-GB").split(","); // example of the dateLocaleString format: "20/12/2012, 03:00:00"
+            const curDate = dateLocaleString[0].split("/")
+            const day = curDate[0];
+            const month = curDate[1];
+            const year = curDate[2];
 
             const formattedDate = `${year}-${month}-${day}`;
             const todaysEvents = formattedCalendarEventsArray.filter(event => event.start === formattedDate);
-            
             setSelectedDate(formattedDate);
             setSelectedEvents(todaysEvents);
         }
