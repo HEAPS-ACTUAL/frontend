@@ -1,41 +1,61 @@
 .reviewsContainer {
-    padding: 0 500px; 
-    border-radius: 10px;
-    margin-bottom: 100px;
-    margin-top: 100px;
-  }
-  
-
-.reviewsHeader {
-    text-align: center;
-    margin-top: 50px;
-    margin-bottom: 20px;
+  padding: 0 500px; 
+  border-radius: 10px;
+  margin-bottom: 100px;
+  margin-top: 100px;
 }
 
-/* Customizing arrows for closer positioning */
+.reviewsHeader {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.review {
+  padding: 20px;
+  margin: 0 auto; 
+  border-radius: 10px;
+  background-color: white;
+  text-align: center;
+  position: relative;
+  margin-bottom: 20px; 
+  width: 1000px ;}
+
+
 .slick-prev,
 .slick-next {
-  color: #000; /* Arrow color */
-  z-index: 1; /* Ensuring arrows are above other elements */
+  color: #000; 
+  z-index: 1; 
 }
 
 .slick-prev {
-  left: 10px; /* Closer to the content */
+  left: 10px; 
+  color: #000;
+
 }
 
 .slick-next {
-  right: 10px; /* Closer to the content */
+  right: 10px; 
 }
 
 .slick-prev:before,
 .slick-next:before {
-  font-size: 20px; /* Adjust size as needed */
+  font-size: 20px;
   opacity: 1;
-  color: #000; /* Arrow color */
+  color: #000; 
 }
 
 .slick-prev,
 .slick-next {
-  top: 50%; /* Align vertically to the center */
-  transform: translateY(-50%); /* Ensure they are perfectly centered */
+  top: 50%; 
+  transform: translateY(-50%);
 }
+
+.slick-slide {
+  margin-right: 20px;
+}
+
+.description {
+  font-style: italic;
+}
+
