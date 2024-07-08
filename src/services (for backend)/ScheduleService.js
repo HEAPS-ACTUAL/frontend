@@ -70,12 +70,14 @@ async function DeleteSpecificRevisionDate(scheduleID, revisionDate) {
     return error.response.data.message;
   }
 }
-
-const fetchTestsForEvent = async (email, scheduleId, date) => {
+const fetchTestsForEvent = async (scheduleId, date) => {
   try {
-    const response = await fetch(`/api/tests/${email}/${scheduleId}/${date}`);
-    if (response.ok) {
-      return await response.json();
+    const response = await axiosInstance({
+      method: "get",
+      url: `/schedule/fetchTestsByScheduleIdAndDate/${scheduleId}/${date}`,
+    });
+    if (response.status === 200) {
+      return response.data;
     } else {
       throw new Error("Failed to fetch tests");
     }
