@@ -142,7 +142,7 @@ function Calendar() {
 		<div className='entirePage'>
             <div className='schedule'>
                 <p className='topline'>Struggling to plan a revision schedule?</p>
-                <p className='bottomline'> Daddy's got your back!</p>
+                <p className='bottomline'> Daddy's got your back! <br></br>Use our cleverly formulated <a href="http://localhost:3000/features">algorithm</a> now</p>
             
                 <div className='calendarContainer'>
                     <FullCalendar

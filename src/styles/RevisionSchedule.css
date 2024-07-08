@@ -33,7 +33,8 @@
 .schedule .topline {
     font-size: 200%;
     margin-bottom: 20px;
-    background: -webkit-linear-gradient(left, #0172F2, #3a6073); 
+    /* color: #4663ac; */
+    background: -webkit-linear-gradient(left, #0172F2, #4663ac); 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
