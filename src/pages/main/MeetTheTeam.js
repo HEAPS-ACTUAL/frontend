@@ -19,7 +19,7 @@ const teamMembers = [
 const MeetTheTeam = () => {
   return (
     <div className={styles.teamContainer}>
-      <h2>Meet the Team</h2>
+      <h2>Meet The Team</h2>
       <div className={styles.teamMembers}>
         {teamMembers.map((member) => (
           <div className={styles.member} key={member.name}>

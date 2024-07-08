@@ -31,12 +31,9 @@ function Navbar() {
             </Link>
 
             <div className={styles.navItems}>
-
-                <Link to="/" className={styles.navLink}>About</Link>
-                <Link to="/features" className={styles.navLink}>Features</Link>
                 <Link to="/home" className={styles.navLink}>Home</Link>
-        
-           
+                <Link to="/features" className={styles.navLink}>Features</Link>
+                
             </div>
 
             <Link to="/login" className={styles.navLinkLogin}><button onClick={handleLogOut}>{logInOutButton}</button></Link>
