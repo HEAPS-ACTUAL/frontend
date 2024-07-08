@@ -11,6 +11,8 @@ import { generateFlashcard, getAllFlashcardsByUser } from "../../../services (fo
 // Components
 import TestCard from "./TestCard";
 
+import AttemptsQuizzesTable from "./AttemptsQuizzes";
+
 function Home() {
     const navigate = useNavigate();
     const email = sessionStorage.getItem("userEmail");
@@ -228,6 +230,7 @@ function Home() {
                     } 
                 </div>
             </div>
+            <AttemptsQuizzesTable />
         </div>
     );
 }
