@@ -9,7 +9,7 @@ function FlashcardModal({ isOpen, tests, onClose }) {
 
   const handleTestClick = (test) => {
     console.log("Test selected:", test.name);
-    navigate("/flashcard", { state: { testID: test.id } });
+    navigate("/test/flashcard", { state: { testID: test.id } });
   };
 
   return (

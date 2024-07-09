@@ -14,7 +14,6 @@ import SignIn from "./pages/main/SignIn";
 import HomeRoute from "./pages/home/HomeRoute";
 import TestRoute from "./pages/home/Flashcards & quizzes/TestRoute";
 import LoadingPage from "./pages/main/LoadingPage";
-import Flashcard from "./pages/home/Flashcards & quizzes/Flashcard";
 
 // STYLES
 import "./styles/App.css";
@@ -53,7 +52,6 @@ function App() {
           path="/loading-page/*"
           element={IsLoggedIn ? <LoadingPage /> : <Navigate to="/login" />} // REDIRECT TO SIGN IN PAGE IF NOT LOGGED IN
         />
-        <Route path="flashcard" element={<Flashcard />} />
       </Routes>
     </Router>
   );
