@@ -28,7 +28,7 @@ function AttemptsQuizzesTable () {
     }
 
     function handleBackToHome(){
-        navigate('../../home')
+        navigate('../../home');
     }
 
     return (
