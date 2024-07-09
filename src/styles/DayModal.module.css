@@ -1,105 +1,117 @@
 .modalContainer {
-    margin-top: 10px;
-    width: 200px;
-    height: 220px;
-    background-color: transparent;
-    position: relative;
+  margin-top: 10px;
+  width: 200px;
+  height: 220px;
+  background-color: transparent;
+  position: relative;
 }
 
 .postItIcon {
-    position: absolute;
-    top: -14px;
-    left: 0px;
-    width: 220px;
-    height: 270px;
-    z-index: -1;
+  position: absolute;
+  top: -14px;
+  left: 0px;
+  width: 220px;
+  height: 270px;
+  z-index: 1;
 }
 
 .modalContent {
-    margin: 22px 0px 0px 17px;
+  position: relative;
+  z-index: 2;
+  margin: 22px 0px 0px 17px;
 }
 
 .modalHeader {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 25px;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 25px;
 }
 
 .calendarIcon {
-    width: 23px;
-    margin-right: 10px;
+  width: 23px;
+  margin-right: 10px;
 }
 
 .modalDate {
-    display: flex;
-    font-size: 14.4px;
-    align-items: center;
-    color: rgb(105, 99, 99);
-    font-weight: bold;
-    margin-bottom: 15px;
+  display: flex;
+  font-size: 14.4px;
+  align-items: center;
+  color: rgb(105, 99, 99);
+  font-weight: bold;
+  margin-bottom: 15px;
 }
 
 .noEvents {
-    margin-top: 10px;
-    font-size: 14px;
+  margin-top: 10px;
+  font-size: 14px;
 }
 
 .haveEvents {
-    display: flex;
-    flex-direction: column;
-    height: 90px;
-    font-size: 14px;
-    overflow-y: auto;
-    box-shadow: 0px 0px 2px #857f7f;
-    margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 90px;
+  font-size: 14px;
+  overflow-y: auto;
+  box-shadow: 0px 0px 2px #857f7f;
+  margin-top: 20px;
 }
 
 .eventItem {
-    display: flex;
-    align-items: center;
-    position: relative;
-    padding: 10px 15px 0px 15px;
-    transition: 0.3s ease;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 10px 15px 0px 15px;
+  transition: 0.3s ease;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 10px 15px;
+  transition: background-color 0.3s ease;
+  justify-content: space-between;
 }
 
 .eventItem:hover {
-    background-color: #d4d7bd;
-    cursor: pointer;
-    transform: translate3d(0px, -2px, 0px);
-    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.15);
+  background-color: #d6dabb;
+  cursor: pointer;
+  background-color: #d4d7bd;
+  cursor: pointer;
+  transform: translate3d(0px, -2px, 0px);
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.15);
 }
 
 .eventItem:active {
-    transition: 0.2s;
-    transform: translate3d(0px, 0px, 0px);
+  transition: 0.2s;
+  transform: translate3d(0px, 0px, 0px);
 }
 
 .eventTitle {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;    
-    text-align: left;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  width: 120px;
+  padding: 0;
+  margin: 0;
+  display: block;
 }
 
 .eventTitle p {
-    width: 120px;
-    margin-bottom: 10px;
+  margin: 0;
 }
 
 .deleteButton {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    margin-right: 5px;
-    margin-bottom: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  margin-right: 5px;
 }
 
 .deleteButton:hover {
-    transform: rotate(10deg); 
+  transform: rotate(10deg);
 }
 
 .deleteButton:active {
-    transform: rotate(0deg); 
+  transform: rotate(0deg);
 }
