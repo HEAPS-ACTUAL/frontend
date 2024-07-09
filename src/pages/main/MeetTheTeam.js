@@ -13,7 +13,7 @@ const teamMembers = [
   { name: "Jerrick Ng", position: "SQL Simp", image: jerrick },
   { name: "Fong Shi Hui", position: "a loser", image: shihui },
   { name: "Isaiah Chia", position: "Director", image: isaiah },
-  { name: "Chloe Tay", position: "", image: chloe },
+  { name: "Chloe Tay", position: "another loser", image: chloe },
 ];
 
 const MeetTheTeam = () => {
