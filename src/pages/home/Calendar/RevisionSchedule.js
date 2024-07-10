@@ -24,7 +24,6 @@ function Calendar() {
       */
     // STATES NEEDED TO RENDER THE PAGE
     const [arrayOfAvailableFlashcards, setArrayOfAvailableFlashcards] = useState([]);
-    const [exams, setExams] = useState([]);
     const [calendarEvents, setCalendarEvents] = useState([]);
 
     // STATES FOR SCHEDULE GENERATION
