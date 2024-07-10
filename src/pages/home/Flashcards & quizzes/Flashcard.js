@@ -10,9 +10,12 @@ import { getAllQuestionsAndOptionsFromATest } from '../../../services (for backe
 const Flashcard = () => {
     const location = useLocation();
     const {testID} = (location.state); // retrieve testID from Flashcard page
+    
     const [flashcardArray, setFlashcardArray] = useState([]);
     const [CurrentFlashcardIndex, setCurrentFlashcardIndex] = useState(0);
+    
     const navigate = useNavigate();
+    
     const [isFlipped, setIsFlipped] = useState(false);
     const toggleFlip = () => {
         setIsFlipped(!isFlipped);
@@ -66,8 +69,6 @@ const Flashcard = () => {
                     
 
             </div>
-
-            
 
             <div className={styles.buttons}>
 
