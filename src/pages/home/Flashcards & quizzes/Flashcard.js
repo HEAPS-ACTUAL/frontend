@@ -57,7 +57,6 @@ const Flashcard = () => {
         <div className={styles.wrapper} >
 
             <div onClick={toggleFlip} className={`${styles.FlashcardContainer} ${isFlipped ? styles.isFlipped: '' }`}>
-
                     <div className={styles.FlashcardFace + " " + styles.FrontFlashcardContent}>
                         {flashcardArray[CurrentFlashcardIndex]["QuestionText"]}
                     </div>
@@ -65,9 +64,6 @@ const Flashcard = () => {
                     <div className={styles.FlashcardFace + " " + styles.BackFlashcardContent}>
                         {flashcardArray[CurrentFlashcardIndex]["Elaboration"]}
                     </div>
-
-                    
-
             </div>
 
             <div className={styles.buttons}>
@@ -75,8 +71,12 @@ const Flashcard = () => {
                 <button className={styles.previousBtn} onClick={handlePreviousFlashcard} disabled={CurrentFlashcardIndex === 0}>
                     <BsArrowLeftShort />
                 </button>
-
-                <button className={styles.HomeButton} onClick={() => navigate('/home')}>Back to Home</button>
+                
+                
+                <div className={styles.navigateButtons}>
+                    <button className={styles.RevisionScheduleButton} onClick={() => navigate('/home/revision-schedule')}> Go to Revision Schedule</button>
+                    <button className={styles.HomeButton} onClick={() => navigate('/home')}>Back to Home</button>
+                </div>
 
                 <button className={styles.nextBtn} onClick={handleNextFlashcard} disabled={CurrentFlashcardIndex === flashcardArray.length - 1} >
                     <BsArrowRightShort />

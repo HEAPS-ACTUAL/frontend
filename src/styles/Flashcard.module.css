@@ -6,8 +6,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: -60px;
+    margin-top: -50px;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .FlashcardContainer {
@@ -112,29 +113,34 @@
     gap: 20px; 
 }
 
-.HomeButton {
+.navigateButtons {
+    display: flex;
+    flex-direction: column;
+}
+
+.HomeButton, .RevisionScheduleButton{
     padding: 10px 20px;
     border-radius: 10px;
+    margin: 10px 0px;
     color: black;
     font-size: 16px;
     border: none;
     box-shadow: 0 2px 4px rgba(0,0,0,0.25);
     cursor: pointer;
-    width: 500px;  
+    width: 500px;
     transition: background-color 0.3s, box-shadow 0.3s;  
     background-color: rgba(70, 99, 172, 0.4);
 }
 
-.HomeButton:hover {
+.HomeButton:hover, .RevisionScheduleButton:hover {
     background-color: rgba(70, 99, 172, 0.7);
     box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
 }
 
 
 .counter{
-   
-    margin-top: 80px;
-        color: gray;
+    margin-top: 50px;
+    color: gray;
 }
 
 
