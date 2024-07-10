@@ -11,7 +11,7 @@ const ResultsPage = () => {
     const navigate = useNavigate();
 
     const location = useLocation();
-    const {testID} = location.state;
+    const {testID, attemptNo} = location.state;
 
     const [quizReviewArray, setQuizReviewArray] = useState([]);
     const [userScore , setUserScore] = useState(null);
@@ -20,7 +20,7 @@ const ResultsPage = () => {
     
     useEffect(() => {
         async function fetchQuizReviewArray(){
-            let returnedArray = await reviewQuiz(testID);
+            let returnedArray = await reviewQuiz(testID, attemptNo);
             setUserScore(returnedArray['NumOfCorrectAnswers']);
             setTotalQns(returnedArray['TotalNumOfQuestions']);
             returnedArray = JSON.parse(returnedArray['QuestionsAndAnswers']);

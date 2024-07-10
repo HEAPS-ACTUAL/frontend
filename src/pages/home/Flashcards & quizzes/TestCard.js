@@ -21,7 +21,7 @@ function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, att
     const navigate = useNavigate();
     const email = sessionStorage.getItem("userEmail");
 
-    function goToTest(){
+    function handleTestClicked(){
         if(difficulty === null){ // DIFFICULTY WILL BE NULL IF ITS A FLASHCARD
             navigate('../../test/flashcard', {state: {testID}});
         }
@@ -30,7 +30,7 @@ function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, att
                 navigate('../../test/quiz', {state: {testID}});
               }
             else if(selectedButton === 'completed'){
-                navigate('../../test/results-page', {state: {testID}});
+                navigate('../../test/attempts', {state: {testID, attempts, numberOfQuestions}});
             }
         }
     }
@@ -78,7 +78,7 @@ function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, att
         >
             
             <div className={styles.testCardWrapper}>
-                <div className={styles.testCard} onClick={goToTest}>
+                <div className={styles.testCard} onClick={handleTestClicked}>
                     <img className={styles.deleteButton} src={xButton} onClick={handleXButtonPressed} alt='delete button' />
                     <h3>{name}</h3>
 
@@ -97,7 +97,7 @@ function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, att
 
                     {attempts !== undefined
                         ? <p className={styles.numOfQuestions}>
-                        Score: {score} / {numberOfQuestions}
+                        Attempts: {attempts.length}
                         </p>
                         : <p className={styles.numOfQuestions}>
                             {numberOfQuestions} questions

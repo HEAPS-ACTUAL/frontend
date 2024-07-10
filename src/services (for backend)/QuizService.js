@@ -102,15 +102,30 @@ async function storeUserQuizAnswers(testID, userAnswers){
     }
 }
 
-async function reviewQuiz(testID, attemptNo = 1){ // Set attempt no as 1 by default. If we want to allow users to take the quiz more than once, then we can change it here.
+async function reviewQuiz(testID, attemptNo){
     try{
         const response = await axiosInstance({
             method: 'post',
             url: '/quiz/reviewQuiz',
             data: {testID: testID, attemptNo: attemptNo}
         })
-        
+
         return response.data[0];
+    }
+    catch(error){
+        return error.response.data.message;
+    }
+}
+
+async function getLatestAttempt(testID){
+    try{
+        const response = await axiosInstance({
+            method: 'post',
+            url: '/quiz/getLatestAttempt',
+            data: {testID: testID}
+        })
+
+        return response.data;
     }
     catch(error){
         return error.response.data.message;
@@ -124,5 +139,6 @@ export {
     getAllQuestionsAndOptionsFromAQuiz, 
     markQuizAsDone,
     storeUserQuizAnswers,
-    reviewQuiz
+    reviewQuiz,
+    getLatestAttempt
 };
