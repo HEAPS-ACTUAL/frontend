@@ -46,9 +46,9 @@ function AttemptsQuizzesTable () {
                 <tbody>
                     {attemptsArray.map((attempt) => (
                         <tr key={attempt.AttemptNo}>
-                            <td> {attempt.AttemptNo} </td>
+                            <td>{attempt.AttemptNo}</td>
                             <td>{attempt.NumOfCorrectAnswers}/{numberOfQuestions}</td>
-                            <td><button onClick={() => handleViewQuiz(attempt.AttemptNo)}>View Quiz</button></td>
+                            <td><button onClick={() => handleViewQuiz(attempt.AttemptNo)}>Review Quiz</button></td>
                         </tr>
 
                         // return <td key={index}>{data.AttemptNo}</td>;
