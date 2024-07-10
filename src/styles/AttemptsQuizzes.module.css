@@ -67,6 +67,7 @@
 
 
 .buttonAQ, .buttonHome{
+    display: flex;
     padding: 10px 20px;
     border-radius: 10px;
     margin: 10px 10px;
@@ -82,12 +83,11 @@
     align-items: center;
 }
 
+.buttonAQ p, .buttonHome p{
+    margin-left: 5px;
+}
+
 .buttonAQ:hover, .buttonHome:hover {
     background-color: rgba(70, 99, 172, 0.7);
     box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
-}
-
-.AlignIconsAndWords{
-    display: flex;
-    align-items: center;
 }

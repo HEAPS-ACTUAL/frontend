@@ -50,13 +50,16 @@ function AttemptsQuizzesTable () {
             </table>
                     
             <div className={styles.buttonContainer}>
-                <div className={styles.AlignIconsAndWords}>
-                    <button onClick={handleReattemptQuiz} className={styles.buttonAQ}><GrPowerCycle /> Attempt quiz again! </button>
-                </div>
+                <button onClick={handleReattemptQuiz} className={styles.buttonAQ}> 
+                    <GrPowerCycle /> 
+                    <p> Attempt quiz again! </p>
+                </button>
 
-                <div className={styles.AlignIconsAndWords}>
-                    <button onClick={handleBackToHome} className={styles.buttonHome}><IoIosHome /> Back to home </button>
-                </div>
+
+                <button onClick={handleBackToHome} className={styles.buttonHome}>
+                    <IoIosHome /> 
+                    <p> Back to home </p>
+                </button>
             </div>
         </div>
     )
