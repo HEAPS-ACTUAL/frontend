@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from '../../../styles/Quiz.module.css';
 import { useLocation, useNavigate } from 'react-router-dom'; 
 
-import { getAllQuestionsAndOptionsFromAQuiz, markQuizAsDone } from '../../../services (for backend)/QuizService';
+import { getAllQuestionsAndOptionsFromAQuiz, getLatestAttempt, markQuizAsDone } from '../../../services (for backend)/QuizService';
 import { storeUserQuizAnswers } from '../../../services (for backend)/QuizService';
 
 const QuizFeature = () => {
@@ -35,7 +35,7 @@ const QuizFeature = () => {
     }
 
     // control navigation through the array of questions
-    const handleNextQuestion = () => {        
+    const handleNextQuestion = async () => {        
         // if there are more questions to be answered 
         if(currentQuestionIndex < questionsOptionsArray.length -1){ 
             setCurrentQuestionIndex(currentQuestionIndex + 1)
@@ -45,7 +45,10 @@ const QuizFeature = () => {
         else{
             storeUserQuizAnswers(testID, userAnswers);
             markQuizAsDone(testID);
-            navigate ('/test/results-page', {state: {testID: testID}})
+            
+            const attemptNo = await getLatestAttempt(testID);
+            
+            navigate ('/test/results-page', {state: {testID: testID, attemptNo: attemptNo['LatestAttempt']}});
             // passes additional state to the /results route. 
             // userAnswers - object containing all the answers given by the user
             // questions - array of questions

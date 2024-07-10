@@ -63,7 +63,7 @@ async function getAllQuestionsAndOptionsFromAQuiz(testID){
             data: {testID: testID}
         })
         
-        console.log(response.data);
+        // console.log(response.data);
         return response.data;
     }
     catch(error){
@@ -117,6 +117,21 @@ async function reviewQuiz(testID, attemptNo){
     }
 }
 
+async function getLatestAttempt(testID){
+    try{
+        const response = await axiosInstance({
+            method: 'post',
+            url: '/quiz/getLatestAttempt',
+            data: {testID: testID}
+        })
+
+        return response.data;
+    }
+    catch(error){
+        return error.response.data.message;
+    }
+}
+
 export { 
     generateQuiz, 
     getToDoQuizzes, 
@@ -124,5 +139,6 @@ export {
     getAllQuestionsAndOptionsFromAQuiz, 
     markQuizAsDone,
     storeUserQuizAnswers,
-    reviewQuiz
+    reviewQuiz,
+    getLatestAttempt
 };
