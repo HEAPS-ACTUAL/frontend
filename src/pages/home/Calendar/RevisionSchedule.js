@@ -18,10 +18,10 @@ function Calendar() {
     const email = sessionStorage.getItem("userEmail");
 
     /*
-      ------------------------------------------------------------------------------------------------------------------------------------
-      USE STATES
-      ------------------------------------------------------------------------------------------------------------------------------------
-      */
+    ------------------------------------------------------------------------------------------------------------------------------------
+    USE STATES
+    ------------------------------------------------------------------------------------------------------------------------------------
+    */
     // STATES NEEDED TO RENDER THE PAGE
     const [arrayOfAvailableFlashcards, setArrayOfAvailableFlashcards] = useState([]);
     const [calendarEvents, setCalendarEvents] = useState([]);
@@ -81,9 +81,7 @@ function Calendar() {
             const year = curDate[2];
 
             const formattedDate = `${year}-${month}-${day}`;
-            const todaysEvents = formattedCalendarEventsArray.filter(
-                (event) => event.start === formattedDate
-            );
+            const todaysEvents = formattedCalendarEventsArray.filter((event) => event.start === formattedDate);
 
             setSelectedDate(formattedDate);
             setSelectedEvents(todaysEvents);
@@ -91,6 +89,7 @@ function Calendar() {
 
         fetchAllFlashcardsWithoutSchedule();
         fetchRevisonDatesAndTodaysEvents();
+
     }, [email]);
 
     // TAKES IN THE SELECTED FLASHCARDS TO GENERATE THE SCHEDULE
@@ -103,29 +102,22 @@ function Calendar() {
     const handleGenerateSchedule = async () => {
         if (!startDate || !examName) {
             window.alert("Please enter exam name and start date!");
-        } else if (selectedTestIDs.length === 0) {
+        } 
+        else if (selectedTestIDs.length === 0) {
             window.alert("Please select at least 1 flashcard!");
-        } else if (endDate && startDate > endDate) {
+        } 
+        else if (endDate && startDate > endDate) {
             window.alert("Start date cannot be after end date!");
-        } else {
+        } 
+        else {
             try {
-                await createNewExam(
-                    startDate,
-                    endDate,
-                    examName,
-                    examColour,
-                    selectedTestIDs
-                );
-                console.log({
-                    startdate: startDate,
-                    enddate: endDate,
-                    examname: examName,
-                    examcolour: examColour,
-                    testIDs: selectedTestIDs,
-                });
+                await createNewExam( startDate, endDate, examName, examColour, selectedTestIDs);
+                console.log({ startdate: startDate, enddate: endDate, examname: examName, examcolour: examColour, testIDs: selectedTestIDs });
+                
                 window.alert("Schedule generated successfully!");
                 window.location.reload(); // REFRESH THE PAGE SO FORM INPUT FIELDS WILL BE RESET
-            } catch (error) {
+            } 
+            catch (error) {
                 console.error("Failed to generate schedule:", error.message || "Error");
             }
         }
@@ -135,17 +127,15 @@ function Calendar() {
     const handleDateChange = (arg) => {
         const clickedDate = arg.dateStr; // YYYY-MM-DD format
         setSelectedDate(clickedDate);
-        const eventsOnDate = calendarEvents.filter(
-            (event) => event.start === clickedDate
-        );
+        const eventsOnDate = calendarEvents.filter((event) => event.start === clickedDate);
         setSelectedEvents(eventsOnDate);
         // console.log("Clicked date:", clickedDate); // Debug
-    };
+    }
 
     const showDeleteModal = (event) => {
         setEventToDelete(event);
         setIsDeleteModalOpen(true); // open the delete confirmation modal
-    };
+    }
 
     return (
         <div className="entirePage">
@@ -180,12 +170,7 @@ function Calendar() {
                     <h3>Generate revision Schedule!</h3>
                     <div className="inputFields">
                         <div className="examName">
-                            <input
-                                type="text"
-                                placeholder="Exam Name"
-                                value={examName}
-                                onChange={(e) => setExamName(e.target.value)}
-                            />
+                            <input type="text" placeholder="Exam Name" value={examName} onChange={(e) => setExamName(e.target.value)} />
                         </div>
 
                         <Select
@@ -200,45 +185,27 @@ function Calendar() {
 
                         <div className="startDate">
                             <p>Start Date:</p>
-                            <input
-                                type="date"
-                                value={startDate}
-                                onChange={(e) => setStartDate(e.target.value)}
-                            />
+                            <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                         </div>
 
                         <div className="endDate">
                             <p>Exam Date (if applicable):</p>
-                            <input
-                                type="date"
-                                value={endDate || ""}
-                                onChange={(e) => setEndDate(e.target.value)}
-                            />
+                            <input type="date" value={endDate || ""} onChange={(e) => setEndDate(e.target.value)} />
                         </div>
 
                         <div className="examColourAndSubmit">
                             <div className="examColour">
                                 <p> Colour:</p>
-                                <input
-                                    type="color"
-                                    value={examColour}
-                                    onChange={(e) => setExamColour(e.target.value)}
-                                />
+                                <input type="color" value={examColour} onChange={(e) => setExamColour(e.target.value)} />
                             </div>
 
-                            <button
-                                className="generateScheduleButton"
-                                onClick={handleGenerateSchedule}
-                            >
-                                {" "}
-                                Submit!{" "}
-                            </button>
+                            <button className="generateScheduleButton" onClick={handleGenerateSchedule}> Submit! </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    );
+    )
 }
 
 export default Calendar;

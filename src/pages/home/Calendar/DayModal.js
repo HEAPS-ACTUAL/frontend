@@ -24,7 +24,8 @@ function DayModal({ date, events, handleDeleteClicked }) {
 
   const handleEventClick = async (event) => {
     try {
-      const tests = await fetchTestsForEvent(event.id, event.start);
+      console.log(event);
+      const tests = await fetchTestsForEvent(event.id[0], event.id[1]);
       console.log("Tests fetched successfully:", tests);
       setSelectedTests(tests);
       setFlashcardModalOpen(true);
