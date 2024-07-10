@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from '../../../styles/Flashcard.module.css';
+
+//icons
 import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
+import { GrSchedules } from "react-icons/gr";
+import { FaHome } from "react-icons/fa";
 
 // Import functions
 import { getAllQuestionsAndOptionsFromATest } from '../../../services (for backend)/TestService';
+
 
 
 const Flashcard = () => {
@@ -73,10 +78,10 @@ const Flashcard = () => {
                 </button>
                 
                 
-                <div className={styles.navigateButtons}>
-                    <button className={styles.RevisionScheduleButton} onClick={() => navigate('/home/revision-schedule')}> Go to Revision Schedule</button>
-                    <button className={styles.HomeButton} onClick={() => navigate('/home')}>Back to Home</button>
-                </div>
+                {/* <div className={styles.navigateButtons}> */}
+                    <button className={styles.RevisionScheduleButton} onClick={() => navigate('/home/revision-schedule')}><GrSchedules /></button>
+                    <button className={styles.HomeButton} onClick={() => navigate('/home')}><FaHome /></button>
+                {/* </div> */}
 
                 <button className={styles.nextBtn} onClick={handleNextFlashcard} disabled={CurrentFlashcardIndex === flashcardArray.length - 1} >
                     <BsArrowRightShort />

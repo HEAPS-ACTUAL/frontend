@@ -1,15 +1,9 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-// import styles from '../../styles/AttemptsQuizzes.module.css';
-
-const quizData = [
-    {"AttemptNo": 1, "NumOfCorrectAnswers": 10, "TotalNumOfQuestions": 20},
-    {"AttemptNo": 2, "NumOfCorrectAnswers": 15, "TotalNumOfQuestions": 20},
-    {"AttemptNo": 3, "NumOfCorrectAnswers": 20, "TotalNumOfQuestions": 20},
-    {"AttemptNo": 4, "NumOfCorrectAnswers": 25, "TotalNumOfQuestions": 20},
-]
-
+import styles from '../../../styles/AttemptsQuizzes.module.css';
+import { IoIosHome } from "react-icons/io";
+import { GrPowerCycle } from "react-icons/gr";
 
 function AttemptsQuizzesTable () {
     const navigate = useNavigate();
@@ -32,10 +26,10 @@ function AttemptsQuizzesTable () {
     }
 
     return (
-        <div>
-            <h2>Previous Quiz Results</h2>
-            <table border='1'>
-                <tbody> {/* need this tbody (below) if not the console will have a warning... u can try to comment it out to see the warning */}
+        <div className={styles.container}>
+            <h2 className={styles.header}>Previous Quiz Results</h2>
+            <table border='1' className={styles.table}>
+                <tbody className={styles.trElementsHeader}> {/* need this tbody (below) if not the console will have a warning... u can try to comment it out to see the warning */}
                     <tr>
                         <th>Attempt Number</th>
                         <th>Score</th>
@@ -43,23 +37,27 @@ function AttemptsQuizzesTable () {
                     </tr>
                 </tbody>
             
-                <tbody>
+                <tbody className={styles.trElements}>
                     {attemptsArray.map((attempt) => (
                         <tr key={attempt.AttemptNo}>
                             <td>{attempt.AttemptNo}</td>
                             <td>{attempt.NumOfCorrectAnswers}/{numberOfQuestions}</td>
-                            <td><button onClick={() => handleViewQuiz(attempt.AttemptNo)}>Review Quiz</button></td>
+                            <td><button onClick={() => handleViewQuiz(attempt.AttemptNo)} className={styles.buttonReview}>Review Quiz</button></td>
                         </tr>
 
-                        // return <td key={index}>{data.AttemptNo}</td>;
-                        // return <td key={index}>{data.NumOfCorrectAnswers}/{data.TotalNumOfQuestions}</td>;
-                        // return <td key={index}><button>View Quiz</button></td>;
                     ))}
                 </tbody>
             </table>
+                    
+            <div className={styles.buttonContainer}>
+                <div className={styles.AlignIconsAndWords}>
+                    <button onClick={handleReattemptQuiz} className={styles.buttonAQ}><GrPowerCycle /> Attempt quiz again! </button>
+                </div>
 
-            <button onClick={handleReattemptQuiz}> Attempt quiz again! </button>
-            <button onClick={handleBackToHome}> Back to home </button>
+                <div className={styles.AlignIconsAndWords}>
+                    <button onClick={handleBackToHome} className={styles.buttonHome}><IoIosHome /> Back to home </button>
+                </div>
+            </div>
         </div>
     )
 }

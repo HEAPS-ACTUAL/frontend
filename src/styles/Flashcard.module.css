@@ -71,7 +71,7 @@
 }
 
 /* buttons */
-.previousBtn, .nextBtn {
+.previousBtn, .nextBtn, .RevisionScheduleButton, .HomeButton {
     font-size: 35px;
     display: flex;
     justify-content: center;
@@ -88,7 +88,11 @@
     margin-left: 50px;
 }
 
-.previousBtn:hover, .previousBtn:focus, .nextBtn:hover, .nextBtn:focus {
+.RevisionScheduleButton, .HomeButton {
+    font-size: 28px;
+}
+
+.previousBtn:hover, .previousBtn:focus, .nextBtn:hover, .nextBtn:focus, .HomeButton:hover, .RevisionScheduleButton:hover {
     background-color: rgba(70, 99, 172, 0.6);
     transform: scale(1.1);  
     outline: none; 
@@ -112,12 +116,12 @@
     gap: 20px; 
 }
 
-.navigateButtons {
+/* .navigateButtons {
     display: flex;
     flex-direction: column;
-}
+} */
 
-.HomeButton, .RevisionScheduleButton{
+/* .HomeButton, .RevisionScheduleButton{
     padding: 10px 20px;
     border-radius: 10px;
     margin: 10px 0px;
@@ -134,7 +138,7 @@
 .HomeButton:hover, .RevisionScheduleButton:hover {
     background-color: rgba(70, 99, 172, 0.7);
     box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
-}
+} */
 
 
 .counter{
