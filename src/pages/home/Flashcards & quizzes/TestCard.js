@@ -97,7 +97,7 @@ function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, att
 
                     {attempts !== undefined
                         ? <p className={styles.numOfQuestions}>
-                        Score: {score} / {numberOfQuestions}
+                        Attempts: {attempts.length}
                         </p>
                         : <p className={styles.numOfQuestions}>
                             {numberOfQuestions} questions
