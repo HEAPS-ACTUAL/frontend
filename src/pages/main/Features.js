@@ -63,10 +63,10 @@ function Features() {
                 </div>
             </div>
 
-            <div className={styles.featureItem} data-aos="fade-up">
-                <h2 className={styles.featureName}>Optimize Learning with Spaced Repetition</h2>
+            <div className={styles.featureItem} data-aos="fade-up" id="spaced-repetition">
+                <h2 className={styles.featureName} >Optimize Learning with Spaced Repetition</h2>
                 <p className={styles.description}>Boost your memory retention effectively with our spaced repetition algorithm. This feature schedules reviews at optimal intervals, ensuring you retain information longer and more efficiently.</p>
-                <p className={styles.learnMore}> <HashLink smooth to='#spaced-repetition'> Learn More about Spaced Repetition </HashLink> </p>
+                <p className={styles.learnMore}> <HashLink smooth to='#spaced-repetition-detailed'> Learn More about Spaced Repetition </HashLink> </p>
                 <div className={styles.featureImage}>
                     <img src={calendar} alt="Spaced Repetition Scheduling" />
                 </div>
@@ -86,7 +86,7 @@ function Features() {
     
                 <div className={styles.Box} data-aos="fade-up">
                     <p className={styles.icon}><FaCalendarAlt /></p>
-                    <h3 id='spaced-repetition'>Spaced Repetition</h3>
+                    <h3 id='spaced-repetition-detailed'>Spaced Repetition</h3>
                     <br></br>
                     <p className={styles.activespaced}>Enhance learning by scheduling review sessions based on memory retention. By strategically repeating and evaluating information, spaced repetition counters the natural tendency to forget, ensuring that knowledge is retained effectively over time.</p>
                 </div>

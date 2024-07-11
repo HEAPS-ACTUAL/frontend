@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import Select from "react-select";
-import "../../../styles/RevisionSchedule.css";
-import { createNewExam, retrieveAllRevisionDates} from "../../../services (for backend)/ScheduleService";
-import { getAllFlashcardsWithoutSchedule } from "../../../services (for backend)/FlashcardService";
+import React, { useState, useEffect } from 'react';
+import Select from 'react-select';
+import '../../../styles/RevisionSchedule.css'; 
+import { createNewExam, retrieveAllRevisionDates } from '../../../services (for backend)/ScheduleService';
+import { getAllFlashcardsWithoutSchedule } from '../../../services (for backend)/FlashcardService';
 
 // calendar component
 import FullCalendar from "@fullcalendar/react";
@@ -137,13 +137,13 @@ function Calendar() {
         setIsDeleteModalOpen(true); // open the delete confirmation modal
     }
 
-    return (
-        <div className="entirePage">
-            <div className="schedule">
-                <p className="topline">Struggling to plan a revision schedule?</p>
-                <p className="bottomline"> Daddy's got your back!</p>
-
-                <div className="calendarContainer">
+	return (
+		<div className='entirePage'>
+            <div className='schedule'>
+                <p className='topline'>Struggling to plan a revision schedule?</p>
+                <p className='bottomline'> Daddy's got your back!</p>
+            
+                <div className='calendarContainer'>
                     <FullCalendar
                         plugins={[dayGridPlugin, interactionPlugin]}
                         initialView="dayGridMonth"
@@ -166,11 +166,12 @@ function Calendar() {
                     closeModal={() => setIsDeleteModalOpen(false)}
                     event={eventToDelete}
                 />
-                <div className="generateSchedule">
-                    <h3>Generate revision Schedule!</h3>
-                    <div className="inputFields">
-                        <div className="examName">
-                            <input type="text" placeholder="Exam Name" value={examName} onChange={(e) => setExamName(e.target.value)} />
+                <div className='generateSchedule'>
+                    <h3>Generate Revision Schedule!</h3>
+                    <div className='inputFields'>
+
+                        <div className='examName'>
+                            <input type="text" placeholder="Exam Name" value={examName} onChange={(e) => setExamName(e.target.value)}/>
                         </div>
 
                         <Select
@@ -199,7 +200,8 @@ function Calendar() {
                                 <input type="color" value={examColour} onChange={(e) => setExamColour(e.target.value)} />
                             </div>
 
-                            <button className="generateScheduleButton" onClick={handleGenerateSchedule}> Submit! </button>
+                            <button className='generateScheduleButton' onClick={handleGenerateSchedule}> Submit! </button>
+                        
                         </div>
                     </div>
                 </div>
