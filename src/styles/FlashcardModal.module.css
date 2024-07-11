@@ -70,3 +70,34 @@ li {
 .closeButton:hover {
   background: #c82333;
 }
+.testButton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 15px 20px; /* More padding for a nicer look */
+  font-size: 16px;
+  background-color: #007bff; /* Primary button color */
+  color: white;
+  border: none;
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}
+
+.testButton:hover {
+  background-color: #0056b3; /* Hover effect */
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.buttonContent {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.testName {
+  font-weight: bold;
+  margin-right: 10px; /* Space between name and date */
+}
