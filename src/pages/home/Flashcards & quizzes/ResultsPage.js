@@ -29,7 +29,7 @@ const ResultsPage = () => {
         
         fetchQuizReviewArray();
 
-    }, [testID]);
+    }, [testID, attemptNo]);
 
     return (
         <div className={styles.QuizResultsContainer}>

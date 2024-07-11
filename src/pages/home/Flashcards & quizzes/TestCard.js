@@ -15,7 +15,6 @@ function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, att
 
     if(attempts !== undefined){
         attempts = JSON.parse(attempts);
-        var score = attempts[0].NumOfCorrectAnswers
     }
 
     const navigate = useNavigate();

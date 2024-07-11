@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import "../../../styles/RevisionSchedule.css";
-import { createNewExam, retrieveAllRevisionDates, fetchTestsForEvent} from "../../../services (for backend)/ScheduleService";
+import { createNewExam, retrieveAllRevisionDates} from "../../../services (for backend)/ScheduleService";
 import { getAllFlashcardsWithoutSchedule } from "../../../services (for backend)/FlashcardService";
 
 // calendar component
