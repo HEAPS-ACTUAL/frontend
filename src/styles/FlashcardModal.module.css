@@ -15,7 +15,6 @@
   background: #fff;
   padding: 40px 60px;
   border-radius: 10px;
-  width: 100%;
   max-width: 600px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -33,71 +32,82 @@ ul {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 li {
-  margin-bottom: 20px;
+  margin: 10px;
 }
 
 .testButton {
-  background: #007bff;
+  background: #9acaff;
   color: #fff;
   border: none;
   padding: 15px 30px;
-  border-radius: 5px;
+  border-radius: 20px;
   cursor: pointer;
   font-size: 18px;
-  transition: background 0.3s ease;
-  width: 100%;
-}
-
-.testButton:hover {
-  background: #0056b3;
-}
-
-.closeButton {
-  background: #dc3545;
-  color: #fff;
-  border: none;
-  padding: 15px 30px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 18px;
-  margin-top: 30px;
-  transition: background 0.3s ease;
-}
-
-.closeButton:hover {
-  background: #c82333;
-}
-.testButton {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 15px 20px; /* More padding for a nicer look */
-  font-size: 16px;
-  background-color: #007bff; /* Primary button color */
-  color: white;
-  border: none;
-  border-radius: 8px; /* Rounded corners */
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+  flex-direction: column;
+  align-items: flex-start;
+  width: 220px;
+  height: 130px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .testButton:hover {
-  background-color: #0056b3; /* Hover effect */
-  transform: translateY(-2px); /* Slight lift on hover */
+  border-bottom: 3px solid #606565;
+  transform: translate3d(0px, -2px, 0px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.testButton:active {
+  transform: translate3d(0px, 2px, 0px);
 }
 
 .buttonContent {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
   width: 100%;
 }
 
 .testName {
   font-weight: bold;
-  margin-right: 10px; /* Space between name and date */
+  text-align: left;
+  color: black;
+}
+
+.dateTime {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  color: black;
+}
+
+.calendarImage {
+  margin-right: 8px;
+  width: 25px;
+  height: 25px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.closeIcon {
+  font-size: 24px;
+  color: #333;
+  transition: transform 0.2s ease;
+}
+
+.closeIcon:hover {
+  transform: rotate(45deg);
 }

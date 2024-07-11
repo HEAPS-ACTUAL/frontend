@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../../../styles/FlashcardModal.module.css";
+import calendarImage from '../../../images/calendar.png';
+
 
 function FlashcardModal({ isOpen, flashcardsArray, onClose }) {
   const navigate = useNavigate();
@@ -16,8 +18,14 @@ function FlashcardModal({ isOpen, flashcardsArray, onClose }) {
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
+
+      <button className={styles.closeButton} onClick={onClose}>
+            <span className={styles.closeIcon}>X</span>
+        </button>
+
         <h2>Select a Flashcard</h2>
 
+    
         <ul>
           {flashcardsArray.map((flashcard) => (
             <li key={flashcard["TestID"]}>
@@ -29,8 +37,10 @@ function FlashcardModal({ isOpen, flashcardsArray, onClose }) {
                   <span className={styles.testName}>
                     {flashcard["TestName"]}
                   </span>
+                  <br></br>
                   <span className={styles.dateTime}>
-                    {new Date(flashcard["DateTimeCreated"]).toLocaleString()}
+                    <img className={styles.calendarImage} src={calendarImage} alt="calendar" />
+                    {new Date(flashcard["DateTimeCreated"]).toLocaleDateString()}
                   </span>
                 </div>
               </button>
@@ -38,9 +48,7 @@ function FlashcardModal({ isOpen, flashcardsArray, onClose }) {
           ))}
         </ul>
 
-        <button className={styles.closeButton} onClick={onClose}>
-          Close
-        </button>
+        
       </div>
     </div>
   );
