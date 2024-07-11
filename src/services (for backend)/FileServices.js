@@ -1,9 +1,8 @@
-import { GlobalWorkerOptions, getDocument } from "pdfjs-dist/legacy/build/pdf";
+import { GlobalWorkerOptions, getDocument } from "pdfjs-dist";
+import workerSrc from "pdfjs-dist/build/pdf.worker.entry";
 
-// Hardcode the version of pdf.js you are using
-const PDFJS_VERSION = "2.6.347";
+GlobalWorkerOptions.workerSrc = workerSrc;
 
-GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${PDFJS_VERSION}/pdf.worker.min.js`;
 export function fileTypeIsPDF(file) {
   const fileType = file.type; // this is how file type looks like if u console.log() it: "application/pdf"
   const indexOfSlash = fileType.lastIndexOf("/");
