@@ -49,18 +49,16 @@
     background: -webkit-linear-gradient(left, #0172F2, #3a6073); 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-decoration: underline; /* Add underline for link style */
-    cursor: pointer;
     margin-bottom: 2px;
+    cursor: pointer; 
 }
 
-.schedule .learnMore {
-    font-size: 50%;
-    display: inline; /* Make the readMore link inline */
-    margin-left: 0px; /* Adjust spacing as needed */
-    color: #0172F2; /* Ensure link color is consistent */
-    text-decoration: underline; /* Add underline for link style */
-    cursor: pointer; /* Change cursor to pointer for link */
+.tagline .learnMoreBtn {
+    font-size: 80%;
+    display: inline;
+    color: #0172F2; 
+    background-color: transparent;
+    border-color: transparent;
   }
 
 .calendarContainer {

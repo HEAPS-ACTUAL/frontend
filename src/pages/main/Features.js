@@ -63,7 +63,7 @@ function Features() {
                 </div>
             </div>
 
-            <div className={styles.featureItem} data-aos="fade-up" id="spaced-repetition">
+            <div className={styles.featureItem} data-aos="fade-up" id="spaced-repetition" >
                 <h2 className={styles.featureName} >Optimize Learning with Spaced Repetition</h2>
                 <p className={styles.description}>Boost your memory retention effectively with our spaced repetition algorithm. This feature schedules reviews at optimal intervals, ensuring you retain information longer and more efficiently.</p>
                 <p className={styles.learnMore}> <HashLink smooth to='#spaced-repetition-detailed'> Learn More about Spaced Repetition </HashLink> </p>

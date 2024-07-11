@@ -3,6 +3,7 @@ import Select from 'react-select';
 import '../../../styles/RevisionSchedule.css'; 
 import { createNewExam, retrieveAllRevisionDates } from '../../../services (for backend)/ScheduleService';
 import { getAllFlashcardsWithoutSchedule } from '../../../services (for backend)/FlashcardService';
+import { HashLink } from 'react-router-hash-link';
 
 // calendar component
 import FullCalendar from "@fullcalendar/react";
@@ -12,6 +13,9 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import DayModal from "./DayModal";
 import interactionPlugin from "@fullcalendar/interaction";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
+
+// icon components
+import { CgArrowTopRight } from "react-icons/cg";
 
 function Calendar() {
     // GET EMAIL OF USER TO BE USED IN SOME OF THE FUNCTIONS BELOW
@@ -142,6 +146,8 @@ function Calendar() {
             <div className='schedule'>
                 <p className='topline'>Struggling to plan a revision schedule?</p>
                 <p className='bottomline'> Daddy's got your back!</p>
+                <p className='tagline'><HashLink smooth to='/features#spaced-repetition'>powered by our spaced repetition algorithm <section className='learnMoreBtn'><CgArrowTopRight /></section></HashLink></p>
+
             
                 <div className='calendarContainer'>
                     <FullCalendar
