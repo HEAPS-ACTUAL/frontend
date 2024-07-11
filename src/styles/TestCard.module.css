@@ -20,7 +20,7 @@
 
 @keyframes fadeOut {
     from {
-        height: 100x%;
+        height: 100%;
         opacity: 1;
     }
     to {
