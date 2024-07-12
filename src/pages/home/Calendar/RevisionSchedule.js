@@ -77,8 +77,8 @@ function Calendar() {
             setCalendarEvents(formattedCalendarEventsArray);
 
             // FETCHING TODAY'S DATE AND EVENTS
-            const dateLocaleString = new Date().toLocaleString("en-GB").split(","); // example of the dateLocaleString format: "20/12/2012, 03:00:00"
-            const curDate = dateLocaleString[0].split("/")
+            const dateLocaleString = new Date().toLocaleDateString("en-GB"); // example of the dateLocaleString format: "20/12/2012, 03:00:00"
+            const curDate = dateLocaleString.split("/")
             
             const day = curDate[0];
             const month = curDate[1];
