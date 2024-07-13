@@ -12,8 +12,7 @@ function Navbar() {
     function updateLogInStatus() {
         if (isLoggedIn()) {
             setLogInOutButton('Log out');
-        }
-        else {
+        } else {
             setLogInOutButton('Log in');
         }
     }
@@ -21,7 +20,7 @@ function Navbar() {
     useEffect(() => {
         updateLogInStatus();
         window.addEventListener('logInOut', updateLogInStatus);
-    })
+    }, []);
 
     return (
         <div className={styles.navbar}>
@@ -33,13 +32,20 @@ function Navbar() {
             <div className={styles.navItems}>
                 <Link to="/home" className={styles.navLink}>Home</Link>
                 <Link to="/features" className={styles.navLink}>Features</Link>
-                
             </div>
 
-            <Link to="/login" className={styles.navLinkLogin}><button onClick={handleLogOut}>{logInOutButton}</button></Link>
+            <div className={styles.navProfile}>
+                {isLoggedIn() && (
+                    <Link to="/profile" className={styles.navLink}>
+                        <button>My Profile</button>
+                    </Link>
+                )}
+                <Link to="/login" className={styles.navLinkLogin}>
+                    <button onClick={handleLogOut}>{logInOutButton}</button>
+                </Link>
+            </div>
         </div>
     );
 }
 
 export default Navbar;
-
