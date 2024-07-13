@@ -17,14 +17,24 @@
     font-size: 40px;
 }
 
-.results {
+.score {
+    font-size: 40px;
+    font-weight: bold;
+    color: #dc3838;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 30px;
-    font-size: 32px;
+   
+}
+
+.attempt{
+    font-size: 40px;
     font-weight: bold;
     color: #dc3838;
+    display: flex;
+    align-items: center;
+    justify-content: center;   
 }
 
 .QuestionBlock {
@@ -36,7 +46,6 @@
     align-items: center; 
     
 }
-
 
 .Question{
     /* background-color: #9bbec8; */
@@ -131,24 +140,24 @@
     margin-top: 60px;   
 }
 
-.RestartButton, .HomeButton{
+.HomeButton, .buttonNavigate{
+    display: flex;
     padding: 10px 20px;
-    margin: 10px;
-    border-radius: 5px;
-    color: white;
+    border-radius: 10px;
+    margin: 10px 10px;
+    color: black;
     font-size: 16px;
     border: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.25);   
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25);
     cursor: pointer;
+    width: 400px;
+    transition: background-color 0.3s, box-shadow 0.3s;  
+    background-color: rgba(70, 99, 172, 0.4);
     justify-content: center;
-    width:500px;
-    background-color: #7d8e95;
-    display: flex;
     align-items: center;
-    flex-direction: row;
-
 }
 
-.RestartButton:hover, .HomeButton:hover{
-    background-color: #9bbec8;
+.HomeButton:hover, .buttonNavigate:hover{
+    background-color: rgba(70, 99, 172, 0.7);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
 }

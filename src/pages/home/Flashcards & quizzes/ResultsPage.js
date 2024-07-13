@@ -30,12 +30,15 @@ const ResultsPage = () => {
         fetchQuizReviewArray();
 
     }, [testID, attemptNo]);
-
+    
+    
     return (
         <div className={styles.QuizResultsContainer}>
-            <div className={styles.Header}> Results </div>
+            <div className={styles.Header} AttemptNo={attemptNo}> Results for Attempt {attemptNo} </div>
             
-            <div className={styles.results}> Score: {userScore} / {totalQns} </div>
+          
+            <div className={styles.score}>Score: {userScore} / {totalQns} </div>
+
 
             {quizReviewArray.map((question_obj) => (
                 <div key={question_obj['QuestionNo']} className={styles.QuestionBlock}>
@@ -70,6 +73,7 @@ const ResultsPage = () => {
             ))}
             
             <div className={styles.BtnContainer}>
+                <button className={styles.buttonNavigate} onClick={() => navigate('../attempts')}>View All Attempts </button>
                 <button className={styles.HomeButton} onClick={() => navigate('/home')}>Back to Home</button>
             </div>
             
