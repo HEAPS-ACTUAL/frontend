@@ -1,19 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../../../styles/FlashcardModal.module.css";
 import calendarImage from '../../../images/calendar.png';
+import { getFlashcardsByScheduleID } from "../../../services (for backend)/FlashcardService";
 
-function FlashcardModal({ isOpen, flashcardsArray, onClose }) {
+function FlashcardModal({ isOpen, scheduleID, onClose }) {
     const navigate = useNavigate();
 
-    if (!isOpen) {
-        return null;
-    }
+    const [flashcardsArray, setFlashcardsArray] = useState([]);
 
+    useEffect(() => {
+        async function fetchRelatedFlashcards(){
+            const relatedFlashcards = await getFlashcardsByScheduleID(scheduleID);
+            setFlashcardsArray(relatedFlashcards);
+        }
+        
+        fetchRelatedFlashcards();
+        
+    }, [scheduleID])
+    
     function handleTestClick(flashcardID) {
         navigate("/test/flashcard", { state: { testID: flashcardID } });
     }
-
+    
+    if (!isOpen) {
+        return null;
+    }
+    
     return (
         <div className={styles.overlay}>
             <div className={styles.modal}>

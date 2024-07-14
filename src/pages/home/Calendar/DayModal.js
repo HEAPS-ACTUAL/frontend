@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import styles from "../../../styles/DayModal.module.css";
 import { FaTrashCan } from "react-icons/fa6";
 import postItIcon from "../../../images/post-it.png";
-import FlashcardModal from "./FlashcardModal";
-import { getFlashcardsByScheduleID } from "../../../services (for backend)/FlashcardService";
 
-function DayModal({ date, events, handleDeleteClicked }) {
+function DayModal({ date, events, handleEventClick, handleDeleteClicked }) {
     // Format the date when component mounts or when date changes
     const [formattedDate, setFormattedDate] = useState("");
     
@@ -19,22 +17,6 @@ function DayModal({ date, events, handleDeleteClicked }) {
         setFormattedDate(formatted);
         
     }, [date]);
-    
-    // For flashcard modal
-    const [isFlashcardModalOpen, setFlashcardModalOpen] = useState(false);
-    const [retrievedFlashcards, setRetrievedFlashcards] = useState([]);
-
-    async function handleEventClick(scheduleID) {
-        try {
-            const flashcardsArray = await getFlashcardsByScheduleID(scheduleID);
-
-            setRetrievedFlashcards(flashcardsArray);
-            setFlashcardModalOpen(true);
-        } 
-        catch (error) {
-            console.error("Failed to fetch tests:", error);
-        }
-    }
 
     return (
         <div className={styles.modalContainer}>
@@ -58,13 +40,6 @@ function DayModal({ date, events, handleDeleteClicked }) {
                     ))}
                 </div>
             </div>
-
-            <FlashcardModal
-                isOpen={isFlashcardModalOpen}
-                flashcardsArray={retrievedFlashcards}
-                onClose={() => setFlashcardModalOpen(false)}
-            />
-
         </div>
     );
 }

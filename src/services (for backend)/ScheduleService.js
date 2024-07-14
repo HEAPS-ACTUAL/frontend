@@ -7,8 +7,7 @@ async function retrieveAllRevisionDates(email) {
             url: "/schedule/retrieveAllRevisionDates",
             data: { email: email }
         });
-
-        console.log(response.data);
+        
         return response.data;
     }
     catch (error) {

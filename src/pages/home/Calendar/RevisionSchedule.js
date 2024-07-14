@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import { HashLink } from 'react-router-hash-link';
 import Select from 'react-select';
-import '../../../styles/RevisionSchedule.css'; 
+import '../../../styles/RevisionSchedule.css';
+
+// icon components
+import { CgArrowTopRight } from "react-icons/cg";
+
+// Functions
 import { createNewExam, retrieveAllRevisionDates } from '../../../services (for backend)/ScheduleService';
 import { getAllFlashcardsWithoutSchedule } from '../../../services (for backend)/FlashcardService';
-import { HashLink } from 'react-router-hash-link';
 
 // calendar component
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-
-// modal component
-import DayModal from "./DayModal";
 import interactionPlugin from "@fullcalendar/interaction";
-import DeleteConfirmationModal from "./DeleteConfirmationModal";
 
-// icon components
-import { CgArrowTopRight } from "react-icons/cg";
-import { event } from 'jquery';
+// day modal component
+import DayModal from "./DayModal";
+import DeleteConfirmationModal from "./DeleteConfirmationModal";
+import FlashcardModal from './FlashcardModal';
 
 function Calendar() {
     // GET EMAIL OF USER TO BE USED IN SOME OF THE FUNCTIONS BELOW
@@ -37,6 +39,10 @@ function Calendar() {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState(null);
     const [examColour, setExamColour] = useState("#808080"); // default colour is grey
+    
+    // STATES FOR FLASHCARD MODAL
+    const [isFlashcardModalOpen, setFlashcardModalOpen] = useState(false);
+    const [clickedScheduleID, setClickedScheduleID] = useState(null);
 
     // State for day modal
     const [selectedDate, setSelectedDate] = useState(null);
@@ -47,10 +53,11 @@ function Calendar() {
     const [eventToDelete, setEventToDelete] = useState(null); // State to store event to delete
 
     /*
-      ------------------------------------------------------------------------------------------------------------------------------------
-      FUNCTIONS
-      ------------------------------------------------------------------------------------------------------------------------------------
-      */
+    ------------------------------------------------------------------------------------------------------------------------------------
+    FUNCTIONS
+    ------------------------------------------------------------------------------------------------------------------------------------
+    */
+    
     // FETCH RELEVANT DATA WHEN THE PAGE IS RENDERED FOR THE FIRST TIME
     useEffect(() => {
         // retrieve names of flashcards from backend to display as dropdown menu @ SHI HUI UR CODE HERE
@@ -68,36 +75,35 @@ function Calendar() {
 
                 // an array of revision date objects
                 const revisionDates = JSON.parse(exam.RevisionDates).map((date) => ({
-                    id: [exam.ScheduleID, date], 
+                    id: [exam.ScheduleID, date],
                     title: exam.ExamName,
                     start: date,
                     backgroundColor: exam.ExamColour,
                     borderColor: 'transparent',
                     flashcards: JSON.parse(exam.Flashcards)
                 }))
-    
+
                 // create an object for the exam date
                 const examDates = {
-                    id: exam.EndDate ? [exam.ScheduleID, exam.EndDate.slice(0, 10)] : [exam.ScheduleID, null], 
+                    id: exam.EndDate ? [exam.ScheduleID, exam.EndDate.slice(0, 10)] : [exam.ScheduleID, null],
                     title: `🗓️ ${exam.ExamName}`,
                     start: exam.EndDate ? exam.EndDate.slice(0, 10) : null,
                     backgroundColor: exam.ExamColour,
                     borderColor: 'black',
                     flashcards: JSON.parse(exam.Flashcards)
                 }
-                
+
                 revisionDates.push(examDates); // append the exam date object into the array of revision date objects
 
                 return revisionDates;
             });
 
-            console.log(formattedCalendarEventsArray);
             setCalendarEvents(formattedCalendarEventsArray);
 
             // FETCHING TODAY'S DATE AND EVENTS
             const dateLocaleString = new Date().toLocaleDateString("en-GB"); // example of the dateLocaleString format: "20/12/2012, 03:00:00"
             const curDate = dateLocaleString.split("/")
-            
+
             const day = curDate[0];
             const month = curDate[1];
             const year = curDate[2];
@@ -124,21 +130,21 @@ function Calendar() {
     const handleGenerateSchedule = async () => {
         if (!startDate || !examName) {
             window.alert("Please enter exam name and start date!");
-        } 
+        }
         else if (selectedTestIDs.length === 0) {
             window.alert("Please select at least 1 flashcard!");
-        } 
+        }
         else if (endDate && startDate > endDate) {
             window.alert("Start date cannot be after end date!");
-        } 
+        }
         else {
             try {
-                await createNewExam( startDate, endDate, examName, examColour, selectedTestIDs);
+                await createNewExam(startDate, endDate, examName, examColour, selectedTestIDs);
                 console.log({ startdate: startDate, enddate: endDate, examname: examName, examcolour: examColour, testIDs: selectedTestIDs });
-                
+
                 window.alert("Schedule generated successfully!");
                 window.location.reload(); // REFRESH THE PAGE SO FORM INPUT FIELDS WILL BE RESET
-            } 
+            }
             catch (error) {
                 console.error("Failed to generate schedule:", error.message || "Error");
             }
@@ -154,19 +160,24 @@ function Calendar() {
         // console.log("Clicked date:", clickedDate); // Debug
     }
 
+    function showFlashcardModal(scheduleID) {
+        setClickedScheduleID(scheduleID);
+        setFlashcardModalOpen(true);
+    }
+
     const showDeleteModal = (event) => {
         setEventToDelete(event);
         setIsDeleteModalOpen(true); // open the delete confirmation modal
     }
 
-	return (
-		<div className='entirePage'>
+    return (
+        <div className='entirePage'>
             <div className='schedule'>
                 <p className='topline'>Struggling to plan a revision schedule?</p>
                 <p className='bottomline'> Daddy's got your back!</p>
                 <p className='tagline'><HashLink smooth to='/features#spaced-repetition'>powered by our spaced repetition algorithm <section className='learnMoreBtn'><CgArrowTopRight /></section></HashLink></p>
 
-            
+
                 <div className='calendarContainer'>
                     <FullCalendar
                         plugins={[dayGridPlugin, interactionPlugin]}
@@ -176,26 +187,37 @@ function Calendar() {
                         dateClick={handleDateChange}
                         showNonCurrentDates={false}
                         fixedWeekCount={false}
+                        eventClick={(info) => showFlashcardModal(info.event.id[0])}
                     />
                 </div>
+
+                <FlashcardModal
+                    isOpen={isFlashcardModalOpen}
+                    scheduleID={clickedScheduleID}
+                    onClose={() => setFlashcardModalOpen(false)}
+                />
+
             </div>
             <div className="todaysEventsAndGenerateSchedule">
                 <DayModal
                     date={selectedDate}
                     events={selectedEvents}
+                    handleEventClick={showFlashcardModal}
                     handleDeleteClicked={showDeleteModal}
                 />
+
                 <DeleteConfirmationModal
                     isOpen={isDeleteModalOpen}
                     closeModal={() => setIsDeleteModalOpen(false)}
                     event={eventToDelete}
                 />
+
                 <div className='generateSchedule'>
                     <h3>Generate Revision Schedule!</h3>
                     <div className='inputFields'>
 
                         <div className='examName'>
-                            <input type="text" placeholder="Exam Name" value={examName} onChange={(e) => setExamName(e.target.value)}/>
+                            <input type="text" placeholder="Exam Name" value={examName} onChange={(e) => setExamName(e.target.value)} />
                         </div>
 
                         <Select
@@ -225,7 +247,7 @@ function Calendar() {
                             </div>
 
                             <button className='generateScheduleButton' onClick={handleGenerateSchedule}> Submit! </button>
-                        
+
                         </div>
                     </div>
                 </div>
