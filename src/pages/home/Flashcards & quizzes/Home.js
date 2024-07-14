@@ -58,9 +58,6 @@ function Home() {
     const FlashcardsArray = await getAllFlashcardsByUser(email);
     setFlashcardList(FlashcardsArray);
   }
-  const handleProfileClick = () => {
-    navigate("../main/profilePage"); // Adjust the route as needed for your application
-  };
 
   useEffect(() => {
     fetchUserInfo();
@@ -149,8 +146,6 @@ function Home() {
   return (
     <div className={styles.container}>
       <div className={styles.greeting}>
-        <FiUser className={styles.profileIcon} onClick={handleProfileClick} />
-
         <div className={styles.name}>Hello {firstName},</div>
         <div className={styles.line}>
           ready to conquer some new knowledge today?

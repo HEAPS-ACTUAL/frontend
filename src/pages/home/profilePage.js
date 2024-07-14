@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
+import "../../styles/ProfilePage.css";
 
 function ProfilePage() {
+  useEffect(() => {
+    console.log("Profile Page is rendered");
+    // existing fetching logic or other setups
+  }, []);
   const [userDetails, setUserDetails] = useState({
     email: "",
     firstName: "",
@@ -74,46 +79,43 @@ function ProfilePage() {
   };
 
   return (
-    <div>
+    <div className="profile-container">
       <h1>Profile Page</h1>
       {editing ? (
         <>
+          <label className="profile-label">First Name:</label>
           <input
+            className="profile-field"
             type="text"
             name="firstName"
             value={userDetails.firstName}
             onChange={handleChange}
           />
-          <input
-            type="text"
-            name="lastName"
-            value={userDetails.lastName}
-            onChange={handleChange}
-          />
-          <input
-            type="email"
-            name="email"
-            value={userDetails.email}
-            onChange={handleChange}
-          />
-          <input type="file" onChange={handleFileChange} />
-          <button onClick={handleSave}>Save Changes</button>
+          {/* Additional fields */}
+          <button className="button" onClick={handleSave}>
+            Save Changes
+          </button>
         </>
       ) : (
         <>
-          <p>Email: {userDetails.email}</p>
-          <p>First Name: {userDetails.firstName}</p>
-          <p>Last Name: {userDetails.lastName}</p>
+          <p>
+            <strong>Email:</strong> {userDetails.email}
+          </p>
+          {/* Additional info */}
           <img
             src={userDetails.profilePic || "path/to/default/avatar.png"}
             alt="Profile"
+            className="profile-image"
           />
-          <button onClick={handleEdit}>Edit Profile</button>
+          <button className="button" onClick={handleEdit}>
+            Edit Profile
+          </button>
         </>
       )}
-      <button onClick={handleDeleteAccount}>Delete Account</button>
+      <button className="button" onClick={handleDeleteAccount}>
+        Delete Account
+      </button>
     </div>
   );
 }
-
 export default ProfilePage;
