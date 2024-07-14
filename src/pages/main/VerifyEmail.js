@@ -1,9 +1,10 @@
 import React, { useState, useEffect} from 'react';
+import styles from "../../styles/VerifyEmail.module.css";
 import { useNavigate, useLocation } from 'react-router-dom';
 
 
 // functions
-import { verifyToken } from '../../services (for backend)/UserService';
+import { verifyToken } from '../../services (for backend)/EmailServices';
 
 const VerifyEmail = () =>{
     const location = useLocation();
@@ -20,8 +21,17 @@ const VerifyEmail = () =>{
         }
     }, [location]);
 
+    // if verifyToken response == "Verified Successfully"
+    // messageText = "Verification was successful. BUTTON to sign in page"
+
+    //else
+    // messageText = "Verification was unsuccessful. Button to send verification email"
+
     return (
-        <div><h1>Verify Email Here TESTING IN PROGRESS</h1></div>
+        <div className={styles.container}>
+            <div className={styles.greeting}><h1>Verify Email Here TESTING IN PROGRESS</h1>
+            </div>
+        </div>
     );
 
 }
