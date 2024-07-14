@@ -1,121 +1,116 @@
 import React, { useState, useEffect } from "react";
-import "../../styles/ProfilePage.css";
+import {
+  getUserByEmail,
+  updateUserDetails,
+  deleteUserAccount,
+} from "../../services (for backend)/UserService";
 
 function ProfilePage() {
-  useEffect(() => {
-    console.log("Profile Page is rendered");
-    // existing fetching logic or other setups
-  }, []);
   const [userDetails, setUserDetails] = useState({
-    email: "",
+    email: sessionStorage.getItem("userEmail") || "",
     firstName: "",
     lastName: "",
-    profilePic: "",
   });
   const [editing, setEditing] = useState(false);
+  const [error, setError] = useState("");
 
-  // Fetch user details from backend on component mount
   useEffect(() => {
-    // Simulate fetching data from an API
-    const fetchUserDetails = async () => {
-      const response = await fetch("/api/user/details"); // Your API endpoint to fetch user details
-      const data = await response.json();
-      setUserDetails(data);
-    };
+    async function fetchUserDetails(email) {
+      console.log("Fetching user details for email:", email); // Debugging log
+      try {
+        const details = await getUserByEmail(email);
+        console.log("Fetched user details:", details); // Debugging log
+        if (details) {
+          setUserDetails({
+            email: details.email || details.Email,
+            firstName: details.firstName || details.FirstName,
+            lastName: details.lastName || details.LastName,
+          });
+        } else {
+          setError("User details not found.");
+        }
+      } catch (error) {
+        setError("Failed to fetch user details.");
+        console.error("Fetch error:", error);
+      }
+    }
 
-    fetchUserDetails();
+    const email = sessionStorage.getItem("userEmail");
+    if (email) {
+      fetchUserDetails(email);
+    } else {
+      setError("No user email found in session storage.");
+    }
   }, []);
 
-  const handleEdit = () => {
-    setEditing(true);
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setUserDetails((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSave = async () => {
-    const response = await fetch("/api/user/update", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userDetails),
-    });
-
-    if (response.ok) {
+    try {
+      const message = await updateUserDetails(userDetails);
+      alert(message);
       setEditing(false);
-    } else {
-      // Handle errors
-      alert("Failed to update profile.");
+    } catch (error) {
+      setError("Failed to update profile.");
+      console.error("Update error:", error);
     }
   };
 
-  const handleDeleteAccount = async () => {
+  const handleDelete = async () => {
     if (
       window.confirm(
         "Are you sure you want to delete your account? This cannot be undone."
       )
     ) {
-      const response = await fetch("/api/user/delete", { method: "DELETE" });
-      if (response.ok) {
-        // Redirect user or log them out
-      } else {
-        alert("Failed to delete account.");
+      try {
+        const message = await deleteUserAccount(userDetails.email);
+        alert(message);
+        sessionStorage.clear();
+        window.location.href = "/login";
+      } catch (error) {
+        setError("Failed to delete account.");
+        console.error("Delete error:", error);
       }
-    }
-  };
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setUserDetails((prevDetails) => ({
-      ...prevDetails,
-      [name]: value,
-    }));
-  };
-
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      // Handle file upload here or set file to state to upload on save
-      console.log("File selected:", file.name);
     }
   };
 
   return (
     <div className="profile-container">
       <h1>Profile Page</h1>
+      {error && <p>{error}</p>}
       {editing ? (
         <>
-          <label className="profile-label">First Name:</label>
           <input
-            className="profile-field"
             type="text"
             name="firstName"
             value={userDetails.firstName}
             onChange={handleChange}
+            placeholder="First Name"
           />
-          {/* Additional fields */}
-          <button className="button" onClick={handleSave}>
-            Save Changes
-          </button>
+          <input
+            type="text"
+            name="lastName"
+            value={userDetails.lastName}
+            onChange={handleChange}
+            placeholder="Last Name"
+          />
+          <button onClick={handleSave}>Save Changes</button>
+          <button onClick={() => setEditing(false)}>Cancel</button>
         </>
       ) : (
         <>
-          <p>
-            <strong>Email:</strong> {userDetails.email}
-          </p>
-          {/* Additional info */}
-          <img
-            src={userDetails.profilePic || "path/to/default/avatar.png"}
-            alt="Profile"
-            className="profile-image"
-          />
-          <button className="button" onClick={handleEdit}>
-            Edit Profile
-          </button>
+          <p>Email: {userDetails.email}</p>
+          <p>First Name: {userDetails.firstName}</p>
+          <p>Last Name: {userDetails.lastName}</p>
+          <button onClick={() => setEditing(true)}>Edit Profile</button>
+          <button onClick={handleDelete}>Delete Account</button>
         </>
       )}
-      <button className="button" onClick={handleDeleteAccount}>
-        Delete Account
-      </button>
     </div>
   );
 }
+
 export default ProfilePage;
