@@ -1,11 +1,11 @@
 import axiosInstance from "../utility/axiosInstance";
 
-async function deleteTest(email, testID, testName) { // isaiah to change
+async function deleteTest(testID, testName) {
     try {
         const response = await axiosInstance({
             method: "post",
             url: "/test/deleteTest",
-            data: { email, testID, testName },
+            data: {testID, testName},
         });
     
         return response.data;

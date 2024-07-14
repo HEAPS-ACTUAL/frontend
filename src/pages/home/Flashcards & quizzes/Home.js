@@ -85,7 +85,7 @@ function Home() {
         else if (!file) {
             setCreateTestMessage("Please upload a file!");
         } 
-        else if ( testTypeChecked["Flashcard"] === false && testTypeChecked["Quiz"] === false) {
+        else if (testTypeChecked["Flashcard"] === false && testTypeChecked["Quiz"] === false){
             setCreateTestMessage("Please select either flashcard or quiz!");
         } 
         else {
@@ -100,14 +100,13 @@ function Home() {
                     .then((wordCount) => {
                         if (wordCount > 8750) {
                             setCreateTestMessage("Word count exceeds the limit of 8750!");
-                        } 
-                        else {
+                        } else {
                             for (let testKey of testList) {
                                 if (testTypeChecked[testKey]) {
                                     let testType = testKey[0]; // Assuming first letter indicates the type (Q for Quiz, F for Flashcard)
 
-                                    console.log("Generating test with:", { email, testName, testType, difficulty, file, fileSize: `${convertFileSizeTo2DP(file)}MB`});
-                                    
+                                    console.log("Generating test with:", {email, testName, testType, difficulty, file, fileSize: `${convertFileSizeTo2DP(file)}MB`});
+
                                     if (testType === "Q") {
                                         generateQuiz(email, testName, testType, difficulty, file);
                                     }
@@ -136,8 +135,10 @@ function Home() {
     return (
         <div className={styles.container}>
             <div className={styles.greeting}>
-                <div className={styles.name}>Hello {firstName}, </div>
-                <div className={styles.line}> ready to conquer some new knowledge today? </div>
+                <div className={styles.name}>Hello {firstName},</div>
+                <div className={styles.line}>
+                    ready to conquer some new knowledge today?
+                </div>
             </div>
 
             <div className={styles.createQuiz}>
@@ -189,7 +190,7 @@ function Home() {
 
                 <div className={styles.flashcardList}>
                     {flashcardList.length === 0 
-                        ? ( <p className={styles.noQuizMessage}> You do not have any flashcards. Create a flashcard above! </p>) 
+                        ? <p className={styles.noQuizMessage}> You do not have any flashcards. Create a flashcard above! </p>
                         : (flashcardList.map((flashcard) => {
                             return (
                                 <TestCard
@@ -232,7 +233,7 @@ function Home() {
 
                 <div className={styles.quizList}>
                     {quizList.length === 0 
-                        ? (<p className={styles.noQuizMessage}> {selectedButton === "to-do" ? "You do not have any quizzes. Create a quiz above!" : "You have not completed any quizzes yet!"} </p> ) 
+                        ? <p className={styles.noQuizMessage}> {selectedButton === "to-do" ? "You do not have any quizzes. Create a quiz above!" : "You have not completed any quizzes yet!"} </p>
                         : (quizList.map((quiz) => {
                             return (
                                 <TestCard

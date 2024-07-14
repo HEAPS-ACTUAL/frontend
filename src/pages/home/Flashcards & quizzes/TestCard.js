@@ -52,7 +52,7 @@ function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, att
     }
 
     async function handleConfirmDelete(){
-        await deleteTest(email, testID, name);
+        await deleteTest(testID, name);
 
         navigate(
             '../../../loading-page', 
