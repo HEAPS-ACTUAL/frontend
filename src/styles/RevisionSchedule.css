@@ -91,10 +91,14 @@
 }
 
 .fc-daygrid-event {
-    background-color: #007bff; 
     border-radius: 4px;
     padding: 3.5px;
     border: 1.75px solid;
+}
+
+.fc-daygrid-event:hover {
+    transform: translate3d(0px, -3px, 0px) !important;
+    transition: 0.2s;
 }
 
 .fc-day-today {
