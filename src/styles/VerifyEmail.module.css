@@ -49,14 +49,19 @@
     margin-bottom: 20px; /* Add some space between the greeting and the button */
 }
 
-.buttonsContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;   
+.container .sentMessage {
+    margin-top: 10px;
+    text-align: center;
+    color: #4663ac;
+    font-size: 80%;
+    font-weight: bold;
 }
 
 .btnSignIn, .btnSendEmail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     padding: 10px 20px;
     border-radius: 5px;
     color: black;
@@ -76,11 +81,18 @@
     background-color: #9bbec8;
 }
 
-.container input{
+.container .inputContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px; /* Add some space below the input box */
+}
+
+.inputContainer input{
     width: 400px; /* Full width to align with the form size */
     padding: 10px; /* Comfortable padding for interaction */
     margin: 8px 0; /* Standard vertical spacing */
-    display: inline-block; /* Helps in proper alignment */
+    display: block; /* Helps in proper alignment */
     border: 1px solid #ccc; /* Subtle border matching the design */
     background-color: #eee; /* Light grey background for visibility */
     border-radius: 4px; /* Rounded corners for aesthetics */

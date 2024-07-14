@@ -3,7 +3,7 @@ import styles from "../../../styles/Home.module.css";
 import { useNavigate } from "react-router-dom";
 
 // Functions
-import {/* getSalutation, */ getUserFirstName } from "../../../services (for backend)/UserService";
+import {/* getSalutation, */ getUserFirstName, checkUserIsVerified } from "../../../services (for backend)/UserService";
 import { generateQuiz, getCompletedQuizzes, getToDoQuizzes } from "../../../services (for backend)/QuizService";
 import { convertFileSizeTo2DP, fileSizeWithinLimit, fileTypeIsPDF, countWordsInPDF } from "../../../services (for backend)/FileServices";
 import { generateFlashcard, getAllFlashcardsByUser } from "../../../services (for backend)/FlashcardService";
@@ -20,6 +20,14 @@ function Home() {
     const [quizList, setQuizList] = useState([]);
     const [flashcardList, setFlashcardList] = useState([]);
     const [selectedButton, setSelectedButton] = useState("to-do");
+    const [isVerified, setIsVerified] = useState(false);
+
+
+    async function fetchIsVerified(){
+        const isVerified = await checkUserIsVerified(email);
+        if (isVerified == 1){ setIsVerified(true);}
+        sessionStorage.setItem("isVerified", isVerified);
+    }
 
     async function fetchUserInfo() {
         const firstName = await getUserFirstName(email);
@@ -48,6 +56,7 @@ function Home() {
         fetchUserInfo();
         fetchToDoQuizzes();
         fetchFlashcards();
+        fetchIsVerified();
     }, []);
 
     const testTypeDict = {
@@ -64,8 +73,10 @@ function Home() {
 
     function handleFileUpload(event) {
         event.preventDefault();
+        if (!isVerified){
+            setCreateTestMessage("You must be verified!");
 
-        if (testName.trim() === "") {
+        }else if (testName.trim() === "") {
             setCreateTestMessage("Quiz name cannot be empty!");
         } 
         else if (difficulty === "") {

@@ -69,4 +69,20 @@ async function getSalutation(email){
     }
 }
 
-export {authenticate, createNewUser, getUserByEmail, getUserFirstName, getSalutation};
+async function checkUserIsVerified(email){
+    try{
+        const response = await axiosInstance({
+            method: "post",
+            url: "/user/is-verified/",
+            data: {email: email}
+        });
+        return response.data;
+    }
+    catch(error){
+        if(error.response){
+            return error.message;
+        }
+    }
+}
+
+export {authenticate, createNewUser, getUserByEmail, getUserFirstName, getSalutation, checkUserIsVerified};

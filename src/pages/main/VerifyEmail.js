@@ -15,14 +15,14 @@ const VerifyEmail = () =>{
     const navigate = useNavigate();
     // const email = sessionStorage.getItem("userEmail");
     const [verifyOk, setVerifyOk] = useState("");
-    const [JWToken, setJWT] = useState("");
     const [email, setEmail] = useState("");
+    const [sentMessage, setSentMessage] = useState("");
+
 
 
     useEffect(()=>{
         const params = new URLSearchParams(location.search);
         const token = params.get('token');
-        setJWT(token);
         if (token){
             handleTokenVerification(token);
         }else{
@@ -36,12 +36,21 @@ const VerifyEmail = () =>{
         console.log(verifyOk);
     }
 
-    async function handleSignInButton(){
+    async function handleSignInButton(event){
+        event.preventDefault();
         navigate('/login');
+        
     }
 
-    async function handleSendEmail(){
-        sendVerificationEmail(email);
+    async function handleSendEmail(event){
+        event.preventDefault();
+        if(email === ""){
+            window.alert("Email is invalid!");
+        }else{
+            sendVerificationEmail(email);
+            setSentMessage("Email Sent!")            
+        }
+        
     }
 
     // if verifyToken response == "Verified Successfully"
@@ -59,43 +68,32 @@ const VerifyEmail = () =>{
                 <div className={styles.greeting}>
                     Verification was Successful!
                 </div>
-                <div className={styles.buttonsContainer}>
                 <button onClick={handleSignInButton}  className={styles.btnSignIn}>
                     Back to Sign In
                 </button>
-                </div>    
             </div>
         );
     }
-    if (verifyOk == "Verification Failed!"){
-        return (
-            <div className={styles.container}>
-                <div className={styles.failIcon}>
-                    <CgCloseO />
-                </div>
-                <div className={styles.greeting}>
-                    Verification Failed!
-                </div>
-                <form onSubmit={handleSendEmail}>
-                <input type="email" placeholder="Enter Email Here" onChange={(event) => setEmail(event.target.value)}></input>
-
-                </form>
-                <div className={styles.buttonsContainer}>
-                <button type="submit" className={styles.btnSendEmail}>
-                    Send a New Verification Email
-                </button>
-
-                </div>    
-            </div>
-        );
-    }
-
     return (
         <div className={styles.container}>
-            <div className={styles.greeting}>
-            
-            <h1>Loading...</h1>
+            <div className={styles.failIcon}>
+                <CgCloseO />
             </div>
+            <div className={styles.greeting}>
+                Verification Failed!
+            </div>
+            <form onSubmit={handleSendEmail}>
+            <div className={styles.inputContainer}>
+            <input type="email" placeholder="Enter Email Here" onChange={(event) => setEmail(event.target.value)}></input>
+            <section className={styles.sentMessage}>{sentMessage}</section>
+            </div>
+            
+            <button type="submit" className={styles.btnSendEmail}>
+                Send a New Verification Email
+            </button>
+            </form>
+            
+
         </div>
     );
 
