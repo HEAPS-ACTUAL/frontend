@@ -120,7 +120,7 @@ async function checkUserIsVerified(email){
         }
     }
   }
-}
+
 
 export {
   authenticate,
