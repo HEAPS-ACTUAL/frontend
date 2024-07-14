@@ -64,6 +64,12 @@ async function getSalutation(email) {
     return "Mr";
   }
 }
+
+async function getDateJoined(email) {
+    const userFound = await getUserByEmail(email);
+    return userFound.DateTimeJoined;
+  }
+
 // Update User Details
 async function updateUserDetails({ email, firstName, lastName }) {
   try {
@@ -124,4 +130,5 @@ export {
   verifyToken,
   updateUserDetails,
   deleteUserAccount,
+  getDateJoined
 };

@@ -11,6 +11,7 @@ function ProfilePage() {
     email: sessionStorage.getItem("userEmail") || "",
     firstName: "",
     lastName: "",
+    dateJoined: ""
   });
   const [editing, setEditing] = useState(false);
   const [error, setError] = useState("");
@@ -26,6 +27,7 @@ function ProfilePage() {
             email: details.email || details.Email,
             firstName: details.firstName || details.FirstName,
             lastName: details.lastName || details.LastName,
+            dateJoined: details.dateJoined || details.DateTimeJoined
           });
         } else {
           setError("User details not found.");
@@ -108,6 +110,7 @@ function ProfilePage() {
           <p>Email: {userDetails.email}</p>
           <p>First Name: {userDetails.firstName}</p>
           <p>Last Name: {userDetails.lastName}</p>
+          <p>Date Joined: {userDetails.dateJoined}</p>
           <button onClick={() => setEditing(true)}>Edit Profile</button>
           <button onClick={handleDelete}>Delete Account</button>
         </>
