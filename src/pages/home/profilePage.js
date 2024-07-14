@@ -4,6 +4,7 @@ import {
   updateUserDetails,
   deleteUserAccount,
 } from "../../services (for backend)/UserService";
+import "../../styles/ProfilePage.css"; // Import the CSS file
 
 function ProfilePage() {
   const [userDetails, setUserDetails] = useState({
@@ -49,8 +50,10 @@ function ProfilePage() {
   };
 
   const handleSave = async () => {
+    const { email, firstName, lastName } = userDetails; // Destructure here
     try {
-      const message = await updateUserDetails(userDetails);
+      console.log("Updating user details:", { email, firstName, lastName }); // Debugging log
+      const message = await updateUserDetails({ email, firstName, lastName });
       alert(message);
       setEditing(false);
     } catch (error) {
@@ -80,7 +83,7 @@ function ProfilePage() {
   return (
     <div className="profile-container">
       <h1>Profile Page</h1>
-      {error && <p>{error}</p>}
+      {error && <p className="error">{error}</p>}
       {editing ? (
         <>
           <input

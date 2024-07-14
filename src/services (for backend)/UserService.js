@@ -65,12 +65,17 @@ async function getSalutation(email) {
   }
 }
 // Update User Details
-async function updateUserDetails(email, firstName, lastName) {
+async function updateUserDetails({ email, firstName, lastName }) {
   try {
-    const response = await axiosInstance({
-      method: "put",
-      url: "/user/update/",
-      data: { email, firstName, lastName },
+    console.log("Sending user details for update:", {
+      email,
+      firstName,
+      lastName,
+    }); // Debugging log
+    const response = await axiosInstance.put("/user/update/", {
+      email,
+      firstName,
+      lastName,
     });
     return response.data.message;
   } catch (error) {
@@ -83,9 +88,7 @@ async function updateUserDetails(email, firstName, lastName) {
 // Delete User Account
 async function deleteUserAccount(email) {
   try {
-    const response = await axiosInstance({
-      method: "delete",
-      url: "/user/delete/",
+    const response = await axiosInstance.delete("/user/delete/", {
       data: { email },
     });
     return response.data.message;
@@ -95,6 +98,7 @@ async function deleteUserAccount(email) {
     }
   }
 }
+
 async function verifyToken(token) {
   try {
     const response = await axiosInstance({
