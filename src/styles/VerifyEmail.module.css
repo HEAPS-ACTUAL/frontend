@@ -1,0 +1,102 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.container {
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    position: absolute; /* Changed from relative to absolute */
+    overflow: hidden;
+    width: 768px;
+    max-width: 100%;
+    min-height: 480px;
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust to perfectly center the container */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 2s ease-in; /* Apply the animation */
+}
+
+.container .tickIcon {
+    font-size: 500%;
+    color: green; 
+    background-color: transparent;
+    border-color: transparent;
+    margin-bottom: 20px; /* Add some space between the icon and the greeting */
+}
+.container .failIcon {
+    font-size: 500%;
+    color: red; 
+    background-color: transparent;
+    border-color: transparent;
+    margin-bottom: 20px; /* Add some space between the icon and the greeting */
+}
+
+.container .greeting {
+    text-align: center;
+    color: #4663ac;
+    font-size: 200%;
+    font-weight: bold;
+    margin-bottom: 20px; /* Add some space between the greeting and the button */
+}
+
+.container .sentMessage {
+    margin-top: 10px;
+    text-align: center;
+    color: #4663ac;
+    font-size: 80%;
+    font-weight: bold;
+}
+
+.btnSignIn, .btnSendEmail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: black;
+    font-size: 16px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25);   
+    cursor: pointer;
+    width: 500px;
+    background-color: #7d8e95;
+    margin-top: 30px;
+}
+
+.btnSignIn:hover{
+    background-color: #9bbec8;
+}
+.btnSendEmail:hover{
+    background-color: #9bbec8;
+}
+
+.container .inputContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px; /* Add some space below the input box */
+}
+
+.inputContainer input{
+    width: 400px; /* Full width to align with the form size */
+    padding: 10px; /* Comfortable padding for interaction */
+    margin: 8px 0; /* Standard vertical spacing */
+    display: block; /* Helps in proper alignment */
+    border: 1px solid #ccc; /* Subtle border matching the design */
+    background-color: #eee; /* Light grey background for visibility */
+    border-radius: 4px; /* Rounded corners for aesthetics */
+    box-sizing: border-box; /* Border and padding included in width */
+    font-size: 13px; /* Readable text size */
+    color: #333; /* Dark grey text for contrast */
+}

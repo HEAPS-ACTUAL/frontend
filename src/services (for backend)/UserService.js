@@ -105,18 +105,19 @@ async function deleteUserAccount(email) {
   }
 }
 
-async function verifyToken(token) {
-  try {
-    const response = await axiosInstance({
-      method: "post",
-      url: "/email/verify-email/",
-      data: { token: token },
-    });
-
-    return response.data.message;
-  } catch (error) {
-    if (error.response) {
-      return error.response.data.message;
+async function checkUserIsVerified(email){
+    try{
+        const response = await axiosInstance({
+            method: "post",
+            url: "/user/is-verified/",
+            data: {email: email}
+        });
+        return response.data;
+    }
+    catch(error){
+        if(error.response){
+            return error.message;
+        }
     }
   }
 }
@@ -127,8 +128,8 @@ export {
   getUserByEmail,
   getUserFirstName,
   getSalutation,
-  verifyToken,
   updateUserDetails,
   deleteUserAccount,
-  getDateJoined
+  getDateJoined,
+  checkUserIsVerified
 };
