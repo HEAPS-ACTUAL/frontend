@@ -8,6 +8,7 @@ async function retrieveAllRevisionDates(email) {
             data: { email: email }
         });
 
+        console.log(response.data);
         return response.data;
     }
     catch (error) {

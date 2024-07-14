@@ -16,6 +16,7 @@ import DeleteConfirmationModal from "./DeleteConfirmationModal";
 
 // icon components
 import { CgArrowTopRight } from "react-icons/cg";
+import { event } from 'jquery';
 
 function Calendar() {
     // GET EMAIL OF USER TO BE USED IN SOME OF THE FUNCTIONS BELOW
@@ -35,10 +36,9 @@ function Calendar() {
     const [examName, setExamName] = useState(""); // examName is the subject
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState(null);
-    const [examColour, setExamColour] = useState("#808080"); // default colour is blue
+    const [examColour, setExamColour] = useState("#808080"); // default colour is grey
 
     // State for day modal
-    // const [isOpen, setIsOpen] = useState(true);
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedEvents, setSelectedEvents] = useState([]);
 
@@ -64,16 +64,34 @@ function Calendar() {
             const returnedArray = await retrieveAllRevisionDates(email);
 
             // TRANSFORM EXAMS INTO A FORMAT THAT IS RECOGNISED BY THE CALENDAR EVENT
-            const formattedCalendarEventsArray = returnedArray.flatMap((exam) =>
-                JSON.parse(exam.RevisionDates).map((date) => ({
-                    id: [exam.ScheduleID, date], // for handleDeleteEvent function
+            const formattedCalendarEventsArray = returnedArray.flatMap((exam) => {
+
+                // an array of revision date objects
+                const revisionDates = JSON.parse(exam.RevisionDates).map((date) => ({
+                    id: [exam.ScheduleID, date], 
                     title: exam.ExamName,
                     start: date,
-                    color: exam.ExamColour,
-                    flashcards: JSON.parse(exam.Flashcards),
+                    backgroundColor: exam.ExamColour,
+                    borderColor: 'transparent',
+                    flashcards: JSON.parse(exam.Flashcards)
                 }))
-            );
+    
+                // create an object for the exam date
+                const examDates = {
+                    id: exam.EndDate ? [exam.ScheduleID, exam.EndDate.slice(0, 10)] : [exam.ScheduleID, null], 
+                    title: `🗓️ ${exam.ExamName}`,
+                    start: exam.EndDate ? exam.EndDate.slice(0, 10) : null,
+                    backgroundColor: exam.ExamColour,
+                    borderColor: 'black',
+                    flashcards: JSON.parse(exam.Flashcards)
+                }
+                
+                revisionDates.push(examDates); // append the exam date object into the array of revision date objects
 
+                return revisionDates;
+            });
+
+            console.log(formattedCalendarEventsArray);
             setCalendarEvents(formattedCalendarEventsArray);
 
             // FETCHING TODAY'S DATE AND EVENTS
