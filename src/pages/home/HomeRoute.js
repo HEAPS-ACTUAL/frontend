@@ -4,7 +4,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import SideBar from "./SideBar";
 import Home from "./Flashcards & quizzes/Home";
 import Calendar from "./Calendar/RevisionSchedule";
-import ProfilePage from "./profilePage";
 
 function HomeRoute() {
   return (
@@ -17,7 +16,6 @@ function HomeRoute() {
         />
         <Route path="flashcards-and-quizzes" element={<Home />} />
         <Route path="revision-schedule" element={<Calendar />} />
-        <Route path="profile" element={<ProfilePage />} />
       </Routes>
     </div>
   );

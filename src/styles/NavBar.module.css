@@ -1,108 +1,129 @@
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: #daebff;
-  /* background: #EBF2FA; */
-  position: sticky;
-  top: 0;
-  height: 80px;
-  z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: #daebff;
+    position: sticky;
+    top: 0;
+    height: 80px;
+    z-index: 1000;
 }
 
 .logoLink {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
 }
 
 .logo {
-  height: 40px;
-  width: auto;
-  margin-right: 10px;
+    height: 40px;
+    width: auto;
+    margin-right: 10px;
 }
 
 .logoText {
-  font-size: 20px;
-  color: #4663ac;
-  font-weight: bold;
-  text-decoration: none;
+    font-size: 20px;
+    color: #4663ac;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 .navItems {
-  display: flex;
-  flex-grow: 1;
+    display: flex;
+    flex-grow: 1;
 }
 
 .navLink {
-  /* margin-right: 20px; */
-  margin-left: 30px;
-  text-align: left;
-  text-decoration: none;
-  color: #333;
-  position: relative;
+    margin-left: 30px;
+    text-align: left;
+    text-decoration: none;
+    color: #333;
+    position: relative;
 }
 
-.navLink::after {
-  content: "";
-  display: block;
-  width: 0;
-  height: 2px;
-  background: #333;
-  transition: width 0.5s ease-out;
-  position: absolute;
-  bottom: -2px;
-  transform: translateX(-50%);
+.notCurrentPage::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #333;
+    transition: width 0.5s ease-out;
+    position: absolute;
+    bottom: -2px;
+    transform: translateX(-50%);
 }
 
-.navLink:hover::after {
-  width: 100%;
-  left: 0;
-  transform: translateX(0);
+.notCurrentPage:hover::after {
+    width: 100%;
+    left: 0;
+    transform: translateX(0);
 }
 
-.navLink:not(:hover)::after {
-  width: 0;
-  left: 0;
-  transform: translateX(0);
+.notCurrentPage:not(:hover)::after {
+    width: 0;
+    left: 0;
+    transform: translateX(0);
 }
 
-.navLinkLogin button {
-  height: 32px;
-  width: 100px;
-  border: 2px solid #007bff;
-  border-radius: 5px;
-  color: #007bff;
-  margin-left: 10px;
-  cursor: pointer;
-  text-align: center;
-  background: transparent;
-  font-size: 16px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+.currentPage {
+    position: relative;
 }
 
-.navLinkLogin button:hover {
-  background-color: #69c8ff75 !important; /* Ensuring hover effect */
+.currentPage::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #333;
+    position: absolute;
+    bottom: -2px;
+    justify-self: center;
+    transform: translateX(0);
 }
 
-/* User and logout combined styling if needed */
-.userAndLogout {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+.profileAndLogin {
+    display: flex;
+    align-items: center;
 }
 
-/* Additional CSS to handle the layout of the elements */
+.profileIcon {
+    margin-right: 20px;
+    margin-top: 5px;
+    width: 25px;
+    height: 25px;
+}
+
+.profileIcon:hover {
+    border-radius: 20px;
+    outline: black solid 1.75px;
+    color: rgb(85, 26, 139);
+}
+
+.profileClicked {
+    border-radius: 20px;
+    outline: black solid 1.75px;
+    color: rgb(85, 26, 139);
+}
+
 .navLinkLogin {
-  display: flex;
-  align-items: center;
-  gap: 10px; /* Space between the icon and the button */
-  margin-left: auto; /* Push to the right of the navbar */
+    height: 32px;
+    width: 80px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    color: #007bff;
+    margin-left: auto;
+    cursor: pointer;
+    background: transparent;
+    font-size: 16px;
+    transition: 0.2s;
+}
+
+.navLinkLogin:hover {
+    background-color: #69c8ff75;
+}
+
+.navLinkLogin:active {
+    transform: translateY(3px);
 }
