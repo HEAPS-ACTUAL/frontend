@@ -7,6 +7,7 @@ function ProfilePage() {
         email: sessionStorage.getItem("userEmail") || "",
         firstName: "",
         lastName: "",
+        gender: "",
         dateJoined: ""
     });
     const [editing, setEditing] = useState(false);
@@ -24,6 +25,7 @@ function ProfilePage() {
                         email: details.email || details.Email,
                         firstName: details.firstName || details.FirstName,
                         lastName: details.lastName || details.LastName,
+                        gender: details.gender || details.Gender,
                         dateJoined: details.dateJoined || details.DateTimeJoined
                     });
                 } else {
@@ -107,7 +109,8 @@ function ProfilePage() {
                     <p>Email: {userDetails.email}</p>
                     <p>First Name: {userDetails.firstName}</p>
                     <p>Last Name: {userDetails.lastName}</p>
-                    <p>Date Joined: {userDetails.dateJoined}</p>
+                    <p>Gender: {userDetails.gender}</p>
+                    <p>Date Joined: {userDetails.dateJoined.slice(0, 10)}</p>
                     <button onClick={() => setEditing(true)}>Edit Profile</button>
                     <button onClick={handleDelete}>Delete Account</button>
                 </>
