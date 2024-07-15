@@ -23,17 +23,20 @@ const VerifyEmail = () =>{
     useEffect(()=>{
         const params = new URLSearchParams(location.search);
         const token = params.get('token');
+
         if (token){
             handleTokenVerification(token);
-        }else{
+        }
+        else {
             console.error("Token not found")
         }
-    }, [location]);
+
+    }, [location.search]);
 
     async function handleTokenVerification(token){
         const verification = await verifyToken(token);
         setVerifyOk(verification);
-        console.log(verifyOk);
+        console.log(verification);
     }
 
     async function handleSignInButton(event){
@@ -42,15 +45,16 @@ const VerifyEmail = () =>{
         
     }
 
-    async function handleSendEmail(event){
+    function handleSendEmail(event){
         event.preventDefault();
+
         if(email === ""){
             window.alert("Email is invalid!");
-        }else{
+        }
+        else {
             sendVerificationEmail(email);
             setSentMessage("Email Sent!")            
         }
-        
     }
 
     // if verifyToken response == "Verified Successfully"
@@ -59,7 +63,7 @@ const VerifyEmail = () =>{
     //else
     // messageText = "Verification was unsuccessful. Button to send verification email"
 
-    if (verifyOk == "Verification Successful!"){
+    if (verifyOk === "Verification Successful!"){
         return (
             <div className={styles.container}>
                 <div className={styles.tickIcon}>
