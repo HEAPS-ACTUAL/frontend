@@ -33,10 +33,10 @@
 .schedule .topline {
     font-size: 200%;
     margin-bottom: 20px;
-    /* color: #4663ac; */
-    background: -webkit-linear-gradient(left, #0172F2, #4663ac); 
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: rgba(70, 99, 172, 1);
+    /* background: -webkit-linear-gradient(left, rgba(70, 99, 172, 1), #4663ac);  */
+    /* -webkit-background-clip: text; */
+    /* -webkit-text-fill-color: transparent; */
 }
 
 .schedule .bottomline {
@@ -46,15 +46,16 @@
 
 .schedule .tagline {
     font-size: 80%;
-    background: -webkit-linear-gradient(left, #0172F2, #3a6073); 
+    background: -webkit-linear-gradient(left, rgba(70, 99, 172, 1), rgba(70, 99, 172, 1)); 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    text-decoration: none;
     margin-bottom: 2px;
     cursor: pointer; 
 }
 
 .tagline .learnMoreBtn {
-    font-size: 80%;
+    font-size: 150%;
     display: inline;
     color: #0172F2; 
     background-color: transparent;

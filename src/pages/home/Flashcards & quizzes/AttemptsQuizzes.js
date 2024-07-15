@@ -69,14 +69,12 @@ function AttemptsQuizzesTable () {
                     
             <div className={styles.buttonContainer}>
                 <button onClick={handleReattemptQuiz} className={styles.buttonAQ}> 
-                    <GrPowerCycle /> 
-                    <p> Attempt quiz again! </p>
+                    <GrPowerCycle /> <p> Attempt quiz again! </p>
                 </button>
 
 
                 <button onClick={handleBackToHome} className={styles.buttonHome}>
-                    <IoIosHome /> 
-                    <p> Back to home </p>
+                    <IoIosHome /> <p> Back to home </p>
                 </button>
             </div>
         </div>
