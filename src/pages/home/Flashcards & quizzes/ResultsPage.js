@@ -34,7 +34,7 @@ const ResultsPage = () => {
     
     return (
         <div className={styles.QuizResultsContainer}>
-            <div className={styles.Header} AttemptNo={attemptNo}> Results for Attempt {attemptNo} </div>
+            <div className={styles.Header} AttemptNo={attemptNo}> Results: Attempt {attemptNo} </div>
             
           
             <div className={styles.score}>Score: {userScore} / {totalQns} </div>

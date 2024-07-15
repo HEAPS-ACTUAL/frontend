@@ -4,20 +4,21 @@
     flex-direction: column; 
     align-items: center; 
     height: 100vh; 
+    margin: 8%;
 }
 
-.Question{
-    /* background-color: #9bbec8; */
+.Question {
     font-size: 40px;
     font-weight: bold;
-    height: 100px;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 50px;
     width: 100%; 
     padding: 50px;
-   
+    text-align: center;
+    box-sizing: border-box;
 }
 
 .optionsContainer {
@@ -32,7 +33,6 @@
     
 .option {
     background-color: #fff;
-    border: 2px solid #ddd;
     border-radius: 10px;
     padding: 20px 30px;
     margin-bottom: 10px;
@@ -42,9 +42,10 @@
 }
 
 .selectedOption {
-    background-color: #9bbec8; 
+    background-color:rgba(70, 99, 172, 0.8);
     color: #fff;
-    border-color: #007BFF; 
+    border-color: #add8e6; 
+    border: 2 px solid grey;
 }
 
 .option:hover {
@@ -61,26 +62,31 @@
 }
 
 .btnSubmit, .btnNext, .btnPrev{
+    display: flex;
     padding: 10px 20px;
-    margin: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
+    margin: 10px 10px;
     color: black;
     font-size: 16px;
     border: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.25);   
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25);
     cursor: pointer;
+    width: 400px;
+    transition: background-color 0.3s, box-shadow 0.3s;  
+    background-color: rgba(70, 99, 172, 0.4);
     justify-content: center;
-    width:500px;
-    background-color: #7d8e95;
+    align-items: center;
 }
 
 
 .btnSubmit:hover{
-    background-color: #9bbec8;
+    background-color: rgba(70, 99, 172, 0.7);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
 }
 
 .btnNext:hover, .btnPrev:hover{
-    background-color: #9bbec8;
+    background-color: rgba(70, 99, 172, 0.7);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
 }
 
 .btnPrev:disabled, .btnNext:disabled {
