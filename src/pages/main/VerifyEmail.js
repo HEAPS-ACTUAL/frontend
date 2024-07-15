@@ -57,12 +57,6 @@ const VerifyEmail = () =>{
         }
     }
 
-    // if verifyToken response == "Verified Successfully"
-    // messageText = "Verification was successful. BUTTON to sign in page"
-
-    //else
-    // messageText = "Verification was unsuccessful. Button to send verification email"
-
     if (verifyOk === "Verification Successful!"){
         return (
             <div className={styles.container}>
