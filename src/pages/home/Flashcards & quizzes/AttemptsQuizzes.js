@@ -9,13 +9,9 @@ function AttemptsQuizzesTable () {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const testID = location.state?.testID;
-    // const attemptsArray = location.state?.attempts || [];
-
+    const testID = location.state['testID'];
     const attemptsArray = location.state['attempts'];
-    const numberOfQuestions = location.state?.numberOfQuestions;
-    const currentAttemptNo = location.state?.currentAttemptNo;
-    const currentScore = location.state?.currentScore;
+    const numberOfQuestions = location.state['numberOfQuestions'];
 
     function handleViewQuiz(attemptNo) {
         navigate('../../test/results-page', { state: { testID: testID, attemptNo: attemptNo } });
@@ -55,13 +51,13 @@ function AttemptsQuizzesTable () {
                     ))}
                     
                     {/* Displaying the current attempt number and score */}
-                    {currentAttemptNo && !attemptsArray.some(attempt => attempt.AttemptNo === currentAttemptNo) && (
+                    {/* {currentAttemptNo && !attemptsArray.some(attempt => attempt.AttemptNo === currentAttemptNo) && (
                         <tr key={currentAttemptNo}>
                             <td>{currentAttemptNo}</td>
                             <td>{currentScore}/{numberOfQuestions}</td>
                             <td><button onClick={() => handleViewQuiz(currentAttemptNo)} className={styles.buttonReview}>Review Quiz</button></td>
                         </tr>
-                    )}
+                    )} */}
 
 
                 </tbody>
