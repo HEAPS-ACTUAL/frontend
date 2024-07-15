@@ -15,15 +15,21 @@ const ResultsPage = () => {
     const [quizReviewArray, setQuizReviewArray] = useState([]);
     const [userScore , setUserScore] = useState(null);
     const [totalQns, setTotalQns] = useState(null);
+    const [allAttempts, setAllAttempts] = useState([]);
 
-    
     useEffect(() => {
         async function fetchQuizReviewArray(){
-            let returnedArray = await reviewQuiz(testID, attemptNo);
+            const returnedArray = await reviewQuiz(testID, attemptNo);
+
             setUserScore(returnedArray['NumOfCorrectAnswers']);
             setTotalQns(returnedArray['TotalNumOfQuestions']);
-            returnedArray = JSON.parse(returnedArray['QuestionsAndAnswers']);
-            setQuizReviewArray(returnedArray);
+            
+            const questionsAndAnswersArray = JSON.parse(returnedArray['QuestionsAndAnswers']);
+            setQuizReviewArray(questionsAndAnswersArray);
+
+            const allAttemptsArray = JSON.parse(returnedArray['Attempts']);
+            setAllAttempts(allAttemptsArray);
+            // console.log(allAttempts);
         }
         
         fetchQuizReviewArray();
@@ -31,8 +37,9 @@ const ResultsPage = () => {
     }, [testID, attemptNo]);
     
     function handleViewAllAttempts() {
-        navigate('../attempts', { state: { testID: testID, attempts: quizReviewArray, numberOfQuestions: totalQns, currentAttemptNo: attemptNo, currentScore: userScore }});
+        navigate('../attempts', {state: {testID: testID, attempts: allAttempts, numberOfQuestions: totalQns}});
     }
+    
     
     return (
         <div className={styles.QuizResultsContainer}>
