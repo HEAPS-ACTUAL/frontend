@@ -75,8 +75,8 @@ function Home() {
         event.preventDefault();
         if (!isVerified){
             setCreateTestMessage("You must be verified!");
-
-        }else if (testName.trim() === "") {
+        }
+        else if (testName.trim() === "") {
             setCreateTestMessage("Quiz name cannot be empty!");
         } 
         else if (difficulty === "") {
@@ -97,37 +97,39 @@ function Home() {
             } 
             else {
                 countWordsInPDF(file)
-                    .then((wordCount) => {
-                        if (wordCount > 8750) {
-                            setCreateTestMessage("Word count exceeds the limit of 8750!");
-                        } else {
-                            for (let testKey of testList) {
-                                if (testTypeChecked[testKey]) {
-                                    let testType = testKey[0]; // Assuming first letter indicates the type (Q for Quiz, F for Flashcard)
+                    // .then((wordCount) => {
+                    //     if (wordCount > 8750) {
+                    //         setCreateTestMessage("Word count exceeds the limit of 8750!");
+                    //     } 
+                    //     else {
+                    //         for (let testKey of testList) {
+                    //             if (testTypeChecked[testKey]) {
+                    //                 let testType = testKey[0]; // Assuming first letter indicates the type (Q for Quiz, F for Flashcard)
 
-                                    console.log("Generating test with:", {email, testName, testType, difficulty, file, fileSize: `${convertFileSizeTo2DP(file)}MB`});
+                    //                 console.log("Generating test with:", {email, testName, testType, difficulty, file, fileSize: `${convertFileSizeTo2DP(file)}MB`});
 
-                                    if (testType === "Q") {
-                                        generateQuiz(email, testName, testType, difficulty, file);
-                                    }
-                                    if (testType === "F") {
-                                        generateFlashcard(email, testName, testType, file);
-                                    }
-                                }
-                            }
-                            navigate("../../../loading-page", {
-                                state: {
-                                    duration: 40000,
-                                    messageArray: [`Generating, please wait...`, `This may take up to a minute`],
-                                    redirect: "/home",
-                                },
-                            });
-                        }
-                    })
-                    .catch((error) => {
-                        console.error("Error counting words in the PDF:", error);
-                        setCreateTestMessage("Failed to process the PDF file.");
-                    });
+                    //                 if (testType === "Q") {
+                    //                     generateQuiz(email, testName, testType, difficulty, file);
+                    //                 }
+                    //                 if (testType === "F") {
+                    //                     generateFlashcard(email, testName, testType, file);
+                    //                 }
+                    //             }
+                    //         }
+
+                    //         navigate("../../../loading-page", {
+                    //             state: {
+                    //                 duration: 40000,
+                    //                 messageArray: [`Generating, please wait...`, `This may take up to a minute`],
+                    //                 redirect: "/home",
+                    //             },
+                    //         });
+                    //     }
+                    // })
+                    // .catch((error) => {
+                    //     console.error("Error counting words in the PDF:", error);
+                    //     setCreateTestMessage("Failed to process the PDF file.");
+                    // });
             }
         }
     }

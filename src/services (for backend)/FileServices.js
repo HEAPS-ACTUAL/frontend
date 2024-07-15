@@ -30,26 +30,35 @@ export function convertFileSizeTo2DP(file) {
     return fileSize;
 }
 
-export function countWordsInPDF(file) {
-    const reader = new FileReader();
-    return new Promise((resolve, reject) => {
-        reader.onload = async (e) => {
-            const typedArray = new Uint8Array(e.target.result);
-            const pdfDoc = await getDocument({ data: typedArray }).promise;
-            let totalWords = 0;
+// export function countWordsInPDF(file) {
+//     const reader = new FileReader();
+//     return new Promise((resolve, reject) => {
+//         reader.onload = async (e) => {
+//             const typedArray = new Uint8Array(e.target.result);
+//             const pdfDoc = await getDocument({ data: typedArray }).promise;
+//             let totalWords = 0;
 
-            for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
-                const page = await pdfDoc.getPage(pageNum);
-                const textContent = await page.getTextContent();
-                const words = textContent.items
-                    .map((item) => item.str.trim())
-                    .join(" ")
-                    .split(/\s+/).length;
-                totalWords += words;
-            }
-            resolve(totalWords);
-        };
-        reader.onerror = (error) => reject(error);
-        reader.readAsArrayBuffer(file);
-    });
+//             for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+//                 const page = await pdfDoc.getPage(pageNum);
+//                 const textContent = await page.getTextContent();
+//                 const words = textContent.items
+//                     .map((item) => item.str.trim())
+//                     .join(" ")
+//                     .split(/\s+/).length;
+//                 totalWords += words;
+//             }
+//             resolve(totalWords);
+//         };
+//         reader.onerror = (error) => reject(error);
+//         reader.readAsArrayBuffer(file);
+//     });
+// }
+
+export async function countWordsInPDF(file){
+    const reader = new FileReader();
+    // reader.readAsText(file);
+    reader.readAsArrayBuffer(file);
+    console.log(reader);
+    console.log(reader.result);
+    
 }

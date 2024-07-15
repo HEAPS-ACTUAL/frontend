@@ -22,7 +22,6 @@ function Navbar() {
     }, []);
     
     const location = useLocation();
-    console.log(location.pathname.split('/')[1]);
     const formattedPathname = location.pathname.split('/')[1];
 
     const [currentPage, setCurrentPage] = useState(formattedPathname);
