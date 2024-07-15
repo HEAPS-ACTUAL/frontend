@@ -29,7 +29,6 @@ const ResultsPage = () => {
 
             const allAttemptsArray = JSON.parse(returnedArray['Attempts']);
             setAllAttempts(allAttemptsArray);
-            // console.log(allAttempts);
         }
         
         fetchQuizReviewArray();

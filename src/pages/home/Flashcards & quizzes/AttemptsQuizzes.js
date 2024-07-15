@@ -9,13 +9,9 @@ function AttemptsQuizzesTable () {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const testID = location.state.testID;
-    // const attemptsArray = location.state?.attempts || [];
-
+    const testID = location.state['testID'];
     const attemptsArray = location.state['attempts'];
-    console.log(attemptsArray);
     const numberOfQuestions = location.state['numberOfQuestions'];
-    console.log(numberOfQuestions);
 
     function handleViewQuiz(attemptNo) {
         navigate('../../test/results-page', { state: { testID: testID, attemptNo: attemptNo } });
