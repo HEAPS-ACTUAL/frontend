@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FiUser } from "react-icons/fi"; // Import user icon from react-icons
-
+import { FiUser } from "react-icons/fi"; 
 import styles from "../../styles/NavBar.module.css";
 import quizDaddyLogo from "../../images/logo-no-background.png";
 

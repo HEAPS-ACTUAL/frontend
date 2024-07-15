@@ -66,7 +66,7 @@ const VerifyEmail = () =>{
                     <SiTicktick />
                 </div>
                 <div className={styles.greeting}>
-                    Verification was Successful!
+                    Verification is Successful!
                 </div>
                 <button onClick={handleSignInButton}  className={styles.btnSignIn}>
                     Back to Sign In

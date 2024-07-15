@@ -33,6 +33,7 @@
     border-color: transparent;
     margin-bottom: 20px; /* Add some space between the icon and the greeting */
 }
+
 .container .failIcon {
     font-size: 500%;
     color: red; 
@@ -59,26 +60,28 @@
 
 .btnSignIn, .btnSendEmail {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 10px;
+    margin: 10px 10px;
     color: black;
     font-size: 16px;
     border: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.25);   
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25);
     cursor: pointer;
-    width: 500px;
-    background-color: #7d8e95;
-    margin-top: 30px;
+    width: 400px;
+    transition: background-color 0.3s, box-shadow 0.3s;  
+    background-color: rgba(70, 99, 172, 0.4);
+    justify-content: center;
+    align-items: center;
 }
 
 .btnSignIn:hover{
-    background-color: #9bbec8;
+    background-color: rgba(70, 99, 172, 0.7);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
 }
 .btnSendEmail:hover{
-    background-color: #9bbec8;
+    background-color: rgba(70, 99, 172, 0.7);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
 }
 
 .container .inputContainer {

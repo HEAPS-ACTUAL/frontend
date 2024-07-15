@@ -91,37 +91,42 @@
 .profileIcon {
     margin-right: 20px;
     margin-top: 5px;
-    width: 25px;
-    height: 25px;
+    width: 33px;
+    height: 33px;
+    color: rgba(70, 99, 172, 0.7);
+    /* border: 2px solid rgba(70, 99, 172, 0.7); */
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 200px;
+    font-weight: bold;
 }
 
 .profileIcon:hover {
-    border-radius: 20px;
-    outline: black solid 1.75px;
-    color: rgb(85, 26, 139);
+    background-color: rgba(70, 99, 172, 0.3);
 }
 
 .profileClicked {
+    width: 35px;
     border-radius: 20px;
-    outline: black solid 1.75px;
-    color: rgb(85, 26, 139);
+   
 }
 
 .navLinkLogin {
     height: 32px;
     width: 80px;
-    border: 1px solid #007bff;
+    border: 2px solid rgba(70, 99, 172, 0.7);
     border-radius: 5px;
-    color: #007bff;
+    color: rgba(70, 99, 172, 0.7);
     margin-left: auto;
     cursor: pointer;
     background: transparent;
     font-size: 16px;
+    font-weight: bold;
     transition: 0.2s;
 }
 
 .navLinkLogin:hover {
-    background-color: #69c8ff75;
+    background-color: rgba(70, 99, 172, 0.3);
 }
 
 .navLinkLogin:active {

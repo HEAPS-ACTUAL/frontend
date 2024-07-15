@@ -8,34 +8,39 @@
     align-items: center;
     justify-content: center;
     background: rgba(0, 0, 0, 0.5);
-    z-index: 1000; /* Adjust the z-index to ensure it's above other content */
+    z-index: 1000;
 }
 
 .modalContent {
     background: white;
-    padding: 20px;
-    border-radius: 5px;
+    padding: 40px; 
+    border-radius: 10px; 
     text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); 
+    width: 60%; 
+    max-width: 800px; 
+    max-height: 80%;
+    overflow-y: auto; 
+    font-size: 18px; 
 }
 
 .buttonGroup {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 30px; 
 }
 
 .buttonGroup button {
-    padding: 10px 20px;
+    padding: 15px 30px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    margin: 0 10px;
+    margin: 0 15px; 
     background-color: transparent;
-    color: #57788b; 
+    color: #57788b;
+    font-size: 16px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
-
 
 .buttonGroup button:first-child {
     background-color: #ff6b6b;
@@ -50,4 +55,9 @@
 .buttonGroup button:last-child {
     background-color: #57788b;
     color: white;
+}
+
+.buttonGroup button:first-child:hover, .buttonGroup button:nth-child(2):hover, .buttonGroup button:last-child:hover{
+    background-color: rgba(70, 99, 172, 0.7);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
 }
