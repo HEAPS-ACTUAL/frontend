@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
-import {getUserByEmail, updateUserDetails, deleteUserAccount} from "../../services (for backend)/UserService";
-import "../../styles/ProfilePage.css"; // Import the CSS file
+import { getUserByEmail, updateUserDetails, deleteUserAccount } from "../../services (for backend)/UserService";
+import "../../styles/ProfilePage.css"; 
+
+import femaleProfileImage from "../../images/female_pfp.png";
+import maleProfileImage from "../../images/male_pfp.png";
+
+import { FaEdit } from "react-icons/fa"; // Import the FaEdit icon
 
 function ProfilePage() {
     const [userDetails, setUserDetails] = useState({
@@ -12,6 +17,7 @@ function ProfilePage() {
     });
     const [editing, setEditing] = useState(false);
     const [error, setError] = useState("");
+    const [daysSinceCreation, setDaysSinceCreation] = useState(0);
 
     useEffect(() => {
         async function fetchUserDetails(email) {
@@ -28,6 +34,12 @@ function ProfilePage() {
                         gender: details.gender || details.Gender,
                         dateJoined: details.dateJoined || details.DateTimeJoined
                     });
+                    // Calculate days since account creation
+                    const creationDate = new Date(details.dateJoined || details.DateTimeJoined);
+                    const today = new Date();
+                    const differenceInTime = today.getTime() - creationDate.getTime();
+                    const differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
+                    setDaysSinceCreation(differenceInDays);
                 } else {
                     setError("User details not found.");
                 }
@@ -81,40 +93,63 @@ function ProfilePage() {
         }
     };
 
+    const getProfileImage = () => {
+        if (userDetails.gender.toLowerCase() === "f") {
+            return femaleProfileImage;
+        }
+        return maleProfileImage;
+    };
+
     return (
         <div className="profile-container">
-            <h1>Profile Page</h1>
             {error && <p className="error">{error}</p>}
-            {editing ? (
-                <>
-                    <input
-                        type="text"
-                        name="firstName"
-                        value={userDetails.firstName}
-                        onChange={handleChange}
-                        placeholder="First Name"
+            <div className="profile-details">
+                <div className="profile-image-wrapper">
+                    <div className="profile-image-background"></div>
+                    <img
+                        src={getProfileImage()}
+                        alt={`${userDetails.gender} profile`}
+                        className="profile-image"
                     />
-                    <input
-                        type="text"
-                        name="lastName"
-                        value={userDetails.lastName}
-                        onChange={handleChange}
-                        placeholder="Last Name"
-                    />
-                    <button onClick={handleSave}>Save Changes</button>
-                    <button onClick={() => setEditing(false)}>Cancel</button>
-                </>
-            ) : (
-                <>
-                    <p>Email: {userDetails.email}</p>
-                    <p>First Name: {userDetails.firstName}</p>
-                    <p>Last Name: {userDetails.lastName}</p>
-                    <p>Gender: {userDetails.gender}</p>
-                    <p>Date Joined: {userDetails.dateJoined.slice(0, 10)}</p>
-                    <button onClick={() => setEditing(true)}>Edit Profile</button>
+                </div>
+                <div className="profile-info">
+                    <div className="name">
+                        {userDetails.firstName} {userDetails.lastName} 
+                        {editing ? (
+                            <>
+                                <input
+                                    type="text"
+                                    name="firstName"
+                                    value={userDetails.firstName}
+                                    onChange={handleChange}
+                                    placeholder="First Name"
+                                />
+                                <input
+                                    type="text"
+                                    name="lastName"
+                                    value={userDetails.lastName}
+                                    onChange={handleChange}
+                                    placeholder="Last Name"
+                                />
+                                <button onClick={handleSave}>Save Changes</button>
+                                <button onClick={() => setEditing(false)}>Cancel</button>
+                            </>
+                        ) : (
+                            <FaEdit className="edit-icon" onClick={() => setEditing(true)} />
+                        )}
+                    </div>
+                    <p>{userDetails.email}</p>
+                    <p>{userDetails.dateJoined.slice(0, 10)}</p>
+                    <div className="progress-circle-container">
+                        <div className="progress-circle">
+                            <div className="progress-circle-inner" style={{ transform: `rotate(${(daysSinceCreation / 365) * 360}deg)` }}>
+                                <span className="progress-circle-text">{daysSinceCreation} Days</span>
+                            </div>
+                        </div>
+                    </div>
                     <button onClick={handleDelete}>Delete Account</button>
-                </>
-            )}
+                </div>
+            </div>
         </div>
     );
 }
