@@ -9,13 +9,12 @@ import { reviewQuiz } from '../../../services (for backend)/QuizService';
 
 const ResultsPage = () => {
     const navigate = useNavigate();
-
     const location = useLocation();
-    const {testID, attemptNo} = location.state;
+    const { testID, attemptNo } = location.state;
 
     const [quizReviewArray, setQuizReviewArray] = useState([]);
     const [userScore , setUserScore] = useState(null);
-    const [totalQns , setTotalQns] = useState(null);
+    const [totalQns, setTotalQns] = useState(null);
 
     
     useEffect(() => {
@@ -31,14 +30,15 @@ const ResultsPage = () => {
 
     }, [testID, attemptNo]);
     
+    function handleViewAllAttempts() {
+        navigate('../attempts', { state: { testID: testID, attempts: quizReviewArray, numberOfQuestions: totalQns, currentAttemptNo: attemptNo, currentScore: userScore }});
+    }
     
     return (
         <div className={styles.QuizResultsContainer}>
             <div className={styles.Header} AttemptNo={attemptNo}> Results: Attempt {attemptNo} </div>
-            
           
             <div className={styles.score}>Score: {userScore} / {totalQns} </div>
-
 
             {quizReviewArray.map((question_obj) => (
                 <div key={question_obj['QuestionNo']} className={styles.QuestionBlock}>
@@ -73,7 +73,7 @@ const ResultsPage = () => {
             ))}
             
             <div className={styles.BtnContainer}>
-                <button className={styles.buttonNavigate} onClick={() => navigate('../attempts')}>View All Attempts </button>
+                <button className={styles.buttonNavigate} onClick={handleViewAllAttempts}>View All Attempts </button>
                 <button className={styles.HomeButton} onClick={() => navigate('/home')}>Back to Home</button>
             </div>
             

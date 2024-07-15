@@ -4,7 +4,7 @@
     flex-direction: column; 
     align-items: center; 
     height: 100vh; 
-    margin: 8%;
+    margin: 6%;
 }
 
 .Question {
@@ -14,7 +14,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 40px;
     width: 100%; 
     padding: 50px;
     text-align: center;
@@ -35,7 +35,7 @@
     background-color: #fff;
     border-radius: 10px;
     padding: 20px 30px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     cursor: pointer;
     transition: background-color 0.3s, border-color 0.3s;
     width: 800px;

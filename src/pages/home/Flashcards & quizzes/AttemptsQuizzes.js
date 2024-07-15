@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import styles from '../../../styles/AttemptsQuizzes.module.css';
@@ -9,13 +9,18 @@ function AttemptsQuizzesTable () {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const testID = location.state['testID'];
-    const attemptsArray = location.state['attempts'];
-    const numberOfQuestions = location.state['numberOfQuestions'];
+    const testID = location.state?.testID;
+    // const attemptsArray = location.state?.attempts || [];
 
-    function handleViewQuiz(attemptNo){
-        navigate('../../test/results-page', {state: {testID: testID, attemptNo: attemptNo}});
+    const attemptsArray = location.state['attempts'];
+    const numberOfQuestions = location.state?.numberOfQuestions;
+    const currentAttemptNo = location.state?.currentAttemptNo;
+    const currentScore = location.state?.currentScore;
+
+    function handleViewQuiz(attemptNo) {
+        navigate('../../test/results-page', { state: { testID: testID, attemptNo: attemptNo } });
     }
+
 
     function handleReattemptQuiz(){
         navigate('../../test/quiz', {state: {testID: testID}});
@@ -24,6 +29,8 @@ function AttemptsQuizzesTable () {
     function handleBackToHome(){
         navigate('../../home');
     }
+
+    
 
     return (
         <div className={styles.container}>
@@ -46,6 +53,17 @@ function AttemptsQuizzesTable () {
                         </tr>
 
                     ))}
+                    
+                    {/* Displaying the current attempt number and score */}
+                    {currentAttemptNo && !attemptsArray.some(attempt => attempt.AttemptNo === currentAttemptNo) && (
+                        <tr key={currentAttemptNo}>
+                            <td>{currentAttemptNo}</td>
+                            <td>{currentScore}/{numberOfQuestions}</td>
+                            <td><button onClick={() => handleViewQuiz(currentAttemptNo)} className={styles.buttonReview}>Review Quiz</button></td>
+                        </tr>
+                    )}
+
+
                 </tbody>
             </table>
                     

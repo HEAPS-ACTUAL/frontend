@@ -31,7 +31,7 @@ const SignIn = () => {
                 const returnedMessage = await createNewUser(email, password, firstName, lastName, gender);
                 window.alert(returnedMessage);
                 
-                if(returnedMessage === 'Account created! Click ok to sign in'){
+                if(returnedMessage === 'Account created! Please check your email to verify your account.'){
                     setTimeout(() => {
                         window.location.reload();
                     }, 500);
