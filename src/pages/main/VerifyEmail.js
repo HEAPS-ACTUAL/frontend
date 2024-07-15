@@ -83,17 +83,15 @@ const VerifyEmail = () =>{
                 Verification Failed!
             </div>
             <form onSubmit={handleSendEmail}>
-            <div className={styles.inputContainer}>
-            <input type="email" placeholder="Enter Email Here" onChange={(event) => setEmail(event.target.value)}></input>
-            <section className={styles.sentMessage}>{sentMessage}</section>
-            </div>
-            
-            <button type="submit" className={styles.btnSendEmail}>
-                Send a New Verification Email
-            </button>
+                <div className={styles.inputContainer}>
+                    <input type="email" placeholder="Enter Email Here" onChange={(event) => setEmail(event.target.value)}></input>
+                    <section className={styles.sentMessage}>{sentMessage}</section>
+                </div>
+                
+                <button type="submit" className={styles.btnSendEmail}>
+                    Send a New Verification Email
+                </button>
             </form>
-            
-
         </div>
     );
 
