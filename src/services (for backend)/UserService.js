@@ -69,30 +69,12 @@ async function getSalutation(email) {
 }
 
 // Update User Details
-async function updateUserDetails(email, firstName, lastName) {
+async function updateUserDetails(email, firstName, lastName, hashedPassword = null, inputPassword = null, newPassword = null) {
     try {
         const response = await axiosInstance({
             method: "put",
             url: "/user/update/",
-            data: { email, firstName, lastName },
-        });
-
-        return response.data.message;
-    }
-    catch (error) {
-        if (error.response) {
-            return error.response.data.message;
-        }
-    }
-}
-
-// Change Password
-async function changePassword(email, currentPassword, newPassword) {
-    try {
-        const response = await axiosInstance({
-            method: "post",
-            url: "/user/change-password/",
-            data: { email, currentPassword, newPassword },
+            data: { email, firstName, lastName, hashedPassword, inputPassword, newPassword }
         });
 
         return response.data.message;
@@ -140,4 +122,4 @@ async function checkUserIsVerified(email) {
 }
 
 
-export { authenticate, createNewUser, getUserByEmail, getUserFirstName, getSalutation, updateUserDetails, changePassword, deleteUserAccount, checkUserIsVerified };
+export { authenticate, createNewUser, getUserByEmail, getUserFirstName, getSalutation, updateUserDetails, deleteUserAccount, checkUserIsVerified };
