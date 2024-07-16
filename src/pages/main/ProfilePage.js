@@ -84,7 +84,8 @@ function ProfilePage() {
             const message = await changePassword(email, currentPassword, newPassword);
             alert(message);
             setChangingPassword(false);
-        } catch (error) {
+        }
+        catch (error) {
             alert("Error changing password: " + error.message);
         }
     }
