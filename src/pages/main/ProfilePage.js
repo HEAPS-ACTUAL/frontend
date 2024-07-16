@@ -131,9 +131,9 @@ function ProfilePage() {
                                 <button onClick={() => setChangingPassword(false)}>Cancel</button>
                             </div>)
                             : (<div>
-                                <p>{userDetails.Email}</p>
-                                <p>{userDetails.DateTimeJoined ? userDetails.DateTimeJoined.slice(0, 10) : ""}</p>
+                            <p style={{ textAlign: 'center' }}>{userDetails.Email}</p>
 
+                                <div className="progress">
                                 <div className="progress-circle-container">
                                     <div className="progress-circle">
                                         <div className="progress-circle-inner" style={{ transform: `rotate(${(daysSinceCreation / 365) * 360}deg)` }}>
@@ -141,9 +141,10 @@ function ProfilePage() {
                                         </div>
                                     </div>
                                 </div>
+                                </div>
 
-                                <button onClick={() => setChangingPassword(true)}>Change Password</button>
-                                <button onClick={handleDelete}>Delete Account</button>
+                                <div><button onClick={() => setChangingPassword(true)}>Change Password</button></div>
+                               <div> <button onClick={handleDelete}>Delete Account</button></div>
                             </div>)
                     }
                 </div>
