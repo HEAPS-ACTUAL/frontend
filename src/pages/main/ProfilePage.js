@@ -106,6 +106,7 @@ function ProfilePage() {
                                     </div>
                                 </div>
                                 
+                                <button onClick={handleDelete}>Change Password</button>
                                 <button onClick={handleDelete}>Delete Account</button>
                             </div>
                         }
