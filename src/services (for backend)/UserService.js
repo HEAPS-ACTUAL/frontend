@@ -1,5 +1,3 @@
-// where i define all the functions
-
 import axiosInstance from "../utility/axiosInstance";
 
 async function authenticate(email, password) {
@@ -43,6 +41,7 @@ async function getUserByEmail(email) {
             url: "/user/profile/",
             data: { email: email },
         });
+
         return response.data;
     } 
     catch (error) {
@@ -70,10 +69,8 @@ async function getSalutation(email) {
 }
 
 // Update User Details
-async function updateUserDetails({ email, firstName, lastName }) {
+async function updateUserDetails(email, firstName, lastName) {
     try {
-        console.log("Sending user details for update:", {email, firstName, lastName}); // Debugging log
-
         const response = await axiosInstance({
             method: "put",
             url: "/user/update/",
