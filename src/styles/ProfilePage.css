@@ -97,6 +97,10 @@
   text-align: center;
 }
 
+.email {
+  text-align: center;
+}
+
 .edit-icon {
   vertical-align: middle; 
   margin-left: 5px;
@@ -104,58 +108,60 @@
   cursor: pointer; 
 }
 
-.progress-circle-container {
-  position: relative;
-  width: 120px;
-  height: 120px;
-  margin: 20px auto;
-  
-  
-}
-
-.progress-circle {
-  text-align: center;
-  position: relative;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
+.profile-container {
+  max-width: 600px;
+  margin: 100px auto;
+  padding: 20px;
   background-color: #f9f9f9;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 0 0 10px rgba(0, 123, 255, 0.1); 
-}
-
-.progress-circle::after {
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  border: 10px solid rgba(0, 123, 255, 0.3);
-  box-sizing: border-box;
-  clip: rect(0, 70px, 140px, 0);
-  background-color: rgba(0, 123, 255, 0.3);
-  transform: rotate(0deg);
-  transition: transform 1s linear;
-}
-
-.progress-circle-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 14px;
-  color: #555;
-  z-index: 2;
-}
-
-.progress{
-  background-color: white;
-  box-shadow: #555;
   border-radius: 10px;
-  width: 450px;
-  height: 200px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: "Arial", sans-serif;
+  display: flex;
+  justify-content: space-between; /* Align items with space between */
+  align-items: center; /* Center vertically */
 }
+
+.profile-container {
+  max-width: 600px;
+  margin: 100px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: "Arial", sans-serif;
+  display: flex;
+  align-items: center; /* Center vertically */
+}
+
+.profile-details {
+  display: flex;
+  align-items: center;
+  flex-grow: 1; /* Allow flex-grow to occupy remaining space */
+}
+
+.progress-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 450px;
+  height: 170px;
+  background-color: #eaeff9;
+  border-radius: 20px;
+}
+
+.progress-bar {
+  margin-left: 15px;
+  margin-top: 20px;
+  margin-left: 15px;
+  position: relative; 
+  width: 120px;
+  height: 120px;
+}
+
+.days-since {
+
+  font-size: 16px;
+  color: black;
+  margin-left: 200px; 
+  margin-top: -50px;
+}
+
