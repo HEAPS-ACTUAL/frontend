@@ -4,7 +4,7 @@ import { FiUser } from "react-icons/fi";
 import styles from "../../styles/NavBar.module.css";
 import quizDaddyLogo from "../../images/logo-no-background.png";
 
-import {handleLogOut, isLoggedIn} from "../../services (for backend)/ProtectionService";
+import {handleLogOut, isLoggedIn} from "../../services/ProtectionService";
 
 function Navbar() {
     const [loggedIn, setLoggedIn] = useState(false);

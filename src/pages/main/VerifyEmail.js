@@ -8,7 +8,7 @@ import { CgCloseO } from "react-icons/cg";
 
 
 // functions
-import { verifyToken, sendVerificationEmail } from '../../services (for backend)/EmailServices';
+import { verifyToken, sendVerificationEmail } from '../../services/EmailServices';
 
 const VerifyEmail = () =>{
     const location = useLocation();

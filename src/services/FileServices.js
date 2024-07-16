@@ -3,7 +3,7 @@ import workerSrc from "pdfjs-dist/build/pdf.worker.entry";
 
 GlobalWorkerOptions.workerSrc = workerSrc;
 
-export function fileTypeIsPDF(file) {
+function fileTypeIsPDF(file) {
     const fileType = file.type; // this is how file type looks like if u console.log() it: "application/pdf"
     const indexOfSlash = fileType.lastIndexOf("/");
     const fileTypeString = fileType.slice(indexOfSlash);
@@ -15,7 +15,7 @@ export function fileTypeIsPDF(file) {
     return false;
 }
 
-export function fileSizeWithinLimit(file) {
+function fileSizeWithinLimit(file) {
     const fileSize = file.size;
 
     if (fileSize <= 5 * 10 ** 6) {
@@ -25,12 +25,12 @@ export function fileSizeWithinLimit(file) {
     return false;
 }
 
-export function convertFileSizeTo2DP(file) {
+function convertFileSizeTo2DP(file) {
     const fileSize = Math.round(file.size / 10 ** 4) / 100; // In MB, rounded off to 2dp
     return fileSize;
 }
 
-export function countWordsInPDF(file) {
+function countWordsInPDF(file) {
     const reader = new FileReader();
     return new Promise((resolve, reject) => {
         reader.onload = async (e) => {
@@ -53,3 +53,10 @@ export function countWordsInPDF(file) {
         reader.readAsArrayBuffer(file);
     });
 }
+
+export {
+    fileTypeIsPDF,
+    fileSizeWithinLimit,
+    convertFileSizeTo2DP,
+    countWordsInPDF,
+};

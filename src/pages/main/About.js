@@ -1,7 +1,7 @@
 import React,  { useEffect } from 'react';
 import styles from '../../styles/About.module.css'; 
 import { useNavigate } from 'react-router-dom';
-import { isLoggedIn } from '../../services (for backend)/ProtectionService';
+import { isLoggedIn } from '../../services/ProtectionService';
 
 //react icons
 import { RxLightningBolt } from "react-icons/rx";

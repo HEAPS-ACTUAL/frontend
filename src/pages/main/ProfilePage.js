@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getUserByEmail, updateUserDetails, deleteUserAccount } from "../../services (for backend)/UserService";
+import { getUserByEmail, updateUserDetails, deleteUserAccount } from "../../services/UserService";
 import "../../styles/ProfilePage.css"; 
 
 import femaleProfileImage from "../../images/female_pfp.png";

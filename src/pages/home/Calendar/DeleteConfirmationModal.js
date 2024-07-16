@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../../../styles/DeleteConfirmationModal.module.css';
 
-import { DeleteExistingExam, DeleteSpecificRevisionDate } from '../../../services (for backend)/ScheduleService';
+import { DeleteExistingExam, DeleteSpecificRevisionDate } from '../../../services/ScheduleService';
 
 function DeleteConfirmationModal({ isOpen, closeModal, event }) {
     if (!isOpen){

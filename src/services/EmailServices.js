@@ -34,4 +34,7 @@ async function sendVerificationEmail(email){
     }
 }
 
-export {verifyToken, sendVerificationEmail};
+export {
+    verifyToken, 
+    sendVerificationEmail
+};

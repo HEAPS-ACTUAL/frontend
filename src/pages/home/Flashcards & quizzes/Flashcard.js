@@ -8,7 +8,7 @@ import { GrSchedules } from "react-icons/gr";
 import { FaHome } from "react-icons/fa";
 
 // Import functions
-import { getAllQuestionsAndOptionsFromATest } from '../../../services (for backend)/TestService';
+import { getAllQuestionsAndOptionsFromATest } from '../../../services/TestService';
 
 
 

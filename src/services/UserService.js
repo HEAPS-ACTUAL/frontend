@@ -125,4 +125,12 @@ async function checkUserIsVerified(email) {
 }
 
 
-export {authenticate, createNewUser, getUserByEmail, getUserFirstName, getSalutation, updateUserDetails, deleteUserAccount, checkUserIsVerified};
+export {
+    authenticate, 
+    createNewUser, 
+    getUserByEmail, 
+    getUserFirstName, 
+    getSalutation, 
+    updateUserDetails, 
+    deleteUserAccount, 
+    checkUserIsVerified};
