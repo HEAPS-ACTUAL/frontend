@@ -66,11 +66,11 @@ function ProfilePage() {
 
     async function handleDelete(){
         if(window.confirm("Are you sure you want to delete your account? This cannot be undone.")){
-            const message = await deleteUserAccount(userDetails.email);
+            const message = await deleteUserAccount(email);
             alert(message);
             
             sessionStorage.clear();
-            navigate('./login');
+            navigate('../login');
         }
     }
 
