@@ -49,17 +49,6 @@ function AttemptsQuizzesTable () {
                         </tr>
 
                     ))}
-                    
-                    {/* Displaying the current attempt number and score */}
-                    {/* {currentAttemptNo && !attemptsArray.some(attempt => attempt.AttemptNo === currentAttemptNo) && (
-                        <tr key={currentAttemptNo}>
-                            <td>{currentAttemptNo}</td>
-                            <td>{currentScore}/{numberOfQuestions}</td>
-                            <td><button onClick={() => handleViewQuiz(currentAttemptNo)} className={styles.buttonReview}>Review Quiz</button></td>
-                        </tr>
-                    )} */}
-
-
                 </tbody>
             </table>
                     
