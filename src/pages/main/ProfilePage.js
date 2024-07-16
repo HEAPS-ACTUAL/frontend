@@ -1,21 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getUserByEmail, updateUserDetails, deleteUserAccount, } from "../../services (for backend)/UserService";
-import "../../styles/ProfilePage.css";
+import styles from "../../styles/ProfilePage.css";
 
+// icons & images
 import femaleProfileImage from "../../images/female_pfp.png";
 import maleProfileImage from "../../images/male_pfp.png";
 import { FaEdit } from "react-icons/fa";
+import { SiTicktick } from "react-icons/si";
+import { CgCloseO } from "react-icons/cg";
+
+// Functions
+import { getUserByEmail, updateUserDetails, deleteUserAccount } from "../../services (for backend)/UserService";
+import {sendVerificationEmail } from '../../services (for backend)/EmailServices';
+
+
 
 function ProfilePage() {
     const navigate = useNavigate();
     const email = sessionStorage.getItem("userEmail");
 
-    const [userDetails, setUserDetails] = useState({});
+    const [userDetails, setUserDetails] = useState({}); // object contained User record from DB
     const [daysSinceCreation, setDaysSinceCreation] = useState(0);
 
     const [editing, setEditing] = useState(false);
     const [changingPassword, setChangingPassword] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(false);
 
     useEffect(() => {
 
@@ -99,6 +108,13 @@ function ProfilePage() {
             navigate('../login');
         }
     }
+    function handleVerifyEmail(event) {
+        setIsDisabled(true)
+        sendVerificationEmail(email);
+        setTimeout(() => {
+            setIsDisabled(false);
+        }, 15000);
+    }
 
     return (
         <div className="profile-container">
@@ -129,7 +145,7 @@ function ProfilePage() {
                                 <button onClick={() => setChangingPassword(false)}>Cancel</button>
                             </div>)
                             : (<div>
-                                <p>{userDetails.Email}</p>
+                                <p>{userDetails.Email} {userDetails.IsVerified ? <SiTicktick className="tickIcon"/>: <><CgCloseO className="closeIcon"/><button className="sendEmailBtn" onClick={handleVerifyEmail}disabled={isDisabled}>Verify Email</button></> } </p>
                                 <p>{userDetails.DateTimeJoined ? userDetails.DateTimeJoined.slice(0, 10) : ""}</p>
 
                                 <div className="progress-circle-container">
@@ -139,9 +155,9 @@ function ProfilePage() {
                                         </div>
                                     </div>
                                 </div>
-
-                                <button onClick={() => setChangingPassword(true)}>Change Password</button>
-                                <button onClick={handleDeleteAccount}>Delete Account</button>
+                                
+                                <button className ="buttons" onClick={() => setChangingPassword(true)}>Change Password</button>
+                                <button className ="buttons" onClick={handleDeleteAccount}>Delete Account</button>
                             </div>)
                     }
                 </div>

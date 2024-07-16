@@ -84,6 +84,11 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
 }
 
+.btnSendEmail:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
 .container .inputContainer {
     display: flex;
     flex-direction: column;
