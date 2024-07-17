@@ -64,7 +64,7 @@ function ProfilePage() {
         if (FirstName.trim() === '' || LastName.trim() === '') {
             alert('Fields cannot be empty!');
         }
-        else{
+        else {
             const message = await updateUserDetails(email, FirstName, LastName); // hashedPassword, inputPassword and newPassword are "null" by default when updating firstName and/or lastName. Refer to updateUserDetails in UserServices.js
 
             alert(message);
@@ -74,22 +74,22 @@ function ProfilePage() {
 
     async function handlePasswordSave() {
         const { HashedPassword, InputPassword, NewPassword, ConfirmPassword } = userDetails;
-        
+
         // console.log(`hashed pw: ${HashedPassword}`)
         // console.log(`input pw: ${InputPassword}`)
         // console.log(`new pw: ${NewPassword}`)
         // console.log(`confirm pw: ${ConfirmPassword}`)
-        
-        if(!InputPassword || !NewPassword || !ConfirmPassword){
+
+        if (!InputPassword || !NewPassword || !ConfirmPassword) {
             alert('Fields cannot be empty!');
         }
-        else if(InputPassword.trim() === '' || NewPassword.trim() === '' || ConfirmPassword.trim() === '' ){
+        else if (InputPassword.trim() === '' || NewPassword.trim() === '' || ConfirmPassword.trim() === '') {
             alert('Fields cannot be empty!');
         }
         else if (NewPassword !== ConfirmPassword) {
             alert("New passwords don't match!");
         }
-        else{
+        else {
             const message = await updateUserDetails(email, null, null, HashedPassword, InputPassword, NewPassword); // Set firstName and lastName as null when updating password
 
             alert(message);
@@ -127,8 +127,8 @@ function ProfilePage() {
                             <button onClick={handleSave}>Save Changes</button>
                             <button onClick={() => setEditing(false)}>Cancel</button>
                         </div>)
-                        : changingPassword 
-                            ? (<div>
+                        : changingPassword
+                            ? (<div className="password-change-container">
                                 <input type="password" name="InputPassword" onChange={handleChange} placeholder="Current Password" />
                                 <input type="password" name="NewPassword" onChange={handleChange} placeholder="New Password" />
                                 <input type="password" name="ConfirmPassword" onChange={handleChange} placeholder="Confirm Password" />
@@ -136,38 +136,38 @@ function ProfilePage() {
                                 <button onClick={() => setChangingPassword(false)}>Cancel</button>
                             </div>)
                             : (<div>
-                            <p className="email">{userDetails.Email}</p>
+                                <p className="email">{userDetails.Email}</p>
 
-                            <div className="progress-container">
-                                <div className="progress-bar">
-                                <CircularProgressbar className='progress-bar' value={daysSinceCreation} text={`${daysSinceCreation}`}
-                                styles={buildStyles({
-                                rotation: 0.25,
-                                strokeLinecap: 'butt',
-                                textSize: '35px',
-                                pathTransitionDuration: 0.5,
-                                pathColor: `rgba(70, 99, 172, 0.7), ${daysPercentage})`,
-                                textColor: '#f88',
-                                trailColor: `rgb(201, 200, 198, 1)`,
-                                backgroundColor: '#3e98c7',
-                                textColor: `rgb(70, 99, 172, 0.7)`,
-                                
-    
-                              })} />
+                                <div className="progress-container">
+                                    <div className="progress-bar">
+                                        <CircularProgressbar className='progress-bar' value={daysSinceCreation} text={`${daysSinceCreation}`}
+                                            styles={buildStyles({
+                                                rotation: 0.25,
+                                                strokeLinecap: 'butt',
+                                                textSize: '35px',
+                                                pathTransitionDuration: 0.5,
+                                                pathColor: `rgba(70, 99, 172, 0.7), ${daysPercentage})`,
+                                                textColor: '#f88',
+                                                trailColor: `rgb(201, 200, 198, 1)`,
+                                                backgroundColor: '#3e98c7',
+                                                textColor: `rgb(70, 99, 172, 0.7)`,
+
+
+                                            })} />
+                                    </div>
+
+                                    <div className="days-since">Days since you joined quizDaddy</div>
                                 </div>
-                           
-                              <div className="days-since">Days since you joined quizDaddy</div>
-                            </div>
 
                                 <button onClick={() => setChangingPassword(true)}>Change Password</button>
                                 <button onClick={handleDeleteAccount}>Delete Account</button>
                             </div>)
 
-                            
+
                     }
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
