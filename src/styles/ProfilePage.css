@@ -65,8 +65,8 @@
 
 .profile-image-wrapper {
   position: relative;
-  width: 220px; /* Set the width to the size of the background circle */
-  height: 220px; /* Set the height to the size of the background circle */
+  width: 220px; 
+  height: 220px; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -74,9 +74,9 @@
 }
 
 .profile-image-background {
-  width: 220px; /* Slightly bigger than the profile image */
-  height: 220px; /* Slightly bigger than the profile image */
-  background-color: #ccc; /* Adjust the color as needed */
+  width: 220px; 
+  height: 220px; 
+  background-color: rgba(70, 99, 172, 0.7); 
   border-radius: 50%;
   position: absolute;
   z-index: 0;
@@ -94,40 +94,74 @@
   font-size: 30px;
   font-weight: bold;
   color: #333;
+  text-align: center;
+}
+
+.email {
+  text-align: center;
 }
 
 .edit-icon {
-  vertical-align: middle; /* Align the icon vertically with text */
-  margin-left: 5px; /* Adjust margin as needed */
-  font-size: 18px; /* Adjust the icon size */
-  cursor: pointer; /* Change cursor to pointer on hover */
+  vertical-align: middle; 
+  margin-left: 5px;
+  font-size: 18px; 
+  cursor: pointer; 
 }
 
-.progress-circle {
-    position: relative;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 10px solid #eee;
-    box-sizing: border-box;
+.profile-container {
+  max-width: 600px;
+  margin: 100px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: "Arial", sans-serif;
+  display: flex;
+  justify-content: space-between; /* Align items with space between */
+  align-items: center; /* Center vertically */
 }
 
-.progress-circle-inner {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    clip: rect(0, 60px, 120px, 0);
-    background-color: #007bff;
-    transform: rotate(0deg);
-    transition: transform 1s linear;
+.profile-container {
+  max-width: 600px;
+  margin: 100px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: "Arial", sans-serif;
+  display: flex;
+  align-items: center; /* Center vertically */
 }
 
-.progress-circle-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 14px;
-    color: #555;
+.profile-details {
+  display: flex;
+  align-items: center;
+  flex-grow: 1; /* Allow flex-grow to occupy remaining space */
 }
+
+.progress-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 450px;
+  height: 170px;
+  background-color: #eaeff9;
+  border-radius: 20px;
+}
+
+.progress-bar {
+  margin-left: 15px;
+  margin-top: 20px;
+  margin-left: 15px;
+  position: relative; 
+  width: 120px;
+  height: 120px;
+}
+
+.days-since {
+
+  font-size: 16px;
+  color: black;
+  margin-left: 200px; 
+  margin-top: -50px;
+}
+

@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUserByEmail, updateUserDetails, deleteUserAccount, } from "../../services (for backend)/UserService";
 import "../../styles/ProfilePage.css";
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+
 
 import femaleProfileImage from "../../images/female_pfp.png";
 import maleProfileImage from "../../images/male_pfp.png";
@@ -13,9 +16,11 @@ function ProfilePage() {
 
     const [userDetails, setUserDetails] = useState({});
     const [daysSinceCreation, setDaysSinceCreation] = useState(0);
+    const [daysPercentage, setDayPercentage] = useState(0);
+    const [changingPassword, setChangingPassword] = useState(false);
+    const [passwords, setPasswords] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' });
 
     const [editing, setEditing] = useState(false);
-    const [changingPassword, setChangingPassword] = useState(false);
 
     useEffect(() => {
 
@@ -31,8 +36,10 @@ function ProfilePage() {
 
             const differenceInTime = today.getTime() - creationDate.getTime();
             const differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
+            const daysPercentage = (differenceInDays % 365) / 365 * 100;
 
             setDaysSinceCreation(differenceInDays);
+            setDayPercentage(daysPercentage);
         }
 
         fetchUserDetails(email);
@@ -129,20 +136,34 @@ function ProfilePage() {
                                 <button onClick={() => setChangingPassword(false)}>Cancel</button>
                             </div>)
                             : (<div>
-                                <p>{userDetails.Email}</p>
-                                <p>{userDetails.DateTimeJoined ? userDetails.DateTimeJoined.slice(0, 10) : ""}</p>
+                            <p className="email">{userDetails.Email}</p>
 
-                                <div className="progress-circle-container">
-                                    <div className="progress-circle">
-                                        <div className="progress-circle-inner" style={{ transform: `rotate(${(daysSinceCreation / 365) * 360}deg)` }}>
-                                            <span className="progress-circle-text">{daysSinceCreation} Days</span>
-                                        </div>
-                                    </div>
+                            <div className="progress-container">
+                                <div className="progress-bar">
+                                <CircularProgressbar className='progress-bar' value={daysSinceCreation} text={`${daysSinceCreation}`}
+                                styles={buildStyles({
+                                rotation: 0.25,
+                                strokeLinecap: 'butt',
+                                textSize: '35px',
+                                pathTransitionDuration: 0.5,
+                                pathColor: `rgba(70, 99, 172, 0.7), ${daysPercentage})`,
+                                textColor: '#f88',
+                                trailColor: `rgb(201, 200, 198, 1)`,
+                                backgroundColor: '#3e98c7',
+                                textColor: `rgb(70, 99, 172, 0.7)`,
+                                
+    
+                              })} />
                                 </div>
+                           
+                              <div className="days-since">Days since you joined quizDaddy</div>
+                            </div>
 
                                 <button onClick={() => setChangingPassword(true)}>Change Password</button>
                                 <button onClick={handleDeleteAccount}>Delete Account</button>
                             </div>)
+
+                            
                     }
                 </div>
             </div>
