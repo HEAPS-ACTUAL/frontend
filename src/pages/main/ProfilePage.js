@@ -154,7 +154,7 @@ function ProfilePage() {
                         </div>
                     )}
 
-                    {/* // IF CHANGING NAME */}
+                    {/* IF CHANGING NAME */}
                     {changingName && (
                         <div>
                             <div className="name">{newUserDetails.FirstName} {newUserDetails.LastName}</div>
@@ -167,7 +167,7 @@ function ProfilePage() {
                         </div>
                     )}
                             
-                    {/* // IF CHANGING PASSWORD */}
+                    {/* IF CHANGING PASSWORD */}
                     {changingPassword && (
                         <div className="password-change-container">
                             <input type="password" name="InputPassword" onChange={handleChange} placeholder="Current Password" />
