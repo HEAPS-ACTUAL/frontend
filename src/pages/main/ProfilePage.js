@@ -124,8 +124,8 @@ function ProfilePage() {
                 <div className="profile-info">
 
                     {/* IF NOT CHANGING NAME OR CHANGING PASSWORD */}
-                    {!changingName && !changingPassword
-                        ? <div>
+                    {!changingName && !changingPassword && (
+                        <div>
                             <div className="name">
                                 {userDetails.FirstName} {userDetails.LastName}
                                 <FaEdit className="edit-icon" onClick={() => setChangingName(true)} />
@@ -152,29 +152,32 @@ function ProfilePage() {
                             <button onClick={() => setChangingPassword(true)}>Change Password</button>
                             <button onClick={handleDeleteAccount}>Delete Account</button>
                         </div>
+                    )}
 
-                        // IF CHANGING NAME
-                        : changingName && !changingPassword
-                            ? <div>
-                                <div className="name">{newUserDetails.FirstName} {newUserDetails.LastName}</div>
+                    {/* // IF CHANGING NAME */}
+                    {changingName && (
+                        <div>
+                            <div className="name">{newUserDetails.FirstName} {newUserDetails.LastName}</div>
 
-                                <input type="text" name="FirstName" onChange={handleChange} placeholder={userDetails.FirstName} />
-                                <input type="text" name="LastName" onChange={handleChange} placeholder={userDetails.LastName} />
+                            <input type="text" name="FirstName" onChange={handleChange} placeholder={userDetails.FirstName} />
+                            <input type="text" name="LastName" onChange={handleChange} placeholder={userDetails.LastName} />
 
-                                <button onClick={handleNameSave}>Save Changes</button>
-                                <button onClick={handleCancel}>Cancel</button>
-                            </div>
+                            <button onClick={handleNameSave}>Save Changes</button>
+                            <button onClick={handleCancel}>Cancel</button>
+                        </div>
+                    )}
                             
-                            // IF CHANGING PASSWORD
-                            : <div className="password-change-container">
-                                <input type="password" name="InputPassword" onChange={handleChange} placeholder="Current Password" />
-                                <input type="password" name="NewPassword" onChange={handleChange} placeholder="New Password" />
-                                <input type="password" name="ConfirmPassword" onChange={handleChange} placeholder="Confirm Password" />
+                    {/* // IF CHANGING PASSWORD */}
+                    {changingPassword && (
+                        <div className="password-change-container">
+                            <input type="password" name="InputPassword" onChange={handleChange} placeholder="Current Password" />
+                            <input type="password" name="NewPassword" onChange={handleChange} placeholder="New Password" />
+                            <input type="password" name="ConfirmPassword" onChange={handleChange} placeholder="Confirm Password" />
 
-                                <button onClick={handlePasswordSave}>Save Password</button>
-                                <button onClick={handleCancel}>Cancel</button>
-                            </div>
-                    }
+                            <button onClick={handlePasswordSave}>Save Password</button>
+                            <button onClick={handleCancel}>Cancel</button>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
