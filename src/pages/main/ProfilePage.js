@@ -1,26 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { getUserByEmail, updateUserDetails, deleteUserAccount, } from "../../services (for backend)/UserService";
 import "../../styles/ProfilePage.css";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
-
+// icons & images
 import femaleProfileImage from "../../images/female_pfp.png";
 import maleProfileImage from "../../images/male_pfp.png";
 import { FaEdit } from "react-icons/fa";
+import { SiTicktick } from "react-icons/si";
+import { CgCloseO } from "react-icons/cg";
+
+// Functions
+import { getUserByEmail, updateUserDetails, deleteUserAccount } from "../../services (for backend)/UserService";
+import {sendVerificationEmail } from '../../services (for backend)/EmailServices';
+
+
 
 function ProfilePage() {
     const navigate = useNavigate();
     const email = sessionStorage.getItem("userEmail");
 
-    const [userDetails, setUserDetails] = useState({});
+    const [userDetails, setUserDetails] = useState({}); // object contained User record from DB
     const [newUserDetails, setNewUserDetails] = useState({}); // THIS VARIABLE IS FOR DISPLAYING THE NEW NAME AS THE USER TYPES IN THEIR NEW NAME
+
     const [daysSinceCreation, setDaysSinceCreation] = useState(0);
     const [daysPercentage, setDayPercentage] = useState(0);
     
     const [changingName, setChangingName] = useState(false);
     const [changingPassword, setChangingPassword] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(false);
 
     useEffect(() => {
 
@@ -112,6 +123,13 @@ function ProfilePage() {
             navigate('../login');
         }
     }
+    function handleVerifyEmail(event) {
+        setIsDisabled(true)
+        sendVerificationEmail(email);
+        setTimeout(() => {
+            setIsDisabled(false);
+        }, 15000);
+    }
 
     return (
         <div className="profile-container">
@@ -131,7 +149,7 @@ function ProfilePage() {
                                 <FaEdit className="edit-icon" onClick={() => setChangingName(true)} />
                             </div>
 
-                            <div className="email">{userDetails.Email}</div>
+                            <div className="email">{userDetails.Email} {userDetails.IsVerified ? <SiTicktick className="tickIcon"/>: <><CgCloseO className="closeIcon"/><button className="sendEmailBtn" onClick={handleVerifyEmail}disabled={isDisabled}>Verify Email</button></> } </p></div>
 
                             <div className="progress-container">
                                 <div className="progress-bar">
@@ -177,7 +195,7 @@ function ProfilePage() {
                             <button onClick={handlePasswordSave}>Save Password</button>
                             <button onClick={handleCancel}>Cancel</button>
                         </div>
-                    )}
+                    )}                            
                 </div>
             </div>
         </div>

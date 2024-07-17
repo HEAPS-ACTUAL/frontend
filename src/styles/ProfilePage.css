@@ -121,4 +121,40 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     width: 100%;
+
+.tickIcon {
+  font-size: 100%;
+  color: green; 
+  background-color: transparent;
+  border-color: transparent;
+  display: inline;
+}
+
+.closeIcon {
+  font-size: 100%;
+  color: red; 
+  background-color: transparent;
+  border-color: transparent;
+  display: inline;
+}
+
+.sendEmailBtn {
+  width: 40%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.sendEmailBtn:hover {
+   background-color: #007bff; 
+  color: #fff;
+}
+
+.sendEmailBtn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }

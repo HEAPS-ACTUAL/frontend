@@ -17,6 +17,7 @@ const VerifyEmail = () =>{
     const [verifyOk, setVerifyOk] = useState("");
     const [email, setEmail] = useState("");
     const [sentMessage, setSentMessage] = useState("");
+    const [isDisabled, setIsDisabled] = useState(false);
 
 
 
@@ -52,8 +53,12 @@ const VerifyEmail = () =>{
             window.alert("Email is invalid!");
         }
         else {
+            setIsDisabled(true)
             sendVerificationEmail(email);
-            setSentMessage("Email Sent!")            
+            setSentMessage("Email Sent!");  
+            setTimeout(() => {
+                setIsDisabled(false);
+            }, 15000);          
         }
     }
 
@@ -86,7 +91,7 @@ const VerifyEmail = () =>{
                     <section className={styles.sentMessage}>{sentMessage}</section>
                 </div>
                 
-                <button type="submit" className={styles.btnSendEmail}>
+                <button disabled={isDisabled} type="submit" className={styles.btnSendEmail}>
                     Send a New Verification Email
                 </button>
             </form>
