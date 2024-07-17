@@ -16,7 +16,7 @@ import ProfilePage from "./pages/main/ProfilePage";
 import "./styles/App.css";
 
 // FUNCTIONS
-import { isLoggedIn } from "./services (for backend)/ProtectionService";
+import { isLoggedIn } from "./services/ProtectionService";
 
 function App() {
     const [IsLoggedIn, setIsLoggedIn] = useState(true);

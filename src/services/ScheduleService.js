@@ -62,4 +62,8 @@ async function DeleteSpecificRevisionDate(scheduleID, revisionDate) {
     }
 }
 
-export { createNewExam, retrieveAllRevisionDates, DeleteExistingExam, DeleteSpecificRevisionDate };
+export { 
+    createNewExam, 
+    retrieveAllRevisionDates, 
+    DeleteExistingExam, 
+    DeleteSpecificRevisionDate };

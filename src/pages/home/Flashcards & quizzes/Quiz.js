@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styles from '../../../styles/Quiz.module.css';
 import { useLocation, useNavigate } from 'react-router-dom'; 
 
-import { getAllQuestionsAndOptionsFromAQuiz, getLatestAttempt, markQuizAsDone } from '../../../services (for backend)/QuizService';
-import { storeUserQuizAnswers } from '../../../services (for backend)/QuizService';
+import { getAllQuestionsAndOptionsFromAQuiz, getLatestAttempt, markQuizAsDone } from '../../../services/QuizService';
+import { storeUserQuizAnswers } from '../../../services/QuizService';
 
 const QuizFeature = () => {
     const location = useLocation(); 

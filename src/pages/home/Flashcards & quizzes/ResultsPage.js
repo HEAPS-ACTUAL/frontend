@@ -5,7 +5,7 @@ import { TiTick } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
 
 // Functions
-import { reviewQuiz } from '../../../services (for backend)/QuizService';
+import { reviewQuiz } from '../../../services/QuizService';
 
 const ResultsPage = () => {
     const navigate = useNavigate();

@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import '../../styles/SignIn.css';
 
 // functions
-import { authenticate, createNewUser } from '../../services (for backend)/UserService';
-import { handleLogIn } from '../../services (for backend)/ProtectionService';
+import { authenticate, createNewUser } from '../../services/UserService';
+import { handleLogIn } from '../../services/ProtectionService';
 
 const SignIn = () => {
     const [email, setEmail] = useState('');

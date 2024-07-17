@@ -69,4 +69,8 @@ async function getFlashcardsByScheduleID(scheduleID){
     }
 }
 
-export { generateFlashcard, getAllFlashcardsByUser, getAllFlashcardsWithoutSchedule, getFlashcardsByScheduleID };
+export { 
+    generateFlashcard, 
+    getAllFlashcardsByUser, 
+    getAllFlashcardsWithoutSchedule, 
+    getFlashcardsByScheduleID };

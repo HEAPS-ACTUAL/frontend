@@ -7,8 +7,8 @@ import '../../../styles/RevisionSchedule.css';
 import { CgArrowTopRight } from "react-icons/cg";
 
 // Functions
-import { createNewExam, retrieveAllRevisionDates } from '../../../services (for backend)/ScheduleService';
-import { getAllFlashcardsWithoutSchedule } from '../../../services (for backend)/FlashcardService';
+import { createNewExam, retrieveAllRevisionDates } from '../../../services/ScheduleService';
+import { getAllFlashcardsWithoutSchedule } from '../../../services/FlashcardService';
 
 // calendar component
 import FullCalendar from "@fullcalendar/react";

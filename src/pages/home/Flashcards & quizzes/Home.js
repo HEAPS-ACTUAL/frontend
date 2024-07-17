@@ -3,10 +3,10 @@ import styles from "../../../styles/Home.module.css";
 import { useNavigate } from "react-router-dom";
 
 // Functions
-import {/* getSalutation, */ getUserFirstName, checkUserIsVerified } from "../../../services (for backend)/UserService";
-import { generateQuiz, getCompletedQuizzes, getToDoQuizzes } from "../../../services (for backend)/QuizService";
-import { convertFileSizeTo2DP, fileSizeWithinLimit, fileTypeIsPDF, countWordsInPDF } from "../../../services (for backend)/FileServices";
-import { generateFlashcard, getAllFlashcardsByUser } from "../../../services (for backend)/FlashcardService";
+import {/* getSalutation, */ getUserFirstName, checkUserIsVerified } from "../../../services/UserService";
+import { generateQuiz, getCompletedQuizzes, getToDoQuizzes } from "../../../services/QuizService";
+import { convertFileSizeTo2DP, fileSizeWithinLimit, fileTypeIsPDF, countWordsInPDF } from "../../../services/FileServices";
+import { generateFlashcard, getAllFlashcardsByUser } from "../../../services/FlashcardService";
 
 // Components
 import TestCard from "./TestCard";

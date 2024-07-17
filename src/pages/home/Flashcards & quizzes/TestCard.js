@@ -8,7 +8,7 @@ import calendarImage from '../../../images/calendar.png';
 import xButton from '../../../images/x-button.png';
 
 // functions
-import { deleteTest } from '../../../services (for backend)/TestService';
+import { deleteTest } from '../../../services/TestService';
 
 function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, attempts, selectedButton}){
     dateCreated = dateCreated.slice(0,10);

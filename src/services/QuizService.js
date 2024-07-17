@@ -132,4 +132,12 @@ async function getLatestAttempt(testID){
     }
 }
 
-export { generateQuiz, getToDoQuizzes, getCompletedQuizzes, getAllQuestionsAndOptionsFromAQuiz, markQuizAsDone, storeUserQuizAnswers, reviewQuiz, getLatestAttempt };
+export { 
+    generateQuiz, 
+    getToDoQuizzes, 
+    getCompletedQuizzes, 
+    getAllQuestionsAndOptionsFromAQuiz, 
+    markQuizAsDone, 
+    storeUserQuizAnswers, 
+    reviewQuiz, 
+    getLatestAttempt };

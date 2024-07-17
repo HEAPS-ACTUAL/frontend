@@ -1,3 +1,5 @@
+// where i define all the functions
+
 import axiosInstance from "../utility/axiosInstance";
 
 async function authenticate(email, password) {
@@ -9,7 +11,7 @@ async function authenticate(email, password) {
         });
 
         return response.data.message;
-    }
+    } 
     catch (error) {
         if (error.response) {
             return error.response.data.message;
@@ -26,7 +28,7 @@ async function createNewUser(email, password, firstName, lastName, gender) {
         });
 
         return response.data.message;
-    }
+    } 
     catch (error) {
         if (error.response) {
             return error.response.data.message;
@@ -41,9 +43,8 @@ async function getUserByEmail(email) {
             url: "/user/profile/",
             data: { email: email },
         });
-
         return response.data;
-    }
+    } 
     catch (error) {
         if (error.response) {
             return error.message;
@@ -62,7 +63,7 @@ async function getSalutation(email) {
 
     if (gender === "F") {
         return "Ms";
-    }
+    } 
     else {
         return "Mr";
     }
@@ -96,7 +97,7 @@ async function deleteUserAccount(email) {
         });
 
         return response.data.message;
-    }
+    } 
     catch (error) {
         if (error.response) {
             return error.response.data.message;
@@ -111,7 +112,7 @@ async function checkUserIsVerified(email) {
             url: "/user/is-verified/",
             data: { email: email }
         });
-
+        
         return response.data;
     }
     catch (error) {
@@ -121,5 +122,4 @@ async function checkUserIsVerified(email) {
     }
 }
 
-
-export { authenticate, createNewUser, getUserByEmail, getUserFirstName, getSalutation, updateUserDetails, deleteUserAccount, checkUserIsVerified };
+export {authenticate, createNewUser, getUserByEmail, getUserFirstName, getSalutation, updateUserDetails, deleteUserAccount, checkUserIsVerified};
