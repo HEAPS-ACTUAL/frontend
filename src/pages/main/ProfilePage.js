@@ -149,16 +149,18 @@ function ProfilePage() {
                                 <FaEdit className="edit-icon" onClick={() => setChangingName(true)} />
                             </div>
 
-                            <div className="email">
-                                {userDetails.Email} 
+                            <div className="emailAndIcon">
+                                <div className="email">{userDetails.Email}</div>
                                 {userDetails.IsVerified 
                                     ? <SiTicktick className="tickIcon"/> 
-                                    : <div>
-                                        <CgCloseO className="closeIcon"/> 
-                                        <button className="sendEmailBtn" onClick={handleVerifyEmail}disabled={isDisabled}> Verify Email </button>
-                                    </div> 
+                                    : <CgCloseO className="closeIcon"/> 
                                 }
                             </div>
+                            
+                            {!userDetails.IsVerified 
+                                ? <button className="sendEmailBtn" onClick={handleVerifyEmail}disabled={isDisabled}> Verify Email </button>
+                                : ''
+                            }
 
                             <div className="progress-container">
                                 <div className="progress-bar">
