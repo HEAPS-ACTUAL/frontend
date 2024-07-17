@@ -139,11 +139,11 @@ function ProfilePage() {
                     <img src={getProfileImage(userDetails.Gender)} alt={`${userDetails.Gender} profile`} className="profile-image" />
                 </div>
 
-                <div className="profile-info">
+
 
                     {/* IF NOT CHANGING NAME OR CHANGING PASSWORD */}
                     {!changingName && !changingPassword && (
-                        <div>
+                        <div className="profile-info">
                             <div className="name">
                                 {userDetails.FirstName} {userDetails.LastName}
                                 <FaEdit className="edit-icon" onClick={() => setChangingName(true)} />
@@ -158,7 +158,7 @@ function ProfilePage() {
                             </div>
                             
                             {!userDetails.IsVerified 
-                                ? <button className="sendEmailBtn" onClick={handleVerifyEmail}disabled={isDisabled}> Verify Email </button>
+                                ? <button className="sendEmailBtn" onClick={handleVerifyEmail} disabled={isDisabled}> Verify Email </button>
                                 : ''
                             }
 
@@ -178,17 +178,17 @@ function ProfilePage() {
                                 </div>
                                 <div className="days-since">Days since you joined quizDaddy!</div>
                             </div>
-                            <button onClick={() => setChangingPassword(true)}>Change Password</button>
-                            <button onClick={handleDeleteAccount}>Delete Account</button>
+                            <button className='changePasswordButton' onClick={() => setChangingPassword(true)}>Change Password</button>
+                            <button className='deleteAccountButton' onClick={handleDeleteAccount}>Delete Account</button>
                         </div>
                     )}
 
                     {/* IF CHANGING NAME */}
                     {changingName && (
-                        <div>
+                        <div className="editNameContainer">
                             <div className="name">{newUserDetails.FirstName} {newUserDetails.LastName}</div>
 
-                            <input type="text" name="FirstName" onChange={handleChange} placeholder={userDetails.FirstName} />
+                            <input className='inputFirstName' type="text" name="FirstName" onChange={handleChange} placeholder={userDetails.FirstName} />
                             <input type="text" name="LastName" onChange={handleChange} placeholder={userDetails.LastName} />
 
                             <button onClick={handleNameSave}>Save Changes</button>
@@ -207,7 +207,7 @@ function ProfilePage() {
                             <button onClick={handleCancel}>Cancel</button>
                         </div>
                     )}                            
-                </div>
+                {/* </div> */}
             </div>
         </div>
     );
