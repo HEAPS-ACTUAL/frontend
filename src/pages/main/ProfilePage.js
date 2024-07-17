@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { getUserByEmail, updateUserDetails, deleteUserAccount, } from "../../services (for backend)/UserService";
 import "../../styles/ProfilePage.css";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
@@ -14,10 +13,8 @@ import { SiTicktick } from "react-icons/si";
 import { CgCloseO } from "react-icons/cg";
 
 // Functions
-import { getUserByEmail, updateUserDetails, deleteUserAccount } from "../../services (for backend)/UserService";
+import { getUserByEmail, updateUserDetails, deleteUserAccount, } from "../../services (for backend)/UserService";
 import {sendVerificationEmail } from '../../services (for backend)/EmailServices';
-
-
 
 function ProfilePage() {
     const navigate = useNavigate();
@@ -149,7 +146,7 @@ function ProfilePage() {
                                 <FaEdit className="edit-icon" onClick={() => setChangingName(true)} />
                             </div>
 
-                            <div className="email">{userDetails.Email} {userDetails.IsVerified ? <SiTicktick className="tickIcon"/>: <><CgCloseO className="closeIcon"/><button className="sendEmailBtn" onClick={handleVerifyEmail}disabled={isDisabled}>Verify Email</button></> } </p></div>
+                            <div className="email">{userDetails.Email} {userDetails.IsVerified ? <SiTicktick className="tickIcon"/>: <><CgCloseO className="closeIcon"/><button className="sendEmailBtn" onClick={handleVerifyEmail}disabled={isDisabled}>Verify Email</button></> }</div>
 
                             <div className="progress-container">
                                 <div className="progress-bar">
