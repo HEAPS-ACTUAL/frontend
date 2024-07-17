@@ -72,10 +72,9 @@ const Flashcard = () => {
             </div>
 
             <div className={styles.buttons}>
-
+                <button className={styles.previousBtn} onClick={handlePreviousFlashcard} disabled={CurrentFlashcardIndex === 0}> <BsArrowLeftShort /></button>
                 <button className={styles.RevisionScheduleButton} onClick={() => navigate('/home/revision-schedule')}><GrSchedules /></button>
                 <button className={styles.HomeButton} onClick={() => navigate('/home')}><FaHome /></button>
-                <button className={styles.previousBtn} onClick={handlePreviousFlashcard} disabled={CurrentFlashcardIndex === 0}> <BsArrowLeftShort /></button>
                 <button className={styles.nextBtn} onClick={handleNextFlashcard} disabled={CurrentFlashcardIndex === flashcardArray.length - 1} ><BsArrowRightShort /></button>
 
             </div>
