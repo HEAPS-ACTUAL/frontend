@@ -29,6 +29,8 @@ function ProfilePage() {
     const [changingName, setChangingName] = useState(false);
     const [changingPassword, setChangingPassword] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
+    const [cooldown, setCooldown] = useState(true);
+
 
     useEffect(() => {
 
@@ -54,6 +56,22 @@ function ProfilePage() {
         fetchUserDetails(email);
 
     }, [email]);
+
+    useEffect(()=>{
+        if (cooldown === 0){
+            console.log("Cooldown is Over!")
+            setCooldown(null);
+        }
+        if (!cooldown){
+            return;
+        }
+        const intervalID = setInterval(()=>{
+            setCooldown(cooldown -1);
+        }, 1000);
+
+            // clear interval on re-render to avoid memory leaks
+        return () => clearInterval(intervalID);
+    })
 
     function getProfileImage(gender) {
         if (gender === "F") {
@@ -125,10 +143,12 @@ function ProfilePage() {
     }
     function handleVerifyEmail(event) {
         setIsDisabled(true)
+        setCooldown(20)
         sendVerificationEmail(email);
         setTimeout(() => {
             setIsDisabled(false);
-        }, 15000);
+        }, 20000);
+
     }
 
     return (
@@ -155,12 +175,13 @@ function ProfilePage() {
                                     ? <SiTicktick className="tickIcon"/> 
                                     : <CgCloseO className="closeIcon"/> 
                                 }
+                                {!userDetails.IsVerified 
+                                ? <button className="verifyEmailBtn" onClick={handleVerifyEmail} disabled={isDisabled}> Verify Email </button>
+                                : ''
+                            }<element className="cooldownTimer">{cooldown}</element>
                             </div>
                             
-                            {!userDetails.IsVerified 
-                                ? <button className="sendEmailBtn" onClick={handleVerifyEmail} disabled={isDisabled}> Verify Email </button>
-                                : ''
-                            }
+                            
 
                             <div className="progress-container">
                                 <div className="progress-bar">

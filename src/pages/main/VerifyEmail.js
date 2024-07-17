@@ -18,6 +18,7 @@ const VerifyEmail = () =>{
     const [email, setEmail] = useState("");
     const [sentMessage, setSentMessage] = useState("");
     const [isDisabled, setIsDisabled] = useState(false);
+    const [cooldown, setCooldown] = useState(true);
 
 
 
@@ -33,6 +34,23 @@ const VerifyEmail = () =>{
         }
 
     }, [location.search]);
+
+    useEffect(()=>{
+        if (cooldown === 0){
+            console.log("Cooldown is Over!")
+            setCooldown(null);
+        }
+        if (!cooldown){
+            return;
+        }
+        const intervalID = setInterval(()=>{
+            setCooldown(cooldown -1);
+        }, 1000);
+
+            // clear interval on re-render to avoid memory leaks
+        return () => clearInterval(intervalID);
+        
+    })
 
     async function handleTokenVerification(token){
         const verification = await verifyToken(token);
@@ -54,11 +72,12 @@ const VerifyEmail = () =>{
         }
         else {
             setIsDisabled(true)
+            setCooldown(20)
             sendVerificationEmail(email);
             setSentMessage("Email Sent!");  
             setTimeout(() => {
                 setIsDisabled(false);
-            }, 15000);          
+            }, 20000);          
         }
     }
 
@@ -88,12 +107,12 @@ const VerifyEmail = () =>{
             <form onSubmit={handleSendEmail}>
                 <div className={styles.inputContainer}>
                     <input type="email" placeholder="Enter Email Here" onChange={(event) => setEmail(event.target.value)}></input>
-                    <section className={styles.sentMessage}>{sentMessage}</section>
+                    <section className={styles.sentMessage}>{sentMessage}&nbsp;{cooldown}</section>
                 </div>
                 
                 <button disabled={isDisabled} type="submit" className={styles.btnSendEmail}>
                     Send a New Verification Email
-                </button>
+                </button> 
             </form>
         </div>
     );
