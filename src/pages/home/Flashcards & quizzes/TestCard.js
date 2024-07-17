@@ -18,7 +18,6 @@ function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, att
     }
 
     const navigate = useNavigate();
-    const email = sessionStorage.getItem("userEmail");
 
     function handleTestClicked(){
         if(difficulty === null){ // DIFFICULTY WILL BE NULL IF ITS A FLASHCARD
