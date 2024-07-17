@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "../../styles/ProfilePage.css";
+
+import { getUserByEmail, updateUserDetails, deleteUserAccount, } from "../../services (for backend)/UserService";
+import "../../styles/ProfilePage.css";
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 // icons & images
 import femaleProfileImage from "../../images/female_pfp.png";
@@ -20,9 +24,12 @@ function ProfilePage() {
     const email = sessionStorage.getItem("userEmail");
 
     const [userDetails, setUserDetails] = useState({}); // object contained User record from DB
-    const [daysSinceCreation, setDaysSinceCreation] = useState(0);
+    const [newUserDetails, setNewUserDetails] = useState({}); // THIS VARIABLE IS FOR DISPLAYING THE NEW NAME AS THE USER TYPES IN THEIR NEW NAME
 
-    const [editing, setEditing] = useState(false);
+    const [daysSinceCreation, setDaysSinceCreation] = useState(0);
+    const [daysPercentage, setDayPercentage] = useState(0);
+    
+    const [changingName, setChangingName] = useState(false);
     const [changingPassword, setChangingPassword] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
 
@@ -33,6 +40,7 @@ function ProfilePage() {
             // console.log("Fetched user details:", retrievedUser); // Debugging log
 
             setUserDetails(retrievedUser);
+            setNewUserDetails(retrievedUser);
 
             // Calculate days since account creation
             const creationDate = new Date(retrievedUser.DateTimeJoined);
@@ -40,8 +48,10 @@ function ProfilePage() {
 
             const differenceInTime = today.getTime() - creationDate.getTime();
             const differenceInDays = Math.floor(differenceInTime / (1000 * 3600 * 24));
+            const daysPercentage = (differenceInDays % 365) / 365 * 100;
 
             setDaysSinceCreation(differenceInDays);
+            setDayPercentage(daysPercentage);
         }
 
         fetchUserDetails(email);
@@ -57,41 +67,46 @@ function ProfilePage() {
 
     function handleChange(event) {
         const { name, value } = event.target;
-        setUserDetails((prev) => ({ ...prev, [name]: value }));
+        setNewUserDetails((prev) => ({ ...prev, [name]: value }));
     }
 
-    async function handleSave() {
-        const { FirstName, LastName } = userDetails;
+    function handleCancel(){
+        setNewUserDetails(userDetails); // SET NEW 
+        setChangingName(false);
+        setChangingPassword(false);
+    }
+
+    async function handleNameSave() {
+        const { FirstName, LastName } = newUserDetails;
 
         if (FirstName.trim() === '' || LastName.trim() === '') {
             alert('Fields cannot be empty!');
         }
-        else{
+        else {
             const message = await updateUserDetails(email, FirstName, LastName); // hashedPassword, inputPassword and newPassword are "null" by default when updating firstName and/or lastName. Refer to updateUserDetails in UserServices.js
 
+            if (message === 'User details updated successfully.'){
+                setUserDetails(newUserDetails); // UPDATE PREVIOUS USER DETAILS TO THE NEW ONE WITHOUT HAVING TO RELOAD THE PAGE
+            }
+
             alert(message);
-            setEditing(false);
+            setChangingName(false);
         }
     }
 
     async function handlePasswordSave() {
-        const { HashedPassword, InputPassword, NewPassword, ConfirmPassword } = userDetails;
-        
-        // console.log(`hashed pw: ${HashedPassword}`)
-        // console.log(`input pw: ${InputPassword}`)
-        // console.log(`new pw: ${NewPassword}`)
-        // console.log(`confirm pw: ${ConfirmPassword}`)
-        
-        if(!InputPassword || !NewPassword || !ConfirmPassword){
+        const { HashedPassword, InputPassword, NewPassword, ConfirmPassword } = newUserDetails;
+
+        if (!InputPassword || !NewPassword || !ConfirmPassword) {
             alert('Fields cannot be empty!');
         }
-        else if(InputPassword.trim() === '' || NewPassword.trim() === '' || ConfirmPassword.trim() === '' ){
+        else if (InputPassword.trim() === '' || NewPassword.trim() === '' || ConfirmPassword.trim() === '') {
             alert('Fields cannot be empty!');
         }
         else if (NewPassword !== ConfirmPassword) {
             alert("New passwords don't match!");
         }
-        else{
+        else {
             const message = await updateUserDetails(email, null, null, HashedPassword, InputPassword, NewPassword); // Set firstName and lastName as null when updating password
 
             alert(message);
@@ -123,43 +138,64 @@ function ProfilePage() {
                     <div className="profile-image-background"></div>
                     <img src={getProfileImage(userDetails.Gender)} alt={`${userDetails.Gender} profile`} className="profile-image" />
                 </div>
+
                 <div className="profile-info">
-                    <div className="name">
-                        {userDetails.FirstName} {userDetails.LastName}
-                        {editing ? '' : <FaEdit className="edit-icon" onClick={() => setEditing(true)} />}
-                    </div>
-                    {editing
-                        ? (<div>
+
+                    {/* IF NOT CHANGING NAME OR CHANGING PASSWORD */}
+                    {!changingName && !changingPassword && (
+                        <div>
+                            <div className="name">
+                                {userDetails.FirstName} {userDetails.LastName}
+                                <FaEdit className="edit-icon" onClick={() => setChangingName(true)} />
+                            </div>
+
+                            <div className="email">{userDetails.Email} {userDetails.IsVerified ? <SiTicktick className="tickIcon"/>: <><CgCloseO className="closeIcon"/><button className="sendEmailBtn" onClick={handleVerifyEmail}disabled={isDisabled}>Verify Email</button></> } </p></div>
+
+                            <div className="progress-container">
+                                <div className="progress-bar">
+                                    <CircularProgressbar value={daysPercentage} text={`${daysSinceCreation}`}
+                                        styles={buildStyles({
+                                            rotation: 0.25,
+                                            strokeLinecap: 'butt',
+                                            textSize: '35px',
+                                            pathTransitionDuration: 0.5,
+                                            pathColor: `rgba(70, 99, 172, 0.7)`,
+                                            trailColor: `rgb(201, 200, 198, 1)`,
+                                            backgroundColor: '#3e98c7',
+                                            textColor: `rgb(70, 99, 172, 0.7)`,
+                                        })} />
+                                </div>
+                                <div className="days-since">Days since you joined quizDaddy!</div>
+                            </div>
+                            <button onClick={() => setChangingPassword(true)}>Change Password</button>
+                            <button onClick={handleDeleteAccount}>Delete Account</button>
+                        </div>
+                    )}
+
+                    {/* IF CHANGING NAME */}
+                    {changingName && (
+                        <div>
+                            <div className="name">{newUserDetails.FirstName} {newUserDetails.LastName}</div>
+
                             <input type="text" name="FirstName" onChange={handleChange} placeholder={userDetails.FirstName} />
                             <input type="text" name="LastName" onChange={handleChange} placeholder={userDetails.LastName} />
 
-                            <button onClick={handleSave}>Save Changes</button>
-                            <button onClick={() => setEditing(false)}>Cancel</button>
-                        </div>)
-                        : changingPassword 
-                            ? (<div>
-                                <input type="password" name="InputPassword" onChange={handleChange} placeholder="Current Password" />
-                                <input type="password" name="NewPassword" onChange={handleChange} placeholder="New Password" />
-                                <input type="password" name="ConfirmPassword" onChange={handleChange} placeholder="Confirm Password" />
-                                <button onClick={handlePasswordSave}>Save Password</button>
-                                <button onClick={() => setChangingPassword(false)}>Cancel</button>
-                            </div>)
-                            : (<div>
-                                <p>{userDetails.Email} {userDetails.IsVerified ? <SiTicktick className="tickIcon"/>: <><CgCloseO className="closeIcon"/><button className="sendEmailBtn" onClick={handleVerifyEmail}disabled={isDisabled}>Verify Email</button></> } </p>
-                                <p>{userDetails.DateTimeJoined ? userDetails.DateTimeJoined.slice(0, 10) : ""}</p>
+                            <button onClick={handleNameSave}>Save Changes</button>
+                            <button onClick={handleCancel}>Cancel</button>
+                        </div>
+                    )}
+                            
+                    {/* IF CHANGING PASSWORD */}
+                    {changingPassword && (
+                        <div className="password-change-container">
+                            <input type="password" name="InputPassword" onChange={handleChange} placeholder="Current Password" />
+                            <input type="password" name="NewPassword" onChange={handleChange} placeholder="New Password" />
+                            <input type="password" name="ConfirmPassword" onChange={handleChange} placeholder="Confirm Password" />
 
-                                <div className="progress-circle-container">
-                                    <div className="progress-circle">
-                                        <div className="progress-circle-inner" style={{ transform: `rotate(${(daysSinceCreation / 365) * 360}deg)` }}>
-                                            <span className="progress-circle-text">{daysSinceCreation} Days</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <button className ="buttons" onClick={() => setChangingPassword(true)}>Change Password</button>
-                                <button className ="buttons" onClick={handleDeleteAccount}>Delete Account</button>
-                            </div>)
-                    }
+                            <button onClick={handlePasswordSave}>Save Password</button>
+                            <button onClick={handleCancel}>Cancel</button>
+                        </div>
+                    )}                            
                 </div>
             </div>
         </div>
