@@ -70,18 +70,16 @@ async function getSalutation(email) {
 }
 
 // Update User Details
-async function updateUserDetails({ email, firstName, lastName }) {
+async function updateUserDetails(email, firstName, lastName, hashedPassword = null, inputPassword = null, newPassword = null) {
     try {
-        console.log("Sending user details for update:", {email, firstName, lastName}); // Debugging log
-
         const response = await axiosInstance({
             method: "put",
             url: "/user/update/",
-            data: { email, firstName, lastName },
+            data: { email, firstName, lastName, hashedPassword, inputPassword, newPassword }
         });
 
         return response.data.message;
-    } 
+    }
     catch (error) {
         if (error.response) {
             return error.response.data.message;
@@ -124,13 +122,4 @@ async function checkUserIsVerified(email) {
     }
 }
 
-
-export {
-    authenticate, 
-    createNewUser, 
-    getUserByEmail, 
-    getUserFirstName, 
-    getSalutation, 
-    updateUserDetails, 
-    deleteUserAccount, 
-    checkUserIsVerified};
+export {authenticate, createNewUser, getUserByEmail, getUserFirstName, getSalutation, updateUserDetails, deleteUserAccount, checkUserIsVerified};

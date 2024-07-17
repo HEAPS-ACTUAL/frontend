@@ -25,7 +25,7 @@ function Home() {
 
     async function fetchIsVerified(){
         const isVerified = await checkUserIsVerified(email);
-        if (isVerified == 1){ setIsVerified(true);}
+        if (isVerified === 1){ setIsVerified(true);}
         sessionStorage.setItem("isVerified", isVerified);
     }
 
