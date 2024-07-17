@@ -13,8 +13,8 @@ import { SiTicktick } from "react-icons/si";
 import { CgCloseO } from "react-icons/cg";
 
 // Functions
-import { getUserByEmail, updateUserDetails, deleteUserAccount, } from "../../services (for backend)/UserService";
-import {sendVerificationEmail } from '../../services (for backend)/EmailServices';
+import { getUserByEmail, updateUserDetails, deleteUserAccount, } from "../../services/UserService";
+import {sendVerificationEmail } from '../../services/EmailServices';
 
 function ProfilePage() {
     const navigate = useNavigate();
@@ -82,12 +82,12 @@ function ProfilePage() {
         else {
             const message = await updateUserDetails(email, FirstName, LastName); // hashedPassword, inputPassword and newPassword are "null" by default when updating firstName and/or lastName. Refer to updateUserDetails in UserServices.js
 
+            alert(message);
+            
             if (message === 'User details updated successfully.'){
                 setUserDetails(newUserDetails); // UPDATE PREVIOUS USER DETAILS TO THE NEW ONE WITHOUT HAVING TO RELOAD THE PAGE
+                setChangingName(false);
             }
-
-            alert(message);
-            setChangingName(false);
         }
     }
 
@@ -107,7 +107,10 @@ function ProfilePage() {
             const message = await updateUserDetails(email, null, null, HashedPassword, InputPassword, NewPassword); // Set firstName and lastName as null when updating password
 
             alert(message);
-            setChangingPassword(false);
+            
+            if (message === "Your password has been successfully changed!"){ 
+                setChangingPassword(false); // ONLY EXIT THE CHANGING PASSWORD PAGE IF PASSWORD CHANGE IS SUCCESSFUL. IF WRONG CURRENT PASSWORD, STAY ON PAGE
+            }
         }
     }
 
@@ -146,7 +149,18 @@ function ProfilePage() {
                                 <FaEdit className="edit-icon" onClick={() => setChangingName(true)} />
                             </div>
 
-                            <div className="email">{userDetails.Email} {userDetails.IsVerified ? <SiTicktick className="tickIcon"/>: <><CgCloseO className="closeIcon"/><button className="sendEmailBtn" onClick={handleVerifyEmail}disabled={isDisabled}>Verify Email</button></> }</div>
+                            <div className="emailAndIcon">
+                                <div className="email">{userDetails.Email}</div>
+                                {userDetails.IsVerified 
+                                    ? <SiTicktick className="tickIcon"/> 
+                                    : <CgCloseO className="closeIcon"/> 
+                                }
+                            </div>
+                            
+                            {!userDetails.IsVerified 
+                                ? <button className="sendEmailBtn" onClick={handleVerifyEmail}disabled={isDisabled}> Verify Email </button>
+                                : ''
+                            }
 
                             <div className="progress-container">
                                 <div className="progress-bar">
