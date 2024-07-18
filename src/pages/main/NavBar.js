@@ -43,7 +43,7 @@ function Navbar() {
 
             <div className={styles.profileAndLogin}>
                 {loggedIn && (
-                    <Link to='/profile' onClick={() => updateCurrentPage('profile')}>
+                    <Link to='/profile' title='view profile' onClick={() => updateCurrentPage('profile')}>
                         <FiUser className={`${styles.profileIcon} ${currentPage === 'profile' ? styles.profileClicked : ''}`} />
                     </Link>
                 )}
