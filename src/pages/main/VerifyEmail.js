@@ -69,9 +69,8 @@ const VerifyEmail = () =>{
             window.alert("Please enter a valid email address!");
         }
         else {           
-            // sendVerificationEmail(email);
+            sendVerificationEmail(email);
             alert('A verification link has been sent to the registered email!')
-            // setSentMessage('A verification link has been sent to the registered email!')
             setIsDisabled(true)
             setCooldown(20)
         }
