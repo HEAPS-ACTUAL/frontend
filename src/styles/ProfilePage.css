@@ -65,6 +65,7 @@
 }
 
 .email {
+    font-size: 14px !important;
     margin-right: 5px;
 }
 
@@ -155,22 +156,29 @@
     color: red;
 }
 
-.sendEmailBtn {
-    width: 450px !important;
+.verifyEmailBtn {
+    width: 120px !important;
     margin: 10px 0;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 14px !important;
     cursor: pointer;
-    margin-left: 10px;
+    margin-left: 20px;
+    display: inline-block;
 }
 
-.sendEmailBtn:hover {
+.verifyEmailBtn:hover {
     background-color: #007bff;
     color: #fff;
 }
 
-.sendEmailBtn:disabled {
+.verifyEmailBtn:disabled {
     background-color: #ccc;
     cursor: not-allowed;
+}
+
+.cooldownTimer {
+  width: 30px;
+  display: inline-block;
+  text-align: center;
 }

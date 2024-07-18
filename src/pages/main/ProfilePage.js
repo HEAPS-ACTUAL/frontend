@@ -29,6 +29,8 @@ function ProfilePage() {
     const [changingName, setChangingName] = useState(false);
     const [changingPassword, setChangingPassword] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
+    const [cooldown, setCooldown] = useState(true);
+
 
     useEffect(() => {
 
@@ -54,6 +56,22 @@ function ProfilePage() {
         fetchUserDetails(email);
 
     }, [email]);
+
+    useEffect(()=>{
+        if (cooldown === 0){
+            console.log("Cooldown is Over!")
+            setCooldown(null);
+        }
+        if (!cooldown){
+            return;
+        }
+        const intervalID = setInterval(()=>{
+            setCooldown(cooldown -1);
+        }, 1000);
+
+            // clear interval on re-render to avoid memory leaks
+        return () => clearInterval(intervalID);
+    })
 
     function getProfileImage(gender) {
         if (gender === "F") {
@@ -125,10 +143,12 @@ function ProfilePage() {
     }
     function handleVerifyEmail(event) {
         setIsDisabled(true)
+        setCooldown(20)
         sendVerificationEmail(email);
         setTimeout(() => {
             setIsDisabled(false);
-        }, 15000);
+        }, 20000);
+
     }
 
     return (
@@ -139,12 +159,46 @@ function ProfilePage() {
                     <img src={getProfileImage(userDetails.Gender)} alt={`${userDetails.Gender} profile`} className="profile-image" />
                 </div>
 
-                {/* IF NOT CHANGING NAME OR CHANGING PASSWORD */}
-                {!changingName && !changingPassword && (
-                    <div className="profile-info">
-                        <div className="name">
-                            {userDetails.FirstName + ' '} {userDetails.LastName}
-                            <FaEdit className="edit-icon" onClick={() => setChangingName(true)} />
+                    {/* IF NOT CHANGING NAME OR CHANGING PASSWORD */}
+                    {!changingName && !changingPassword && (
+                        <div className="profile-info">
+                            <div className="name">
+                                {userDetails.FirstName + ' '} {userDetails.LastName}
+                                <FaEdit className="edit-icon" onClick={() => setChangingName(true)} />
+                            </div>
+                            
+                            <div className="emailAndIcon">
+                                <div className="email">{userDetails.Email}</div>
+                                {userDetails.IsVerified 
+                                    ? <SiTicktick className="tickIcon"/> 
+                                    : <CgCloseO className="closeIcon"/> 
+                                }
+                                {!userDetails.IsVerified 
+                                ? <button className="verifyEmailBtn" onClick={handleVerifyEmail} disabled={isDisabled}> Verify Email </button>
+                                : ''
+                            }<element className="cooldownTimer">{cooldown}</element>
+                            </div>
+                            
+                            
+
+                            <div className="progress-container">
+                                <div className="progress-bar">
+                                    <CircularProgressbar value={daysPercentage} text={`${daysSinceCreation}`}
+                                        styles={buildStyles({
+                                            rotation: 0.25,
+                                            strokeLinecap: 'butt',
+                                            textSize: '35px',
+                                            pathTransitionDuration: 0.5,
+                                            pathColor: `rgba(70, 99, 172, 0.7)`,
+                                            trailColor: `rgb(201, 200, 198, 1)`,
+                                            backgroundColor: '#3e98c7',
+                                            textColor: `rgb(70, 99, 172, 0.7)`,
+                                        })} />
+                                </div>
+                                <div className="days-since">Days since you joined quizDaddy!</div>
+                            </div>
+                            <button className='changePasswordButton' onClick={() => setChangingPassword(true)}>Change Password</button>
+                            <button className='deleteAccountButton' onClick={handleDeleteAccount}>Delete Account</button>
                         </div>
 
                         <div className="emailAndIcon">

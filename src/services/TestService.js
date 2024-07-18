@@ -32,6 +32,4 @@ async function getAllQuestionsAndOptionsFromATest(testID){
 }
 
 
-export {
-    deleteTest, 
-    getAllQuestionsAndOptionsFromATest};
+export {deleteTest, getAllQuestionsAndOptionsFromATest};

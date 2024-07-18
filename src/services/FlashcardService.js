@@ -1,6 +1,6 @@
 import axiosInstance from "../utility/axiosInstance";
 
-async function generateFlashcard(email, testName, testType, file) { // isaiah to change
+async function generateFlashcard(email, testName, testType, file) {
     try {
         const formData = new FormData();
         formData.append("email", email);
@@ -69,8 +69,4 @@ async function getFlashcardsByScheduleID(scheduleID){
     }
 }
 
-export { 
-    generateFlashcard, 
-    getAllFlashcardsByUser, 
-    getAllFlashcardsWithoutSchedule, 
-    getFlashcardsByScheduleID };
+export { generateFlashcard, getAllFlashcardsByUser, getAllFlashcardsWithoutSchedule, getFlashcardsByScheduleID };
