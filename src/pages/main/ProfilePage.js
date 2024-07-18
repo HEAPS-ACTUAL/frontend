@@ -29,7 +29,7 @@ function ProfilePage() {
     const [changingName, setChangingName] = useState(false);
     const [changingPassword, setChangingPassword] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
-    const [cooldown, setCooldown] = useState(true);
+    const [cooldown, setCooldown] = useState(0);
 
     useEffect(() => {
 
@@ -56,29 +56,27 @@ function ProfilePage() {
     }, [email]);
 
     useEffect(() => {
-        if (cooldown === 0){
-            console.log("Cooldown is Over!")
-            setCooldown(null);
-        }
-        if (!cooldown){
-            return;
+
+        function countDown(){
+            if(cooldown <= 0){
+                setIsDisabled(false);
+                return;
+            }
+    
+            setTimeout(() => {
+                setCooldown(cooldown - 1);
+            }, 1000);
         }
 
-        const intervalID = setInterval(()=>{
-            setCooldown(cooldown - 1);
-        }, 1000);
+        countDown();
 
-        // clear interval on re-render to avoid memory leaks
-        return () => clearInterval(intervalID);
-    })
+    }, [cooldown])
 
     function handleVerifyEmail() {
+        sendVerificationEmail(email);
+        alert('A verification link has been sent to the registered email!')
         setIsDisabled(true)
         setCooldown(20)
-        sendVerificationEmail(email);
-        setTimeout(() => {
-            setIsDisabled(false);
-        }, 20000);
     }
 
     function getProfileImage(gender) {
@@ -86,7 +84,8 @@ function ProfilePage() {
             return femaleProfileImage;
         }
         return maleProfileImage;
-    };
+    }
+
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -176,7 +175,7 @@ function ProfilePage() {
                             {!userDetails.IsVerified && (
                                 <div>
                                     <button className="verifyEmailBtn" onClick={handleVerifyEmail} disabled={isDisabled}> Verify Email </button>
-                                    <element className="cooldownTimer">{cooldown}</element>
+                                    <element className="cooldownTimer">{cooldown !== 0 && cooldown}</element>
                                 </div>
                             )}
                         </div>
