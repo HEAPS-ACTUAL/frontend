@@ -159,61 +159,29 @@ function ProfilePage() {
                     <img src={getProfileImage(userDetails.Gender)} alt={`${userDetails.Gender} profile`} className="profile-image" />
                 </div>
 
-                    {/* IF NOT CHANGING NAME OR CHANGING PASSWORD */}
-                    {!changingName && !changingPassword && (
-                        <div className="profile-info">
-                            <div className="name">
-                                {userDetails.FirstName + ' '} {userDetails.LastName}
-                                <FaEdit className="edit-icon" onClick={() => setChangingName(true)} />
-                            </div>
-                            
-                            <div className="emailAndIcon">
-                                <div className="email">{userDetails.Email}</div>
-                                {userDetails.IsVerified 
-                                    ? <SiTicktick className="tickIcon"/> 
-                                    : <CgCloseO className="closeIcon"/> 
-                                }
-                                {!userDetails.IsVerified 
-                                ? <button className="verifyEmailBtn" onClick={handleVerifyEmail} disabled={isDisabled}> Verify Email </button>
-                                : ''
-                            }<element className="cooldownTimer">{cooldown}</element>
-                            </div>
-                            
-                            
-
-                            <div className="progress-container">
-                                <div className="progress-bar">
-                                    <CircularProgressbar value={daysPercentage} text={`${daysSinceCreation}`}
-                                        styles={buildStyles({
-                                            rotation: 0.25,
-                                            strokeLinecap: 'butt',
-                                            textSize: '35px',
-                                            pathTransitionDuration: 0.5,
-                                            pathColor: `rgba(70, 99, 172, 0.7)`,
-                                            trailColor: `rgb(201, 200, 198, 1)`,
-                                            backgroundColor: '#3e98c7',
-                                            textColor: `rgb(70, 99, 172, 0.7)`,
-                                        })} />
-                                </div>
-                                <div className="days-since">Days since you joined quizDaddy!</div>
-                            </div>
-                            <button className='changePasswordButton' onClick={() => setChangingPassword(true)}>Change Password</button>
-                            <button className='deleteAccountButton' onClick={handleDeleteAccount}>Delete Account</button>
+                {/* IF NOT CHANGING NAME OR CHANGING PASSWORD */}
+                {!changingName && !changingPassword && (
+                    <div className="profile-info">
+                        <div className="name">
+                            {userDetails.FirstName + ' '} {userDetails.LastName}
+                            <FaEdit className="edit-icon" onClick={() => setChangingName(true)} />
                         </div>
-
+                        
                         <div className="emailAndIcon">
                             <div className="email">{userDetails.Email}</div>
                             {userDetails.IsVerified 
                                 ? <SiTicktick className="tickIcon"/> 
                                 : <CgCloseO className="closeIcon"/> 
                             }
+
+                            {!userDetails.IsVerified && (
+                                <div>
+                                    <button className="verifyEmailBtn" onClick={handleVerifyEmail} disabled={isDisabled}> Verify Email </button>
+                                    <element className="cooldownTimer">{cooldown}</element>
+                                </div>
+                            )}
                         </div>
                         
-                        {!userDetails.IsVerified 
-                            ? <button className="sendEmailBtn" onClick={handleVerifyEmail} disabled={isDisabled}> Verify Email </button>
-                            : ''
-                        }
-
                         <div className="progress-container">
                             <div className="progress-bar">
                                 <CircularProgressbar value={daysPercentage} text={`${daysSinceCreation}`}
@@ -226,7 +194,8 @@ function ProfilePage() {
                                         trailColor: `rgb(201, 200, 198, 1)`,
                                         backgroundColor: '#3e98c7',
                                         textColor: `rgb(70, 99, 172, 0.7)`,
-                                    })} />
+                                    })} 
+                                />
                             </div>
                             <div className="days-since">Days since you joined quizDaddy!</div>
                         </div>
@@ -247,7 +216,7 @@ function ProfilePage() {
                         <button onClick={handleCancel}>Cancel</button>
                     </div>
                 )}
-                        
+ 
                 {/* IF CHANGING PASSWORD */}
                 {changingPassword && (
                     <div className="password-change-container">
