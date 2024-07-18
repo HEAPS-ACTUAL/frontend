@@ -31,7 +31,7 @@ function Navbar() {
 
     return (
         <div className={styles.navbar}>
-            <Link to="/" className={styles.logoLink}>
+            <Link to="/" className={styles.logoLink} onClick={() => updateCurrentPage('about')}>
                 <img src={quizDaddyLogo} alt="quizDaddy Logo" className={styles.logo} />
                 <span className={styles.logoText}>quizDaddy</span>
             </Link>
@@ -43,7 +43,7 @@ function Navbar() {
 
             <div className={styles.profileAndLogin}>
                 {loggedIn && (
-                    <Link to='/profile' onClick={() => updateCurrentPage('profile')}>
+                    <Link to='/profile' title='view profile' onClick={() => updateCurrentPage('profile')}>
                         <FiUser className={`${styles.profileIcon} ${currentPage === 'profile' ? styles.profileClicked : ''}`} />
                     </Link>
                 )}

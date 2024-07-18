@@ -4,9 +4,9 @@ import { FaTrashCan } from "react-icons/fa6";
 import postItIcon from "../../../images/post-it.png";
 
 function DayModal({ date, events, handleEventClick, handleDeleteClicked }) {
-    // Format the date when component mounts or when date changes
     const [formattedDate, setFormattedDate] = useState("");
     
+    // Format the date when component mounts or when date changes
     useEffect(() => {
         const formatted = new Date(date).toLocaleDateString("en-GB", {
             day: "numeric",

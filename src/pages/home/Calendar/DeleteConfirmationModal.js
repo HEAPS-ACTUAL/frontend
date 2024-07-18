@@ -14,8 +14,6 @@ function DeleteConfirmationModal({ isOpen, closeModal, event }) {
 
     // DELETE ENTIRE SCHEDULE
     async function handleDeleteAll(){
-        console.log("trying to delete entire schedule for exam with schedule ID:", scheduleID);
-
         const result = await deleteExistingExam(scheduleID);
 
         if (result === 'ok deleted entire exam from db') { // message from the backend
@@ -25,8 +23,6 @@ function DeleteConfirmationModal({ isOpen, closeModal, event }) {
         else { 
             window.alert('Failed to delete the exam, try again'); 
         }
-
-        // setIsDeleteModalOpen(false); // close the delete confirmation modal
     }
     
     // DELETE A SINGLE REVISION DATE

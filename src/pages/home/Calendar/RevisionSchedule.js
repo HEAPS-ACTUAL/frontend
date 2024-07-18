@@ -49,7 +49,7 @@ function Calendar() {
     const [selectedEvents, setSelectedEvents] = useState([]);
 
     // State for delete confirmation modal
-    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // State for delete confirmation modal
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [eventToDelete, setEventToDelete] = useState(null); // State to store event to delete
 
     /*
@@ -60,7 +60,7 @@ function Calendar() {
     
     // FETCH RELEVANT DATA WHEN THE PAGE IS RENDERED FOR THE FIRST TIME
     useEffect(() => {
-        // retrieve names of flashcards from backend to display as dropdown menu @ SHI HUI UR CODE HERE
+        // retrieve names of flashcards from backend to display as dropdown menu 
         async function fetchAllFlashcardsWithoutSchedule() {
             const returnedArray = await getAllFlashcardsWithoutSchedule(email);
             setArrayOfAvailableFlashcards(returnedArray);
@@ -157,12 +157,11 @@ function Calendar() {
         setSelectedDate(clickedDate);
         const eventsOnDate = calendarEvents.filter((event) => event.start === clickedDate);
         setSelectedEvents(eventsOnDate);
-        // console.log("Clicked date:", clickedDate); // Debug
     }
 
     function showFlashcardModal(scheduleID) {
         setClickedScheduleID(scheduleID);
-        setFlashcardModalOpen(true);
+        setFlashcardModalOpen(true); // open the flashcard modal
     }
 
     const showDeleteModal = (event) => {

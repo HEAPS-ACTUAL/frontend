@@ -59,10 +59,9 @@
 }
 
 .btnSignIn, .btnSendEmail {
-    display: flex;
-    padding: 10px 20px;
     border-radius: 10px;
-    margin: 10px 10px;
+    padding: 10px 20px;
+    margin: 10px;
     color: black;
     font-size: 16px;
     border: none;
@@ -71,14 +70,13 @@
     width: 400px;
     transition: background-color 0.3s, box-shadow 0.3s;  
     background-color: rgba(70, 99, 172, 0.4);
-    justify-content: center;
-    align-items: center;
 }
 
 .btnSignIn:hover{
     background-color: rgba(70, 99, 172, 0.7);
     box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
 }
+
 .btnSendEmail:hover{
     background-color: rgba(70, 99, 172, 0.7);
     box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
@@ -99,7 +97,6 @@
 .inputContainer input{
     width: 400px; /* Full width to align with the form size */
     padding: 10px; /* Comfortable padding for interaction */
-    margin: 8px 0; /* Standard vertical spacing */
     display: block; /* Helps in proper alignment */
     border: 1px solid #ccc; /* Subtle border matching the design */
     background-color: #eee; /* Light grey background for visibility */
@@ -109,3 +106,12 @@
     color: #333; /* Dark grey text for contrast */
 }
 
+.buttonAndCooldown {
+    position: relative;
+}
+
+.cooldown {
+    position: absolute;
+    right: -23px;
+    top: 20px;
+}

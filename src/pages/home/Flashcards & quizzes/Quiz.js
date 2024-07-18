@@ -49,10 +49,6 @@ const QuizFeature = () => {
             const attemptNo = await getLatestAttempt(testID);
             
             navigate ('/test/results-page', {state: {testID: testID, attemptNo: attemptNo['LatestAttempt']}});
-            // passes additional state to the /results route. 
-            // userAnswers - object containing all the answers given by the user
-            // questions - array of questions
-            // information is accessible on the results page, allowing it to summarize the quiz results based on the answers and questions.
         }
     }
 
