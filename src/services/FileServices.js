@@ -54,9 +54,4 @@ function countWordsInPDF(file) {
     });
 }
 
-export {
-    fileTypeIsPDF,
-    fileSizeWithinLimit,
-    convertFileSizeTo2DP,
-    countWordsInPDF,
-};
+export { fileTypeIsPDF, fileSizeWithinLimit, convertFileSizeTo2DP, countWordsInPDF };

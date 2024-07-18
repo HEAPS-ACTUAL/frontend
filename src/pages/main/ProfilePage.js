@@ -31,12 +31,10 @@ function ProfilePage() {
     const [isDisabled, setIsDisabled] = useState(false);
     const [cooldown, setCooldown] = useState(true);
 
-
     useEffect(() => {
 
         async function fetchUserDetails(email) {
             const retrievedUser = await getUserByEmail(email);
-            // console.log("Fetched user details:", retrievedUser); // Debugging log
 
             setUserDetails(retrievedUser);
             setNewUserDetails(retrievedUser);
@@ -57,7 +55,7 @@ function ProfilePage() {
 
     }, [email]);
 
-    useEffect(()=>{
+    useEffect(() => {
         if (cooldown === 0){
             console.log("Cooldown is Over!")
             setCooldown(null);
@@ -65,13 +63,23 @@ function ProfilePage() {
         if (!cooldown){
             return;
         }
+
         const intervalID = setInterval(()=>{
-            setCooldown(cooldown -1);
+            setCooldown(cooldown - 1);
         }, 1000);
 
-            // clear interval on re-render to avoid memory leaks
+        // clear interval on re-render to avoid memory leaks
         return () => clearInterval(intervalID);
     })
+
+    function handleVerifyEmail() {
+        setIsDisabled(true)
+        setCooldown(20)
+        sendVerificationEmail(email);
+        setTimeout(() => {
+            setIsDisabled(false);
+        }, 20000);
+    }
 
     function getProfileImage(gender) {
         if (gender === "F") {
@@ -84,9 +92,9 @@ function ProfilePage() {
         const { name, value } = event.target;
         setNewUserDetails((prev) => ({ ...prev, [name]: value }));
     }
-
+    
     function handleCancel(){
-        setNewUserDetails(userDetails); // SET NEW 
+        setNewUserDetails(userDetails); // SET NEW USER DETAILS BACK TO THE ORIGINAL
         setChangingName(false);
         setChangingPassword(false);
     }
@@ -140,15 +148,6 @@ function ProfilePage() {
             sessionStorage.clear();
             navigate('../login');
         }
-    }
-    function handleVerifyEmail(event) {
-        setIsDisabled(true)
-        setCooldown(20)
-        sendVerificationEmail(email);
-        setTimeout(() => {
-            setIsDisabled(false);
-        }, 20000);
-
     }
 
     return (
