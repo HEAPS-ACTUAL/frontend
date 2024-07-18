@@ -1,61 +1,39 @@
 .reviewsContainer {
-  padding: 0 500px; 
-  border-radius: 10px;
-  margin-bottom: 100px;
-  margin-top: 100px;
+    padding: 0 500px;
+    border-radius: 10px;
+    margin-bottom: 100px;
+    margin-top: 100px;
+}
+
+:global(.slick-next) {
+    right: -50px;
+}
+
+:global(.slick-next:before) {
+    /* font-size: 100px; */
+}
+
+:global(.slick-prev){
+    left: -50px;
 }
 
 .reviewsHeader {
-  text-align: center;
-  margin-top: 50px;
-  margin-bottom: 50px;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .review {
-  padding: 20px;
-  margin: 0 auto; 
-  border-radius: 10px;
-  background-color: white;
-  text-align: center;
-  position: relative;
-  margin-bottom: 20px; 
-  width: 1000px ;}
-
-
-.slick-prev,
-.slick-next {
-  color: #000; 
-  z-index: 1; 
-}
-
-.slick-prev {
-  left: 10px; 
-  color: #000;
-
-}
-
-.slick-next {
-  right: 10px; 
-}
-
-.slick-prev:before,
-.slick-next:before {
-  font-size: 20px;
-  opacity: 1;
-  color: #000; 
-}
-
-.slick-prev,
-.slick-next {
-  top: 50%; 
-  transform: translateY(-50%);
-}
-
-.slick-slide {
-  margin-right: 20px;
+    padding: 20px;
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+    position: relative;
+    margin-bottom: 20px;
+    width: 1000px;
 }
 
 .description {
-  font-style: italic;
+    font-style: italic;
 }
-
