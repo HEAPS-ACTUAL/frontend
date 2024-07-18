@@ -31,7 +31,7 @@ function Navbar() {
 
     return (
         <div className={styles.navbar}>
-            <Link to="/" className={styles.logoLink}>
+            <Link to="/" className={styles.logoLink} onClick={() => updateCurrentPage('about')}>
                 <img src={quizDaddyLogo} alt="quizDaddy Logo" className={styles.logo} />
                 <span className={styles.logoText}>quizDaddy</span>
             </Link>

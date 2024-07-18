@@ -6,14 +6,13 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { SiTicktick } from "react-icons/si";
 import { CgCloseO } from "react-icons/cg";
 
-
 // functions
 import { verifyToken, sendVerificationEmail } from '../../services/EmailServices';
 
 const VerifyEmail = () =>{
     const location = useLocation();
     const navigate = useNavigate();
-    
+
     const [verifyOk, setVerifyOk] = useState("");
     const [email, setEmail] = useState("");
     const [isDisabled, setIsDisabled] = useState(false);
