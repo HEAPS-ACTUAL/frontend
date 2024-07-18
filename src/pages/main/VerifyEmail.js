@@ -13,7 +13,7 @@ import { verifyToken, sendVerificationEmail } from '../../services/EmailServices
 const VerifyEmail = () =>{
     const location = useLocation();
     const navigate = useNavigate();
-    // const email = sessionStorage.getItem("userEmail");
+    
     const [verifyOk, setVerifyOk] = useState("");
     const [email, setEmail] = useState("");
     const [isDisabled, setIsDisabled] = useState(false);
