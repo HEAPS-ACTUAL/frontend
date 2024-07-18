@@ -68,6 +68,15 @@
     --rotate-y: 180deg;
 }
 
+.flipArrow {
+    position: absolute;
+    top: 0px; /* Adjust the value as needed */
+    right: 10px; /* Adjust the value as needed */
+    cursor: pointer;
+  }
+  
+  
+
 /* buttons */
 .buttons {
     display: flex;

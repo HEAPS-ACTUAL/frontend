@@ -6,6 +6,8 @@ import styles from '../../../styles/Flashcard.module.css';
 import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
 import { GrSchedules } from "react-icons/gr";
 import { FaHome } from "react-icons/fa";
+import { BsArrowRepeat } from "react-icons/bs";
+
 
 // Import functions
 import { getAllQuestionsAndOptionsFromATest } from '../../../services/TestService';
@@ -60,16 +62,19 @@ const Flashcard = () => {
 
     return(
         <div className={styles.wrapper}>
+            
+            <div onClick={toggleFlip} className={`${styles.FlashcardContainer} ${isFlipped ? styles.isFlipped : ''}`}>
+                <div className={styles.FlashcardFace + " " + styles.FrontFlashcardContent}>
+                    {flashcardArray[CurrentFlashcardIndex]["QuestionText"]}
+                    <div className={styles.flipArrow}><BsArrowRepeat /></div>
+                </div>
 
-            <div onClick={toggleFlip} className={`${styles.FlashcardContainer} ${isFlipped ? styles.isFlipped: '' }`}>
-                    <div className={styles.FlashcardFace + " " + styles.FrontFlashcardContent}>
-                        {flashcardArray[CurrentFlashcardIndex]["QuestionText"]}
-                    </div>
-
-                    <div className={styles.FlashcardFace + " " + styles.BackFlashcardContent}>
-                        {flashcardArray[CurrentFlashcardIndex]["Elaboration"]}
-                    </div>
+                <div className={styles.FlashcardFace + " " + styles.BackFlashcardContent}>
+                    {flashcardArray[CurrentFlashcardIndex]["Elaboration"]}
+                    <div className={styles.flipArrow}><BsArrowRepeat /></div>
+                </div>
             </div>
+
 
             <div className={styles.buttons}>
                 <button className={styles.previousBtn} onClick={handlePreviousFlashcard} disabled={CurrentFlashcardIndex === 0}> <BsArrowLeftShort /></button>
