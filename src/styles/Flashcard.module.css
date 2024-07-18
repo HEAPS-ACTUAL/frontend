@@ -1,21 +1,20 @@
 
 .wrapper {
     position: relative;
-    width: 100%; 
-    height: 100vh;
+    width: 100%;
+    height: 95vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: -50px;
     flex-direction: column;
 }
 
+
 .FlashcardContainer {
-    position: relative; 
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 100px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     border-radius: 40px;
     padding: 10px;
@@ -26,7 +25,6 @@
     transform-style: preserve-3d;
     transform: perspective(1000px) rotateY(0deg);
     cursor: pointer;
-
 }
 
 .FlashcardFace{
@@ -71,6 +69,14 @@
 }
 
 /* buttons */
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px; /* Adjust as needed */
+    gap: 20px; 
+}
+ 
 .previousBtn, .nextBtn, .RevisionScheduleButton, .HomeButton {
     font-size: 35px;
     display: flex;
@@ -79,13 +85,13 @@
     background-color: #f0f0f0;
     border: none; 
     border-radius: 50%; 
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0,0,0,0.25); 
     transition: background-color 0.3s, transform 0.3s; 
-    margin-right: 50px;
-    margin-left: 50px;
+    margin: 10px;
+
 }
 
 .RevisionScheduleButton, .HomeButton {
@@ -116,36 +122,14 @@
     gap: 20px; 
 }
 
-/* .navigateButtons {
+.counter {
     display: flex;
-    flex-direction: column;
-} */
-
-/* .HomeButton, .RevisionScheduleButton{
-    padding: 10px 20px;
-    border-radius: 10px;
-    margin: 10px 0px;
-    color: black;
-    font-size: 16px;
-    border: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.25);
-    cursor: pointer;
-    width: 500px;
-    transition: background-color 0.3s, box-shadow 0.3s;  
-    background-color: rgba(70, 99, 172, 0.4);
-}
-
-.HomeButton:hover, .RevisionScheduleButton:hover {
-    background-color: rgba(70, 99, 172, 0.7);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
-} */
-
-
-.counter{
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
     margin-top: 50px;
     color: gray;
+    width: 100%; /* Ensure it takes the full width */
 }
-
 
 
   
