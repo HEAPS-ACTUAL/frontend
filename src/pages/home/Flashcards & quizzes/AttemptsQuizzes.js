@@ -17,7 +17,6 @@ function AttemptsQuizzesTable () {
         navigate('../../test/results-page', { state: { testID: testID, attemptNo: attemptNo } });
     }
 
-
     function handleReattemptQuiz(){
         navigate('../../test/quiz', {state: {testID: testID}});
     }
@@ -25,8 +24,6 @@ function AttemptsQuizzesTable () {
     function handleBackToHome(){
         navigate('../../home');
     }
-
-    
 
     return (
         <div className={styles.container}>

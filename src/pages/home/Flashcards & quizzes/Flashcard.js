@@ -10,20 +10,16 @@ import { BsArrowRepeat } from "react-icons/bs";
 // import flipIcon from '../../../images/flip icon.png';
 import flipIcon from '../../../images/flip (1).png';
 
-
 // Import functions
 import { getAllQuestionsAndOptionsFromATest } from '../../../services/TestService';
 
-
-
 const Flashcard = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const {testID} = (location.state); // retrieve testID from Flashcard page
     
     const [flashcardArray, setFlashcardArray] = useState([]);
     const [CurrentFlashcardIndex, setCurrentFlashcardIndex] = useState(0);
-    
-    const navigate = useNavigate();
     
     const [isFlipped, setIsFlipped] = useState(false);
     const toggleFlip = () => {
@@ -31,18 +27,17 @@ const Flashcard = () => {
     }
 
     useEffect(() => {
-        
         async function fetchTestQuestions(){
             const flashcardQuestions = await getAllQuestionsAndOptionsFromATest(testID);
             setFlashcardArray(flashcardQuestions);
-            
         }
+
         fetchTestQuestions();
+
     }, [testID])
 
     // control navigation through the array of flashcards
     const handleNextFlashcard = () => {
-
         if(CurrentFlashcardIndex < flashcardArray.length -1){
             setCurrentFlashcardIndex(CurrentFlashcardIndex + 1)
             setIsFlipped(false);
@@ -51,7 +46,6 @@ const Flashcard = () => {
 
     const handlePreviousFlashcard = () =>{
         if(CurrentFlashcardIndex > 0){
-            
             setCurrentFlashcardIndex(CurrentFlashcardIndex - 1);
             setIsFlipped(false); 
         }

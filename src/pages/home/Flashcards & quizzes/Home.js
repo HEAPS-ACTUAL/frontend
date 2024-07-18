@@ -22,10 +22,12 @@ function Home() {
     const [selectedButton, setSelectedButton] = useState("to-do");
     const [isVerified, setIsVerified] = useState(false);
 
-
     async function fetchIsVerified(){
         const isVerified = await checkUserIsVerified(email);
-        if (isVerified === 1){ setIsVerified(true);}
+        if (isVerified === 1){ 
+            setIsVerified(true);
+        
+        }
         sessionStorage.setItem("isVerified", isVerified);
     }
 
@@ -73,6 +75,7 @@ function Home() {
 
     function handleFileUpload(event) {
         event.preventDefault();
+
         if (!isVerified){
             setCreateTestMessage("You must be verified!");
 
@@ -110,11 +113,13 @@ function Home() {
                                     if (testType === "Q") {
                                         generateQuiz(email, testName, testType, difficulty, file);
                                     }
+
                                     if (testType === "F") {
                                         generateFlashcard(email, testName, testType, file);
                                     }
                                 }
                             }
+                            
                             navigate("../../../loading-page", {
                                 state: {
                                     duration: 40000,

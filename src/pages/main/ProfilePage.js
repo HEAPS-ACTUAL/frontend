@@ -161,7 +161,7 @@ function ProfilePage() {
                     <div className="profile-info">
                         <div className="name">
                             {userDetails.FirstName + ' '} {userDetails.LastName}
-                            <FaEdit className="edit-icon" onClick={() => setChangingName(true)} />
+                            <FaEdit title='Edit name' className="edit-icon" onClick={() => setChangingName(true)} />
                         </div>
                         
                         <div className="emailAndIcon">
@@ -221,7 +221,7 @@ function ProfilePage() {
                         <input type="password" name="NewPassword" onChange={handleChange} placeholder="New Password" />
                         <input type="password" name="ConfirmPassword" onChange={handleChange} placeholder="Confirm Password" />
 
-                        <button onClick={handlePasswordSave}>Save Password</button>
+                        <button onClick={handlePasswordSave}>Confirm Change Password</button>
                         <button onClick={handleCancel}>Cancel</button>
                     </div>
                 )}
