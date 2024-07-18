@@ -29,14 +29,12 @@ function ProfilePage() {
     const [changingName, setChangingName] = useState(false);
     const [changingPassword, setChangingPassword] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
-    const [cooldown, setCooldown] = useState(true);
-
+    const [cooldown, setCooldown] = useState(0);
 
     useEffect(() => {
 
         async function fetchUserDetails(email) {
             const retrievedUser = await getUserByEmail(email);
-            // console.log("Fetched user details:", retrievedUser); // Debugging log
 
             setUserDetails(retrievedUser);
             setNewUserDetails(retrievedUser);
@@ -57,36 +55,44 @@ function ProfilePage() {
 
     }, [email]);
 
-    useEffect(()=>{
-        if (cooldown === 0){
-            console.log("Cooldown is Over!")
-            setCooldown(null);
-        }
-        if (!cooldown){
-            return;
-        }
-        const intervalID = setInterval(()=>{
-            setCooldown(cooldown -1);
-        }, 1000);
+    useEffect(() => {
 
-            // clear interval on re-render to avoid memory leaks
-        return () => clearInterval(intervalID);
-    })
+        function countDown(){
+            if(cooldown <= 0){
+                setIsDisabled(false);
+                return;
+            }
+    
+            setTimeout(() => {
+                setCooldown(cooldown - 1);
+            }, 1000);
+        }
+
+        countDown();
+
+    }, [cooldown])
 
     function getProfileImage(gender) {
         if (gender === "F") {
             return femaleProfileImage;
         }
         return maleProfileImage;
-    };
+    }
+    
+    function handleVerifyEmail() {
+        sendVerificationEmail(email);
+        alert('A verification link has been sent to the registered email!')
+        setIsDisabled(true)
+        setCooldown(20)
+    }
 
     function handleChange(event) {
         const { name, value } = event.target;
         setNewUserDetails((prev) => ({ ...prev, [name]: value }));
     }
-
+    
     function handleCancel(){
-        setNewUserDetails(userDetails); // SET NEW 
+        setNewUserDetails(userDetails); // SET NEW USER DETAILS BACK TO THE ORIGINAL
         setChangingName(false);
         setChangingPassword(false);
     }
@@ -141,15 +147,6 @@ function ProfilePage() {
             navigate('../login');
         }
     }
-    function handleVerifyEmail(event) {
-        setIsDisabled(true)
-        setCooldown(20)
-        sendVerificationEmail(email);
-        setTimeout(() => {
-            setIsDisabled(false);
-        }, 20000);
-
-    }
 
     return (
         <div className="profile-container">
@@ -177,7 +174,7 @@ function ProfilePage() {
                             {!userDetails.IsVerified && (
                                 <div>
                                     <button className="verifyEmailBtn" onClick={handleVerifyEmail} disabled={isDisabled}> Verify Email </button>
-                                    <element className="cooldownTimer">{cooldown}</element>
+                                    <element className="cooldownTimer">{cooldown !== 0 && cooldown}</element>
                                 </div>
                             )}
                         </div>
