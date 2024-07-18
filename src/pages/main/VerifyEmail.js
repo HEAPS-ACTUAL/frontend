@@ -20,8 +20,6 @@ const VerifyEmail = () =>{
     const [isDisabled, setIsDisabled] = useState(false);
     const [cooldown, setCooldown] = useState(true);
 
-
-
     useEffect(()=>{
         const params = new URLSearchParams(location.search);
         const token = params.get('token');
@@ -35,22 +33,22 @@ const VerifyEmail = () =>{
 
     }, [location.search]);
 
-    useEffect(()=>{
-        if (cooldown === 0){
-            console.log("Cooldown is Over!")
-            setCooldown(null);
-        }
-        if (!cooldown){
-            return;
-        }
-        const intervalID = setInterval(()=>{
-            setCooldown(cooldown -1);
-        }, 1000);
+    useEffect(() => {
 
-            // clear interval on re-render to avoid memory leaks
-        return () => clearInterval(intervalID);
-        
-    })
+        function countDown(){
+            if(cooldown <= 0){
+                setIsDisabled(false);
+                return;
+            }
+    
+            setTimeout(() => {
+                setCooldown(cooldown - 1);
+            }, 1000);
+        }
+
+        countDown();
+
+    }, [cooldown])
 
     async function handleTokenVerification(token){
         const verification = await verifyToken(token);
@@ -68,16 +66,14 @@ const VerifyEmail = () =>{
         event.preventDefault();
 
         if(email === ""){
-            window.alert("Email is invalid!");
+            window.alert("Please enter a valid email address!");
         }
-        else {
+        else {           
+            // sendVerificationEmail(email);
+            alert('A verification link has been sent to the registered email!')
+            // setSentMessage('A verification link has been sent to the registered email!')
             setIsDisabled(true)
             setCooldown(20)
-            sendVerificationEmail(email);
-            setSentMessage("Email Sent!");  
-            setTimeout(() => {
-                setIsDisabled(false);
-            }, 20000);          
         }
     }
 
@@ -107,12 +103,14 @@ const VerifyEmail = () =>{
             <form onSubmit={handleSendEmail}>
                 <div className={styles.inputContainer}>
                     <input type="email" placeholder="Enter Email Here" onChange={(event) => setEmail(event.target.value)}></input>
-                    <section className={styles.sentMessage}>{sentMessage}&nbsp;{cooldown}</section>
                 </div>
                 
-                <button disabled={isDisabled} type="submit" className={styles.btnSendEmail}>
-                    Send a New Verification Email
-                </button> 
+                <div className={styles.buttonAndCooldown}>
+                    <button disabled={isDisabled} type="submit" className={styles.btnSendEmail}>
+                        Send a New Verification Email
+                    </button>
+                    <div className={styles.cooldown}>{cooldown > 0 && cooldown}</div>
+                </div> 
             </form>
         </div>
     );
