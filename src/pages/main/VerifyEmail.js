@@ -16,7 +16,6 @@ const VerifyEmail = () =>{
     // const email = sessionStorage.getItem("userEmail");
     const [verifyOk, setVerifyOk] = useState("");
     const [email, setEmail] = useState("");
-    const [sentMessage, setSentMessage] = useState("");
     const [isDisabled, setIsDisabled] = useState(false);
     const [cooldown, setCooldown] = useState(true);
 
