@@ -72,20 +72,19 @@ function ProfilePage() {
 
     }, [cooldown])
 
-    function handleVerifyEmail() {
-        sendVerificationEmail(email);
-        alert('A verification link has been sent to the registered email!')
-        setIsDisabled(true)
-        setCooldown(20)
-    }
-
     function getProfileImage(gender) {
         if (gender === "F") {
             return femaleProfileImage;
         }
         return maleProfileImage;
     }
-
+    
+    function handleVerifyEmail() {
+        sendVerificationEmail(email);
+        alert('A verification link has been sent to the registered email!')
+        setIsDisabled(true)
+        setCooldown(20)
+    }
 
     function handleChange(event) {
         const { name, value } = event.target;
