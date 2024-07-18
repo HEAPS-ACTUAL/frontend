@@ -32,12 +32,12 @@ async function createNewExam(startDate, endDate, examName, examColour, arrayOfTe
     }
 }
 
-async function DeleteExistingExam(scheduleID) {
+async function deleteExistingExam(scheduleID) {
     console.log('retrieving scheduleID: ', scheduleID);
     try {
         const response = await axiosInstance({
             method: "post",
-            url: "/schedule/DeleteExistingExam",
+            url: "/schedule/deleteExistingExam",
             data: { scheduleID: scheduleID }
         });
 
@@ -48,11 +48,11 @@ async function DeleteExistingExam(scheduleID) {
     }
 }
 
-async function DeleteSpecificRevisionDate(scheduleID, revisionDate) {
+async function deleteSpecificRevisionDate(scheduleID, revisionDate) {
     try {
         const response = await axiosInstance({
             method: "post",
-            url: "/schedule/DeleteSpecificRevisionDate",
+            url: "/schedule/deleteSpecificRevisionDate",
             data: { scheduleID: scheduleID, revisionDate: revisionDate }
         });
         return response.data;
@@ -62,8 +62,4 @@ async function DeleteSpecificRevisionDate(scheduleID, revisionDate) {
     }
 }
 
-export { 
-    createNewExam, 
-    retrieveAllRevisionDates, 
-    DeleteExistingExam, 
-    DeleteSpecificRevisionDate };
+export { createNewExam, retrieveAllRevisionDates, deleteExistingExam, deleteSpecificRevisionDate };

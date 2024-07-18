@@ -1,5 +1,3 @@
-// where i define all the functions
-
 import axiosInstance from "../utility/axiosInstance";
 
 async function authenticate(email, password) {

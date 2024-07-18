@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../../../styles/DeleteConfirmationModal.module.css';
 
-import { DeleteExistingExam, DeleteSpecificRevisionDate } from '../../../services/ScheduleService';
+import { deleteExistingExam, deleteSpecificRevisionDate } from '../../../services/ScheduleService';
 
 function DeleteConfirmationModal({ isOpen, closeModal, event }) {
     if (!isOpen){
@@ -16,7 +16,7 @@ function DeleteConfirmationModal({ isOpen, closeModal, event }) {
     async function handleDeleteAll(){
         console.log("trying to delete entire schedule for exam with schedule ID:", scheduleID);
 
-        const result = await DeleteExistingExam(scheduleID);
+        const result = await deleteExistingExam(scheduleID);
 
         if (result === 'ok deleted entire exam from db') { // message from the backend
             window.alert(`${examName} deleted successfully!`);
@@ -31,7 +31,7 @@ function DeleteConfirmationModal({ isOpen, closeModal, event }) {
     
     // DELETE A SINGLE REVISION DATE
     async function handleDeleteOne(){
-        const result = await DeleteSpecificRevisionDate(scheduleID, date); 
+        const result = await deleteSpecificRevisionDate(scheduleID, date); 
         
         if (result === 'ok deleted specific date from db') {
             window.alert(`Revision date deleted successfully!`);

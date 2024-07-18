@@ -13,7 +13,4 @@ function handleLogIn(email) {
     window.dispatchEvent(new Event("logInOut"));
 }
 
-export { 
-    isLoggedIn, 
-    handleLogOut, 
-    handleLogIn };
+export { isLoggedIn, handleLogOut, handleLogIn };

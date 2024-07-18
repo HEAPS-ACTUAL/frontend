@@ -1,6 +1,6 @@
 import axiosInstance from "../utility/axiosInstance";
 
-async function generateQuiz(email, testName, testType, difficulty, file) { // isaiah to change
+async function generateQuiz(email, testName, testType, difficulty, file) {
     try {
         const formData = new FormData();
         formData.append("email", email);
@@ -132,12 +132,4 @@ async function getLatestAttempt(testID){
     }
 }
 
-export { 
-    generateQuiz, 
-    getToDoQuizzes, 
-    getCompletedQuizzes, 
-    getAllQuestionsAndOptionsFromAQuiz, 
-    markQuizAsDone, 
-    storeUserQuizAnswers, 
-    reviewQuiz, 
-    getLatestAttempt };
+export { generateQuiz, getToDoQuizzes, getCompletedQuizzes, getAllQuestionsAndOptionsFromAQuiz, markQuizAsDone, storeUserQuizAnswers, reviewQuiz, getLatestAttempt };
