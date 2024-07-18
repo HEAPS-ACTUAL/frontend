@@ -3,7 +3,7 @@ import axiosInstance from "../utility/axiosInstance";
 async function deleteTest(testID, testName) {
     try {
         const response = await axiosInstance({
-            method: "post",
+            method: "delete",
             url: "/test/deleteTest",
             data: {testID, testName},
         });
