@@ -7,7 +7,6 @@ import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
 import { GrSchedules } from "react-icons/gr";
 import { FaHome } from "react-icons/fa";
 import { BsArrowRepeat } from "react-icons/bs";
-// import flipIcon from '../../../images/flip icon.png';
 import flipIcon from '../../../images/flip (1).png';
 
 // Import functions
@@ -62,12 +61,10 @@ const Flashcard = () => {
             <div onClick={toggleFlip} className={`${styles.FlashcardContainer} ${isFlipped ? styles.isFlipped : ''}`}>
                 <div className={styles.FlashcardFace + " " + styles.FrontFlashcardContent}>
                     {flashcardArray[CurrentFlashcardIndex]["QuestionText"]}
-                    {/*<div className={styles.flipArrow}><BsArrowRepeat /></div> */}
                 </div>
 
                 <div className={styles.FlashcardFace + " " + styles.BackFlashcardContent}>
                     {flashcardArray[CurrentFlashcardIndex]["Elaboration"]}
-                    {/*<div className={styles.flipArrow}><BsArrowRepeat /></div> */}
                 </div>
                 <img src={flipIcon} title='flip flashcard' className={`${!isFlipped ? styles.flipIconFront : styles.flipIconBack}`} /> 
             </div>

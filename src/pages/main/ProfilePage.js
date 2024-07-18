@@ -161,7 +161,7 @@ function ProfilePage() {
                     <div className="profile-info">
                         <div className="name">
                             {userDetails.FirstName + ' '} {userDetails.LastName}
-                            <FaEdit title='Edit name' className="edit-icon" onClick={() => setChangingName(true)} />
+                            <FaEdit title='edit name' className="edit-icon" onClick={() => setChangingName(true)} />
                         </div>
                         
                         <div className="emailAndIcon">
