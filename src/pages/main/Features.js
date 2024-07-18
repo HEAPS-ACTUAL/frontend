@@ -11,10 +11,9 @@ import { FaCalendarAlt } from "react-icons/fa";
 import { FaBrain } from "react-icons/fa6";
 
 // IMAGES
-import homepage from "../../images/homepage.jpg";
-import flashcards from "../../images/flashcards.jpg";
-import calendar from "../../images/calendar.jpg";
 import home from "../../images/home.jpg";
+import learning_hub from "../../images/learning_hub.jpg";
+import calendar from "../../images/calendar.jpg";
 import quiz from "../../images/quiz.jpg";
 
 
@@ -32,7 +31,7 @@ function Features() {
             <h1 className={styles.centerText} data-aos="fade-up">Transform Your PDFs with quizDaddy</h1>
 
             <div className={styles.featureImage} data-aos="fade-up">
-                <img alt='homepage' src={homepage} ></img>
+                <img alt='home' src={home} ></img>
             
             </div>
             
@@ -40,7 +39,7 @@ function Features() {
                 <h2 className={styles.featureName}>Create Flashcards Effortlessly</h2>
                 <p className={styles.description}>Explore interactive flashcards for an enriching learning experience.</p>
                 <div className={styles.featureImage}>
-                    <img src={flashcards} alt="Interactive Flashcards" />
+                    <img src={home} alt="Interactive Flashcards" />
                 </div>
             </div>
 
@@ -59,7 +58,7 @@ function Features() {
                 <h2 className={styles.featureName}>Your Learning Hub</h2>
                 <p className={styles.description}>Easily access flashcards and track completed and pending quizzes to monitor your progress effortlessly.</p>
                 <div className={styles.featureImage}>
-                    <img src={home} alt="Quiz Tracker" />
+                    <img src={learning_hub} alt="Learning Hub" />
                 </div>
             </div>
 
