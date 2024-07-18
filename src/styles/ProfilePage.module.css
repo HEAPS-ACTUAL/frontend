@@ -1,4 +1,4 @@
-.profile-container {
+.profileContainer {
     max-width: 600px;
     margin: 125px auto;
     padding: 30px;
@@ -8,7 +8,7 @@
     font-family: "Arial", sans-serif;
 }
 
-.profile-details {
+.profileDetails {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,7 +16,7 @@
     flex-grow: 1;
 }
 
-.profile-image-wrapper {
+.profileImageWrapper {
     position: relative;
     width: 220px;
     height: 220px;
@@ -26,7 +26,7 @@
     margin-bottom: 20px;
 }
 
-.profile-image-background {
+.profileImageBackground {
     width: 220px;
     height: 220px;
     background-color: rgba(70, 99, 172, 0.7);
@@ -35,7 +35,7 @@
     z-index: 0;
 }
 
-.profile-image {
+.profileImage {
     width: 200px;
     height: 200px;
     border-radius: 50%;
@@ -43,7 +43,7 @@
     z-index: 1;
 }
 
-.profile-info {
+.profileInfo {
     display: grid;
     width: 530px;
 }
@@ -69,13 +69,13 @@
     margin-right: 5px;
 }
 
-.edit-icon {
+.editIcon {
     margin-left: 10px;
     font-size: 22px;
     cursor: pointer;
 }
 
-.progress-container {
+.progressContainer {
     display: flex;
     margin: 20px 0px 20px 0px;
     padding: 0px 75px;
@@ -88,11 +88,11 @@
     justify-self: center;
 }
 
-.progress-bar {
+.progressBar {
     width: 83px;
 }
 
-.days-since {
+.daysSince {
     font-size: 16px;
     color: black;
     width: 180px;
@@ -102,7 +102,7 @@
     width: 530px;
 }
 
-.profile-container input[type="text"] {
+.profileContainer input[type="text"] {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -115,7 +115,7 @@
     margin-top: 30px !important;
 }
 
-.profile-container button {
+.profileContainer button {
     width: 100%;
     padding: 10px;
     margin-top: 10px;
@@ -126,12 +126,12 @@
     justify-self: center;
 }
 
-.profile-container button:hover {
+.profileContainer button:hover {
     background-color: #75aae2;
     color: #fff;
 }
 
-.profile-container button:disabled {
+.profileContainer button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
 }
@@ -140,7 +140,7 @@
     width: 450px !important;
 }
 
-.password-change-container input {
+.passwordChangeContainer input {
     margin: 10px 0;
     padding: 10px;
     border: 1px solid #ccc;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import "../../styles/ProfilePage.css";
+import styles from "../../styles/ProfilePage.module.css";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
@@ -149,38 +149,38 @@ function ProfilePage() {
     }
 
     return (
-        <div className="profile-container">
-            <div className="profile-details">
-                <div className="profile-image-wrapper">
-                    <div className="profile-image-background"></div>
-                    <img src={getProfileImage(userDetails.Gender)} alt={`${userDetails.Gender} profile`} className="profile-image" />
+        <div className={styles.profileContainer}>
+            <div className={styles.profileDetails}>
+                <div className={styles.profileImageWrapper}>
+                    <div className={styles.profileImageBackground}></div>
+                    <img src={getProfileImage(userDetails.Gender)} alt={`${userDetails.Gender} profile`} className={styles.profileImage} />
                 </div>
 
                 {/* IF NOT CHANGING NAME OR CHANGING PASSWORD */}
                 {!changingName && !changingPassword && (
-                    <div className="profile-info">
-                        <div className="name">
+                    <div className={styles.profileInfo}>
+                        <div className={styles.name}>
                             {userDetails.FirstName + ' '} {userDetails.LastName}
-                            <FaEdit title='edit name' className="edit-icon" onClick={() => setChangingName(true)} />
+                            <FaEdit title='edit name' className={styles.editIcon} onClick={() => setChangingName(true)} />
                         </div>
                         
-                        <div className="emailAndIcon">
-                            <div className="email">{userDetails.Email}</div>
+                        <div className={styles.emailAndIcon}>
+                            <div className={styles.email}>{userDetails.Email}</div>
                             {userDetails.IsVerified 
-                                ? <SiTicktick className="tickIcon"/> 
-                                : <CgCloseO className="closeIcon"/> 
+                                ? <SiTicktick className={styles.tickIcon}/> 
+                                : <CgCloseO className={styles.closeIcon}/> 
                             }
 
                             {!userDetails.IsVerified && (
                                 <div>
-                                    <button className="verifyEmailBtn" onClick={handleVerifyEmail} disabled={isDisabled}> Verify Email </button>
-                                    <element className="cooldownTimer">{cooldown !== 0 && cooldown}</element>
+                                    <button className={styles.verifyEmailBtn} onClick={handleVerifyEmail} disabled={isDisabled}> Verify Email </button>
+                                    <element className={styles.cooldownTimer}>{cooldown !== 0 && cooldown}</element>
                                 </div>
                             )}
                         </div>
                         
-                        <div className="progress-container">
-                            <div className="progress-bar">
+                        <div className={styles.progressContainer}>
+                            <div className={styles.progressBar}>
                                 <CircularProgressbar value={daysPercentage} text={`${daysSinceCreation}`}
                                     styles={buildStyles({
                                         rotation: 0.25,
@@ -194,19 +194,19 @@ function ProfilePage() {
                                     })} 
                                 />
                             </div>
-                            <div className="days-since">Days since you joined quizDaddy!</div>
+                            <div className={styles.daysSince}>Days since you joined quizDaddy!</div>
                         </div>
-                        <button className='changePasswordButton' onClick={() => setChangingPassword(true)}>Change Password</button>
-                        <button className='deleteAccountButton' onClick={handleDeleteAccount}>Delete Account</button>
+                        <button className={styles.changePasswordButton} onClick={() => setChangingPassword(true)}>Change Password</button>
+                        <button className={styles.deleteAccountButton} onClick={handleDeleteAccount}>Delete Account</button>
                     </div>
                 )}
 
                 {/* IF CHANGING NAME */}
                 {changingName && (
-                    <div className="editNameContainer">
-                        <div className="name">{newUserDetails.FirstName + ' '} {newUserDetails.LastName}</div>
+                    <div className={styles.editNameContainer}>
+                        <div className={styles.name}>{newUserDetails.FirstName + ' '} {newUserDetails.LastName}</div>
 
-                        <input className='inputFirstName' type="text" name="FirstName" onChange={handleChange} placeholder={userDetails.FirstName === newUserDetails.FirstName ? userDetails.FirstName : ''} />
+                        <input className={styles.inputFirstName} type="text" name="FirstName" onChange={handleChange} placeholder={userDetails.FirstName === newUserDetails.FirstName ? userDetails.FirstName : ''} />
                         <input type="text" name="LastName" onChange={handleChange} placeholder={userDetails.LastName === newUserDetails.LastName ? userDetails.LastName : ''} />
 
                         <button onClick={handleNameSave}>Save Changes</button>
@@ -216,7 +216,7 @@ function ProfilePage() {
  
                 {/* IF CHANGING PASSWORD */}
                 {changingPassword && (
-                    <div className="password-change-container">
+                    <div className={styles.passwordChangeContainer}>
                         <input type="password" name="InputPassword" onChange={handleChange} placeholder="Current Password" />
                         <input type="password" name="NewPassword" onChange={handleChange} placeholder="New Password" />
                         <input type="password" name="ConfirmPassword" onChange={handleChange} placeholder="Confirm Password" />
