@@ -32,11 +32,11 @@
 }
 
 .container button{
-    background-color: #fff;
-    color: #0172F2;
+    background-color: rgba(70, 99, 172, 0.4);
+    color: black;
     font-size: 12px;
     padding: 10px 45px;
-    border: 1px solid #0172F2;
+    border: solid 0.5px black;
     border-radius: 8px;
     font-weight: 600;
     letter-spacing: 0.5px;
@@ -45,9 +45,10 @@
     cursor: pointer;
 }
 
+
 .container button:hover{
-    background-color: #0172F2;
-    color: #fff;
+    background-color: rgba(70, 99, 172, 0.7);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
 }
 
 .container button.hidden{

@@ -40,7 +40,8 @@
     border-radius: 40px;
 }
 
-.FrontFlashcardContent, .BackFlashcardContent{
+
+.FrontFlashcardContent, .BackFlashcardContent {
     color: black;
     font-size: 30px;
     font-weight: bold;
@@ -52,6 +53,7 @@
     width: 100%; 
     padding: 50px;
 }
+
 
 .FrontFlashcardContent {
     text-align: center;
@@ -78,6 +80,10 @@
 .flipIconFront, .flipIconBack {
     width: 30px;
     position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+
 }
 
 .flipIconFront {
