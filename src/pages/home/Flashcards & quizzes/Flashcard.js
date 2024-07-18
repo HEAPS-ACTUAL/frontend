@@ -6,7 +6,6 @@ import styles from '../../../styles/Flashcard.module.css';
 import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
 import { GrSchedules } from "react-icons/gr";
 import { FaHome } from "react-icons/fa";
-import { BsArrowRepeat } from "react-icons/bs";
 import flipIcon from '../../../images/flip (1).png';
 
 // Import functions
@@ -66,9 +65,8 @@ const Flashcard = () => {
                 <div className={styles.FlashcardFace + " " + styles.BackFlashcardContent}>
                     {flashcardArray[CurrentFlashcardIndex]["Elaboration"]}
                 </div>
-                <img src={flipIcon} title='flip flashcard' className={`${!isFlipped ? styles.flipIconFront : styles.flipIconBack}`} /> 
+                <img src={flipIcon} alt='flip flashcard icon' title='flip flashcard' className={`${!isFlipped ? styles.flipIconFront : styles.flipIconBack}`} /> 
             </div>
-
 
             <div className={styles.buttons}>
                 <button title='previous flashcard' className={styles.previousBtn} onClick={handlePreviousFlashcard} disabled={CurrentFlashcardIndex === 0}> <BsArrowLeftShort /></button>
@@ -83,7 +81,6 @@ const Flashcard = () => {
             </div>
         </div>
     )
-
 }
 
 export default Flashcard;

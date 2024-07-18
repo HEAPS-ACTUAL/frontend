@@ -1,3 +1,30 @@
+@keyframes shakeIconFront {
+    0% { transform: rotate(0deg); }
+    10% { transform: rotate(5deg); }
+    20% { transform: rotate(10deg); }
+    30% { transform: rotate(15deg); }
+    40% { transform: rotate(20deg); }
+    50% { transform: rotate(20deg); }
+    60% { transform: rotate(20deg); }
+    70% { transform: rotate(15deg); }
+    80% { transform: rotate(10deg); }
+    90% { transform: rotate(5deg); }
+    100% { transform: rotate(0deg); }
+}
+
+@keyframes shakeIconBack {
+    0% { transform: rotate(0deg); }
+    10% { transform: rotate(2deg); }
+    20% { transform: rotate(4deg); }
+    30% { transform: rotate(6deg); }
+    40% { transform: rotate(8deg); }
+    50% { transform: rotate(10deg); }
+    60% { transform: rotate(8deg); }
+    70% { transform: rotate(6deg); }
+    80% { transform: rotate(4deg); }
+    90% { transform: rotate(2deg); }
+    100% { transform: rotate(0deg); }
+}
 
 .wrapper {
     position: relative;
@@ -8,7 +35,6 @@
     align-items: center;
     flex-direction: column;
 }
-
 
 .FlashcardContainer {
     position: relative;
@@ -40,7 +66,6 @@
     border-radius: 40px;
 }
 
-
 .FrontFlashcardContent, .BackFlashcardContent {
     color: black;
     font-size: 30px;
@@ -49,11 +74,9 @@
     justify-content: center;
     align-items: center;
     height: 100px;
-    margin-top: 50px;
     width: 100%; 
     padding: 50px;
 }
-
 
 .FrontFlashcardContent {
     text-align: center;
@@ -66,8 +89,7 @@
     font-size: 30px;
     background-color: transparent;
     text-align: left;
-    
- }
+}
 
 .FlashcardContainer.isFlipped {
     transform: rotateY(180deg);
@@ -83,13 +105,18 @@
     top: 20px;
     right: 20px;
     cursor: pointer;
+}
+
+.flipIconFront:hover {
+    animation: shakeIconFront 0.5s;
+    animation-iteration-count: infinite;
 
 }
 
 .flipIconFront {
     right: 20px;
     top: 20px;
-} 
+}
 
 .flipIconBack {
     left: 20px;
