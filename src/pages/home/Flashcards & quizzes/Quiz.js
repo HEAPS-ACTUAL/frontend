@@ -43,11 +43,10 @@ const QuizFeature = () => {
 
         // no more questions to be answered, navigate to the results page
         else{
-            storeUserQuizAnswers(testID, userAnswers);
+            await storeUserQuizAnswers(testID, userAnswers);
             markQuizAsDone(testID);
             
             const attemptNo = await getLatestAttempt(testID);
-            
             navigate ('/test/results-page', {state: {testID: testID, attemptNo: attemptNo['LatestAttempt']}});
         }
     }
