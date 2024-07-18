@@ -68,7 +68,7 @@
     height: 100%;
 }
 
-.form-container{
+.formContainer{
     position: absolute;
     top: 0;
     height: 100%;
@@ -76,16 +76,16 @@
     text-align: center;
 }
 
-.form-container div {
+.formContainer div {
     display: flex;
 }
 
-.form-container button {
+.formContainer button {
     margin-top: 20px;
 }
 
-.form-container input,
-.form-container select {
+.formContainer input,
+.formContainer select {
     width: 100%; /* Full width to align with the form size */
     padding: 10px; /* Comfortable padding for interaction */
     margin: 8px 0; /* Standard vertical spacing */
@@ -98,7 +98,7 @@
     color: #333; /* Dark grey text for contrast */
 }
 
-.form-container select {
+.formContainer select {
     -webkit-appearance: none; /* Removes default styling in WebKit browsers */
     -moz-appearance: none; /* Removes default styling in Mozilla browsers */
     appearance: none; /* Standard way to remove default styling */
@@ -107,24 +107,24 @@
     background-color: #eee; /* Matches other input fields */
 }
 
-.sign-in{
+.signIn{
     left: 0;
     width: 50%;
     z-index: 2;
 }
 
-.container.active .sign-in{
+.container.active .signIn{
     transform: translateX(100%);
 }
 
-.sign-up{
+.signUp{
     left: 0;
     width: 50%;
     opacity: 0;
     z-index: 1;
 }
 
-.container.active .sign-up{
+.container.active .signUp{
     transform: translateX(100%);
     opacity: 1;
     z-index: 5;
@@ -142,7 +142,7 @@
     }
 }
 
-.toggle-container{
+.toggleContainer{
     position: absolute;
     top: 0;
     left: 50%;
@@ -154,7 +154,7 @@
     z-index: 1000;
 }
 
-.container.active .toggle-container{
+.container.active .toggleContainer{
     transform: translateX(-100%);
     border-radius: 0 150px 100px 0;
 }
@@ -176,7 +176,7 @@
     transform: translateX(50%);
 }
 
-.toggle-panel{
+.togglePanel{
     position: absolute;
     width: 50%;
     height: 100%;
@@ -191,19 +191,19 @@
     transition: all 0.6s ease-in-out;
 }
 
-.toggle-left{
+.toggleLeft{
     transform: translateX(-200%);
 }
 
-.container.active .toggle-left{
+.container.active .toggleLeft{
     transform: translateX(0);
 }
 
-.toggle-right{
+.toggleRight{
     right: 0;
     transform: translateX(0);
 }
 
-.container.active .toggle-right{
+.container.active .toggleRight{
     transform: translateX(200%);
 }                                          

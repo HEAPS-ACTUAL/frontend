@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../styles/SignIn.css';
+import styles from '../../styles/SignIn.module.css';
 
 // functions
 import { authenticate, createNewUser } from '../../services/UserService';
@@ -63,14 +63,14 @@ const SignIn = () => {
 
     return (
         <>
-        <div className={isActive ? "container active" : "container"} id="container">
-            <div className="form-container sign-up">
+        <div className={`${styles.container} ${isActive ? styles.active : ''}`} id="container">
+            <div className={`${styles.formContainer} ${styles.signUp}`}>
                 <form onSubmit={handleRegistration}>
                     <h1>Create Account</h1>
                     <br></br>
                     <div>
-                        <input className="firstName" type="text" placeholder="First Name" onChange={(event) => setFirstName(event.target.value)} />
-                        <input className="lastName" type="text" placeholder="Last Name" onChange={(event) => setLastName(event.target.value)} />
+                        <input className={styles.firstName} type="text" placeholder="First Name" onChange={(event) => setFirstName(event.target.value)} />
+                        <input className={styles.lastName} type="text" placeholder="Last Name" onChange={(event) => setLastName(event.target.value)} />
                     </div>
                     <select name="gender" onChange={(event) => setGender(event.target.value)}>
                         <option value="">Select Gender</option> 
@@ -85,7 +85,7 @@ const SignIn = () => {
                     <button type="submit">Register</button>
                 </form>
             </div>
-            <div className="form-container sign-in">
+            <div className={`${styles.formContainer} ${styles.signIn}`}>
                 <form onSubmit={handleSignIn}>
                     <h1>Sign In</h1>
                     <br></br>
@@ -94,17 +94,15 @@ const SignIn = () => {
                     <button type="submit">Sign In</button>
                 </form>
             </div>
-            <div className="toggle-container">
-                <div className="toggle">
-                    <div className="toggle-panel toggle-left">
+            <div className={styles.toggleContainer}>
+                <div className={styles.toggle}>
+                    <div className={`${styles.togglePanel} ${styles.toggleLeft}`}>
                         <h1>Welcome Back!</h1>
-                        {/* <p>Enter your personal details to use all of site features</p> */}
-                        <button className="hidden" id="login" onClick={() => setIsActive(false)}>Sign In</button>
+                        <button className={styles.hidden} id="login" onClick={() => setIsActive(false)}>Sign In</button>
                     </div>
-                    <div className="toggle-panel toggle-right">
+                    <div className={`${styles.togglePanel} ${styles.toggleRight}`}>
                         <h1>Don't have an account?</h1>
-                        {/* <p>Enter your personal details to start your learning</p> */}
-                        <button className="hidden" id="register" onClick={() => setIsActive(true)}>Register Here</button>
+                        <button className={styles.hidden} id="register" onClick={() => setIsActive(true)}>Register Here</button>
                     </div>
                 </div>
             </div>
