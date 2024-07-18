@@ -7,7 +7,6 @@ import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
 import { GrSchedules } from "react-icons/gr";
 import { FaHome } from "react-icons/fa";
 import { BsArrowRepeat } from "react-icons/bs";
-// import flipIcon from '../../../images/flip icon.png';
 import flipIcon from '../../../images/flip (1).png';
 
 
@@ -68,12 +67,11 @@ const Flashcard = () => {
             <div onClick={toggleFlip} className={`${styles.FlashcardContainer} ${isFlipped ? styles.isFlipped : ''}`}>
                 <div className={styles.FlashcardFace + " " + styles.FrontFlashcardContent}>
                     {flashcardArray[CurrentFlashcardIndex]["QuestionText"]}
-                    {/*<div className={styles.flipArrow}><BsArrowRepeat /></div> */}
                 </div>
 
                 <div className={styles.FlashcardFace + " " + styles.BackFlashcardContent}>
-                    {flashcardArray[CurrentFlashcardIndex]["Elaboration"]}
-                    {/*<div className={styles.flipArrow}><BsArrowRepeat /></div> */}
+                    {/* {flashcardArray[CurrentFlashcardIndex]["Elaboration"]} */}
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                 </div>
                 <img src={flipIcon} title='flip flashcard' className={`${!isFlipped ? styles.flipIconFront : styles.flipIconBack}`} /> 
             </div>
