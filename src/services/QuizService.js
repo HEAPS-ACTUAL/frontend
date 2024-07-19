@@ -105,9 +105,9 @@ async function storeUserQuizAnswers(testID, userAnswers){
 async function reviewQuiz(testID, attemptNo){
     try{
         const response = await axiosInstance({
-            method: 'post',
+            method: 'get',
             url: '/quiz/reviewQuiz',
-            data: {testID: testID, attemptNo: attemptNo}
+            params: {testID: testID, attemptNo: attemptNo}
         })
 
         return response.data[0];
@@ -120,9 +120,9 @@ async function reviewQuiz(testID, attemptNo){
 async function getLatestAttempt(testID){
     try{
         const response = await axiosInstance({
-            method: 'post',
+            method: 'get',
             url: '/quiz/getLatestAttempt',
-            data: {testID: testID}
+            params: {testID: testID}
         })
 
         return response.data;

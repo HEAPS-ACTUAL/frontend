@@ -3,9 +3,9 @@ import axiosInstance from "../utility/axiosInstance";
 async function retrieveAllRevisionDates(email) {
     try {
         const response = await axiosInstance({
-            method: "post",
+            method: "get",
             url: "/schedule/retrieveAllRevisionDates",
-            data: { email: email }
+            params: { email: email }
         });
         
         return response.data;
@@ -33,10 +33,9 @@ async function createNewExam(startDate, endDate, examName, examColour, arrayOfTe
 }
 
 async function deleteExistingExam(scheduleID) {
-    console.log('retrieving scheduleID: ', scheduleID);
     try {
         const response = await axiosInstance({
-            method: "post",
+            method: "delete",
             url: "/schedule/deleteExistingExam",
             data: { scheduleID: scheduleID }
         });
@@ -51,7 +50,7 @@ async function deleteExistingExam(scheduleID) {
 async function deleteSpecificRevisionDate(scheduleID, revisionDate) {
     try {
         const response = await axiosInstance({
-            method: "post",
+            method: "delete",
             url: "/schedule/deleteSpecificRevisionDate",
             data: { scheduleID: scheduleID, revisionDate: revisionDate }
         });

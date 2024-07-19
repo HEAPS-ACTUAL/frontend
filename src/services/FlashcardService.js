@@ -42,9 +42,9 @@ async function getAllFlashcardsByUser(email) {
 async function getAllFlashcardsWithoutSchedule(email) {
     try {
         const response = await axiosInstance({
-            method: "post",
+            method: "get",
             url: "/flashcard/getAllFlashcardsWithoutSchedule",
-            data: { email: email }
+            params: { email: email }
         });
 
         return response.data;
@@ -57,9 +57,9 @@ async function getAllFlashcardsWithoutSchedule(email) {
 async function getFlashcardsByScheduleID(scheduleID){
     try {
         const response = await axiosInstance({
-            method: "post",
+            method: "get",
             url: "/flashcard/getFlashcardsByScheduleID",
-            data: { scheduleID: scheduleID }
+            params: { scheduleID: scheduleID }
         });
 
         return response.data;
