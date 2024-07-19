@@ -3,7 +3,7 @@ import styles from "../../../styles/Home.module.css";
 import { useNavigate } from "react-router-dom";
 
 // Functions
-import {/* getSalutation, */ getUserFirstName, checkUserIsVerified } from "../../../services/UserService";
+import { getUserFirstName, getUserVerificationStatus } from "../../../services/UserService";
 import { generateQuiz, getCompletedQuizzes, getToDoQuizzes } from "../../../services/QuizService";
 import { convertFileSizeTo2DP, fileSizeWithinLimit, fileTypeIsPDF, countWordsInPDF } from "../../../services/FileServices";
 import { generateFlashcard, getAllFlashcardsByUser } from "../../../services/FlashcardService";
@@ -23,7 +23,7 @@ function Home() {
     const [isVerified, setIsVerified] = useState(false);
 
     async function fetchIsVerified(){
-        const isVerified = await checkUserIsVerified(email);
+        const isVerified = await getUserVerificationStatus(email);
         if (isVerified === 1){ 
             setIsVerified(true);
         
@@ -31,12 +31,9 @@ function Home() {
         sessionStorage.setItem("isVerified", isVerified);
     }
 
-    async function fetchUserInfo() {
+    async function fetchUserFirstName() {
         const firstName = await getUserFirstName(email);
         setFirstName(firstName);
-
-        // const salutation = await getSalutation(email);
-        // setSalutation(salutation);
     }
 
     async function fetchToDoQuizzes() {
@@ -55,11 +52,11 @@ function Home() {
     }
 
     useEffect(() => {
-        fetchUserInfo();
+        fetchUserFirstName();
         fetchToDoQuizzes();
         fetchFlashcards();
         fetchIsVerified();
-    }, []);
+    }, [email]);
 
     const testTypeDict = {
         Flashcard: false,

@@ -37,10 +37,11 @@ async function createNewUser(email, password, firstName, lastName, gender) {
 async function getUserByEmail(email) {
     try {
         const response = await axiosInstance({
-            method: "post",
-            url: "/user/profile/",
-            data: { email: email },
+            method: "get",
+            url: "/user/profile",
+            params: { email: email },
         });
+        
         return response.data;
     } 
     catch (error) {
@@ -55,23 +56,16 @@ async function getUserFirstName(email) {
     return userFound.FirstName;
 }
 
-async function getSalutation(email) {
+async function getUserVerificationStatus(email){
     const userFound = await getUserByEmail(email);
-    const gender = userFound.Gender;
-
-    if (gender === "F") {
-        return "Ms";
-    } 
-    else {
-        return "Mr";
-    }
+    return userFound.IsVerified;
 }
 
 // Update User Details
 async function updateUserDetails(email, firstName, lastName, hashedPassword = null, inputPassword = null, newPassword = null) {
     try {
         const response = await axiosInstance({
-            method: "put",
+            method: "post",
             url: "/user/update/",
             data: { email, firstName, lastName, hashedPassword, inputPassword, newPassword }
         });
@@ -103,21 +97,4 @@ async function deleteUserAccount(email) {
     }
 }
 
-async function checkUserIsVerified(email) {
-    try {
-        const response = await axiosInstance({
-            method: "post",
-            url: "/user/is-verified/",
-            data: { email: email }
-        });
-        
-        return response.data;
-    }
-    catch (error) {
-        if (error.response) {
-            return error.message;
-        }
-    }
-}
-
-export {authenticate, createNewUser, getUserByEmail, getUserFirstName, getSalutation, updateUserDetails, deleteUserAccount, checkUserIsVerified};
+export {authenticate, createNewUser, getUserByEmail, getUserFirstName, updateUserDetails, deleteUserAccount, getUserVerificationStatus};

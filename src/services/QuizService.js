@@ -28,9 +28,9 @@ async function generateQuiz(email, testName, testType, difficulty, file) {
 async function getToDoQuizzes(email) {
     try {
         const response = await axiosInstance({
-            method: "post",
+            method: "get",
             url: "/test/getTestInfo",
-            data: { email: email, testType: 'Q', testStatus: false },
+            params: { email: email, testType: 'Q', testStatus: false },
         });
 
         return response.data;
@@ -43,30 +43,14 @@ async function getToDoQuizzes(email) {
 async function getCompletedQuizzes(email) {
     try {
         const response = await axiosInstance({
-            method: "post",
+            method: "get",
             url: "/test/getTestInfo",
-            data: { email: email, testType: 'Q', testStatus: true },
+            params: { email: email, testType: 'Q', testStatus: true },
         });
 
         return response.data;
     }
     catch (error) {
-        return error.response.data.message;
-    }
-}
-
-async function getAllQuestionsAndOptionsFromAQuiz(testID){
-    try{
-        const response = await axiosInstance({
-            method: 'post',
-            url: '/test/getQuestionsAndOptions',
-            data: {testID: testID}
-        })
-        
-        // console.log(response.data);
-        return response.data;
-    }
-    catch(error){
         return error.response.data.message;
     }
 }
@@ -105,9 +89,9 @@ async function storeUserQuizAnswers(testID, userAnswers){
 async function reviewQuiz(testID, attemptNo){
     try{
         const response = await axiosInstance({
-            method: 'post',
+            method: 'get',
             url: '/quiz/reviewQuiz',
-            data: {testID: testID, attemptNo: attemptNo}
+            params: {testID: testID, attemptNo: attemptNo}
         })
 
         return response.data[0];
@@ -120,9 +104,9 @@ async function reviewQuiz(testID, attemptNo){
 async function getLatestAttempt(testID){
     try{
         const response = await axiosInstance({
-            method: 'post',
+            method: 'get',
             url: '/quiz/getLatestAttempt',
-            data: {testID: testID}
+            params: {testID: testID}
         })
 
         return response.data;
@@ -132,4 +116,4 @@ async function getLatestAttempt(testID){
     }
 }
 
-export { generateQuiz, getToDoQuizzes, getCompletedQuizzes, getAllQuestionsAndOptionsFromAQuiz, markQuizAsDone, storeUserQuizAnswers, reviewQuiz, getLatestAttempt };
+export { generateQuiz, getToDoQuizzes, getCompletedQuizzes, markQuizAsDone, storeUserQuizAnswers, reviewQuiz, getLatestAttempt };
