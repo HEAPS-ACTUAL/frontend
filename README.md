@@ -7,6 +7,7 @@
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [Screenshots](#screenshots)
+- 
 
 
 ## Introduction
@@ -33,15 +34,19 @@ quizDaddy is a web application for students to upload their notes and materials 
     ```sh
       npm start
     ```
-  You should see the following in the terminal (ignore warnings):
+
+
+You should see the following in the terminal (ignore warnings):
   
-  Compiled successfully!
-  You can now view quizgen in the browser.
-  Local: http://localhost:3000
-  On Your Network:  http://10.124.131.219:3000
-  Note that the development build is not optimized.
-  To create a production build, use npm run build.
-  webpack compiled successfully
+Compiled successfully!
+
+You can now view quizgen in the browser.
+    Local: http://localhost:3000
+    On Your Network:  http://10.124.131.219:3000
+  
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+webpack compiled successfully
 
 ## Contributing
 1. Fork the repository
@@ -74,7 +79,8 @@ quizDaddy is a web application for students to upload their notes and materials 
 
 **Profile Page**
 
-<img width="1420" alt="Screenshot 2024-07-19 at 9 39 28 PM" src="https://github.com/user-attachments/assets/0ae39d7b-8d69-44b5-8efe-433b7eae6027">
+<img width="1420" alt="Screenshot 2024-07-19 at 10 04 49 PM" src="https://github.com/user-attachments/assets/e42a5319-a94d-429a-8af0-5fda9000cd12">
+
 
 
 
