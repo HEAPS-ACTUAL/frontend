@@ -119,7 +119,7 @@ function Home() {
                             
                             navigate("../../../loading-page", {
                                 state: {
-                                    duration: 40000,
+                                    duration: 60000,
                                     messageArray: [`Generating, please wait...`, `This may take up to a minute`],
                                     redirect: "/home",
                                 },
