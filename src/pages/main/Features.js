@@ -15,6 +15,7 @@ import home from "../../images/home.jpg";
 import learning_hub from "../../images/learning_hub.jpg";
 import calendar from "../../images/calendar.jpg";
 import quiz from "../../images/quiz.jpg";
+import flashcard from "../../images/flashcard.jpg";
 
 
 function Features() {
@@ -39,7 +40,7 @@ function Features() {
                 <h2 className={styles.featureName}>Create Flashcards Effortlessly</h2>
                 <p className={styles.description}>Explore interactive flashcards for an enriching learning experience.</p>
                 <div className={styles.featureImage}>
-                    <img src={home} alt="Interactive Flashcards" />
+                    <img src={flashcard} alt="Interactive Flashcards" />
                 </div>
             </div>
 
