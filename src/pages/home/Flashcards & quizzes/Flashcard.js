@@ -33,6 +33,22 @@ const Flashcard = () => {
         fetchTestQuestions();
 
     }, [testID])
+    
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.key === 'ArrowLeft') {
+                handlePreviousFlashcard();
+            } else if (event.key === 'ArrowRight') {
+                handleNextFlashcard();
+            }
+        };
+    
+        window.addEventListener('keydown', handleKeyDown);
+    
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    })
 
     // control navigation through the array of flashcards
     const handleNextFlashcard = () => {
