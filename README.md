@@ -7,12 +7,12 @@
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [Screenshots](#screenshots)
-    - About Page
-    - Log In Page
-    - Features Page
-    - Flashcards & Quizzes Page
-    - Revision Schedule Page
-    - Profile Page
+    - [About Page](#about-page)
+    - [Log In Page](#log-in)
+    - [Features Page](#features)
+    - [Flashcards & Quizzes Page](#flashcards-quizzes)
+    - [Revision Schedule Page](#revision-schedule)
+    - [Profile Page](#profile)
   
 
 
