@@ -1,4 +1,4 @@
-# quizDaddy
+![image](https://github.com/user-attachments/assets/07e6f141-7221-4562-a98b-1149db3d5ee0)# quizDaddy
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -43,7 +43,6 @@ quizDaddy is a web application for students to upload their notes and materials 
   To create a production build, use npm run build.
   webpack compiled successfully
 
-<img width="800" alt="image" src="https://github.com/user-attachments/assets/582f549c-31de-4551-8772-f3d7d3d5e9b5">
 ## Contributing
 1. Fork the repository
 2. Create a new branch (`git checkout -b feature/your-feature-name`)
@@ -52,5 +51,8 @@ quizDaddy is a web application for students to upload their notes and materials 
 5. Push to the branch (`git push origin feature/your-feature-name`)
 6. Open a Pull Request
 
-   ## Screenshots
+## Screenshots of Quizdaddy
+
+
+
 
