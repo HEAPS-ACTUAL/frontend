@@ -13,17 +13,17 @@
 }
 
 @keyframes shakeIconBack {
-    0% { transform: rotate(0deg); }
-    10% { transform: rotate(2deg); }
-    20% { transform: rotate(4deg); }
-    30% { transform: rotate(6deg); }
-    40% { transform: rotate(8deg); }
-    50% { transform: rotate(10deg); }
-    60% { transform: rotate(8deg); }
-    70% { transform: rotate(6deg); }
-    80% { transform: rotate(4deg); }
-    90% { transform: rotate(2deg); }
-    100% { transform: rotate(0deg); }
+    0% { transform: rotate(360deg) scaleX(-1); }
+    10% { transform: rotate(355deg) scaleX(-1); }
+    20% { transform: rotate(350deg) scaleX(-1); }
+    30% { transform: rotate(345deg) scaleX(-1); }
+    40% { transform: rotate(340deg) scaleX(-1); }
+    50% { transform: rotate(340deg) scaleX(-1); }
+    60% { transform: rotate(340deg) scaleX(-1); }
+    70% { transform: rotate(345deg) scaleX(-1); }
+    80% { transform: rotate(350deg) scaleX(-1); }
+    90% { transform: rotate(355deg) scaleX(-1); }
+    100% { transform: rotate(360deg) scaleX(-1); }
 }
 
 .wrapper {
@@ -109,8 +109,10 @@
 
 .flipIconFront:hover {
     animation: shakeIconFront 0.5s;
-    animation-iteration-count: infinite;
+}
 
+.flipIconBack:hover {
+    animation: shakeIconBack 0.5s;
 }
 
 .flipIconFront {
