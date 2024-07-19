@@ -3,9 +3,9 @@ import { FaStar } from "react-icons/fa";
 
 const StarRating = ({ count = 5 }) => {
   const starStyle = {
-    color: "#FFD700", 
+    color: "#ffd700", 
     fontSize: "24px",
-    marginBottom: "10px",
+    marginBottom: "20px",
   };
 
   const stars = Array.from({ length: count }, (_, index) => (
