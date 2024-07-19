@@ -28,9 +28,9 @@ async function generateQuiz(email, testName, testType, difficulty, file) {
 async function getToDoQuizzes(email) {
     try {
         const response = await axiosInstance({
-            method: "post",
+            method: "get",
             url: "/test/getTestInfo",
-            data: { email: email, testType: 'Q', testStatus: false },
+            params: { email: email, testType: 'Q', testStatus: false },
         });
 
         return response.data;
@@ -43,9 +43,9 @@ async function getToDoQuizzes(email) {
 async function getCompletedQuizzes(email) {
     try {
         const response = await axiosInstance({
-            method: "post",
+            method: "get",
             url: "/test/getTestInfo",
-            data: { email: email, testType: 'Q', testStatus: true },
+            params: { email: email, testType: 'Q', testStatus: true },
         });
 
         return response.data;

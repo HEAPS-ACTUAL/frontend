@@ -27,9 +27,9 @@ async function generateFlashcard(email, testName, testType, file) {
 async function getAllFlashcardsByUser(email) {
     try {
         const response = await axiosInstance({
-            method: "post",
+            method: "get",
             url: "/test/getTestInfo",
-            data: { email: email, testType: 'F' },
+            params: { email: email, testType: 'F' },
         });
 
         return response.data;

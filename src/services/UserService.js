@@ -56,6 +56,11 @@ async function getUserFirstName(email) {
     return userFound.FirstName;
 }
 
+async function getUserVerificationStatus(email){
+    const userFound = await getUserByEmail(email);
+    return userFound.IsVerified;
+}
+
 // Update User Details
 async function updateUserDetails(email, firstName, lastName, hashedPassword = null, inputPassword = null, newPassword = null) {
     try {
@@ -92,21 +97,4 @@ async function deleteUserAccount(email) {
     }
 }
 
-async function checkUserIsVerified(email) {
-    try {
-        const response = await axiosInstance({
-            method: "post",
-            url: "/user/is-verified/",
-            data: { email: email }
-        });
-        
-        return response.data;
-    }
-    catch (error) {
-        if (error.response) {
-            return error.message;
-        }
-    }
-}
-
-export {authenticate, createNewUser, getUserByEmail, getUserFirstName, updateUserDetails, deleteUserAccount, checkUserIsVerified};
+export {authenticate, createNewUser, getUserByEmail, getUserFirstName, updateUserDetails, deleteUserAccount, getUserVerificationStatus};
