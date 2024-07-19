@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import styles from '../../../styles/Quiz.module.css';
 import { useLocation, useNavigate } from 'react-router-dom'; 
 
-import { getAllQuestionsAndOptionsFromAQuiz, getLatestAttempt, markQuizAsDone } from '../../../services/QuizService';
+import { getLatestAttempt, markQuizAsDone } from '../../../services/QuizService';
 import { storeUserQuizAnswers } from '../../../services/QuizService';
+import { getAllQuestionsAndOptionsFromATest } from '../../../services/TestService';
 
 const QuizFeature = () => {
     const location = useLocation(); 
@@ -18,7 +19,7 @@ const QuizFeature = () => {
     
     useEffect(() => {
         async function fetchQuizQuestionsAndOptions(){
-            const quizQuestionsAndOptions = await getAllQuestionsAndOptionsFromAQuiz(testID);
+            const quizQuestionsAndOptions = await getAllQuestionsAndOptionsFromATest(testID);
             setQuestionsOptionsArray(quizQuestionsAndOptions);
         }
 

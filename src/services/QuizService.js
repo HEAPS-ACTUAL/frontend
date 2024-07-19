@@ -55,22 +55,6 @@ async function getCompletedQuizzes(email) {
     }
 }
 
-async function getAllQuestionsAndOptionsFromAQuiz(testID){
-    try{
-        const response = await axiosInstance({
-            method: 'post',
-            url: '/test/getQuestionsAndOptions',
-            data: {testID: testID}
-        })
-        
-        // console.log(response.data);
-        return response.data;
-    }
-    catch(error){
-        return error.response.data.message;
-    }
-}
-
 async function markQuizAsDone(testID){
     try{
         const response = await axiosInstance({
@@ -132,4 +116,4 @@ async function getLatestAttempt(testID){
     }
 }
 
-export { generateQuiz, getToDoQuizzes, getCompletedQuizzes, getAllQuestionsAndOptionsFromAQuiz, markQuizAsDone, storeUserQuizAnswers, reviewQuiz, getLatestAttempt };
+export { generateQuiz, getToDoQuizzes, getCompletedQuizzes, markQuizAsDone, storeUserQuizAnswers, reviewQuiz, getLatestAttempt };

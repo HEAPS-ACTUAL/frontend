@@ -18,9 +18,9 @@ async function deleteTest(testID, testName) {
 async function getAllQuestionsAndOptionsFromATest(testID){
     try{
         const response = await axiosInstance({
-            method: 'post',
+            method: 'get',
             url: '/test/getQuestionsAndOptions',
-            data: {testID: testID}
+            params: {testID: testID}
         })
         
         // console.log(response.data);
