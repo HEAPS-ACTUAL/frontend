@@ -28,8 +28,9 @@ quizDaddy is a web application for students to upload their notes and materials 
 1. Clone the repository:
     ```sh
     git clone https://github.com/HEAPS-ACTUAL/frontend.git
-    cd frontend
+
     ```
+    Make sure you are in the frontend directory
 
 2. Install the dependencies:
     ```sh
