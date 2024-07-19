@@ -36,10 +36,15 @@ const Flashcard = () => {
     
     useEffect(() => {
         const handleKeyDown = (event) => {
-            if (event.key === 'ArrowLeft') {
+            if (event.code === 'ArrowLeft') {
                 handlePreviousFlashcard();
-            } else if (event.key === 'ArrowRight') {
+            } 
+            else if (event.code === 'ArrowRight') {
                 handleNextFlashcard();
+            }
+            else if (event.code === 'Space') {
+                event.preventDefault();
+                toggleFlip();
             }
         };
     
