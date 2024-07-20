@@ -42,10 +42,10 @@ function DeleteConfirmationModal({ isOpen, closeModal, event }) {
         <div className={styles.modalContainer}>
             <div className={styles.modalContent}>
                 <h2>Delete Event</h2>
-                <p>Do you want to delete all revision dates or just one?</p>
+                <p>Do you want to delete all revision dates or just the selected date?</p>
                 <div className={styles.buttonGroup}>
                     <button onClick={handleDeleteAll}>Delete All</button>
-                    <button onClick={handleDeleteOne}>Delete One</button>
+                    <button onClick={handleDeleteOne}>Delete Selected Date</button>
                     <button onClick={closeModal}>Cancel</button>
                 </div>
             </div>

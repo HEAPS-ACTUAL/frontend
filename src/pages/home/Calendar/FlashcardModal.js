@@ -32,7 +32,7 @@ function FlashcardModal({ isOpen, scheduleID, onClose }) {
             <div className={styles.modal}>
 
                 <button className={styles.closeButton} onClick={onClose}>
-                    <span className={styles.closeIcon}>X</span>
+                    <span title='close' className={styles.closeIcon}>X</span>
                 </button>
 
                 <h2>Select a Flashcard</h2>
@@ -40,7 +40,7 @@ function FlashcardModal({ isOpen, scheduleID, onClose }) {
                 <ul>
                     {flashcardsArray.map((flashcard) => (
                         <li key={flashcard["TestID"]}>
-                            <button className={styles.testButton} onClick={() => handleTestClick(flashcard["TestID"])} >
+                            <button title='view flashcard' className={styles.testButton} onClick={() => handleTestClick(flashcard["TestID"])} >
                                 <div className={styles.buttonContent}>
                                     
                                     <span className={styles.testName}> {flashcard["TestName"]} </span>

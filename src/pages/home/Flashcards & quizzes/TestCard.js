@@ -67,17 +67,16 @@ function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, att
     
     return (
         <div 
-            className=
-            {`
-                ${selectedButton ==='to-do' ? styles.toDoQuizCard : ''}
+            className={
+                `${selectedButton ==='to-do' ? styles.toDoQuizCard : ''}
                 ${selectedButton === 'completed' ? styles.completedQuizCard : ''}
-                ${selectedButton === null ? styles.flashcard : ''}
-            `}
+                ${selectedButton === null ? styles.flashcard : ''}`
+            }
         >
             
             <div className={styles.testCardWrapper}>
-                <div className={styles.testCard} onClick={handleTestClicked}>
-                    <img className={styles.deleteButton} src={xButton} onClick={handleXButtonPressed} alt='delete button' />
+                <div className={styles.testCard} onClick={handleTestClicked} title={selectedButton === 'completed' ? 'view past attempts' : selectedButton === 'to-do' ? 'attempt quiz' : 'view flashcard'}>
+                    <img title='delete' className={styles.deleteButton} src={xButton} onClick={handleXButtonPressed} alt='delete button' />
                     <h3>{name}</h3>
 
                     {difficulty !== null 

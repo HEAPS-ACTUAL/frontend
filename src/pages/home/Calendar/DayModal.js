@@ -28,13 +28,13 @@ function DayModal({ date, events, handleEventClick, handleDeleteClicked }) {
                 <div className={`${styles.eventsContainer} ${events.length === 0 ? styles.noEvents : styles.haveEvents}`} >
                     {events.length !== 0 
                         ? events.map((event) => (
-                            <div key={event.id} className={styles.eventItem}>
+                            <div title='see related flashcards' key={event.id} className={styles.eventItem}>
 
                                 <button className={styles.eventTitle} onClick={() => handleEventClick(event.id[0])} >
                                     {event.title}
                                 </button>
 
-                                <button onClick={() => handleDeleteClicked(event)} className={styles.deleteButton} >
+                                <button title='delete' onClick={() => handleDeleteClicked(event)} className={styles.deleteButton} >
                                     <FaTrashCan style={{ opacity: 0.5 }} />
                                 </button>
                             </div>
