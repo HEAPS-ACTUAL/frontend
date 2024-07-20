@@ -18,7 +18,7 @@ function fileTypeIsPDF(file) {
 function fileSizeWithinLimit(file) {
     const fileSize = file.size;
 
-    if (fileSize <= 5 * 10 ** 6) {
+    if (fileSize <= 20 * 10 ** 6) {
         return true;
     }
 
