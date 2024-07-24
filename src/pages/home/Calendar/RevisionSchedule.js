@@ -186,7 +186,7 @@ function Calendar() {
                         dateClick={handleDateChange}
                         showNonCurrentDates={false}
                         fixedWeekCount={false}
-                        eventClick={(info) => showFlashcardModal(info.event.id[0])}
+                        eventClick={(info) => showFlashcardModal(info.event.id.split(',')[0])}
                     />
                 </div>
 
