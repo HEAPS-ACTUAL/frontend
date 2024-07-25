@@ -14,7 +14,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* margin-top: 40px; */
     width: fit-content;
     padding: 50px;
     text-align: center;
@@ -47,7 +46,7 @@
 }
 
 .option:hover {
-    background-color: #cac7c7;
+    background-color: #bbb8b8;
 }
 
 .buttonsContainer{
