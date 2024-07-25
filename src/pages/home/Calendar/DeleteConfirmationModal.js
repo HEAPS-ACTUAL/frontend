@@ -23,7 +23,7 @@ function DeleteConfirmationModal({ isOpen, closeModal, event }) {
 
         if (result === 'ok deleted entire exam from db') { // message from the backend
             // window.alert(`${examName} deleted successfully!`);
-            window.location.reload();
+            // window.location.reload();
         } 
         else { 
             window.alert('Failed to delete the exam, try again'); 
@@ -36,8 +36,8 @@ function DeleteConfirmationModal({ isOpen, closeModal, event }) {
         
         if (result === 'ok deleted specific date from db') {
             // window.alert(`Revision date deleted successfully!`);
-            window.location.reload();
-        } 
+            // window.location.reload();
+        }
         else {
             window.alert('Failed to delete revision date, try again');
         }
@@ -51,9 +51,9 @@ function DeleteConfirmationModal({ isOpen, closeModal, event }) {
             '../../../loading-page', 
             {state: 
                 {
-                    duration: 1500, 
+                    duration: 1000, 
                     messageArray: [`Deleting...`], 
-                    redirect: '/home'
+                    redirect: '/revision-schedule'
                 } 
             }
         )
@@ -67,9 +67,9 @@ function DeleteConfirmationModal({ isOpen, closeModal, event }) {
             '../../../loading-page', 
             {state: 
                 {
-                    duration: 1500, 
+                    duration: 1000, 
                     messageArray: [`Deleting...`], 
-                    redirect: '/home'
+                    redirect: '/revision-schedule'
                 } 
             }
         )

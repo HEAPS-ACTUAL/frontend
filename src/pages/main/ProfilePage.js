@@ -11,7 +11,8 @@ import maleProfileImage from "../../images/male_pfp.png";
 import { FaEdit } from "react-icons/fa";
 import { SiTicktick } from "react-icons/si";
 import { CgCloseO } from "react-icons/cg";
-
+import { IoWarningOutline } from "react-icons/io5";
+import PasswordChangedModal from './PasswordChangedModal';
 // Functions
 import { getUserByEmail, updateUserDetails, deleteUserAccount, } from "../../services/UserService";
 import {sendVerificationEmail } from '../../services/EmailServices';
@@ -28,6 +29,7 @@ function ProfilePage() {
     
     const [changingName, setChangingName] = useState(false);
     const [changingPassword, setChangingPassword] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
     const [isDisabled, setIsDisabled] = useState(false);
     const [cooldown, setCooldown] = useState(0);
 
@@ -119,13 +121,13 @@ function ProfilePage() {
         const { HashedPassword, InputPassword, NewPassword, ConfirmPassword } = newUserDetails;
 
         if (!InputPassword || !NewPassword || !ConfirmPassword) {
-            alert('Fields cannot be empty!');
+            setErrorMessage('Fields cannot be empty');
         }
         else if (InputPassword.trim() === '' || NewPassword.trim() === '' || ConfirmPassword.trim() === '') {
-            alert('Fields cannot be empty!');
+            setErrorMessage('Fields cannot be empty');
         }
         else if (NewPassword !== ConfirmPassword) {
-            alert("New passwords don't match!");
+            setErrorMessage("New passwords don't match");
         }
         else {
             const message = await updateUserDetails(email, null, null, HashedPassword, InputPassword, NewPassword); // Set firstName and lastName as null when updating password
@@ -221,8 +223,14 @@ function ProfilePage() {
                         <input type="password" name="NewPassword" onChange={handleChange} placeholder="New Password" />
                         <input type="password" name="ConfirmPassword" onChange={handleChange} placeholder="Confirm Password" />
 
+                        {errorMessage && (
+                            <p className={styles.errorMessage}><IoWarningOutline className={styles.errorIcon}/> {errorMessage}</p>
+                        )}
+
                         <button onClick={handlePasswordSave}>Confirm Change Password</button>
                         <button onClick={handleCancel}>Cancel</button>
+
+                        
                     </div>
                 )}
             </div>
