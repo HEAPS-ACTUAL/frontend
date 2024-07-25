@@ -19,9 +19,18 @@ const SignIn = () => {
 
     const [registrationMessage, setRegistrationMessage] = useState('');
     const [signInMessage, setSignInMessage] = useState('');
-    const [showAccountCreatedModal, setShowAccountCreatedModal] = useState(true);
+    const [showAccountCreatedModal, setShowAccountCreatedModal] = useState(false);
     
     const navigate = useNavigate();
+
+    function clearInputFields(){
+        setEmail('');
+        setPassword('');
+        setConfirmPassword('');
+        setFirstName('');
+        setLastName('');
+        setGender('');
+    }
 
     async function handleRegistration(event) {
         event.preventDefault();
@@ -34,15 +43,16 @@ const SignIn = () => {
                 setRegistrationMessage("Passwords don't match!");
             }
             else{
-                // const returnedMessage = await createNewUser(email, password, firstName, lastName, gender);
+                const returnedMessage = await createNewUser(email, password, firstName, lastName, gender);
                 
-                // if(returnedMessage === "Email already exists!"){
-                //     setRegistrationMessage(returnedMessage);
-                // }
-                // else{
+                if(returnedMessage === "Email already exists!"){
+                    setRegistrationMessage(returnedMessage);
+                }
+                else{
                     setRegistrationMessage('');
                     setShowAccountCreatedModal(true);
-            //     }
+                    clearInputFields();
+                }
             }
         }
     }
@@ -80,25 +90,25 @@ const SignIn = () => {
     }
 
     return (
-        <div className={styles.entirePage}>
+        <div>
             <div className={`${styles.container} ${isActive ? styles.active : ''}`} id="container">
                 <div className={`${styles.formContainer} ${styles.signUp}`}>
                     <form onSubmit={handleRegistration}>
                         <h1>Create Account</h1>
                         <br></br>
                         <div>
-                            <input className={styles.firstName} type="text" placeholder="First Name" onChange={(event) => setFirstName(event.target.value)} />
-                            <input className={styles.lastName} type="text" placeholder="Last Name" onChange={(event) => setLastName(event.target.value)} />
+                            <input className={styles.firstName} type="text" placeholder="First Name" value={firstName} onChange={(event) => setFirstName(event.target.value)} />
+                            <input className={styles.lastName} type="text" placeholder="Last Name" value={lastName} onChange={(event) => setLastName(event.target.value)} />
                         </div>
                         <select name="gender" onChange={(event) => setGender(event.target.value)}>
-                            <option value="">Select Gender</option>
+                            <option selected={gender === ''} value="">Select Gender</option>
                             <option value="M">Male</option>
                             <option value="F">Female</option>
                         </select>
-                        <input type="email" placeholder="Email" onChange={(event) => setEmail(event.target.value)}/>
+                        <input type="email" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)}/>
                         <div>
-                            <input type="password" placeholder="Password" onChange={(event) => setPassword(event.target.value)}/>
-                            <input type="password" placeholder="Confirm Password" onChange={(event) => setConfirmPassword(event.target.value)}/>
+                            <input type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)}/>
+                            <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)}/>
                         </div>
                         <button type="submit">Register</button>
 
