@@ -76,7 +76,8 @@ function Home() {
         if (!isVerified){
             setCreateTestMessage("You must be verified!");
 
-        }else if (testName.trim() === "") {
+        }
+        else if (testName.trim() === "") {
             setCreateTestMessage("Quiz name cannot be empty!");
         } 
         else if (difficulty === "") {

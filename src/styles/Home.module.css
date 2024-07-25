@@ -49,7 +49,7 @@
     /* animation: fadeIn 2s ease-in; */
   }
 
-h2 {
+.container h2 {
     font-size: 28px;
     /* color: #4663ac; */
     color: #08293c; /* black */

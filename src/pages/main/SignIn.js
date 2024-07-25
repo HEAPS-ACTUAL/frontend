@@ -19,7 +19,7 @@ const SignIn = () => {
 
     const [registrationMessage, setRegistrationMessage] = useState('');
     const [signInMessage, setSignInMessage] = useState('');
-    const [showAccountCreatedModal, setShowAccountCreatedModal] = useState(false);
+    const [showAccountCreatedModal, setShowAccountCreatedModal] = useState(true);
     
     const navigate = useNavigate();
 
@@ -34,15 +34,15 @@ const SignIn = () => {
                 setRegistrationMessage("Passwords don't match!");
             }
             else{
-                const returnedMessage = await createNewUser(email, password, firstName, lastName, gender);
+                // const returnedMessage = await createNewUser(email, password, firstName, lastName, gender);
                 
-                if(returnedMessage === "Email already exists!"){
-                    setRegistrationMessage(returnedMessage);
-                }
-                else{
+                // if(returnedMessage === "Email already exists!"){
+                //     setRegistrationMessage(returnedMessage);
+                // }
+                // else{
                     setRegistrationMessage('');
                     setShowAccountCreatedModal(true);
-                }
+            //     }
             }
         }
     }
@@ -71,6 +71,7 @@ const SignIn = () => {
     function showSignIn(){
         setIsActive(false);
         setSignInMessage('');
+        setShowAccountCreatedModal(false);
     }
     
     function showRegistration(){
@@ -79,7 +80,7 @@ const SignIn = () => {
     }
 
     return (
-        <div>
+        <div className={styles.entirePage}>
             <div className={`${styles.container} ${isActive ? styles.active : ''}`} id="container">
                 <div className={`${styles.formContainer} ${styles.signUp}`}>
                     <form onSubmit={handleRegistration}>
@@ -132,7 +133,13 @@ const SignIn = () => {
                 </div>
             </div>
 
-            {showAccountCreatedModal && <AccountCreatedModal />}
+            <div className={styles.accountCreatedModal}>
+                {showAccountCreatedModal &&
+                    <AccountCreatedModal 
+                        closeAccountCreatedModal={showSignIn}
+                    />
+                }
+            </div>
         </div>
     );
 }
