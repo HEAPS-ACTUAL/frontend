@@ -49,7 +49,7 @@
 }
 
 .container button {
-    background-color: #21bf54;
+    background-color: #50C878;
     border-radius: 7px;
     padding-top: 13px;
     padding-bottom: 13px;
@@ -61,5 +61,5 @@
 }
 
 .container button:hover {
-    background-color: #1dae4b;
+    background-color: #50C878;
 }
