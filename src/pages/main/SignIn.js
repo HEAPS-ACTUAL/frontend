@@ -95,7 +95,9 @@ const SignIn = () => {
         <div>
             <div className={`${styles.container} ${isActive ? styles.active : ''}`} id="container">
                 <div className={`${styles.formContainer} ${styles.signUp}`}>
+
                     <form onSubmit={handleRegistration}>
+                        
                         <h1>Create Account</h1>
                         <br></br>
                         <div>
@@ -113,7 +115,8 @@ const SignIn = () => {
                             <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)}/>
                         </div>
                         <button type="submit">Register</button>
-
+                       
+                        
                         <p className={styles.errorMessageRegister}>{registrationMessage && registrationMessage}</p>
                     </form>
                 </div>

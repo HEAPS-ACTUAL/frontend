@@ -1,9 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from '../../../styles/DeleteConfirmationModal.module.css';
 
 import { deleteExistingExam, deleteSpecificRevisionDate } from '../../../services/ScheduleService';
 
+
 function DeleteConfirmationModal({ isOpen, closeModal, event }) {
+
+    const navigate = useNavigate();
+
     if (!isOpen){
         return null;
     }
@@ -17,7 +22,7 @@ function DeleteConfirmationModal({ isOpen, closeModal, event }) {
         const result = await deleteExistingExam(scheduleID);
 
         if (result === 'ok deleted entire exam from db') { // message from the backend
-            window.alert(`${examName} deleted successfully!`);
+            // window.alert(`${examName} deleted successfully!`);
             window.location.reload();
         } 
         else { 
@@ -30,7 +35,7 @@ function DeleteConfirmationModal({ isOpen, closeModal, event }) {
         const result = await deleteSpecificRevisionDate(scheduleID, date); 
         
         if (result === 'ok deleted specific date from db') {
-            window.alert(`Revision date deleted successfully!`);
+            // window.alert(`Revision date deleted successfully!`);
             window.location.reload();
         } 
         else {
@@ -38,14 +43,45 @@ function DeleteConfirmationModal({ isOpen, closeModal, event }) {
         }
     };
 
+    // loading bar for when user clicks on delete one button
+    async function handleConfirmDeleteOne(){
+        await handleDeleteOne();
+
+        navigate(
+            '../../../loading-page', 
+            {state: 
+                {
+                    duration: 1500, 
+                    messageArray: [`Deleting...`], 
+                    redirect: '/home'
+                } 
+            }
+        )
+    }
+
+    // loading bar for when user clicks on delete all button
+    async function handleConfirmDeleteAll(){
+        await handleDeleteAll();
+
+        navigate(
+            '../../../loading-page', 
+            {state: 
+                {
+                    duration: 1500, 
+                    messageArray: [`Deleting...`], 
+                    redirect: '/home'
+                } 
+            }
+        )
+    }
     return (
         <div className={styles.modalContainer}>
             <div className={styles.modalContent}>
                 <h2>Delete Event</h2>
                 <p>Do you want to delete all revision dates or just the selected date?</p>
                 <div className={styles.buttonGroup}>
-                    <button onClick={handleDeleteAll}>Delete All</button>
-                    <button onClick={handleDeleteOne}>Delete Selected Date</button>
+                    <button onClick={handleConfirmDeleteAll} >Delete All</button>
+                    <button onClick={handleConfirmDeleteOne}>Delete Selected Date</button>
                     <button onClick={closeModal}>Cancel</button>
                 </div>
             </div>

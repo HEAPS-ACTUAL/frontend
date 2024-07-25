@@ -80,6 +80,10 @@
     flex-direction: column; */
 }
 
+.form {
+    position: fixed;
+}
+
 .formContainer div {
     display: flex;
 }
@@ -119,7 +123,7 @@
 
 .errorMessagSignIn {
     color: red;
-    position: fixed;
+    /* position: fixed; */
     /* @arin, u can try using postion fixed. uncomment the top left right bottom one by one to see what it does*/
     position: fixed; 
     bottom: 60px; 
@@ -128,7 +132,7 @@
 
 .errorMessageRegister {
     color: red;
-    position: fixed; 
+    /* position: fixed;  */
     bottom: 20px; 
 
 }
