@@ -49,6 +49,11 @@
     background-color: #bbb8b8;
 }
 
+.selectedOption:hover {
+    background-color:rgba(70, 99, 172, 0.8);
+    color: #fff;
+}
+
 .buttonsContainer{
     display: flex;
     flex-direction: row;
