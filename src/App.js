@@ -11,7 +11,7 @@ import TestRoute from "./pages/home/Flashcards & quizzes/TestRoute";
 import LoadingPage from "./pages/main/LoadingPage";
 import VerifyEmail from "./pages/main/VerifyEmail";
 import ProfilePage from "./pages/main/ProfilePage";
-import Calendar from "./pages/home/Calendar/RevisionSchedule";
+
 // STYLES
 import "./styles/App.css";
 
@@ -50,10 +50,8 @@ function App() {
                     element={IsLoggedIn ? <LoadingPage /> : <Navigate to="/login" />} // REDIRECT TO SIGN IN PAGE IF NOT LOGGED IN
                 />
 
-
                 <Route path='/verify-email' element={<VerifyEmail />}></Route>
                 <Route path='/profile' element={<ProfilePage />}></Route>
-                <Route path='/revision-schedule' element={<Calendar />}></Route>
 
             </Routes>
         </Router>
