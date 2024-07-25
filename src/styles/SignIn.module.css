@@ -119,8 +119,17 @@
 
 .errorMessage{
     color: red;
-    margin-top: 10px;
-    min-height: 30px;
+
+    /* @arin, u can try using postion fixed. uncomment the top left right bottom one by one to see what it does*/
+    position: fixed; 
+    
+    /* top: 0px; */
+    /* left: 0px; */
+    /* right: 0px; */
+    /* bottom: 0px; */
+
+    /* margin-top: 10px; */
+    /* min-height: 30px; */
     /* height: 20px; */
 }
 
