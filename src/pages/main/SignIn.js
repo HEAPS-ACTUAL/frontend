@@ -112,8 +112,7 @@ const SignIn = () => {
                         </div>
                         <button type="submit">Register</button>
 
-                        <p className={styles.errorMessage}>{registrationMessage && registrationMessage}</p>
-                        {/* <p className={styles.errorMessage}>{registrationMessage || '\u00A0'}</p> \u00A0 is a non-breaking space */}
+                        <p className={styles.errorMessageRegister}>{registrationMessage && registrationMessage}</p>
                     </form>
                 </div>
 
@@ -126,7 +125,7 @@ const SignIn = () => {
                         <input type="password" placeholder="Password" onChange={(event) => setPassword(event.target.value)}/>
                         <button type="submit">Sign In</button>
 
-                        <p className={styles.errorMessage}>{signInMessage && signInMessage}</p>
+                        <p className={styles.errorMessagSignIn}>{signInMessage && signInMessage}</p>
                     </form>
 
                 </div>
