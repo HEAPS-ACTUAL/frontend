@@ -25,32 +25,34 @@ function Navbar() {
 
     const [currentPage, setCurrentPage] = useState(formattedPathname);
 
-    function updateCurrentPage(page){
-        setCurrentPage(page);
-    }
+    useEffect(() => {
+        setCurrentPage(formattedPathname);
+    }, [formattedPathname]);
 
     return (
         <div className={styles.navbar}>
-            <Link to="/" className={styles.logoLink} onClick={() => updateCurrentPage('about')}>
+            <Link to="/" className={styles.logoLink}>
                 <img src={quizDaddyLogo} alt="quizDaddy Logo" className={styles.logo} />
                 <span className={styles.logoText}>quizDaddy</span>
             </Link>
 
             <div className={styles.navItems}>
-                <Link to="/home" className={`${styles.navLink} ${currentPage === 'home' ? styles.currentPage : styles.notCurrentPage}`} onClick={() => updateCurrentPage('home')}> Home </Link>
-                <Link to="/features" className={`${styles.navLink} ${currentPage === 'features' ? styles.currentPage : styles.notCurrentPage}`} onClick={() => updateCurrentPage('features')}> Features</Link>
+                <Link to="/home" className={`${styles.navLink} ${currentPage === 'home' ? styles.currentPage : styles.notCurrentPage}`}> Home </Link>
+                <Link to="/features" className={`${styles.navLink} ${currentPage === 'features' ? styles.currentPage : styles.notCurrentPage}`}> Features</Link>
             </div>
 
             <div className={styles.profileAndLogin}>
                 {loggedIn && (
-                    <Link to='/profile' title='view profile' onClick={() => updateCurrentPage('profile')}>
+                    <Link to='/profile' title='view profile'>
                         <FiUser className={`${styles.profileIcon} ${currentPage === 'profile' ? styles.profileClicked : ''}`} />
                     </Link>
                 )}
 
-                <Link to="/login">
-                    <button onClick={handleLogOut} className={styles.navLinkLogin}> {loggedIn ? "Log out" : "Log in"} </button>
-                </Link>
+                {currentPage !== 'login' &&
+                    <Link to="/login">
+                        <button onClick={handleLogOut} className={styles.navLinkLogin}> {loggedIn ? "Log out" : "Log in"} </button>
+                    </Link>
+                }
             </div>
         </div>
     );
