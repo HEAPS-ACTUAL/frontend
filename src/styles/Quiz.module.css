@@ -44,12 +44,10 @@
 .selectedOption {
     background-color:rgba(70, 99, 172, 0.8);
     color: #fff;
-    border-color: #add8e6; 
-    border: 2 px solid grey;
 }
 
 .option:hover {
-    background-color: #e9e9e9;
+    background-color: #cac7c7;
 }
 
 .buttonsContainer{
