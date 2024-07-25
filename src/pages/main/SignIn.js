@@ -82,11 +82,13 @@ const SignIn = () => {
         setIsActive(false);
         setSignInMessage('');
         setShowAccountCreatedModal(false);
+        clearInputFields();
     }
     
     function showRegistration(){
         setIsActive(true);
         setRegistrationMessage('');
+        clearInputFields();
     }
 
     return (
@@ -121,8 +123,8 @@ const SignIn = () => {
                     <form onSubmit={handleSignIn}>
                         <h1>Sign In</h1>
                         <br></br>
-                        <input type="email" placeholder="Email" onChange={(event) => setEmail(event.target.value)}/>
-                        <input type="password" placeholder="Password" onChange={(event) => setPassword(event.target.value)}/>
+                        <input type="email" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)}/>
+                        <input type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)}/>
                         <button type="submit">Sign In</button>
 
                         <p className={styles.errorMessagSignIn}>{signInMessage && signInMessage}</p>
