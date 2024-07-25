@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { HashLink } from 'react-router-hash-link';
 import Select from 'react-select';
-import '../../../styles/RevisionSchedule.css';
+import styles from '../../../styles/RevisionSchedule.module.css';
 
 // icon components
 import { CgArrowTopRight } from "react-icons/cg";
@@ -39,6 +39,7 @@ function Calendar() {
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState(null);
     const [examColour, setExamColour] = useState("#808080"); // default colour is grey
+    const [errorMessage, setErrorMessage] = useState('');
     
     // STATES FOR FLASHCARD MODAL
     const [isFlashcardModalOpen, setFlashcardModalOpen] = useState(false);
@@ -129,20 +130,19 @@ function Calendar() {
     // WHEN USER CLICKS GENERATE SCHEDULE -> SEND DATA TO THE BACKEND
     const handleGenerateSchedule = async () => {
         if (!startDate || !examName) {
-            window.alert("Please enter exam name and start date!");
+            setErrorMessage("Please enter exam name and start date!");
         }
         else if (selectedTestIDs.length === 0) {
-            window.alert("Please select at least 1 flashcard!");
+            setErrorMessage("Please select at least 1 flashcard!");
         }
         else if (endDate && startDate > endDate) {
-            window.alert("Start date cannot be after end date!");
+            setErrorMessage("Start date cannot be after end date!");
         }
         else {
             try {
                 await createNewExam(startDate, endDate, examName, examColour, selectedTestIDs);
-                console.log({ startdate: startDate, enddate: endDate, examname: examName, examcolour: examColour, testIDs: selectedTestIDs });
 
-                window.alert("Schedule generated successfully!");
+                setErrorMessage("Schedule generated successfully!");
                 window.location.reload(); // REFRESH THE PAGE SO FORM INPUT FIELDS WILL BE RESET
             }
             catch (error) {
@@ -170,14 +170,14 @@ function Calendar() {
     }
 
     return (
-        <div className='entirePage'>
-            <div className='schedule'>
-                <p className='topline'>Struggling to plan a revision schedule?</p>
-                <p className='bottomline'> Daddy's got your back!</p>
-                <p className='tagline'><HashLink smooth to='/features#spaced-repetition'>powered by our spaced repetition algorithm <section className='learnMoreBtn'><CgArrowTopRight /></section></HashLink></p>
+        <div className={styles.entirePage}>
+            <div className={styles.schedule}>
+                <p className={styles.topline}>Struggling to plan a revision schedule?</p>
+                <p className={styles.bottomline}> Daddy's got your back!</p>
+                <p className={styles.tagline}><HashLink smooth to='/features#spaced-repetition'>powered by our spaced repetition algorithm <section className={styles.learnMoreBtn}><CgArrowTopRight /></section></HashLink></p>
 
 
-                <div className='calendarContainer'>
+                <div className={styles.calendarContainer}>
                     <FullCalendar
                         plugins={[dayGridPlugin, interactionPlugin]}
                         initialView="dayGridMonth"
@@ -197,7 +197,7 @@ function Calendar() {
                 />
 
             </div>
-            <div className="todaysEventsAndGenerateSchedule">
+            <div className={styles.todaysEventsAndGenerateSchedule}>
                 <DayModal
                     date={selectedDate}
                     events={selectedEvents}
@@ -211,16 +211,16 @@ function Calendar() {
                     event={eventToDelete}
                 />
 
-                <div className='generateSchedule'>
+                <div className={styles.generateSchedule}>
                     <h3>Generate Revision Schedule!</h3>
-                    <div className='inputFields'>
+                    <div className={styles.inputFields}>
 
-                        <div className='examName'>
+                        <div className={styles.examName}>
                             <input type="text" placeholder="Exam Name" value={examName} onChange={(e) => setExamName(e.target.value)} />
                         </div>
 
                         <Select
-                            className="selectFlashcards"
+                            className={styles.selectFlashcards}
                             options={arrayOfAvailableFlashcards}
                             isMulti={true}
                             hideSelectedOptions={true}
@@ -229,26 +229,28 @@ function Calendar() {
                             onChange={handleSelectChange}
                         />
 
-                        <div className="startDate">
+                        <div className={styles.startDate}>
                             <p>Start Date:</p>
                             <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                         </div>
 
-                        <div className="endDate">
+                        <div className={styles.endDate}>
                             <p>Exam Date (if applicable):</p>
                             <input type="date" value={endDate || ""} onChange={(e) => setEndDate(e.target.value)} />
                         </div>
 
-                        <div className="examColourAndSubmit">
-                            <div className="examColour">
+                        <div className={styles.examColourAndSubmit}>
+                            <div className={styles.examColour}>
                                 <p> Colour:</p>
                                 <input type="color" value={examColour} onChange={(e) => setExamColour(e.target.value)} />
                             </div>
 
-                            <button className='generateScheduleButton' onClick={handleGenerateSchedule}> Submit! </button>
-
+                            <button className={styles.generateScheduleButton} onClick={handleGenerateSchedule}> Submit! </button>
                         </div>
                     </div>
+                        
+                    {errorMessage && <div className={styles.errorMessage}>{errorMessage}</div>}
+                
                 </div>
             </div>
         </div>

@@ -13,6 +13,7 @@ import { SiTicktick } from "react-icons/si";
 import { CgCloseO } from "react-icons/cg";
 import { IoWarningOutline } from "react-icons/io5";
 import PasswordChangedModal from './PasswordChangedModal';
+
 // Functions
 import { getUserByEmail, updateUserDetails, deleteUserAccount, } from "../../services/UserService";
 import {sendVerificationEmail } from '../../services/EmailServices';
@@ -132,7 +133,7 @@ function ProfilePage() {
         else {
             const message = await updateUserDetails(email, null, null, HashedPassword, InputPassword, NewPassword); // Set firstName and lastName as null when updating password
 
-            alert(message);
+            setErrorMessage(message);
             
             if (message === "Your password has been successfully changed!"){ 
                 setChangingPassword(false); // ONLY EXIT THE CHANGING PASSWORD PAGE IF PASSWORD CHANGE IS SUCCESSFUL. IF WRONG CURRENT PASSWORD, STAY ON PAGE
@@ -223,9 +224,9 @@ function ProfilePage() {
                         <input type="password" name="NewPassword" onChange={handleChange} placeholder="New Password" />
                         <input type="password" name="ConfirmPassword" onChange={handleChange} placeholder="Confirm Password" />
 
-                        {errorMessage && (
+                        {/* {errorMessage && (
                             <p className={styles.errorMessage}><IoWarningOutline className={styles.errorIcon}/> {errorMessage}</p>
-                        )}
+                        )} */}
 
                         <button onClick={handlePasswordSave}>Confirm Change Password</button>
                         <button onClick={handleCancel}>Cancel</button>

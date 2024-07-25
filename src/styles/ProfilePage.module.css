@@ -149,13 +149,13 @@
 }
 
 .errorMessage {
-    display: flex;
+    /* display: flex;
     align-items: center;
     color: red;
     margin-top: 10px;
     min-height: 20px;
     height: 20px;
-    gap: 8px; 
+    gap: 8px; */
 }
 
 .errorIcon {
