@@ -9,7 +9,7 @@ import chloe from "../../images/MeetTheTeam/chloe.jpg";
 import isaiah from "../../images/MeetTheTeam/isaiah.jpg";
 
 const teamMembers = [
-  { name: "Arin Mak", position: "Ur Mother", image: arin },
+  { name: "Arin Mak", position: "Mummy", image: arin },
   { name: "Jerrick Ng", position: "SQL Simp", image: jerrick },
   { name: "Fong Shi Hui", position: "a loser", image: shihui },
   { name: "Isaiah Chia", position: "Director", image: isaiah },
