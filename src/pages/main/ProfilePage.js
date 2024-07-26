@@ -12,7 +12,7 @@ import { FaEdit } from "react-icons/fa";
 import { SiTicktick } from "react-icons/si";
 import { CgCloseO } from "react-icons/cg";
 import { IoWarningOutline } from "react-icons/io5";
-import PasswordChangedModal from './PasswordChangedModal';
+import EditSuccessfulModal from '../modals/ChangeUserDetailsModal';
 
 // Functions
 import { getUserByEmail, updateUserDetails, deleteUserAccount, } from "../../services/UserService";
@@ -31,6 +31,8 @@ function ProfilePage() {
     const [changingName, setChangingName] = useState(false);
     const [changingPassword, setChangingPassword] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const [showEditSuccessfulModal, setShowEditSuccessfulModal] = useState(false);
+    
     const [isDisabled, setIsDisabled] = useState(false);
     const [cooldown, setCooldown] = useState(0);
 
@@ -98,22 +100,23 @@ function ProfilePage() {
         setNewUserDetails(userDetails); // SET NEW USER DETAILS BACK TO THE ORIGINAL
         setChangingName(false);
         setChangingPassword(false);
+        setErrorMessage('');
     }
 
     async function handleNameSave() {
         const { FirstName, LastName } = newUserDetails;
 
         if (FirstName.trim() === '' || LastName.trim() === '') {
-            alert('Fields cannot be empty!');
+            setErrorMessage('Fields cannot be empty!');
         }
         else {
             const message = await updateUserDetails(email, FirstName, LastName); // hashedPassword, inputPassword and newPassword are "null" by default when updating firstName and/or lastName. Refer to updateUserDetails in UserServices.js
 
-            alert(message);
-            
-            if (message === 'User details updated successfully.'){
-                setUserDetails(newUserDetails); // UPDATE PREVIOUS USER DETAILS TO THE NEW ONE WITHOUT HAVING TO RELOAD THE PAGE
-                setChangingName(false);
+            if (message !== 'User details updated successfully.'){
+                setErrorMessage(message);
+            }
+            else{
+                setShowEditSuccessfulModal(true);
             }
         }
     }
@@ -122,23 +125,41 @@ function ProfilePage() {
         const { HashedPassword, InputPassword, NewPassword, ConfirmPassword } = newUserDetails;
 
         if (!InputPassword || !NewPassword || !ConfirmPassword) {
-            setErrorMessage('Fields cannot be empty');
+            setErrorMessage('Fields cannot be empty!');
         }
         else if (InputPassword.trim() === '' || NewPassword.trim() === '' || ConfirmPassword.trim() === '') {
-            setErrorMessage('Fields cannot be empty');
+            setErrorMessage('Fields cannot be empty!');
         }
         else if (NewPassword !== ConfirmPassword) {
-            setErrorMessage("New passwords don't match");
+            setErrorMessage("New passwords don't match!");
         }
         else {
             const message = await updateUserDetails(email, null, null, HashedPassword, InputPassword, NewPassword); // Set firstName and lastName as null when updating password
 
-            setErrorMessage(message);
-            
-            if (message === "Your password has been successfully changed!"){ 
-                setChangingPassword(false); // ONLY EXIT THE CHANGING PASSWORD PAGE IF PASSWORD CHANGE IS SUCCESSFUL. IF WRONG CURRENT PASSWORD, STAY ON PAGE
+            if (message !== "Your password has been successfully changed!"){
+                setErrorMessage(message);
+            }
+            else{
+                setShowEditSuccessfulModal(true);
             }
         }
+    }
+
+    useEffect(() =>{
+        console.log(newUserDetails);
+    }, [newUserDetails])
+
+    function handleCloseEditSuccessfulModal(){
+        if(changingName){
+            setUserDetails(newUserDetails); // UPDATE PREVIOUS USER DETAILS TO THE NEW ONE WITHOUT HAVING TO RELOAD THE PAGE
+            setChangingName(false);
+        }
+        else if(changingPassword){
+            setChangingPassword(false);
+            setNewUserDetails(userDetails);
+        }
+        setShowEditSuccessfulModal(false)
+        setErrorMessage('');
     }
 
     async function handleDeleteAccount() {
@@ -211,6 +232,10 @@ function ProfilePage() {
 
                         <input className={styles.inputFirstName} type="text" name="FirstName" onChange={handleChange} placeholder={userDetails.FirstName === newUserDetails.FirstName ? userDetails.FirstName : ''} />
                         <input type="text" name="LastName" onChange={handleChange} placeholder={userDetails.LastName === newUserDetails.LastName ? userDetails.LastName : ''} />
+                        
+                        {errorMessage && (
+                            <div className={styles.errorMessage}><IoWarningOutline className={styles.errorIcon}/> {errorMessage}</div>
+                        )}
 
                         <button onClick={handleNameSave}>Save Changes</button>
                         <button onClick={handleCancel}>Cancel</button>
@@ -224,16 +249,21 @@ function ProfilePage() {
                         <input type="password" name="NewPassword" onChange={handleChange} placeholder="New Password" />
                         <input type="password" name="ConfirmPassword" onChange={handleChange} placeholder="Confirm Password" />
 
-                        {/* {errorMessage && (
-                            <p className={styles.errorMessage}><IoWarningOutline className={styles.errorIcon}/> {errorMessage}</p>
-                        )} */}
-
-                        <button onClick={handlePasswordSave}>Confirm Change Password</button>
-                        <button onClick={handleCancel}>Cancel</button>
-
+                        {errorMessage && (
+                            <div className={styles.errorMessage}><IoWarningOutline className={styles.errorIcon}/> {errorMessage}</div>
+                        )}
                         
+                        <button onClick={handlePasswordSave}>Confirm Change Password</button>
+                        <button onClick={handleCancel}>Cancel</button> 
                     </div>
                 )}
+
+                {showEditSuccessfulModal &&
+                    <EditSuccessfulModal 
+                        nameOrPassword={changingName ? 'name' : 'password'}
+                        closeEditSuccessfulModal={handleCloseEditSuccessfulModal}
+                    />
+                }
             </div>
         </div>
     );
