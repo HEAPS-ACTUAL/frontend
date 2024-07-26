@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "../../../styles/FlashcardModal.module.css";
-import calendarImage from '../../../images/calendar.png';
-import { getFlashcardsByScheduleID } from "../../../services/FlashcardService";
+import styles from "../../styles/FlashcardModal.module.css";
+import calendarImage from '../../images/calendar.png';
+import { getFlashcardsByScheduleID } from "../../services/FlashcardService";
 
 function FlashcardModal({ isOpen, scheduleID, onClose }) {
     const navigate = useNavigate();

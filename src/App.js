@@ -49,8 +49,10 @@ function App() {
                     path="/loading-page/*"
                     element={IsLoggedIn ? <LoadingPage /> : <Navigate to="/login" />} // REDIRECT TO SIGN IN PAGE IF NOT LOGGED IN
                 />
+
                 <Route path='/verify-email' element={<VerifyEmail />}></Route>
                 <Route path='/profile' element={<ProfilePage />}></Route>
+
             </Routes>
         </Router>
     );

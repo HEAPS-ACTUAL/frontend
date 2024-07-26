@@ -1,9 +1,11 @@
 import React from 'react';
-import styles from '../../../styles/DeleteConfirmationModal.module.css';
-
-import { deleteExistingExam, deleteSpecificRevisionDate } from '../../../services/ScheduleService';
+import { useNavigate } from 'react-router-dom';
+import styles from '../../styles/DeleteConfirmationModal.module.css';
+import { deleteExistingExam, deleteSpecificRevisionDate } from '../../services/ScheduleService';
 
 function DeleteConfirmationModal({ isOpen, closeModal, event }) {
+    const navigate = useNavigate();
+
     if (!isOpen){
         return null;
     }
@@ -17,8 +19,16 @@ function DeleteConfirmationModal({ isOpen, closeModal, event }) {
         const result = await deleteExistingExam(scheduleID);
 
         if (result === 'ok deleted entire exam from db') { // message from the backend
-            window.alert(`${examName} deleted successfully!`);
-            window.location.reload();
+            navigate(
+                '../../../loading-page', 
+                {state: 
+                    {
+                        duration: 1500, 
+                        messageArray: [`Deleting ${examName}...`], 
+                        redirect: '/home/revision-schedule'
+                    } 
+                }
+            )
         } 
         else { 
             window.alert('Failed to delete the exam, try again'); 
@@ -30,9 +40,17 @@ function DeleteConfirmationModal({ isOpen, closeModal, event }) {
         const result = await deleteSpecificRevisionDate(scheduleID, date); 
         
         if (result === 'ok deleted specific date from db') {
-            window.alert(`Revision date deleted successfully!`);
-            window.location.reload();
-        } 
+            navigate(
+                '../../../loading-page', 
+                {state: 
+                    {
+                        duration: 1500, 
+                        messageArray: [`Deleting revision date for ${examName}...`], 
+                        redirect: '/home/revision-schedule'
+                    } 
+                }
+            )
+        }
         else {
             window.alert('Failed to delete revision date, try again');
         }
@@ -44,7 +62,7 @@ function DeleteConfirmationModal({ isOpen, closeModal, event }) {
                 <h2>Delete Event</h2>
                 <p>Do you want to delete all revision dates or just the selected date?</p>
                 <div className={styles.buttonGroup}>
-                    <button onClick={handleDeleteAll}>Delete All</button>
+                    <button onClick={handleDeleteAll} >Delete All</button>
                     <button onClick={handleDeleteOne}>Delete Selected Date</button>
                     <button onClick={closeModal}>Cancel</button>
                 </div>

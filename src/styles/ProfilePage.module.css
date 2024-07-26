@@ -127,7 +127,7 @@
 }
 
 .profileContainer button:hover {
-    background-color: #75aae2;
+    background-color: rgba(70, 99, 172, 0.7);
     color: #fff;
 }
 
@@ -145,8 +145,23 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 100%;
+    width: 540px;
 }
+
+.errorMessage {
+    /* display: flex;
+    align-items: center;
+    min-height: 20px;
+    height: 20px;
+    gap: 8px; */
+    margin: 10px 0px;
+    color: red;
+}
+
+.errorIcon {
+    margin-right: 4px;
+}
+
 
 .tickIcon {
     color: green;
@@ -182,3 +197,4 @@
   display: inline-block;
   text-align: center;
 }
+
