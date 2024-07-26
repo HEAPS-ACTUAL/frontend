@@ -1,12 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from '../../styles/DeleteConfirmationModal.module.css';
-
 import { deleteExistingExam, deleteSpecificRevisionDate } from '../../services/ScheduleService';
 
-
 function DeleteConfirmationModal({ isOpen, closeModal, event }) {
-
     const navigate = useNavigate();
 
     if (!isOpen){
@@ -27,7 +24,7 @@ function DeleteConfirmationModal({ isOpen, closeModal, event }) {
                 {state: 
                     {
                         duration: 1500, 
-                        messageArray: [`Deleting exam...`], 
+                        messageArray: [`Deleting ${examName}...`], 
                         redirect: '/home/revision-schedule'
                     } 
                 }
@@ -48,7 +45,7 @@ function DeleteConfirmationModal({ isOpen, closeModal, event }) {
                 {state: 
                     {
                         duration: 1500, 
-                        messageArray: [`Deleting revision date...`], 
+                        messageArray: [`Deleting revision date for ${examName}...`], 
                         redirect: '/home/revision-schedule'
                     } 
                 }

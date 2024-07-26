@@ -19,8 +19,11 @@ import interactionPlugin from "@fullcalendar/interaction";
 import DayModal from "../../modals/DayModal";
 import DeleteConfirmationModal from "../../modals/DeleteConfirmationModal";
 import FlashcardModal from '../../modals/FlashcardModal';
+import { useNavigate } from 'react-router-dom';
 
 function Calendar() {
+    const navigate = useNavigate();
+
     // GET EMAIL OF USER TO BE USED IN SOME OF THE FUNCTIONS BELOW
     const email = sessionStorage.getItem("userEmail");
 
@@ -142,8 +145,16 @@ function Calendar() {
             try {
                 await createNewExam(startDate, endDate, examName, examColour, selectedTestIDs);
 
-                setErrorMessage("Schedule generated successfully!");
-                // window.location.reload(); // REFRESH THE PAGE SO FORM INPUT FIELDS WILL BE RESET
+                navigate(
+                    '../../../loading-page', 
+                    {state: 
+                        {
+                            duration: 1500, 
+                            messageArray: [`Creating revision schedule now...`], 
+                            redirect: '/home/revision-schedule'
+                        } 
+                    }
+                )
             }
             catch (error) {
                 window.alert("Failed to generate schedule:", error.message || "Error");
