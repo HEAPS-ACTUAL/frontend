@@ -19,6 +19,7 @@ import { IoWarningOutline } from "react-icons/io5";
 // Functions
 import { getUserByEmail, updateUserDetails, deleteUserAccount, } from "../../services/UserService";
 import {sendVerificationEmail } from '../../services/EmailServices';
+import { handleLogOut } from "../../services/ProtectionService";
 
 function ProfilePage() {
     const navigate = useNavigate();
@@ -168,8 +169,7 @@ function ProfilePage() {
         if (window.confirm("Are you sure you want to delete your account? This cannot be undone.")) {
             const message = await deleteUserAccount(email);
             alert(message);
-
-            sessionStorage.clear();
+            handleLogOut();
             navigate('../login');
         }
     }
