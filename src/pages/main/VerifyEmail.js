@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 // icons
 import { SiTicktick } from "react-icons/si";
 import { CgCloseO } from "react-icons/cg";
+import { IoWarningOutline } from "react-icons/io5";
 
 // functions
 import { verifyToken, sendVerificationEmail } from '../../services/EmailServices';
@@ -17,6 +18,7 @@ const VerifyEmail = () =>{
     const [email, setEmail] = useState("");
     const [isDisabled, setIsDisabled] = useState(false);
     const [cooldown, setCooldown] = useState(true);
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(()=>{
         const params = new URLSearchParams(location.search);
@@ -51,24 +53,23 @@ const VerifyEmail = () =>{
     async function handleTokenVerification(token){
         const verification = await verifyToken(token);
         setVerifyOk(verification);
-        console.log(verification);
     }
 
     async function handleSignInButton(event){
         event.preventDefault();
         navigate('/login');
-        
     }
 
     function handleSendEmail(event){
         event.preventDefault();
 
         if(email === ""){
-            window.alert("Please enter a valid email address!");
+            setErrorMessage("Please enter a valid email address!");
         }
-        else {           
-            sendVerificationEmail(email);
+        else {
             alert('A verification link has been sent to the registered email!')
+            setErrorMessage('');
+            sendVerificationEmail(email);
             setIsDisabled(true)
             setCooldown(20)
         }
@@ -102,6 +103,9 @@ const VerifyEmail = () =>{
                     <input type="email" placeholder="Enter Email Here" onChange={(event) => setEmail(event.target.value)}></input>
                 </div>
                 
+                {errorMessage &&
+                    <div className={styles.errorMessage}> <IoWarningOutline/> {errorMessage} </div>
+                }
                 <div className={styles.buttonAndCooldown}>
                     <button disabled={isDisabled} type="submit" className={styles.btnSendEmail}>
                         Send a New Verification Email

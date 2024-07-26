@@ -115,3 +115,9 @@
     right: -23px;
     top: 20px;
 }
+
+.errorMessage {
+    margin-left: 11px;
+    margin-bottom: 5px;
+    color: red;
+}

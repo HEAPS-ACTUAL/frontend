@@ -5,6 +5,9 @@ import styles from "../../styles/ProfilePage.module.css";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
+// modal
+import EditSuccessfulModal from '../modals/ChangeUserDetailsModal';
+
 // icons & images
 import femaleProfileImage from "../../images/female_pfp.png";
 import maleProfileImage from "../../images/male_pfp.png";
@@ -12,7 +15,6 @@ import { FaEdit } from "react-icons/fa";
 import { SiTicktick } from "react-icons/si";
 import { CgCloseO } from "react-icons/cg";
 import { IoWarningOutline } from "react-icons/io5";
-import EditSuccessfulModal from '../modals/ChangeUserDetailsModal';
 
 // Functions
 import { getUserByEmail, updateUserDetails, deleteUserAccount, } from "../../services/UserService";
