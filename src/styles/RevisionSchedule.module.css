@@ -116,7 +116,7 @@
     transition: background-color 0.3s; 
 }
 
-global(.fc-daygrid-day-number) {
+:global(.fc-daygrid-day-number) {
     font-weight: bold; 
 }
 

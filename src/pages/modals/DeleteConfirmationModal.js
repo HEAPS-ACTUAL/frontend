@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from '../../../styles/DeleteConfirmationModal.module.css';
+import styles from '../../styles/DeleteConfirmationModal.module.css';
 
-import { deleteExistingExam, deleteSpecificRevisionDate } from '../../../services/ScheduleService';
+import { deleteExistingExam, deleteSpecificRevisionDate } from '../../services/ScheduleService';
 
 
 function DeleteConfirmationModal({ isOpen, closeModal, event }) {

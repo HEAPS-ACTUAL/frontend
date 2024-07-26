@@ -16,9 +16,9 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 
 // day modal component
-import DayModal from "./DayModal";
-import DeleteConfirmationModal from "./DeleteConfirmationModal";
-import FlashcardModal from './FlashcardModal';
+import DayModal from "../../modals/DayModal";
+import DeleteConfirmationModal from "../../modals/DeleteConfirmationModal";
+import FlashcardModal from '../../modals/FlashcardModal';
 
 function Calendar() {
     // GET EMAIL OF USER TO BE USED IN SOME OF THE FUNCTIONS BELOW
@@ -143,10 +143,10 @@ function Calendar() {
                 await createNewExam(startDate, endDate, examName, examColour, selectedTestIDs);
 
                 setErrorMessage("Schedule generated successfully!");
-                window.location.reload(); // REFRESH THE PAGE SO FORM INPUT FIELDS WILL BE RESET
+                // window.location.reload(); // REFRESH THE PAGE SO FORM INPUT FIELDS WILL BE RESET
             }
             catch (error) {
-                console.error("Failed to generate schedule:", error.message || "Error");
+                window.alert("Failed to generate schedule:", error.message || "Error");
             }
         }
     };

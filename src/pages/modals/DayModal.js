@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import styles from "../../../styles/DayModal.module.css";
+import styles from "../../styles/DayModal.module.css";
 import { FaTrashCan } from "react-icons/fa6";
-import postItIcon from "../../../images/post-it.png";
+import postItIcon from "../../images/post-it.png";
 
 function DayModal({ date, events, handleEventClick, handleDeleteClicked }) {
     const [formattedDate, setFormattedDate] = useState("");

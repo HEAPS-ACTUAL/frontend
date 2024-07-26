@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from '../../styles/SignIn.module.css';
 
 // Components
-import AccountCreatedModal from './AccountCreatedModal';
+import AccountCreatedModal from '../modals/AccountCreatedModal';
 
 // functions
 import { authenticate, createNewUser } from '../../services/UserService';
