@@ -132,7 +132,7 @@
 
 .errorMessageRegister {
     color: red;
-    /* position: fixed;  */
+    position: fixed;
     bottom: 20px; 
 
 }
