@@ -74,7 +74,7 @@ const QuizFeature = () => {
             {/* display the options */}
             <div className={styles.optionsContainer}>
 
-                {JSON.parse(questionsOptionsArray[currentQuestionIndex]['Options']).map((option_obj) => (
+                {(questionsOptionsArray[currentQuestionIndex]['Options']).map((option_obj) => (
                     <div 
                         key = {option_obj['OptionLetter']}
                         onClick = {() => handleAnswerChange(questionsOptionsArray[currentQuestionIndex]['QuestionNo'], option_obj['OptionLetter'])}

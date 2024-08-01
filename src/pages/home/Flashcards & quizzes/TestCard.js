@@ -13,10 +13,6 @@ import { deleteTest } from '../../../services/TestService';
 function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, attempts, selectedButton}){
     dateCreated = dateCreated.slice(0,10);
 
-    if(attempts !== undefined){
-        attempts = JSON.parse(attempts);
-    }
-
     const navigate = useNavigate();
 
     function handleTestClicked(){

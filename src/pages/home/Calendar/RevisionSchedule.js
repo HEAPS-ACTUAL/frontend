@@ -78,13 +78,13 @@ function Calendar() {
             const formattedCalendarEventsArray = returnedArray.flatMap((exam) => {
 
                 // an array of revision date objects
-                const revisionDates = JSON.parse(exam.RevisionDates).map((date) => ({
+                const revisionDates = exam.RevisionDates.map((date) => ({
                     id: [exam.ScheduleID, date],
                     title: exam.ExamName,
                     start: date,
                     backgroundColor: exam.ExamColour,
                     borderColor: 'transparent',
-                    flashcards: JSON.parse(exam.Flashcards)
+                    flashcards: exam.Flashcards
                 }))
 
                 // create an object for the exam date
@@ -94,7 +94,7 @@ function Calendar() {
                     start: exam.EndDate ? exam.EndDate.slice(0, 10) : null,
                     backgroundColor: exam.ExamColour,
                     borderColor: 'black',
-                    flashcards: JSON.parse(exam.Flashcards)
+                    flashcards: exam.Flashcards
                 }
 
                 revisionDates.push(examDates); // append the exam date object into the array of revision date objects
