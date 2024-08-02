@@ -24,10 +24,10 @@ const ResultsPage = () => {
             setUserScore(returnedArray['NumOfCorrectAnswers']);
             setTotalQns(returnedArray['TotalNumOfQuestions']);
             
-            const questionsAndAnswersArray = JSON.parse(returnedArray['QuestionsAndAnswers']);
+            const questionsAndAnswersArray = returnedArray['QuestionsAndAnswers'];
             setQuizReviewArray(questionsAndAnswersArray);
 
-            const allAttemptsArray = JSON.parse(returnedArray['Attempts']);
+            const allAttemptsArray = returnedArray['Attempts'];
             setAllAttempts(allAttemptsArray);
         }
         
