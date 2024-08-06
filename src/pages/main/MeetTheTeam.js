@@ -3,17 +3,17 @@ import styles from "../../styles/MeetTheTeam.module.css";
 
 // import the images
 import arin from "../../images/MeetTheTeam/arin.jpg";
-import jerrick from "../../images/MeetTheTeam/jerrick.jpg";
+import jerrick from "../../images/MeetTheTeam/jerrick.JPG";
 import shihui from "../../images/MeetTheTeam/shihui.jpg";
-import chloe from "../../images/MeetTheTeam/chloe.jpg";
-import isaiah from "../../images/MeetTheTeam/isaiah.jpg";
+import chloe from "../../images/MeetTheTeam/chloe.JPG";
+import isaiah from "../../images/MeetTheTeam/isaiah.JPG";
 
 const teamMembers = [
-  { name: "Arin Mak", position: "Mummy", image: arin },
-  { name: "Jerrick Ng", position: "SQL Simp", image: jerrick },
-  { name: "Fong Shi Hui", position: "a loser", image: shihui },
-  { name: "Isaiah Chia", position: "Director", image: isaiah },
-  { name: "Chloe Tay", position: "another loser", image: chloe },
+  { name: "Arin Mak", position: "UI/UX Developer", image: arin },
+  { name: "Jerrick Ng", position: "Developer", image: jerrick },
+  { name: "Fong Shi Hui", position: "Developer", image: shihui },
+  { name: "Isaiah Chia", position: "Team Lead", image: isaiah },
+  { name: "Chloe Tay", position: "UI/UX Developer", image: chloe },
 ];
 
 const MeetTheTeam = () => {
