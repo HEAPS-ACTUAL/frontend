@@ -3,10 +3,10 @@ import styles from "../../styles/MeetTheTeam.module.css";
 
 // import the images
 import arin from "../../images/MeetTheTeam/arin.jpg";
-import jerrick from "../../images/MeetTheTeam/jerrick.JPG";
+import jerrick from "../../images/MeetTheTeam/jerrick.jpg";
 import shihui from "../../images/MeetTheTeam/shihui.jpg";
-import chloe from "../../images/MeetTheTeam/chloe.JPG";
-import isaiah from "../../images/MeetTheTeam/isaiah.JPG";
+import chloe from "../../images/MeetTheTeam/chloe.jpg";
+import isaiah from "../../images/MeetTheTeam/isaiah.jpg";
 
 const teamMembers = [
   { name: "Arin Mak", position: "UI/UX Developer", image: arin },
