@@ -10,8 +10,8 @@ import isaiah from "../../images/MeetTheTeam/isaiah.JPG";
 
 const teamMembers = [
   { name: "Arin Mak", position: "UI/UX Developer", image: arin },
-  { name: "Jerrick Ng", position: "Developer", image: jerrick },
-  { name: "Fong Shi Hui", position: "Developer", image: shihui },
+  { name: "Jerrick Ng", position: "Fullstack Developer", image: jerrick },
+  { name: "Fong Shi Hui", position: "Backend Developer", image: shihui },
   { name: "Isaiah Chia", position: "Team Lead", image: isaiah },
   { name: "Chloe Tay", position: "UI/UX Developer", image: chloe },
 ];
