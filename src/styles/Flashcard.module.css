@@ -135,7 +135,7 @@
     gap: 20px; 
 }
  
-.previousBtn, .nextBtn, .RevisionScheduleButton, .HomeButton {
+.previousBtn, .nextBtn, .RevisionScheduleButton, .HomeButton, .EditButton {
     font-size: 35px;
     display: flex;
     justify-content: center;
@@ -152,11 +152,11 @@
 
 }
 
-.RevisionScheduleButton, .HomeButton {
+.RevisionScheduleButton, .HomeButton, .EditButton {
     font-size: 28px;
 }
 
-.previousBtn:hover, .previousBtn:focus, .nextBtn:hover, .nextBtn:focus, .HomeButton:hover, .RevisionScheduleButton:hover {
+.previousBtn:hover, .previousBtn:focus, .nextBtn:hover, .nextBtn:focus, .HomeButton:hover, .RevisionScheduleButton:hover, .EditButton:hover {
     background-color: rgba(70, 99, 172, 0.6);
     transform: scale(1.1);  
     outline: none; 
@@ -189,5 +189,39 @@
     width: 100%; /* Ensure it takes the full width */
 }
 
+textarea {
+    width: 100%;
+    height: 250px;
+    font-size: 20px;
+    padding: 30px;
+    margin: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-align: center;
+    resize: none;
+    font-weight: bold;
+}
 
-  
+.cancelBtn, .confirmBtn {
+    width: 120px !important;
+    height: 40px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px !important;
+    cursor: pointer;
+    margin-left: 20px;
+    display: inline-block;
+    margin-top: 350px;
+}
+
+.cancelBtn:hover, .confirmBtn:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.cancelBtnHidden, .confirmBtnHidden {
+    display: none;
+}
