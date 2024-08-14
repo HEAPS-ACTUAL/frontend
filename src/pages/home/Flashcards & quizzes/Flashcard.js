@@ -10,6 +10,7 @@ import flipIcon from '../../../images/flip (1).png';
 
 // Import functions
 import { getAllQuestionsAndOptionsFromATest } from '../../../services/TestService';
+import { updateFlashcard } from '../../../services/FlashcardService';
 
 const Flashcard = () => {
     const location = useLocation();
@@ -22,6 +23,8 @@ const Flashcard = () => {
     const [isFlipped, setIsFlipped] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
+    const [newUpdatedText, setNewUpdatedText] = useState("");
+
 
     const toggleFlip = () => {
         setIsFlipped(!isFlipped);
@@ -79,6 +82,11 @@ const Flashcard = () => {
     }
 
     const handleEditFlashcard = () => {
+        if (!isFlipped){
+            setNewUpdatedText(flashcardArray[CurrentFlashcardIndex]["QuestionText"]);
+        }else{
+            setNewUpdatedText(flashcardArray[CurrentFlashcardIndex]["Elaboration"]);
+        }
         setIsEditing(!isEditing);
         setIsDisabled(!isDisabled);
     }
@@ -86,8 +94,18 @@ const Flashcard = () => {
         return;
     }
 
-    const handleTextUpdate = () => {
+    const handleChange = (event) => {
+        const {name, value} = event.target;
+        setNewUpdatedText(value);
+        
+    }
+    const handleConfirm = async () => {
+        const updateStatus = await updateFlashcard(testID, newUpdatedText, isFlipped);
+        if (updateStatus === "Flashcard updated successfully"){
+            setIsEditing(!isEditing);
+            window.location.reload();
 
+        }
     }
 
     if (flashcardArray.length === 0) {
@@ -100,15 +118,15 @@ const Flashcard = () => {
             
             <div onClick={isDisabled ? disableFlip : toggleFlip} className={`${styles.FlashcardContainer} ${isFlipped ? styles.isFlipped : ''}`}>
                 <div className={styles.FlashcardFace + " " + styles.FrontFlashcardContent}>
-                    { isEditing ? <textarea placeholder={`${flashcardArray[CurrentFlashcardIndex]["QuestionText"]}`} id='editTextBox' name='updatedText'/> : flashcardArray[CurrentFlashcardIndex]["QuestionText"]}
+                    { isEditing ? <textarea value={newUpdatedText} id='editTextBox' name='updatedText' onChange={handleChange}/> : flashcardArray[CurrentFlashcardIndex]["QuestionText"]}
                 </div>
-                <div>
+                <div className={`${styles.FlashcardFace} ${ isFlipped ? styles.BackFlashcardContent : styles.FrontFlashcardContent}`}>
                     <button title='cancelEdit' onClick={handleEditFlashcard} className={isEditing ? styles.cancelBtn : styles.cancelBtnHidden }>Cancel</button>
-                    <button title='confirmEdit' onClick={handleTextUpdate} className={ `${isEditing ? styles.confirmBtn : styles.confirmBtnHidden} ${isFlipped ? styles.isFlipped : ''}` }>Confirm</button>
+                    <button title='confirmEdit' onClick={handleConfirm} className={ `${isEditing ? styles.confirmBtn : styles.confirmBtnHidden}` }>Confirm</button>
                 </div>
 
                 <div className={styles.FlashcardFace + " " + styles.BackFlashcardContent}>
-                { isEditing ? <textarea placeholder={`${flashcardArray[CurrentFlashcardIndex]["Elaboration"]}`} id='editTextBox' name='updatedText'/> : flashcardArray[CurrentFlashcardIndex]["Elaboration"]}
+                { isEditing ? <textarea value={newUpdatedText} id='editTextBox' name='updatedText' onChange={handleChange} />   : flashcardArray[CurrentFlashcardIndex]["Elaboration"]} 
                 </div>
                 <img src={flipIcon} alt='flip flashcard icon' title='flip flashcard' className={`${!isFlipped ? styles.flipIconFront : styles.flipIconBack}`} /> 
             </div>

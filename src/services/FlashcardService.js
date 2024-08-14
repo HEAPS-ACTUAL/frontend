@@ -69,4 +69,21 @@ async function getFlashcardsByScheduleID(scheduleID){
     }
 }
 
-export { generateFlashcard, getAllFlashcardsByUser, getAllFlashcardsWithoutSchedule, getFlashcardsByScheduleID };
+async function updateFlashcard(testID, updatedText, isBack){
+    try {
+        const response = await axiosInstance({
+            method: "post",
+            url: "/flashcard/updateFlashcard",
+            data: {testID: testID, updatedText: updatedText, isBack: isBack}
+        });
+
+        return response.data.message;
+    }
+    catch (error) {
+        if (error.response) {
+            return error.response.data.message;
+        }
+    }
+}
+
+export { generateFlashcard, getAllFlashcardsByUser, getAllFlashcardsWithoutSchedule, getFlashcardsByScheduleID, updateFlashcard };
