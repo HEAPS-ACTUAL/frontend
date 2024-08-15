@@ -65,8 +65,8 @@ function About() {
 
                 <div className={styles.box} data-aos="fade-up" data-aos-delay="500">
                     <FaRegBell className={styles.icon} />
-                    <div className={styles.title}> Review with Smart Reminders<br></br></div>
-                    <div className={styles.info}>Get timely pop-up quizzes without disrupting your flow</div>
+                    <div className={styles.title}> Generate Smart Revision Schedule<br></br></div>
+                    <div className={styles.info}>Explore our special spaced repetition algorithm</div>
                 </div>
 
                 <div className={styles.box} data-aos="fade-up" data-aos-delay="600">
