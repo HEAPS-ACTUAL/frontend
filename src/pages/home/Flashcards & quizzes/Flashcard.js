@@ -5,69 +5,106 @@ import styles from '../../../styles/Flashcard.module.css';
 //icons
 import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
 import { GrSchedules } from "react-icons/gr";
-import { FaHome } from "react-icons/fa";
+import { FaHome, FaEdit } from "react-icons/fa";
 import flipIcon from '../../../images/flip (1).png';
 
 // Import functions
 import { getAllQuestionsAndOptionsFromATest } from '../../../services/TestService';
 
+import ConfirmModal from '../../modals/ConfirmModal';
+
 const Flashcard = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const {testID} = (location.state); // retrieve testID from Flashcard page
-    
+    const { testID } = (location.state); // retrieve testID from Flashcard page
+
     const [flashcardArray, setFlashcardArray] = useState([]);
     const [CurrentFlashcardIndex, setCurrentFlashcardIndex] = useState(0);
-    
+
     const [isFlipped, setIsFlipped] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(false);
+    const [newUpdatedText, setNewUpdatedText] = useState("");
+
+    // State for confirmation modal
+    const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+
+
     const toggleFlip = () => {
         setIsFlipped(!isFlipped);
     }
 
     useEffect(() => {
-        async function fetchTestQuestions(){
+        async function fetchTestQuestions() {
             const flashcardQuestions = await getAllQuestionsAndOptionsFromATest(testID);
             setFlashcardArray(flashcardQuestions);
         }
-
         fetchTestQuestions();
 
     }, [testID])
-    
+
     useEffect(() => {
-        const handleKeyDown = (event) => {
-            if (event.code === 'ArrowLeft') {
-                handlePreviousFlashcard();
-            } 
-            else if (event.code === 'ArrowRight') {
-                handleNextFlashcard();
-            }
-            else if (event.code === 'Space') {
-                event.preventDefault();
-                toggleFlip();
-            }
-        };
-    
-        window.addEventListener('keydown', handleKeyDown);
-    
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-        };
+
+        if (isDisabled) {
+            const handleKeyDown = null;
+        } else {
+            const handleKeyDown = (event) => {
+                if (event.code === 'ArrowLeft') {
+                    handlePreviousFlashcard();
+                }
+                else if (event.code === 'ArrowRight') {
+                    handleNextFlashcard();
+                }
+                else if (event.code === 'Space') {
+                    event.preventDefault();
+                    toggleFlip();
+                }
+            };
+
+            window.addEventListener('keydown', handleKeyDown);
+
+            return () => {
+                window.removeEventListener('keydown', handleKeyDown);
+            };
+        }
     })
 
     // control navigation through the array of flashcards
     const handleNextFlashcard = () => {
-        if(CurrentFlashcardIndex < flashcardArray.length -1){
+        if (CurrentFlashcardIndex < flashcardArray.length - 1) {
             setCurrentFlashcardIndex(CurrentFlashcardIndex + 1)
             setIsFlipped(false);
         }
     }
 
-    const handlePreviousFlashcard = () =>{
-        if(CurrentFlashcardIndex > 0){
+    const handlePreviousFlashcard = () => {
+        if (CurrentFlashcardIndex > 0) {
             setCurrentFlashcardIndex(CurrentFlashcardIndex - 1);
-            setIsFlipped(false); 
+            setIsFlipped(false);
         }
+    }
+
+    const handleEditFlashcard = () => {
+        if (!isFlipped) {
+            setNewUpdatedText(flashcardArray[CurrentFlashcardIndex]["QuestionText"]);
+        } else {
+            setNewUpdatedText(flashcardArray[CurrentFlashcardIndex]["Elaboration"]);
+        }
+        setIsEditing(!isEditing);
+        setIsDisabled(!isDisabled);
+    }
+    const disableFlip = () => {
+        return;
+    }
+
+    const handleChange = (event) => {
+        const { value } = event.target;
+        setNewUpdatedText(value);
+
+    }
+
+    const handleConfirm = () => {
+        setIsConfirmModalOpen(true);
     }
 
     if (flashcardArray.length === 0) {
@@ -75,32 +112,41 @@ const Flashcard = () => {
         // without this, the page will show error as the flashcardArray will be undefined while awaiting
     }
 
-    return(
+    return (
         <div className={styles.wrapper}>
-            
-            <div onClick={toggleFlip} className={`${styles.FlashcardContainer} ${isFlipped ? styles.isFlipped : ''}`}>
+
+            <div onClick={isDisabled ? disableFlip : toggleFlip} className={`${styles.FlashcardContainer} ${isFlipped ? styles.isFlipped : ''}`}>
                 <div className={styles.FlashcardFace + " " + styles.FrontFlashcardContent}>
-                    {flashcardArray[CurrentFlashcardIndex]["QuestionText"]}
+                    {isEditing ? <textarea value={newUpdatedText} id='editTextBox' name='updatedText' onChange={handleChange} /> : flashcardArray[CurrentFlashcardIndex]["QuestionText"]}
+                </div>
+                <div className={`${styles.FlashcardFace} ${isFlipped ? styles.BackFlashcardContent : styles.FrontFlashcardContent}`}>
+                    <button title='cancelEdit' onClick={handleEditFlashcard} className={isEditing ? styles.cancelBtn : styles.cancelBtnHidden}>Cancel</button>
+                    <button title='confirmEdit' onClick={handleConfirm} className={`${isEditing ? styles.confirmBtn : styles.confirmBtnHidden}`}>Confirm</button>
                 </div>
 
                 <div className={styles.FlashcardFace + " " + styles.BackFlashcardContent}>
-                    {flashcardArray[CurrentFlashcardIndex]["Elaboration"]}
+                    {isEditing ? <textarea value={newUpdatedText} id='editTextBox' name='updatedText' onChange={handleChange} /> : flashcardArray[CurrentFlashcardIndex]["Elaboration"]}
                 </div>
-                <img src={flipIcon} alt='flip flashcard icon' title='flip flashcard' className={`${!isFlipped ? styles.flipIconFront : styles.flipIconBack}`} /> 
+                <img src={flipIcon} alt='flip flashcard icon' title='flip flashcard' className={`${!isFlipped ? styles.flipIconFront : styles.flipIconBack}`} />
             </div>
 
             <div className={styles.buttons}>
                 <button title='previous flashcard' className={styles.previousBtn} onClick={handlePreviousFlashcard} disabled={CurrentFlashcardIndex === 0}> <BsArrowLeftShort /></button>
                 <button title='revision schedule' className={styles.RevisionScheduleButton} onClick={() => navigate('/home/revision-schedule')}><GrSchedules /></button>
                 <button title='home' className={styles.HomeButton} onClick={() => navigate('/home')}><FaHome /></button>
+                <button title='edit' className={styles.EditButton} onClick={handleEditFlashcard} ><FaEdit /></button>
+
                 <button title='next flashcard' className={styles.nextBtn} onClick={handleNextFlashcard} disabled={CurrentFlashcardIndex === flashcardArray.length - 1} ><BsArrowRightShort /></button>
 
             </div>
 
-            <div className={styles.counter}>     
+            <div className={styles.counter}>
                 {flashcardArray[CurrentFlashcardIndex]["QuestionNo"]} of {flashcardArray.length}
             </div>
+            {isConfirmModalOpen && <ConfirmModal setIsOpen={setIsConfirmModalOpen} testID={testID} newUpdatedText={newUpdatedText} questionNo={flashcardArray[CurrentFlashcardIndex]["QuestionNo"]} isBack={isFlipped} />}
         </div>
+        
+
     )
 }
 
