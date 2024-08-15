@@ -30,7 +30,6 @@ const Flashcard = () => {
     const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 
 
-
     const toggleFlip = () => {
         setIsFlipped(!isFlipped);
     }
@@ -40,7 +39,6 @@ const Flashcard = () => {
             const flashcardQuestions = await getAllQuestionsAndOptionsFromATest(testID);
             setFlashcardArray(flashcardQuestions);
         }
-
         fetchTestQuestions();
 
     }, [testID])
@@ -145,7 +143,7 @@ const Flashcard = () => {
             <div className={styles.counter}>
                 {flashcardArray[CurrentFlashcardIndex]["QuestionNo"]} of {flashcardArray.length}
             </div>
-            {isConfirmModalOpen && <ConfirmModal setIsOpen={setIsConfirmModalOpen} testID={testID} newUpdatedText={newUpdatedText} isBack={isFlipped} />}
+            {isConfirmModalOpen && <ConfirmModal setIsOpen={setIsConfirmModalOpen} testID={testID} newUpdatedText={newUpdatedText} questionNo={flashcardArray[CurrentFlashcardIndex]["QuestionNo"]} isBack={isFlipped} />}
         </div>
         
 

@@ -69,12 +69,12 @@ async function getFlashcardsByScheduleID(scheduleID){
     }
 }
 
-async function updateFlashcard(testID, updatedText, isBack){
+async function updateFlashcard(testID, updatedText, questionNo, isBack){
     try {
         const response = await axiosInstance({
             method: "post",
             url: "/flashcard/updateFlashcard",
-            data: {testID: testID, updatedText: updatedText, isBack: isBack}
+            data: {testID: testID, updatedText: updatedText, questionNo: questionNo, isBack: isBack}
         });
 
         return response.data.message;

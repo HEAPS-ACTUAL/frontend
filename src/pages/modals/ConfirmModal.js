@@ -1,27 +1,17 @@
 import React from "react";
 import styles from "../../styles/ConfirmModal.module.css";
 import { RiCloseLine } from "react-icons/ri";
-import { useNavigate } from "react-router-dom";
 
 import { updateFlashcard } from '../../services/FlashcardService';
 
 
-const ConfirmModal = ({ setIsOpen, testID, newUpdatedText, isBack }) => {
-    const navigate = useNavigate();
-
+const ConfirmModal = ({ setIsOpen, testID, newUpdatedText, questionNo, isBack }) => {
+    console.log(testID, newUpdatedText, questionNo, isBack);
     const handleConfirm = async () => {
-        const updateStatus = await updateFlashcard(testID, newUpdatedText, isBack);
+        const updateStatus = await updateFlashcard(testID, newUpdatedText, questionNo, isBack);
         if (updateStatus === 'Flashcard updated successfully') { // message from the backend
-            navigate(
-                '../../../loading-page', 
-                {state: 
-                    {
-                        duration: 1500, 
-                        messageArray: [`Updating Flashcard...`], 
-                        redirect: `/home/test/flashcard?testID=${testID}`,
-                    } 
-                }
-            )
+            setTimeout(window.location.reload(), 2000);
+            
         } 
         else { 
             window.alert('Failed to update the flashcard, try again'); 
