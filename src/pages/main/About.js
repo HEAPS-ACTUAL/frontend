@@ -5,7 +5,7 @@ import { isLoggedIn } from '../../services/ProtectionService';
 
 //react icons
 import { RxLightningBolt } from "react-icons/rx";
-import { FaRegBell } from "react-icons/fa";
+import { PiCalendar } from "react-icons/pi";
 import { GiMaterialsScience } from "react-icons/gi";
 import { IoSparkles } from "react-icons/io5";
 
@@ -64,7 +64,7 @@ function About() {
                 </div>
 
                 <div className={styles.box} data-aos="fade-up" data-aos-delay="500">
-                    <FaRegBell className={styles.icon} />
+                    <PiCalendar className={styles.icon} />
                     <div className={styles.title}> Generate Smart Revision Schedule<br></br></div>
                     <div className={styles.info}>Explore our special spaced repetition algorithm</div>
                 </div>
