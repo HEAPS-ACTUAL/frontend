@@ -51,6 +51,26 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
 }
 
+.registerButton {
+    margin-top: 0;
+    padding: 10px 45px;
+    background-color: rgba(70, 99, 172, 0.4);
+    color: black;
+    font-size: 12px;
+    border: solid 0.5px white;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.registerButton:hover {
+    background-color: rgba(70, 99, 172, 0.7);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
 .container button.hidden{
     background-color: transparent;
     border-color: #fff;
@@ -85,7 +105,7 @@
 }
 
 .formContainer button {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .formContainer input,
@@ -127,7 +147,9 @@
 .errorMessageRegister {
     color: red;
     position: fixed;
-    bottom: 20px; 
+    bottom: 2px; 
+    margin-top: 10px;
+    text-align: center;
 
 }
 
@@ -230,6 +252,7 @@
     display: flex;
     align-items: center;
     gap: 10px; 
+    width: 100%;
 }
 
 .accesscodeField {
@@ -237,6 +260,7 @@
     padding: 10px;
     border: 1px solid #ccc; 
     border-radius: 4px;
+    margin-bottom: 0px;
 }
 
 .telegramIcon {
@@ -261,23 +285,28 @@
     visibility: hidden;
     background-color: #333;
     color: #fff;
-    text-align: center;
+    text-align: left;
     padding: 10px;
-    border-radius: 15px;
+    border-radius: 8px;
     position: absolute;
-    bottom: -80px;
-    left: 30%; 
-    transform: translateX(-30%); 
+    top: 50px;
+    left: 10%;
+    transform: translateX(-20px); 
     white-space: normal;
     font-size: 12px;
     line-height: 1.4;
     opacity: 0;
     transition: opacity 0.5s ease, transform 0.5s ease;
     z-index: 1000;
-    width: 250px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    width: 300px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.iconContainer:hover .HoverText {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-20px); 
+}
 
 .iconContainer:hover .HoverText {
     visibility: visible; 

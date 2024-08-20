@@ -46,6 +46,9 @@ const SignIn = () => {
             if(password !== confirmPassword){
                 setRegistrationMessage("Passwords don't match!");
             }
+            else if(accesscode !== "quizBabies#1"){
+                setRegistrationMessage("Incorrect access code!");
+            }
             else{
                 const returnedMessage = await createNewUser(email, password, firstName, lastName, gender);
                 
@@ -67,6 +70,7 @@ const SignIn = () => {
         if(email === "" || password === ""){
             setSignInMessage("All fields must be filled in!");
         }
+        
         else{
             const returnedMessage = await authenticate (email, password);
 
@@ -104,7 +108,7 @@ const SignIn = () => {
                         
                         <h1>Create Account</h1>
                         <br></br>
-                        
+
                         <div className={styles.nameContainer}>
                             <input className={styles.firstName} type="text" placeholder="First Name" value={firstName} onChange={(event) => setFirstName(event.target.value)} />
                             <input className={styles.lastName} type="text" placeholder="Last Name" value={lastName} onChange={(event) => setLastName(event.target.value)} />
@@ -130,10 +134,10 @@ const SignIn = () => {
                                 <a href="https://t.me/+XoP6ElrLNBYzZThl" target="_blank" rel="noopener noreferrer">
                                 <ImTelegram className={styles.telegramIcon}/>
                                 </a>
-                                <span className={styles.HoverText}>Join our Telegram channel!<br></br> or tele @arinmakkk for an access code to register for an account </span>
+                                <span className={styles.HoverText}>Join our Telegram channel!<br></br> or tele @arinmakkk for an access <br></br>code to register for an account </span>
                             </div>
                         </div>
-                        <button type="submit">Register</button>
+                        <button type="submit" className={styles.registerButton}>Register</button>
                        
                         
                         <p className={styles.errorMessageRegister}>{registrationMessage && registrationMessage}</p>
