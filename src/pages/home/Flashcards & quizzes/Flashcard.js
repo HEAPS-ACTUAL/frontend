@@ -135,7 +135,6 @@ const Flashcard = () => {
                 <button title='revision schedule' className={styles.RevisionScheduleButton} onClick={() => navigate('/home/revision-schedule')}><GrSchedules /></button>
                 <button title='home' className={styles.HomeButton} onClick={() => navigate('/home')}><FaHome /></button>
                 <button title='edit' className={styles.EditButton} onClick={handleEditFlashcard} ><FaEdit /></button>
-
                 <button title='next flashcard' className={styles.nextBtn} onClick={handleNextFlashcard} disabled={CurrentFlashcardIndex === flashcardArray.length - 1} ><BsArrowRightShort /></button>
 
             </div>

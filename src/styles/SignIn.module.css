@@ -225,3 +225,73 @@
 .container.active .toggleRight{
     transform: translateX(200%);
 }
+
+.userTesting {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+
+.accesscodeField {
+    flex-grow: 5; 
+    padding: 10px;
+    border: 1px solid #ccc; 
+    border-radius: 4px;
+}
+
+.telegramIcon {
+    font-size: 30px;
+    color: #164863;
+    cursor: pointer; 
+    cursor: pointer;
+}
+
+.telegramIcon:hover {
+    color: #1da1f2; 
+    transform: scale(1.1); 
+    transition: transform 0.3s ease, color 0.3s ease; 
+}
+.iconContainer {
+    position: relative; 
+    display: inline-block;
+    overflow: visible;
+}
+
+.HoverText {
+    visibility: hidden;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 15px;
+    position: absolute;
+    bottom: -80px;
+    left: 30%; 
+    transform: translateX(-30%); 
+    white-space: normal;
+    font-size: 12px;
+    line-height: 1.4;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    z-index: 1000;
+    width: 250px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+
+.iconContainer:hover .HoverText {
+    visibility: visible; 
+    opacity: 1; 
+    transform: translateX(-50%) translateY(0); 
+}
+
+.nameContainer{
+    display: flex;
+    gap: 10px;
+}
+
+.passwordInput {
+    display: flex;
+    gap: 10px;
+}
+

@@ -4,10 +4,12 @@ import styles from '../../styles/SignIn.module.css';
 
 // Components
 import AccountCreatedModal from '../modals/AccountCreatedModal';
+import { ImTelegram } from "react-icons/im";
 
 // functions
 import { authenticate, createNewUser } from '../../services/UserService';
 import { handleLogIn } from '../../services/ProtectionService';
+// import { access } from 'fs';
 
 const SignIn = () => {
     const [email, setEmail] = useState('');
@@ -16,6 +18,7 @@ const SignIn = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [gender, setGender] = useState('');
+    const [accesscode, setAccesscode] = useState('');
 
     const [registrationMessage, setRegistrationMessage] = useState('');
     const [signInMessage, setSignInMessage] = useState('');
@@ -30,6 +33,7 @@ const SignIn = () => {
         setFirstName('');
         setLastName('');
         setGender('');
+        setAccesscode('');
     }
 
     async function handleRegistration(event) {
@@ -100,19 +104,34 @@ const SignIn = () => {
                         
                         <h1>Create Account</h1>
                         <br></br>
-                        <div>
+                        
+                        <div className={styles.nameContainer}>
                             <input className={styles.firstName} type="text" placeholder="First Name" value={firstName} onChange={(event) => setFirstName(event.target.value)} />
                             <input className={styles.lastName} type="text" placeholder="Last Name" value={lastName} onChange={(event) => setLastName(event.target.value)} />
                         </div>
+
                         <select name="gender" onChange={(event) => setGender(event.target.value)}>
                             <option selected={gender === ''} value="">Select Gender</option>
                             <option value="M">Male</option>
                             <option value="F">Female</option>
                         </select>
+
                         <input type="email" placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)}/>
-                        <div>
+
+                        <div className={styles.passwordInput}>
                             <input type="password" placeholder="Password" value={password} onChange={(event) => setPassword(event.target.value)}/>
                             <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)}/>
+                        </div>
+
+                        <div className={styles.userTesting}>
+                            <input type="text" placeholder="AccessCode" value={accesscode} onChange={(event) => setAccesscode(event.target.value)} className={styles.accesscodeField} />
+
+                            <div className={styles.iconContainer}>
+                                <a href="https://t.me/+XoP6ElrLNBYzZThl" target="_blank" rel="noopener noreferrer">
+                                <ImTelegram className={styles.telegramIcon}/>
+                                </a>
+                                <span className={styles.HoverText}>Join our Telegram channel!<br></br> or tele @arinmakkk for an access code to register for an account </span>
+                            </div>
                         </div>
                         <button type="submit">Register</button>
                        
