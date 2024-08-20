@@ -18,7 +18,7 @@ const SignIn = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [gender, setGender] = useState('');
-    const [accesscode, setAccesscode] = useState('');
+    const [accessCode, setAccessCode] = useState('');
 
     const [registrationMessage, setRegistrationMessage] = useState('');
     const [signInMessage, setSignInMessage] = useState('');
@@ -33,7 +33,7 @@ const SignIn = () => {
         setFirstName('');
         setLastName('');
         setGender('');
-        setAccesscode('');
+        setAccessCode('');
     }
 
     async function handleRegistration(event) {
@@ -47,9 +47,9 @@ const SignIn = () => {
                 setRegistrationMessage("Passwords don't match!");
             }
             else{
-                const returnedMessage = await createNewUser(email, password, firstName, lastName, gender);
+                const returnedMessage = await createNewUser(email, password, firstName, lastName, gender, accessCode);
                 
-                if(returnedMessage === "Email already exists!"){
+                if(returnedMessage !== "Account created! Please CHECK YOUR EMAIL to verify your account."){
                     setRegistrationMessage(returnedMessage);
                 }
                 else{
@@ -125,7 +125,7 @@ const SignIn = () => {
                         </div>
 
                         <div className={styles.userTesting}>
-                            <input type="text" placeholder="AccessCode" value={accesscode} onChange={(event) => setAccesscode(event.target.value)} className={styles.accesscodeField} />
+                            <input type="text" placeholder="AccessCode" value={accessCode} onChange={(event) => setAccessCode(event.target.value)} className={styles.accessCodeField} />
 
                             <div className={styles.iconContainer}>
                                 <a href="https://t.me/+XoP6ElrLNBYzZThl" target="_blank" rel="noopener noreferrer">

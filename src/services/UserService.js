@@ -17,12 +17,12 @@ async function authenticate(email, password) {
     }
 }
 
-async function createNewUser(email, password, firstName, lastName, gender) {
+async function createNewUser(email, password, firstName, lastName, gender, accessCode) {
     try {
         const response = await axiosInstance({
             method: "post",
             url: "/user/register/",
-            data: { email, password, firstName, lastName, gender }
+            data: { email, password, firstName, lastName, gender, accessCode }
         });
 
         return response.data.message;
