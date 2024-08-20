@@ -46,9 +46,6 @@ const SignIn = () => {
             if(password !== confirmPassword){
                 setRegistrationMessage("Passwords don't match!");
             }
-            else if(accesscode !== "quizBabies#1"){
-                setRegistrationMessage("Incorrect access code!");
-            }
             else{
                 const returnedMessage = await createNewUser(email, password, firstName, lastName, gender);
                 
