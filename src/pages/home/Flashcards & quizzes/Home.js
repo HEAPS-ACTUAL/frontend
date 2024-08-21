@@ -94,7 +94,7 @@ function Home() {
                 setCreateTestMessage("File type must be PDF!");
             } 
             else if (!fileSizeWithinLimit(file)) {
-                setCreateTestMessage("Your file size exceeds the limit of 5MB.");
+                setCreateTestMessage("Your file size exceeds the limit of 20MB.");
             } 
             else {
                 countWordsInPDF(file)
