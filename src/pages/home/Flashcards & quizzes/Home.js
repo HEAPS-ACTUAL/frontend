@@ -206,21 +206,23 @@ function Home() {
                 <div className={styles.flashcardSearchBar}> <SearchBar setSearch={setSearch} placeholder='Search flashcards...'/> </div>
 
                 <div className={styles.flashcardList}>
-                    {filteredFlashcards.length === 0 
+                    {allFlashcards.length === 0 
                         ? <p className={styles.noQuizMessage}> You do not have any flashcards. Create a flashcard above! </p>
-                        : (filteredFlashcards.map((flashcard) => {
-                            return (
-                                <TestCard
-                                    key={flashcard.TestID}
-                                    testID={flashcard.TestID}
-                                    name={flashcard.TestName}
-                                    dateCreated={flashcard.DateTimeCreated}
-                                    difficulty={null}
-                                    numberOfQuestions={flashcard.numOfQuestions}
-                                    selectedButton={null}
-                                />
-                            );
-                        })
+                        : filteredFlashcards.length === 0
+                            ? <p className={styles.noQuizMessage}> Sorry, we couldn't find any flashcard that matches your search </p>
+                            :(filteredFlashcards.map((flashcard) => {
+                                return (
+                                    <TestCard
+                                        key={flashcard.TestID}
+                                        testID={flashcard.TestID}
+                                        name={flashcard.TestName}
+                                        dateCreated={flashcard.DateTimeCreated}
+                                        difficulty={null}
+                                        numberOfQuestions={flashcard.numOfQuestions}
+                                        selectedButton={null}
+                                    />
+                                );
+                            })
                     )}
                 </div>
             </div>
