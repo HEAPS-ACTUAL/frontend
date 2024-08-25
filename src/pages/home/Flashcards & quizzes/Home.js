@@ -7,6 +7,7 @@ import { getUserFirstName, getUserVerificationStatus } from "../../../services/U
 import { generateQuiz, getCompletedQuizzes, getToDoQuizzes } from "../../../services/QuizService";
 import { convertFileSizeTo2DP, fileSizeWithinLimit, fileTypeIsPDF, countWordsInPDF } from "../../../services/FileServices";
 import { generateFlashcard, getAllFlashcardsByUser } from "../../../services/FlashcardService";
+import { identifyUser } from "../../../services/PostHogAnalyticsServices";
 
 // Components
 import TestCard from "./TestCard";
@@ -16,7 +17,6 @@ function Home() {
     const email = sessionStorage.getItem("userEmail");
 
     const [firstName, setFirstName] = useState("");
-    // const [salutation, setSalutation] = useState("");
     const [quizList, setQuizList] = useState([]);
     const [flashcardList, setFlashcardList] = useState([]);
     const [selectedButton, setSelectedButton] = useState("to-do");
@@ -26,7 +26,6 @@ function Home() {
         const isVerified = await getUserVerificationStatus(email);
         if (isVerified === 1){ 
             setIsVerified(true);
-        
         }
         sessionStorage.setItem("isVerified", isVerified);
     }

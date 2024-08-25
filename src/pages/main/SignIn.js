@@ -9,7 +9,7 @@ import { ImTelegram } from "react-icons/im";
 // functions
 import { authenticate, createNewUser } from '../../services/UserService';
 import { handleLogIn } from '../../services/ProtectionService';
-// import { access } from 'fs';
+import { trackRegistration } from '../../services/PostHogAnalyticsServices';
 
 const SignIn = () => {
     const [email, setEmail] = useState('');
@@ -55,6 +55,7 @@ const SignIn = () => {
                 else{
                     setRegistrationMessage('');
                     setShowAccountCreatedModal(true);
+                    trackRegistration();
                     clearInputFields();
                 }
             }

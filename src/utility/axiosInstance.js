@@ -5,7 +5,7 @@ const BE_PROTO_IP = '18.139.224.111'; // prototype
 const localhost = 'localhost';
 
 const axiosInstance = axios.create({
-    baseURL: `http://${localhost}:8001`,
+    baseURL: `http://${BE_IP_ADDRESS}:8001`,
     headers: { "Content-Type": "application/json" },
     withCredentials: false,
 });
