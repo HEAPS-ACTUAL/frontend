@@ -7,10 +7,10 @@ import { getUserFirstName, getUserVerificationStatus } from "../../../services/U
 import { generateQuiz, getCompletedQuizzes, getToDoQuizzes } from "../../../services/QuizService";
 import { convertFileSizeTo2DP, fileSizeWithinLimit, fileTypeIsPDF, countWordsInPDF } from "../../../services/FileServices";
 import { generateFlashcard, getAllFlashcardsByUser } from "../../../services/FlashcardService";
-import { identifyUser } from "../../../services/PostHogAnalyticsServices";
 
 // Components
 import TestCard from "./TestCard";
+import SearchBar from "../../main/SearchBar";
 
 function Home() {
     const navigate = useNavigate();
@@ -18,9 +18,12 @@ function Home() {
 
     const [firstName, setFirstName] = useState("");
     const [quizList, setQuizList] = useState([]);
-    const [flashcardList, setFlashcardList] = useState([]);
+    const [allFlashcards, setAllFlashcards] = useState([]);
     const [selectedButton, setSelectedButton] = useState("to-do");
     const [isVerified, setIsVerified] = useState(false);
+
+    const [search, setSearch] = useState('');
+    const [filteredFlashcards, setFilteredFlashcards] = useState([]);
 
     async function fetchIsVerified(){
         const isVerified = await getUserVerificationStatus(email);
@@ -45,17 +48,28 @@ function Home() {
         setQuizList(CompletedQuizzesArray);
     }
 
-    async function fetchFlashcards() {
+    async function fetchAllFlashcards() {
         const FlashcardsArray = await getAllFlashcardsByUser(email);
-        setFlashcardList(FlashcardsArray);
+        setAllFlashcards(FlashcardsArray);
+        setFilteredFlashcards(FlashcardsArray);
     }
 
     useEffect(() => {
         fetchUserFirstName();
         fetchToDoQuizzes();
-        fetchFlashcards();
+        fetchAllFlashcards()
         fetchIsVerified();
     }, [email]);
+    
+    
+    async function filterFlashcards(){
+        const filteredFlashcardList = allFlashcards.filter((flashcard) => flashcard['TestName'].toLowerCase().includes(search.toLowerCase()));
+        setFilteredFlashcards(filteredFlashcardList);
+    }
+
+    useEffect(() => {
+        filterFlashcards();
+    }, [search]);
 
     const testTypeDict = {
         Flashcard: false,
@@ -189,11 +203,12 @@ function Home() {
             {/* flashcards */}
             <div className={styles.yourFlashcards}>
                 <h2> Your Flashcards </h2>
+                <div className={styles.flashcardSearchBar}> <SearchBar setSearch={setSearch} placeholder='Search flashcards...'/> </div>
 
                 <div className={styles.flashcardList}>
-                    {flashcardList.length === 0 
+                    {filteredFlashcards.length === 0 
                         ? <p className={styles.noQuizMessage}> You do not have any flashcards. Create a flashcard above! </p>
-                        : (flashcardList.map((flashcard) => {
+                        : (filteredFlashcards.map((flashcard) => {
                             return (
                                 <TestCard
                                     key={flashcard.TestID}

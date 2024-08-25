@@ -40,14 +40,12 @@
     line-height: 1.2;
     display: block;
     color: #4663ac;
-    
 }
 
 .createQuiz, .yourQuizzes, .yourFlashcards {
     padding: 20px 20px 20px 0px;
     margin: 10px 60px 0px 60px;
-    /* animation: fadeIn 2s ease-in; */
-  }
+}
 
 .container h2 {
     font-size: 28px;
@@ -121,6 +119,15 @@
 .createQuiz button:active {
     transition: 0.2s;
     transform: translate3d(0px, 2px, 0px);
+}
+
+.flashcardSearchBar {
+    margin-top: 15px;
+}
+
+.flashcardSearchBar input {
+    height: 35px;
+    width: 300px;
 }
 
 .quizList, .flashcardList {
