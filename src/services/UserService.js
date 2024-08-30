@@ -82,7 +82,7 @@ async function updateUserDetails(email, firstName, lastName, hashedPassword = nu
 
 // Delete User Account
 async function deleteUserAccount(email) {
-    
+
     trackAccountDeletion(email);
 
     try {
@@ -93,7 +93,7 @@ async function deleteUserAccount(email) {
         });
 
         return response.data.message;
-    } 
+    }
     catch (error) {
         if (error.response) {
             return error.response.data.message;
