@@ -9,6 +9,7 @@ import { CgArrowTopRight } from "react-icons/cg";
 // Functions
 import { createNewExam, retrieveAllRevisionDates } from '../../../services/ScheduleService';
 import { getAllFlashcardsWithoutSchedule } from '../../../services/FlashcardService';
+import { trackSpaceRepAlgoClicked } from '../../../services/PostHogAnalyticsServices';
 
 // calendar component
 import FullCalendar from "@fullcalendar/react";
@@ -185,7 +186,7 @@ function Calendar() {
             <div className={styles.schedule}>
                 <p className={styles.topline}>Struggling to plan a revision schedule?</p>
                 <p className={styles.bottomline}> Daddy's got your back!</p>
-                <p className={styles.tagline}><HashLink smooth to='/features#spaced-repetition'>powered by our spaced repetition algorithm <section className={styles.learnMoreBtn}><CgArrowTopRight /></section></HashLink></p>
+                <p className={styles.tagline} onClick={trackSpaceRepAlgoClicked}><HashLink smooth to='/features#spaced-repetition'>powered by our spaced repetition algorithm <section className={styles.learnMoreBtn}><CgArrowTopRight /></section></HashLink></p>
 
 
                 <div className={styles.calendarContainer}>

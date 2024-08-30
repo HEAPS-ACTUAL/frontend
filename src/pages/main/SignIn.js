@@ -9,7 +9,7 @@ import { ImTelegram } from "react-icons/im";
 // functions
 import { authenticate, createNewUser } from '../../services/UserService';
 import { handleLogIn } from '../../services/ProtectionService';
-import { trackRegistration } from '../../services/PostHogAnalyticsServices';
+import { trackRegistration, trackTelegramButtonClicked } from '../../services/PostHogAnalyticsServices';
 
 const SignIn = () => {
     const [email, setEmail] = useState('');
@@ -130,7 +130,7 @@ const SignIn = () => {
 
                             <div className={styles.iconContainer}>
                                 <a href="https://t.me/+XoP6ElrLNBYzZThl" target="_blank" rel="noopener noreferrer">
-                                <ImTelegram className={styles.telegramIcon}/>
+                                    <ImTelegram className={styles.telegramIcon} onClick={trackTelegramButtonClicked}/>
                                 </a>
                                 <span className={styles.HoverText}>Join our Telegram channel!<br></br> or tele @arinmakkk for an access <br></br>code to register for an account </span>
                             </div>

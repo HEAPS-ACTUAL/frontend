@@ -5,6 +5,7 @@ import styles from "../../styles/NavBar.module.css";
 import quizDaddyLogo from "../../images/logo-no-background.png";
 
 import {handleLogOut, isLoggedIn} from "../../services/ProtectionService";
+import { trackFeaturesPageClicked } from "../../services/PostHogAnalyticsServices";
 
 function Navbar() {
     const [loggedIn, setLoggedIn] = useState(false);
@@ -38,7 +39,7 @@ function Navbar() {
 
             <div className={styles.navItems}>
                 <Link to="/home" className={`${styles.navLink} ${currentPage === 'home' ? styles.currentPage : styles.notCurrentPage}`}> Home </Link>
-                <Link to="/features" className={`${styles.navLink} ${currentPage === 'features' ? styles.currentPage : styles.notCurrentPage}`}> Features</Link>
+                <Link to="/features" className={`${styles.navLink} ${currentPage === 'features' ? styles.currentPage : styles.notCurrentPage}`}> <p onClick={trackFeaturesPageClicked}> Features </p></Link>
             </div>
 
             <div className={styles.profileAndLogin}>

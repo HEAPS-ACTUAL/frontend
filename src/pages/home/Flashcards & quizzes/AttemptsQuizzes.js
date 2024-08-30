@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styles from '../../../styles/AttemptsQuizzes.module.css';
 import { IoIosHome } from "react-icons/io";
 import { GrPowerCycle } from "react-icons/gr";
+import { trackReattemptQuiz } from "../../../services/PostHogAnalyticsServices";
 
 function AttemptsQuizzesTable () {
     const navigate = useNavigate();
@@ -18,6 +19,7 @@ function AttemptsQuizzesTable () {
     }
 
     function handleReattemptQuiz(){
+        trackReattemptQuiz(testID);
         navigate('../../test/quiz', {state: {testID: testID}});
     }
 
