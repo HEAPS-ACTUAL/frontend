@@ -21,6 +21,7 @@ function Home() {
     const [allFlashcards, setAllFlashcards] = useState([]);
     const [selectedButton, setSelectedButton] = useState("to-do");
     const [isVerified, setIsVerified] = useState(false);
+    const [createTestMessage, setCreateTestMessage] = useState("");
 
     const [search, setSearch] = useState('');
     const [filteredFlashcards, setFilteredFlashcards] = useState([]);
@@ -30,6 +31,10 @@ function Home() {
         if (isVerified === 1){ 
             setIsVerified(true);
         }
+        else{
+            setCreateTestMessage("You must be verified to create a test!");
+        }
+
         sessionStorage.setItem("isVerified", isVerified);
     }
 
@@ -80,70 +85,67 @@ function Home() {
     const [testName, setTestName] = useState("");
     const [difficulty, setDifficulty] = useState("");
     const [testTypeChecked, setTestTypeChecked] = useState(testTypeDict);
-    const [createTestMessage, setCreateTestMessage] = useState("");
     const testList = Object.keys(testTypeDict);
 
     function handleFileUpload(event) {
         event.preventDefault();
 
-        if (!isVerified){
-            setCreateTestMessage("You must be verified!");
-
-        }
-        else if (testName.trim() === "") {
-            setCreateTestMessage("Quiz name cannot be empty!");
-        } 
-        else if (difficulty === "") {
-            setCreateTestMessage("Please indicate the difficulty level!");
-        } 
-        else if (!file) {
-            setCreateTestMessage("Please upload a file!");
-        } 
-        else if (testTypeChecked["Flashcard"] === false && testTypeChecked["Quiz"] === false){
-            setCreateTestMessage("Please select either flashcard or quiz!");
-        } 
-        else {
-            if (!fileTypeIsPDF(file)) {
-                setCreateTestMessage("File type must be PDF!");
+        if (isVerified){
+            if (testName.trim() === "") {
+                setCreateTestMessage("Quiz name cannot be empty!");
             } 
-            else if (!fileSizeWithinLimit(file)) {
-                setCreateTestMessage("Your file size exceeds the limit of 20MB.");
+            else if (difficulty === "") {
+                setCreateTestMessage("Please indicate the difficulty level!");
+            } 
+            else if (!file) {
+                setCreateTestMessage("Please upload a file!");
+            } 
+            else if (testTypeChecked["Flashcard"] === false && testTypeChecked["Quiz"] === false){
+                setCreateTestMessage("Please select either flashcard or quiz!");
             } 
             else {
-                countWordsInPDF(file)
-                    .then((wordCount) => {
-                        if (wordCount > 8750) {
-                            setCreateTestMessage("Word count exceeds the limit of 8750!");
-                        } else {
-                            for (let testKey of testList) {
-                                if (testTypeChecked[testKey]) {
-                                    let testType = testKey[0]; // Assuming first letter indicates the type (Q for Quiz, F for Flashcard)
-
-                                    console.log("Generating test with:", {email, testName, testType, difficulty, file, fileSize: `${convertFileSizeTo2DP(file)}MB`});
-
-                                    if (testType === "Q") {
-                                        generateQuiz(email, testName, testType, difficulty, file);
-                                    }
-
-                                    if (testType === "F") {
-                                        generateFlashcard(email, testName, testType, file);
+                if (!fileTypeIsPDF(file)) {
+                    setCreateTestMessage("File type must be PDF!");
+                } 
+                else if (!fileSizeWithinLimit(file)) {
+                    setCreateTestMessage("Your file size exceeds the limit of 20MB.");
+                } 
+                else {
+                    countWordsInPDF(file)
+                        .then((wordCount) => {
+                            if (wordCount > 8750) {
+                                setCreateTestMessage("Word count exceeds the limit of 8750!");
+                            } else {
+                                for (let testKey of testList) {
+                                    if (testTypeChecked[testKey]) {
+                                        let testType = testKey[0]; // Assuming first letter indicates the type (Q for Quiz, F for Flashcard)
+    
+                                        console.log("Generating test with:", {email, testName, testType, difficulty, file, fileSize: `${convertFileSizeTo2DP(file)}MB`});
+    
+                                        if (testType === "Q") {
+                                            generateQuiz(email, testName, testType, difficulty, file);
+                                        }
+    
+                                        if (testType === "F") {
+                                            generateFlashcard(email, testName, testType, file);
+                                        }
                                     }
                                 }
+                                
+                                navigate("../../../loading-page", {
+                                    state: {
+                                        duration: 60000,
+                                        messageArray: [`Generating, please wait...`, `This may take up to a minute`],
+                                        redirect: "/home",
+                                    },
+                                });
                             }
-                            
-                            navigate("../../../loading-page", {
-                                state: {
-                                    duration: 60000,
-                                    messageArray: [`Generating, please wait...`, `This may take up to a minute`],
-                                    redirect: "/home",
-                                },
-                            });
-                        }
-                    })
-                    .catch((error) => {
-                        console.error("Error counting words in the PDF:", error);
-                        setCreateTestMessage("Failed to process the PDF file.");
-                    });
+                        })
+                        .catch((error) => {
+                            console.error("Error counting words in the PDF:", error);
+                            setCreateTestMessage("Failed to process the PDF file.");
+                        });
+                }
             }
         }
     }
