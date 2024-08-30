@@ -40,6 +40,10 @@ function trackSpaceRepAlgoClicked(testID, questionNo){
     posthog.capture(`Space repetition algo clicked`)
 }
 
+function trackAccountDeletion(email){
+    posthog.capture(`User ${email} deleted account`)
+}
+
 export {
     identifyUser,
     trackSignIn,
@@ -50,5 +54,6 @@ export {
     trackFlashcardClicked, 
     trackReattemptQuiz,
     trackEditFlashcard,
-    trackSpaceRepAlgoClicked
+    trackSpaceRepAlgoClicked,
+    trackAccountDeletion
 };
