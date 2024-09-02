@@ -1,5 +1,4 @@
 import posthog from 'posthog-js';
-const { v4: uuidv4 } = require('uuid');
 
 
 function identifyUser(email){
@@ -27,18 +26,18 @@ function trackFeaturesPageClicked(){
 }
 
 function trackFlashcardClicked(testID){
-    posthog.capture(`User clicked into flashcard with testID ${testID}`);
+    posthog.capture(`User clicked into flashcard`, {testID: testID});
 }
 
 function trackReattemptQuiz(testID){
-    posthog.capture(`User reattempted quiz with testID ${testID}`);
+    posthog.capture(`User reattempted quiz with testID`, {testID: testID});
 }
 
 function trackEditFlashcard(testID, questionNo){
-    posthog.capture(`Edited question ${questionNo} of flashcard testID ${testID}`)
+    posthog.capture(`Flashcard Question Edited`, {testID: testID, questionNo: questionNo })
 }
 
-function trackSpaceRepAlgoClicked(testID, questionNo){
+function trackSpaceRepAlgoClicked(){
     posthog.capture(`Space repetition algo clicked`)
 }
 
@@ -46,11 +45,15 @@ function trackAccountDeletion(email){
     posthog.capture(`User ${email} deleted account`)
 }
 
-function trackFlashcardUsage(testID, questionNo, eventID) {
-    const idempotencyKey = uuidv4();
-    console.log(idempotencyKey)
-    posthog.capture(`Revised till flashcard(${testID}) No.${questionNo}`);
+function trackFlashcardUsage(testID, questionNo) {
+    posthog.capture(`Revised Flashcard till Question ${questionNo}`, {testID: testID});
 
+}
+
+function trackFollowedRevisionSchedule(isRevisionDate){
+    let isCorrect = true;
+    if (isRevisionDate == "N"){ isCorrect = false; }
+    posthog.capture("User revised according to schedule?", {isCorrect: isCorrect});
 }
 
 export {
@@ -65,5 +68,6 @@ export {
     trackEditFlashcard,
     trackSpaceRepAlgoClicked,
     trackAccountDeletion,
-    trackFlashcardUsage
+    trackFlashcardUsage,
+    trackFollowedRevisionSchedule
 };

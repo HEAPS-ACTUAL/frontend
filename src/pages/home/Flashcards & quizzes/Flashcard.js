@@ -71,15 +71,15 @@ const Flashcard = () => {
 
     // control navigation through the array of flashcards
     const handleNextFlashcard = () => {
+        const trackedNums = [7, 14, 20];
         if (CurrentFlashcardIndex < flashcardArray.length - 1) {
             setCurrentFlashcardIndex(CurrentFlashcardIndex + 1)
             setIsFlipped(false);
         }
-        let questionNo = Number(flashcardArray[CurrentFlashcardIndex+1]["QuestionNo"]);
-        console.log(questionNo);
-        const trackedNums = [7, 14, 20];
+        let questionNo = Number(flashcardArray[CurrentFlashcardIndex]["QuestionNo"])+1; // This has a bug
+        console.log(questionNo); 
         if (trackedNums.includes(questionNo)){
-            trackFlashcardUsage(testID, questionNo)
+            trackFlashcardUsage(testID, questionNo);
         }
     }
 
