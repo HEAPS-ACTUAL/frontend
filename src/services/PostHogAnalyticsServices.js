@@ -1,4 +1,6 @@
 import posthog from 'posthog-js';
+const { v4: uuidv4 } = require('uuid');
+
 
 function identifyUser(email){
     posthog.identify(`${email}`);
@@ -44,6 +46,13 @@ function trackAccountDeletion(email){
     posthog.capture(`User ${email} deleted account`)
 }
 
+function trackFlashcardUsage(testID, questionNo, eventID) {
+    const idempotencyKey = uuidv4();
+    console.log(idempotencyKey)
+    posthog.capture(`Revised till flashcard(${testID}) No.${questionNo}`);
+
+}
+
 export {
     identifyUser,
     trackSignIn,
@@ -55,5 +64,6 @@ export {
     trackReattemptQuiz,
     trackEditFlashcard,
     trackSpaceRepAlgoClicked,
-    trackAccountDeletion
+    trackAccountDeletion,
+    trackFlashcardUsage
 };

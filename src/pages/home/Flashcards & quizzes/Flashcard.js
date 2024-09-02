@@ -10,7 +10,7 @@ import flipIcon from '../../../images/flip (1).png';
 
 // Import functions
 import { getAllQuestionsAndOptionsFromATest } from '../../../services/TestService';
-
+import { trackFlashcardUsage } from '../../../services/PostHogAnalyticsServices';
 import ConfirmModal from '../../modals/ConfirmModal';
 
 const Flashcard = () => {
@@ -74,6 +74,12 @@ const Flashcard = () => {
         if (CurrentFlashcardIndex < flashcardArray.length - 1) {
             setCurrentFlashcardIndex(CurrentFlashcardIndex + 1)
             setIsFlipped(false);
+        }
+        let questionNo = Number(flashcardArray[CurrentFlashcardIndex+1]["QuestionNo"]);
+        console.log(questionNo);
+        const trackedNums = [7, 14, 20];
+        if (trackedNums.includes(questionNo)){
+            trackFlashcardUsage(testID, questionNo)
         }
     }
 
