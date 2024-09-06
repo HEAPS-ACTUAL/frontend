@@ -4,6 +4,8 @@ import styles from "../../styles/FlashcardModal.module.css";
 import calendarImage from '../../images/calendar.png';
 import { getFlashcardsByScheduleID } from "../../services/FlashcardService";
 
+import { trackFollowedRevisionSchedule } from "../../services/PostHogAnalyticsServices";
+
 function FlashcardModal({ isOpen, scheduleID, onClose }) {
     const navigate = useNavigate();
 
@@ -20,6 +22,12 @@ function FlashcardModal({ isOpen, scheduleID, onClose }) {
     }, [scheduleID])
     
     function handleTestClick(flashcardID) {
+        let followedRevisionDate = window.prompt("Is today the revision date? [Y|N]");
+        console.log(followedRevisionDate);
+        while (followedRevisionDate !== "Y" && followedRevisionDate !== "N"){
+            followedRevisionDate = window.prompt("Is today the revision date? [Y|N]");
+        }
+        trackFollowedRevisionSchedule(followedRevisionDate);
         navigate("/test/flashcard", { state: { testID: flashcardID } });
     }
     

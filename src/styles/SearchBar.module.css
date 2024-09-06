@@ -1,0 +1,17 @@
+.searchBar label {
+    display: flex;
+    align-items: center;
+}
+
+.magnifyingGlass {
+    width: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.searchBar input {
+    background-color: transparent;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid black;
+}

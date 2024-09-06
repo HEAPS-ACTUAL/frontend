@@ -1,4 +1,5 @@
 import axiosInstance from "../utility/axiosInstance";
+import { trackAccountDeletion } from "./PostHogAnalyticsServices";
 
 async function authenticate(email, password) {
     try {
@@ -81,6 +82,9 @@ async function updateUserDetails(email, firstName, lastName, hashedPassword = nu
 
 // Delete User Account
 async function deleteUserAccount(email) {
+
+    trackAccountDeletion(email);
+
     try {
         const response = await axiosInstance({
             method: "delete",
@@ -89,7 +93,7 @@ async function deleteUserAccount(email) {
         });
 
         return response.data.message;
-    } 
+    }
     catch (error) {
         if (error.response) {
             return error.response.data.message;

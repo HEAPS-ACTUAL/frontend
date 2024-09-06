@@ -10,7 +10,7 @@ import flipIcon from '../../../images/flip (1).png';
 
 // Import functions
 import { getAllQuestionsAndOptionsFromATest } from '../../../services/TestService';
-
+import { trackFlashcardUsage } from '../../../services/PostHogAnalyticsServices';
 import ConfirmModal from '../../modals/ConfirmModal';
 
 const Flashcard = () => {
@@ -71,9 +71,15 @@ const Flashcard = () => {
 
     // control navigation through the array of flashcards
     const handleNextFlashcard = () => {
+        const trackedNums = [7, 14, 20];
         if (CurrentFlashcardIndex < flashcardArray.length - 1) {
             setCurrentFlashcardIndex(CurrentFlashcardIndex + 1)
             setIsFlipped(false);
+        }
+        let questionNo = Number(flashcardArray[CurrentFlashcardIndex]["QuestionNo"])+1; // This has a bug
+        console.log(questionNo); 
+        if (trackedNums.includes(questionNo)){
+            trackFlashcardUsage(testID, questionNo);
         }
     }
 
@@ -130,14 +136,15 @@ const Flashcard = () => {
                 <img src={flipIcon} alt='flip flashcard icon' title='flip flashcard' className={`${!isFlipped ? styles.flipIconFront : styles.flipIconBack}`} />
             </div>
 
-            <div className={styles.buttons}>
-                <button title='previous flashcard' className={styles.previousBtn} onClick={handlePreviousFlashcard} disabled={CurrentFlashcardIndex === 0}> <BsArrowLeftShort /></button>
-                <button title='revision schedule' className={styles.RevisionScheduleButton} onClick={() => navigate('/home/revision-schedule')}><GrSchedules /></button>
-                <button title='home' className={styles.HomeButton} onClick={() => navigate('/home')}><FaHome /></button>
-                <button title='edit' className={styles.EditButton} onClick={handleEditFlashcard} ><FaEdit /></button>
-                <button title='next flashcard' className={styles.nextBtn} onClick={handleNextFlashcard} disabled={CurrentFlashcardIndex === flashcardArray.length - 1} ><BsArrowRightShort /></button>
-
-            </div>
+            {isEditing === false &&
+                <div className={styles.buttons}>
+                    <button title='previous flashcard' className={styles.previousBtn} onClick={handlePreviousFlashcard} disabled={CurrentFlashcardIndex === 0}> <BsArrowLeftShort /></button>
+                    <button title='revision schedule' className={styles.RevisionScheduleButton} onClick={() => navigate('/home/revision-schedule')}><GrSchedules /></button>
+                    <button title='home' className={styles.HomeButton} onClick={() => navigate('/home')}><FaHome /></button>
+                    <button title='edit' className={styles.EditButton} onClick={handleEditFlashcard} ><FaEdit /></button>
+                    <button title='next flashcard' className={styles.nextBtn} onClick={handleNextFlashcard} disabled={CurrentFlashcardIndex === flashcardArray.length - 1} ><BsArrowRightShort /></button>
+                </div>
+            }
 
             <div className={styles.counter}>
                 {flashcardArray[CurrentFlashcardIndex]["QuestionNo"]} of {flashcardArray.length}

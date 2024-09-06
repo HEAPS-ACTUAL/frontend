@@ -9,6 +9,7 @@ import xButton from '../../../images/x-button.png';
 
 // functions
 import { deleteTest } from '../../../services/TestService';
+import { trackFlashcardClicked } from '../../../services/PostHogAnalyticsServices';
 
 function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, attempts, selectedButton}){
     dateCreated = dateCreated.slice(0,10);
@@ -17,6 +18,7 @@ function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, att
 
     function handleTestClicked(){
         if(difficulty === null){ // DIFFICULTY WILL BE NULL IF ITS A FLASHCARD
+            trackFlashcardClicked(testID);
             navigate(`../../test/flashcard`, {state: {testID}});
         }
         else{

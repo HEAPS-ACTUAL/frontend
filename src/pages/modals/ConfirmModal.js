@@ -6,7 +6,6 @@ import { updateFlashcard } from '../../services/FlashcardService';
 
 
 const ConfirmModal = ({ setIsOpen, testID, newUpdatedText, questionNo, isBack }) => {
-    console.log(testID, newUpdatedText, questionNo, isBack);
     const handleConfirm = async () => {
         const updateStatus = await updateFlashcard(testID, newUpdatedText, questionNo, isBack);
         if (updateStatus === 'Flashcard updated successfully') { // message from the backend

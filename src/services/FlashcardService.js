@@ -1,4 +1,5 @@
 import axiosInstance from "../utility/axiosInstance";
+import { trackEditFlashcard } from "./PostHogAnalyticsServices";
 
 async function generateFlashcard(email, testName, testType, file) {
     try {
@@ -70,6 +71,9 @@ async function getFlashcardsByScheduleID(scheduleID){
 }
 
 async function updateFlashcard(testID, updatedText, questionNo, isBack){
+    
+    trackEditFlashcard(testID, questionNo);
+
     try {
         const response = await axiosInstance({
             method: "post",
