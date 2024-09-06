@@ -11,6 +11,7 @@ import { generateFlashcard, getAllFlashcardsByUser } from "../../../services/Fla
 // Components
 import TestCard from "./TestCard";
 import SearchBar from "../../main/SearchBar";
+import { trackFileExceedWordCount, trackFileSizeExceeded, trackWrongFileType } from "../../../services/PostHogAnalyticsServices";
 
 function Home() {
     const navigate = useNavigate();
@@ -105,15 +106,18 @@ function Home() {
             } 
             else {
                 if (!fileTypeIsPDF(file)) {
+                    trackWrongFileType();
                     setCreateTestMessage("File type must be PDF!");
                 } 
                 else if (!fileSizeWithinLimit(file)) {
+                    trackFileSizeExceeded();
                     setCreateTestMessage("Your file size exceeds the limit of 20MB.");
                 } 
                 else {
                     countWordsInPDF(file)
                         .then((wordCount) => {
                             if (wordCount > 8750) {
+                                trackFileExceedWordCount();
                                 setCreateTestMessage("Word count exceeds the limit of 8750!");
                             } else {
                                 for (let testKey of testList) {

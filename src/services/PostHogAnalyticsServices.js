@@ -56,6 +56,18 @@ function trackFollowedRevisionSchedule(isRevisionDate){
     posthog.capture("User revised according to schedule?", {isCorrect: isCorrect});
 }
 
+function trackWrongFileType(){
+    posthog.capture('User uploaded the wrong file type')
+}
+
+function trackFileSizeExceeded(){
+    posthog.capture(`User's file size exceeded 20mb`)
+}
+
+function trackFileExceedWordCount(){
+    posthog.capture(`User's file exceeded word count`)
+}
+
 export {
     identifyUser,
     trackSignIn,
@@ -69,5 +81,8 @@ export {
     trackSpaceRepAlgoClicked,
     trackAccountDeletion,
     trackFlashcardUsage,
-    trackFollowedRevisionSchedule
+    trackFollowedRevisionSchedule,
+    trackWrongFileType,
+    trackFileSizeExceeded,
+    trackFileExceedWordCount
 };
