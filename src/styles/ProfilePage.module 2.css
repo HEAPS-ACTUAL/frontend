@@ -1,0 +1,200 @@
+.profileContainer {
+    max-width: 600px;
+    margin: 125px auto;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: "Arial", sans-serif;
+}
+
+.profileDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -135px;
+    flex-grow: 1;
+}
+
+.profileImageWrapper {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profileImageBackground {
+    width: 220px;
+    height: 220px;
+    background-color: rgba(70, 99, 172, 0.7);
+    border-radius: 50%;
+    position: absolute;
+    z-index: 0;
+}
+
+.profileImage {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+}
+
+.profileInfo {
+    display: grid;
+    width: 530px;
+}
+
+.name {
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+.emailAndIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0;
+    color: #555;
+
+}
+
+.email {
+    font-size: 14px !important;
+    margin-right: 5px;
+}
+
+.editIcon {
+    margin-left: 10px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.progressContainer {
+    display: flex;
+    margin: 20px 0px 20px 0px;
+    padding: 0px 75px;
+    width: 450px;
+    height: 120px;
+    background-color: #eaeff9;
+    border-radius: 20px;
+    align-items: center;
+    justify-content: space-between;
+    justify-self: center;
+}
+
+.progressBar {
+    width: 83px;
+}
+
+.daysSince {
+    font-size: 16px;
+    color: black;
+    width: 180px;
+}
+
+.editNameContainer {
+    width: 530px;
+}
+
+.profileContainer input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.inputFirstName {
+    margin-top: 30px !important;
+}
+
+.profileContainer button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    justify-self: center;
+}
+
+.profileContainer button:hover {
+    background-color: rgba(70, 99, 172, 0.7);
+    color: #fff;
+}
+
+.profileContainer button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.changePasswordButton, .deleteAccountButton {
+    width: 450px !important;
+}
+
+.passwordChangeContainer input {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 540px;
+}
+
+.errorMessage {
+    /* display: flex;
+    align-items: center;
+    min-height: 20px;
+    height: 20px;
+    gap: 8px; */
+    margin: 10px 0px;
+    color: red;
+}
+
+.errorIcon {
+    margin-right: 4px;
+}
+
+
+.tickIcon {
+    color: green;
+}
+
+.closeIcon {
+    color: red;
+}
+
+.verifyEmailBtn {
+    width: 120px !important;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px !important;
+    cursor: pointer;
+    margin-left: 20px;
+    display: inline-block;
+}
+
+.verifyEmailBtn:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.verifyEmailBtn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.cooldownTimer {
+  width: 30px;
+  display: inline-block;
+  text-align: center;
+}
+

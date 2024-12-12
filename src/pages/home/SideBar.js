@@ -8,8 +8,10 @@ import { Link } from 'react-router-dom';
 
 function SideBar(){
     return(
-        <div className={styles.sidebar}>
+        <div className={`${styles.sidebar}`}>
+
             <div className={styles.allSidebarWords}>
+
             <Link to="/home/flashcards-and-quizzes" className={styles.sidebarElement}>
                 <div className={styles.icon}><FaQuestion /></div>
                 <div className={styles.word}>Flashcards & Quizzes</div>
@@ -19,7 +21,14 @@ function SideBar(){
                 <div className={styles.icon}><AiOutlineSchedule /></div> 
                 <div className={styles.word}>Revision Schedule</div>
             </Link>
+            
+            {/* for the new UI */}
+            <Link to="/home/test" className={styles.sidebarElement}>
+                <div className={styles.icon}><AiOutlineSchedule /></div> 
+                <div className={styles.word}>test</div>
+            </Link>
 
+           
             </div>
         </div>
     );

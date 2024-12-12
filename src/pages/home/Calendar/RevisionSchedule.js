@@ -182,7 +182,7 @@ function Calendar() {
     }
 
     return (
-        <div className={styles.entirePage}>
+        <div className={styles.entirePage} >
             <div className={styles.schedule}>
                 <p className={styles.topline}>Struggling to plan a revision schedule?</p>
                 <p className={styles.bottomline}> Daddy's got your back!</p>

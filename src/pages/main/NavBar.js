@@ -42,6 +42,13 @@ function Navbar() {
                 <Link to="/features" className={`${styles.navLink} ${currentPage === 'features' ? styles.currentPage : styles.notCurrentPage}`}> <p onClick={trackFeaturesPageClicked}> Features </p></Link>
             </div>
 
+
+            {/* new UI */}
+            <div>
+                <button class="createBtn">Create</button>
+            </div>
+
+
             <div className={styles.profileAndLogin}>
                 {loggedIn && (
                     <Link to='/profile' title='view profile'>
