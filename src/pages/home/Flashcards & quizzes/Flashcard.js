@@ -16,12 +16,19 @@ import { getAllQuestionsAndOptionsFromATest } from '../../../services/TestServic
 import { trackFlashcardUsage } from '../../../services/PostHogAnalyticsServices';
 import ConfirmModal from '../../modals/ConfirmModal';
 
+// Components
+import Spinner from '../../../components/Spinner';
+
 const Flashcard = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { testID } = (location.state); // retrieve testID from Flashcard page
 
     const [flashcardArray, setFlashcardArray] = useState([])
+    const [trackProgress, setTrackProgress] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
+    const [index, setIndex] = useState(0)
+    const [progress, setProgress] = useState(0)
 
     useEffect(() => {
 
@@ -29,61 +36,75 @@ const Flashcard = () => {
             const flashcardQuestions = await getAllQuestionsAndOptionsFromATest(testID);
             console.log(flashcardQuestions)
             setFlashcardArray(flashcardQuestions);
+            setIsLoading(false)
         }
         
         fetchTestQuestions();
 
     }, [testID])
 
-    const widthPercentage = 5/20 * 100
-    const [trackProgress, setTrackProgress] = useState(true)
+    useEffect(() => {
+        updateProgress()
+    }, [flashcardArray, index])
+
+    function updateProgress(){
+        let newProgress = (index + 1) / flashcardArray.length * 100
+        setProgress(newProgress)
+    }
+
+    function previousFlashcard(){
+        setIndex(index - 1)
+    }
+    
+    function nextFlashcard(){
+        setIndex(index + 1)
+    }
 
     return (
-        <div className='container mx-auto mt-12 px-48 space-y-7'>
-
-            <div className='relative'>
-                <div className='text-xl text-center'>
-                    Computational Thinking Week 3
-                </div>
-                <button className='text-xl text-center w-min absolute top-1 right-0'>
-                    <FiEdit />
-                </button>
-            </div>
-            
-            <div className='space-y-3'>
-                <div className='h-3 bg-white rounded-full'>
-                    <div className='h-3 bg-green-500 rounded-full' style={{width: widthPercentage + '%'}}></div>
-                </div>
-                <div className='text-center text-sm'> 5 of 20 </div>
-            </div>
-
-            <div className='bg-white rounded-2xl text-center content-center text-3xl font-bold p-10 relative' style={{height: '450px'}}>
-                What is the subset sum problem?
-                <img src={flipIcon} className='absolute w-6 h-6 top-5 right-5 hover:cursor-pointer'/>
-            </div>
-
-            {trackProgress 
-                ?
-                    <div className='flex justify-center space-x-6'>
-                        <button className='bg-white rounded-full w-11 h-11 p-1'>
-                            <RxCross2 className='mx-auto text-2xl text-red-500'/>
-                        </button>
-                        <button className='bg-white rounded-full w-11 h-11 p-1'>
-                            <BsCheckLg className='mx-auto text-2xl text-green-500'/>
-                        </button>
+        <div>
+            {isLoading ? (
+                <Spinner message={'loading flashcard...'}/>
+            ) : (
+                <div className="container mx-auto mt-12 px-48 space-y-7">
+                    <div className="relative">
+                        <div className="text-xl text-center"> Computational Thinking Week 3 </div>
+                        <button className="text-xl text-center w-min absolute top-1 right-0"> <FiEdit /> </button>
                     </div>
-                :
-                <div className='flex justify-center space-x-6'>
-                    <button className='bg-white rounded-full p-1'>
-                        <BsArrowLeftShort className='mx-auto text-4xl'/>
-                    </button>
-                    <button className='bg-white rounded-full w-11 h-11 p-1'>
-                        <BsArrowRightShort className='mx-auto text-4xl'/>
-                    </button>
+    
+                    <div className="space-y-3">
+                        <div className="h-3 bg-white rounded-full">
+                            <div className="h-3 bg-green-500 rounded-full transition-all duration-500 ease-in-out" style={{ width: progress + "%" }}> </div>
+                        </div>
+                        <div className="text-center text-sm"> {index + 1} of {flashcardArray.length} </div>
+                    </div>
+    
+                    <div className="bg-white rounded-2xl text-center content-center text-3xl font-bold p-10 relative" style={{ height: "450px" }}>
+                        {flashcardArray[index].QuestionText}
+                        <img src={flipIcon} className="absolute w-6 h-6 top-5 right-5 hover:cursor-pointer"/>
+                    </div>
+    
+                    {trackProgress ? (
+                        <div className="flex justify-center space-x-6">
+                            <button className="bg-white rounded-full w-11 h-11 p-1">
+                                <RxCross2 className="mx-auto text-2xl text-red-500" />
+                            </button>
+                            <button className="bg-white rounded-full w-11 h-11 p-1">
+                                <BsCheckLg className="mx-auto text-2xl text-green-500" />
+                            </button>
+                        </div>
+                    ) : (
+                        <div className="flex justify-center space-x-6">
+                            <button className="bg-white rounded-full p-1 disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-gray-200" onClick={previousFlashcard} disabled={index === 0}>
+                                <BsArrowLeftShort className="mx-auto text-4xl"/>
+                            </button>
+                            <button className="bg-white rounded-full w-11 h-11 p-1 disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-gray-200" onClick={nextFlashcard} disabled={index === flashcardArray.length - 1}>
+                                <BsArrowRightShort className="mx-auto text-4xl" />
+                            </button>
+                        </div>
+                    )}
                 </div>
-            }
-
-            </div>
+            )}
+        </div>
     )
 
     // const location = useLocation();
