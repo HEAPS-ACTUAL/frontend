@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import styles from '../../../styles/Flashcard.module.css';
 
 //icons
@@ -20,9 +20,10 @@ import ConfirmModal from '../../modals/ConfirmModal';
 import Spinner from '../../../components/Spinner';
 
 const Flashcard = () => {
-    const location = useLocation();
     const navigate = useNavigate();
-    const { testID } = (location.state); // retrieve testID from Flashcard page
+    const { id } = useParams()
+    const location = useLocation();
+    // const { knowFlashcardsArray = [], unsureFlashcardsArray = [] } = location.state || {};
 
     const [flashcardArray, setFlashcardArray] = useState([])
     const [unsureFlashcards, setUnsureFlashcards] = useState([])
@@ -38,15 +39,14 @@ const Flashcard = () => {
     useEffect(() => {
 
         async function fetchTestQuestions() {
-            const flashcardQuestions = await getAllQuestionsAndOptionsFromATest(testID);
-            console.log(flashcardQuestions)
+            const flashcardQuestions = await getAllQuestionsAndOptionsFromATest(id);
             setFlashcardArray(flashcardQuestions);
             setIsLoading(false)
         }
         
         fetchTestQuestions();
 
-    }, [testID])
+    }, [id])
 
     useEffect(() => {
         updateProgress()
@@ -63,7 +63,7 @@ const Flashcard = () => {
     
     function nextFlashcard(){
         if (index === flashcardArray.length - 1){
-            navigate(`completed/${testID}`)
+            navigate(`completed`, {state: {knowFlashcards, unsureFlashcards}})
         }
         else {
             setIndex(index + 1)
@@ -112,7 +112,7 @@ const Flashcard = () => {
                 <div className="container mx-auto mt-10 px-48 space-y-7">
                     <div className="relative">
                         <div className="text-xl text-center"> Computational Thinking Week 3 </div>
-                        <button className="text-xl text-center w-min absolute top-1 right-0" onClick={() => navigate(`edit/${testID}`)}> <FiEdit /> </button>
+                        <button className="text-xl text-center w-min absolute top-1 right-0" onClick={() => navigate(`edit`)}> <FiEdit /> </button>
                     </div>
     
                     <div className="space-y-3">
