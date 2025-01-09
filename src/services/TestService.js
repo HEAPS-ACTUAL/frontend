@@ -31,5 +31,22 @@ async function getAllQuestionsAndOptionsFromATest(testID){
     }
 }
 
+async function getTestName(testID){
+    try {
+        const response = await axiosInstance({
+            method: "get",
+            url: "/test/getTestNameById",
+            params: {testID: testID}
+        });
 
-export {deleteTest, getAllQuestionsAndOptionsFromATest};
+        return response.data;
+    }
+    catch (error) {
+        if (error.response) {
+            return error.response.data.message;
+        }
+    }
+}
+
+
+export {deleteTest, getAllQuestionsAndOptionsFromATest, getTestName};

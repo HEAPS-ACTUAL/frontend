@@ -10,7 +10,7 @@ import { BsCheckLg } from "react-icons/bs";
 import flipIcon from '../../../images/flip (1).png';
 
 // Import functions
-import { getAllQuestionsAndOptionsFromATest } from '../../../services/TestService';
+import { getAllQuestionsAndOptionsFromATest, getTestName } from '../../../services/TestService';
 // import { trackFlashcardUsage } from '../../../services/PostHogAnalyticsServices';
 // import ConfirmModal from '../../modals/ConfirmModal';
 
@@ -25,6 +25,7 @@ const Flashcard = () => {
     // const { knowFlashcardsArray = [], unsureFlashcardsArray = [] } = location.state || {};
 
     const [flashcardArray, setFlashcardArray] = useState([])
+    const [flashcardName, setFlashcardName] = useState([])
     const [unsureFlashcards, setUnsureFlashcards] = useState([])
     const [knowFlashcards, setKnowFlashcards] = useState([])
     
@@ -41,6 +42,10 @@ const Flashcard = () => {
             const flashcardQuestions = await getAllQuestionsAndOptionsFromATest(id);
             setFlashcardArray(flashcardQuestions);
             console.log(flashcardQuestions)
+
+            const flashcardName = await getTestName(id)
+            setFlashcardName(flashcardName.testName)
+
             setIsLoading(false)
         }
         
@@ -111,7 +116,7 @@ const Flashcard = () => {
             ) : (
                 <div className={styles.container}>
                     <div className={styles.titleContainer}>
-                        <div className={`${styles.textLarge} ${styles.textCenter}`}>Computational Thinking Week 3</div>
+                        <div className={`${styles.textLarge} ${styles.textCenter}`}> {flashcardName} </div>
                         <button className={styles.button} onClick={() => navigate(`edit`)}>
                             <FiEdit />
                         </button>
