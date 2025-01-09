@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import styles from '../../../styles/Flashcard.module.css';
 
 //icons
 import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
 import { GrSchedules } from "react-icons/gr";
-import { FaHome, FaEdit } from "react-icons/fa";
+import { FaHome} from "react-icons/fa";
+import { FiEdit } from "react-icons/fi";
+import { RxCross2 } from "react-icons/rx";
+import { BsCheckLg } from "react-icons/bs";
 import flipIcon from '../../../images/flip (1).png';
 
 // Import functions
@@ -13,147 +16,175 @@ import { getAllQuestionsAndOptionsFromATest } from '../../../services/TestServic
 import { trackFlashcardUsage } from '../../../services/PostHogAnalyticsServices';
 import ConfirmModal from '../../modals/ConfirmModal';
 
+// Components
+import Spinner from '../../../components/Spinner';
+
 const Flashcard = () => {
-    const location = useLocation();
     const navigate = useNavigate();
-    const { testID } = (location.state); // retrieve testID from Flashcard page
+    const { id } = useParams()
+    const location = useLocation();
+    // const { knowFlashcardsArray = [], unsureFlashcardsArray = [] } = location.state || {};
 
-    const [flashcardArray, setFlashcardArray] = useState([]);
-    const [CurrentFlashcardIndex, setCurrentFlashcardIndex] = useState(0);
+    const [flashcardArray, setFlashcardArray] = useState([])
+    const [unsureFlashcards, setUnsureFlashcards] = useState([])
+    const [knowFlashcards, setKnowFlashcards] = useState([])
+    
+    const [isLoading, setIsLoading] = useState(true)
+    const [index, setIndex] = useState(0)
+    const [progress, setProgress] = useState(0)
+    const [isFlipped, setIsFlipped] = useState(false)
 
-    const [isFlipped, setIsFlipped] = useState(false);
-    const [isEditing, setIsEditing] = useState(false);
-    const [isDisabled, setIsDisabled] = useState(false);
-    const [newUpdatedText, setNewUpdatedText] = useState("");
-
-    // State for confirmation modal
-    const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
-
-
-    const toggleFlip = () => {
-        setIsFlipped(!isFlipped);
-    }
+    const [trackProgress, setTrackProgress] = useState(false)
 
     useEffect(() => {
+
         async function fetchTestQuestions() {
-            const flashcardQuestions = await getAllQuestionsAndOptionsFromATest(testID);
+            const flashcardQuestions = await getAllQuestionsAndOptionsFromATest(id);
             setFlashcardArray(flashcardQuestions);
+            console.log(flashcardQuestions)
+            setIsLoading(false)
         }
+        
         fetchTestQuestions();
 
-    }, [testID])
+    }, [id])
 
     useEffect(() => {
+        updateProgress()
+    }, [flashcardArray, index])
 
-        if (isDisabled) {
-            const handleKeyDown = null;
-        } else {
-            const handleKeyDown = (event) => {
-                if (event.code === 'ArrowLeft') {
-                    handlePreviousFlashcard();
-                }
-                else if (event.code === 'ArrowRight') {
-                    handleNextFlashcard();
-                }
-                else if (event.code === 'Space') {
-                    event.preventDefault();
-                    toggleFlip();
-                }
-            };
+    function updateProgress(){
+        let newProgress = (index + 1) / flashcardArray.length * 100
+        setProgress(newProgress)
+    }
 
-            window.addEventListener('keydown', handleKeyDown);
-
-            return () => {
-                window.removeEventListener('keydown', handleKeyDown);
-            };
+    function previousFlashcard(){
+        setIndex(index - 1)
+    }
+    
+    function nextFlashcard(){
+        if (index === flashcardArray.length - 1){
+            navigate(`completed`, {state: {knowFlashcards, unsureFlashcards}})
         }
-    })
-
-    // control navigation through the array of flashcards
-    const handleNextFlashcard = () => {
-        const trackedNums = [7, 14, 20];
-        if (CurrentFlashcardIndex < flashcardArray.length - 1) {
-            setCurrentFlashcardIndex(CurrentFlashcardIndex + 1)
-            setIsFlipped(false);
-        }
-        let questionNo = Number(flashcardArray[CurrentFlashcardIndex]["QuestionNo"])+1; // This has a bug
-        console.log(questionNo); 
-        if (trackedNums.includes(questionNo)){
-            trackFlashcardUsage(testID, questionNo);
+        else {
+            setIndex(index + 1)
         }
     }
 
-    const handlePreviousFlashcard = () => {
-        if (CurrentFlashcardIndex > 0) {
-            setCurrentFlashcardIndex(CurrentFlashcardIndex - 1);
-            setIsFlipped(false);
+    function handleLeftArrowClicked(){
+        previousFlashcard()
+    }
+
+    function handleRightArrowClicked(){
+        nextFlashcard()
+    }
+
+    function handleTickClicked(){
+        setKnowFlashcards([...knowFlashcards, flashcardArray[index]])
+        nextFlashcard()
+    }
+
+    function handleCrossClicked(){
+        setUnsureFlashcards([...unsureFlashcards, flashcardArray[index]])
+        nextFlashcard()
+    }
+
+    function flipFlashcard(){
+        setIsFlipped(!isFlipped)
+    }
+
+    function toggleTrackProgress(){
+        setTrackProgress(!trackProgress)
+
+        if (trackProgress){
+            setKnowFlashcards([])
+            setUnsureFlashcards([])
         }
-    }
-
-    const handleEditFlashcard = () => {
-        if (!isFlipped) {
-            setNewUpdatedText(flashcardArray[CurrentFlashcardIndex]["QuestionText"]);
-        } else {
-            setNewUpdatedText(flashcardArray[CurrentFlashcardIndex]["Elaboration"]);
+        else {
+            setIndex(0)
         }
-        setIsEditing(!isEditing);
-        setIsDisabled(!isDisabled);
-    }
-    const disableFlip = () => {
-        return;
-    }
-
-    const handleChange = (event) => {
-        const { value } = event.target;
-        setNewUpdatedText(value);
-
-    }
-
-    const handleConfirm = () => {
-        setIsConfirmModalOpen(true);
-    }
-
-    if (flashcardArray.length === 0) {
-        return <div>Loading...</div>; // Display a loading state while questions are being fetched
-        // without this, the page will show error as the flashcardArray will be undefined while awaiting
     }
 
     return (
-        <div className={styles.wrapper}>
+        <div>
+            {isLoading ? (
+                <Spinner message={'loading flashcard...'} />
+            ) : (
+                <div className={styles.container}>
+                    <div className={styles.titleContainer}>
+                        <div className={`${styles.textLarge} ${styles.textCenter}`}>Computational Thinking Week 3</div>
+                        <button className={styles.button} onClick={() => navigate(`edit`)}>
+                            <FiEdit />
+                        </button>
+                    </div>
 
-            <div onClick={isDisabled ? disableFlip : toggleFlip} className={`${styles.FlashcardContainer} ${isFlipped ? styles.isFlipped : ''}`}>
-                <div className={styles.FlashcardFace + " " + styles.FrontFlashcardContent}>
-                    {isEditing ? <textarea value={newUpdatedText} id='editTextBox' name='updatedText' onChange={handleChange} /> : flashcardArray[CurrentFlashcardIndex]["QuestionText"]}
-                </div>
-                <div className={`${styles.FlashcardFace} ${isFlipped ? styles.BackFlashcardContent : styles.FrontFlashcardContent}`}>
-                    <button title='cancelEdit' onClick={handleEditFlashcard} className={isEditing ? styles.cancelBtn : styles.cancelBtnHidden}>Cancel</button>
-                    <button title='confirmEdit' onClick={handleConfirm} className={`${isEditing ? styles.confirmBtn : styles.confirmBtnHidden}`}>Confirm</button>
-                </div>
+                    <div className={styles.progressContainer}>
+                        <div className={styles.progressBar}>
+                            <div
+                                className={styles.progressFill}
+                                style={{ width: progress + '%' }}
+                            ></div>
+                        </div>
+                        <div className={`${styles.textCenter} ${styles.textSmall}`}>
+                            {index + 1} of {flashcardArray.length}
+                        </div>
+                    </div>
 
-                <div className={styles.FlashcardFace + " " + styles.BackFlashcardContent}>
-                    {isEditing ? <textarea value={newUpdatedText} id='editTextBox' name='updatedText' onChange={handleChange} /> : flashcardArray[CurrentFlashcardIndex]["Elaboration"]}
-                </div>
-                <img src={flipIcon} alt='flip flashcard icon' title='flip flashcard' className={`${!isFlipped ? styles.flipIconFront : styles.flipIconBack}`} />
-            </div>
+                    {trackProgress && (
+                        <div className={styles.flex}>
+                            <div className={styles.flex}>
+                                <div className={`${styles.circleButton} ${styles.textRed}`}>{unsureFlashcards.length}</div>
+                                <p className={styles.textRed}>Unsure</p>
+                            </div>
 
-            {isEditing === false &&
-                <div className={styles.buttons}>
-                    <button title='previous flashcard' className={styles.previousBtn} onClick={handlePreviousFlashcard} disabled={CurrentFlashcardIndex === 0}> <BsArrowLeftShort /></button>
-                    <button title='revision schedule' className={styles.RevisionScheduleButton} onClick={() => navigate('/home/revision-schedule')}><GrSchedules /></button>
-                    <button title='home' className={styles.HomeButton} onClick={() => navigate('/home')}><FaHome /></button>
-                    <button title='edit' className={styles.EditButton} onClick={handleEditFlashcard} ><FaEdit /></button>
-                    <button title='next flashcard' className={styles.nextBtn} onClick={handleNextFlashcard} disabled={CurrentFlashcardIndex === flashcardArray.length - 1} ><BsArrowRightShort /></button>
-                </div>
-            }
+                            <div className={styles.flex}>
+                                <p className={styles.textGreen}>Remember</p>
+                                <div className={`${styles.circleButton} ${styles.textGreen}`}>{knowFlashcards.length}</div>
+                            </div>
+                        </div>
+                    )}
 
-            <div className={styles.counter}>
-                {flashcardArray[CurrentFlashcardIndex]["QuestionNo"]} of {flashcardArray.length}
-            </div>
-            {isConfirmModalOpen && <ConfirmModal setIsOpen={setIsConfirmModalOpen} testID={testID} newUpdatedText={newUpdatedText} questionNo={flashcardArray[CurrentFlashcardIndex]["QuestionNo"]} isBack={isFlipped} />}
+                    <div className={`${styles.flashcard} ${isFlipped ? styles.flashcardFlipped : styles.flashcardNormal}`} onClick={flipFlashcard}>
+                        {isFlipped ? flashcardArray[index].Elaboration : flashcardArray[index].QuestionText}
+                        <img src={flipIcon} className={styles.icon} />
+                    </div>
+
+                    {trackProgress ? (
+                        <div className={styles.flexCenter}>
+                            <button className={`${styles.circleButton}`} onClick={handleCrossClicked}>
+                                <RxCross2 className={`${styles.textRed} mx-auto text-2xl`} />
+                            </button>
+                            <button className={`${styles.circleButton}`} onClick={handleTickClicked}>
+                                <BsCheckLg className={`${styles.textGreen} mx-auto text-2xl`} />
+                            </button>
+                        </div>
+                    ) : (
+                        <div className={styles.flexCenter}>
+                            <button
+                                className={`${styles.circleButton} ${index === 0 && styles.circleButtonDisabled}`}
+                                onClick={handleLeftArrowClicked}
+                                disabled={index === 0}
+                            >
+                                <BsArrowLeftShort className="mx-auto text-4xl" />
+                            </button>
+                            <button
+                                className={`${styles.circleButton}`}
+                                onClick={handleRightArrowClicked}
+                            >
+                                <BsArrowRightShort className="mx-auto text-4xl" />
+                            </button>
+                        </div>
+                    )}
+
+                    {/* <label className={styles.toggleContainer}>
+                        <input type="checkbox" className="sr-only" onClick={toggleTrackProgress} />
+                        <div className={`${styles.toggle} ${trackProgress && styles.toggleChecked}`}></div>
+                        <span className="ms-3 text-sm font-medium">Track Progress</span>
+                    </label> */}
+                </div>
+            )}
         </div>
-        
-
-    )
+    );
 }
 
 export default Flashcard;

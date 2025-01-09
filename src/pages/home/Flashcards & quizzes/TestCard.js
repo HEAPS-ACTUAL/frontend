@@ -19,7 +19,7 @@ function TestCard({testID, name, dateCreated, difficulty, numberOfQuestions, att
     function handleTestClicked(){
         if(difficulty === null){ // DIFFICULTY WILL BE NULL IF ITS A FLASHCARD
             trackFlashcardClicked(testID);
-            navigate(`../../test/flashcard`, {state: {testID}});
+            navigate(`../../test/flashcard/${testID}`);
         }
         else{
             if(selectedButton === 'to-do'){

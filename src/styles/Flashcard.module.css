@@ -26,7 +26,157 @@
     100% { transform: rotate(360deg) scaleX(-1); }
 }
 
-.wrapper {
+.container {
+    margin: 2.5rem auto;
+    padding: 0 18rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+.titleContainer {
+    position: relative;
+}
+
+.textCenter {
+    text-align: center;
+}
+
+.textLarge {
+    font-size: 1.25rem;
+}
+
+.button {
+    font-size: 1.25rem;
+    position: absolute;
+    top: 0.25rem;
+    right: 0;
+}
+
+.progressContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.progressBar {
+    height: 0.75rem;
+    background: #ffffff;
+    border-radius: 9999px;
+}
+
+.progressFill {
+    height: 0.75rem;
+    background: #22c55e;
+    border-radius: 9999px;
+    transition: all 0.5s ease-in-out;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flexCenter {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.flashcard {
+    background: #ffffff;
+    border-radius: 1.5rem;
+    padding: 0 5rem;
+    font-size: 1.875rem;
+    cursor: pointer;
+    position: relative;
+    height: 450px;
+    align-content: center;
+}
+
+.flashcardFlipped {
+    text-align: justify;
+}
+
+.flashcardNormal {
+    font-weight: bold;
+    text-align: center;
+}
+
+.icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    cursor: pointer;
+}
+
+.circleButton {
+    background: #ffffff;
+    border-radius: 9999px;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0.25rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.circleButton:hover {
+    background: #e5e7eb;
+}
+
+.circleButtonDisabled {
+    background: #d1d5db;
+    cursor: not-allowed;
+}
+
+.textRed {
+    color: #ef4444;
+    font-weight: bold;
+}
+
+.textGreen {
+    color: #22c55e;
+    font-weight: bold;
+}
+
+.toggleContainer {
+    position: absolute;
+    top: 0;
+}
+
+.toggle {
+    width: 2.75rem;
+    height: 1.5rem;
+    background: #e5e7eb;
+    border-radius: 9999px;
+    position: relative;
+    transition: background 0.3s;
+}
+
+.toggle::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 1.25rem;
+    height: 1.25rem;
+    background: #ffffff;
+    border-radius: 9999px;
+    transition: transform 0.3s;
+}
+
+.toggleChecked {
+    background: #2563eb;
+}
+
+.toggleChecked::after {
+    transform: translateX(1.25rem);
+}
+
+
+/* .wrapper {
     position: relative;
     width: 100%;
     height: 95vh;
@@ -126,12 +276,11 @@
     transform: scaleX(-1);
 } 
 
-/* buttons */
 .buttons {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px; /* Adjust as needed */
+    margin-top: 20px;
     gap: 20px; 
 }
  
@@ -182,11 +331,11 @@
 
 .counter {
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    justify-content: center; 
+    align-items: center; 
     margin-top: 50px;
     color: gray;
-    width: 100%; /* Ensure it takes the full width */
+    width: 100%;
 }
 
 textarea {
@@ -224,4 +373,4 @@ textarea {
 
 .cancelBtnHidden, .confirmBtnHidden {
     display: none;
-}
+} */
