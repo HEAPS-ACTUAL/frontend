@@ -12,6 +12,7 @@ import { generateFlashcard, getAllFlashcardsByUser } from "../../../services/Fla
 import TestCard from "./TestCard";
 import SearchBar from "../../main/SearchBar";
 import { trackFileExceedWordCount, trackFileSizeExceeded, trackWrongFileType } from "../../../services/PostHogAnalyticsServices";
+import Spinner from "../../../components/Spinner";
 
 function Home() {
     const navigate = useNavigate();
@@ -86,10 +87,13 @@ function Home() {
     const [testName, setTestName] = useState("");
     const [difficulty, setDifficulty] = useState("");
     const [testTypeChecked, setTestTypeChecked] = useState(testTypeDict);
+    const [isLoading, setIsLoading] = useState(false)
+
     const testList = Object.keys(testTypeDict);
 
-    function handleFileUpload(event) {
+    async function handleFileUpload(event) {
         event.preventDefault();
+        setIsLoading(true)
 
         if (isVerified){
             if (testName.trim() === "") {
@@ -115,7 +119,7 @@ function Home() {
                 } 
                 else {
                     countWordsInPDF(file)
-                        .then((wordCount) => {
+                        .then( async (wordCount) => {
                             if (wordCount > 8750) {
                                 trackFileExceedWordCount();
                                 setCreateTestMessage("Word count exceeds the limit of 8750!");
@@ -123,26 +127,37 @@ function Home() {
                                 for (let testKey of testList) {
                                     if (testTypeChecked[testKey]) {
                                         let testType = testKey[0]; // Assuming first letter indicates the type (Q for Quiz, F for Flashcard)
-    
+
                                         console.log("Generating test with:", {email, testName, testType, difficulty, file, fileSize: `${convertFileSizeTo2DP(file)}MB`});
     
-                                        if (testType === "Q") {
-                                            generateQuiz(email, testName, testType, difficulty, file);
+                                        try {
+                                            if (testType === "Q") {
+                                                await generateQuiz(email, testName, testType, difficulty, file);
+                                            }
+        
+                                            if (testType === "F") {
+                                                await generateFlashcard(email, testName, testType, file);
+                                            }
                                         }
-    
-                                        if (testType === "F") {
-                                            generateFlashcard(email, testName, testType, file);
+                                        catch (error) {
+                                            
+                                        }
+                                        finally{
+                                            setIsLoading(false)
+                                            fetchToDoQuizzes();
+                                            fetchAllFlashcards()
                                         }
                                     }
                                 }
                                 
-                                navigate("../../../loading-page", {
-                                    state: {
-                                        duration: 60000,
-                                        messageArray: [`Generating, please wait...`, `This may take up to a minute`],
-                                        redirect: "/home",
-                                    },
-                                });
+                                // navigate("../../../loading-page", {
+                                //     state: {
+                                //         duration: 60000,
+                                //         messageArray: [`Generating, please wait...`, `This may take up to a minute`],
+                                //         redirect: "/home",
+                                //     },
+                                // });
+
                             }
                         })
                         .catch((error) => {
@@ -152,6 +167,14 @@ function Home() {
                 }
             }
         }
+    }
+
+    if (isLoading){
+        return (
+            <div style={{position: 'absolute', top: '40%', left: '35vw'}}>
+                <Spinner message={'Generating... this could take up to a minute'} />
+            </div>
+        )
     }
 
     return (

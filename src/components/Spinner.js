@@ -1,13 +1,15 @@
 import BeatLoader from "react-spinners/BeatLoader";
 
-function Spinner({message}){
+function Spinner({ message }) {
     return (
-        <div className="space-y-5">
-            <div className="flex justify-center mt-40">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '40px' }}>
                 <BeatLoader color="grey" size={20} />
             </div>
 
-            <div className="text-center text-xl font-bold"> {message} </div>
+            <div style={{ textAlign: 'center', fontSize: '20px', fontWeight: 'bold' }}>
+                {message}
+            </div>
         </div>
     )
 }
