@@ -4,8 +4,6 @@ import styles from '../../../styles/Flashcard.module.css';
 
 //icons
 import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
-import { GrSchedules } from "react-icons/gr";
-import { FaHome} from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import { RxCross2 } from "react-icons/rx";
 import { BsCheckLg } from "react-icons/bs";
@@ -13,11 +11,12 @@ import flipIcon from '../../../images/flip (1).png';
 
 // Import functions
 import { getAllQuestionsAndOptionsFromATest } from '../../../services/TestService';
-import { trackFlashcardUsage } from '../../../services/PostHogAnalyticsServices';
-import ConfirmModal from '../../modals/ConfirmModal';
+// import { trackFlashcardUsage } from '../../../services/PostHogAnalyticsServices';
+// import ConfirmModal from '../../modals/ConfirmModal';
 
 // Components
 import Spinner from '../../../components/Spinner';
+import ToggleSwitch from '../../../components/ToggleSwitch';
 
 const Flashcard = () => {
     const navigate = useNavigate();
@@ -34,7 +33,7 @@ const Flashcard = () => {
     const [progress, setProgress] = useState(0)
     const [isFlipped, setIsFlipped] = useState(false)
 
-    const [trackProgress, setTrackProgress] = useState(false)
+    const [trackProgress, setTrackProgress] = useState(true)
 
     useEffect(() => {
 
@@ -133,13 +132,13 @@ const Flashcard = () => {
                     {trackProgress && (
                         <div className={styles.flex}>
                             <div className={styles.flex}>
-                                <div className={`${styles.circleButton} ${styles.textRed}`}>{unsureFlashcards.length}</div>
-                                <p className={styles.textRed}>Unsure</p>
+                                <div className={`${styles.scoreCount} ${styles.unsureCount} ${styles.textRed}`}>{unsureFlashcards.length}</div>
+                                <p className={styles.textRed}> Unsure </p>
                             </div>
 
                             <div className={styles.flex}>
-                                <p className={styles.textGreen}>Remember</p>
-                                <div className={`${styles.circleButton} ${styles.textGreen}`}>{knowFlashcards.length}</div>
+                                <p className={styles.textGreen}> Remember </p>
+                                <div className={`${styles.scoreCount} ${styles.sureCount} ${styles.textGreen}`}>{knowFlashcards.length}</div>
                             </div>
                         </div>
                     )}
@@ -151,29 +150,38 @@ const Flashcard = () => {
 
                     {trackProgress ? (
                         <div className={styles.flexCenter}>
+
+                            <div className={styles.toggleSwitch}>
+                                <ToggleSwitch trackProgress={trackProgress} handleToggle={toggleTrackProgress}/>
+                            </div>
+
                             <button className={`${styles.circleButton}`} onClick={handleCrossClicked}>
-                                <RxCross2 className={`${styles.textRed} mx-auto text-2xl`} />
+                                <RxCross2 className={`${styles.textRed} ${styles.cross}`} />
                             </button>
+
                             <button className={`${styles.circleButton}`} onClick={handleTickClicked}>
-                                <BsCheckLg className={`${styles.textGreen} mx-auto text-2xl`} />
+                                <BsCheckLg className={`${styles.textGreen} ${styles.tick}`} />
                             </button>
+
                         </div>
                     ) : (
                         <div className={styles.flexCenter}>
+
+                            <div className={styles.toggleSwitch}>
+                                <ToggleSwitch trackProgress={trackProgress} handleToggle={toggleTrackProgress}/>
+                            </div>
+
                             <button className={`${styles.circleButton} ${index === 0 && styles.circleButtonDisabled}`} onClick={handleLeftArrowClicked} disabled={index === 0}>
                                 <BsArrowLeftShort />
                             </button>
+
                             <button className={`${styles.circleButton} ${index === flashcardArray.length - 1 && styles.circleButtonDisabled}`} onClick={handleRightArrowClicked} disabled={index === flashcardArray.length - 1}>
                                 <BsArrowRightShort />
                             </button>
+
                         </div>
                     )}
 
-                    {/* <label className={styles.toggleContainer}>
-                        <input type="checkbox" className="sr-only" onClick={toggleTrackProgress} />
-                        <div className={`${styles.toggle} ${trackProgress && styles.toggleChecked}`}></div>
-                        <span className="ms-3 text-sm font-medium">Track Progress</span>
-                    </label> */}
                 </div>
             )}
         </div>

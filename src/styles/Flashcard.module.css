@@ -78,12 +78,34 @@
 .flex {
     display: flex;
     justify-content: space-between;
+    gap: 10px;
+    font-size: 1.1rem;
+    align-items: center;
+}
+
+.scoreCount {
+    border-width: 1.5px;
+    border-style: solid;
+    width: 40px;
+    height: 25px;
+    border-radius: 15px;
+    text-align: center;
+    align-content: center;
+}
+
+.unsureCount {
+    background-color: #fac9c9;
+}
+
+.sureCount {
+    background-color: #b6f9cf;
 }
 
 .flexCenter {
     display: flex;
     justify-content: center;
     gap: 1.5rem;
+    position: relative;
 }
 
 .flashcard {
@@ -125,7 +147,6 @@
     transition: background 0.2s;
     cursor: pointer;
     font-size: 2rem;
-    align-content: center;
 }
 
 .circleButton:hover {
@@ -135,6 +156,10 @@
 .circleButtonDisabled {
     background: #d1d5db;
     cursor: not-allowed;
+}
+
+.cross, .tick {
+    font-size: 1.7rem;
 }
 
 .textRed {
@@ -181,6 +206,12 @@
     transform: translateX(1.25rem);
 }
 
+.toggleSwitch {
+    position: absolute;
+    left: 0;
+}
+
+/* EVERYTHING BELOW IS OLD STYLING */
 
 /* .wrapper {
     position: relative;
