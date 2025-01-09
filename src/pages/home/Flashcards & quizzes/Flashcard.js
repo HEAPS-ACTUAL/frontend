@@ -160,18 +160,11 @@ const Flashcard = () => {
                         </div>
                     ) : (
                         <div className={styles.flexCenter}>
-                            <button
-                                className={`${styles.circleButton} ${index === 0 && styles.circleButtonDisabled}`}
-                                onClick={handleLeftArrowClicked}
-                                disabled={index === 0}
-                            >
-                                <BsArrowLeftShort className="mx-auto text-4xl" />
+                            <button className={`${styles.circleButton} ${index === 0 && styles.circleButtonDisabled}`} onClick={handleLeftArrowClicked} disabled={index === 0}>
+                                <BsArrowLeftShort />
                             </button>
-                            <button
-                                className={`${styles.circleButton}`}
-                                onClick={handleRightArrowClicked}
-                            >
-                                <BsArrowRightShort className="mx-auto text-4xl" />
+                            <button className={`${styles.circleButton} ${index === flashcardArray.length - 1 && styles.circleButtonDisabled}`} onClick={handleRightArrowClicked} disabled={index === flashcardArray.length - 1}>
+                                <BsArrowRightShort />
                             </button>
                         </div>
                     )}

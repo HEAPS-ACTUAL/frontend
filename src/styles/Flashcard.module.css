@@ -51,6 +51,9 @@
     position: absolute;
     top: 0.25rem;
     right: 0;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
 }
 
 .progressContainer {
@@ -114,12 +117,15 @@
 
 .circleButton {
     background: #ffffff;
+    border: none;
     border-radius: 9999px;
     width: 2.75rem;
     height: 2.75rem;
     padding: 0.25rem;
-    cursor: pointer;
     transition: background 0.2s;
+    cursor: pointer;
+    font-size: 2rem;
+    align-content: center;
 }
 
 .circleButton:hover {
