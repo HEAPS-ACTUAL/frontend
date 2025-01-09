@@ -108,7 +108,8 @@
     position: relative;
 }
 
-.flashcard {
+/* flashcard front */
+.flashcard { 
     background: #ffffff;
     border-radius: 1.5rem;
     padding: 0 5rem;
@@ -117,11 +118,24 @@
     position: relative;
     height: 450px;
     align-content: center;
+    box-shadow: 5px 5px 5px gray;
+
 }
 
+/* flashcard back */
 .flashcardFlipped {
     text-align: justify;
+    background-color: #ef4444;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+
 }
+
+.flashcard,
+.flashcardFlipped {
+    transform: rotateY(-180deg);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
 
 .flashcardNormal {
     font-weight: bold;
