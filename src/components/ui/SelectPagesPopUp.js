@@ -1,8 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { GlobalWorkerOptions, getDocument } from "pdfjs-dist/build/pdf";
-
-GlobalWorkerOptions.workerSrc =
-  "//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
+import { getDocument } from "pdfjs-dist/build/pdf";
 
 const SelectPagesModal = () => {
   const [isOpen, setIsOpen] = useState(false);
