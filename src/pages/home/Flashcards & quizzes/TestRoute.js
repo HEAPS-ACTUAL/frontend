@@ -6,7 +6,7 @@ import ResultsPage from "./ResultsPage";
 import Flashcard from "./Flashcard";
 import AttemptsQuizzesTable from "./AttemptsQuizzes";
 // import EditFlashcardPage from "../../EditFlashcardPage";
-// import CompletedFlashcardPage from "../../CompletedFlashcardPage";
+import CompletedFlashcardPage from "../../../pages/CompletedFlashcardPage";
 
 function TestRoute(){
     return (
@@ -16,8 +16,8 @@ function TestRoute(){
                 <Route path="/results-page" element={<ResultsPage />} />
                 <Route path="/flashcard/:id" element={<Flashcard />} />
                 <Route path="/attempts" element={<AttemptsQuizzesTable />} />
-                {/* <Route path="/flashcard/:id/edit" element={<EditFlashcardPage />} />
-                <Route path="/flashcard/:id/completed" element={<CompletedFlashcardPage />} /> */}
+                {/* <Route path="/flashcard/:id/edit" element={<EditFlashcardPage />} /> */}
+                <Route path="/flashcard/:id/completed" element={<CompletedFlashcardPage />} />
             </Routes>
         </div>
     )

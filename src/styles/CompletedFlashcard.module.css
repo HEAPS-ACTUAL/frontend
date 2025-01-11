@@ -1,0 +1,56 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+.header {
+    text-align: center;
+    margin-top: 10vh;
+    font-size: 2rem;
+    padding: 0rem 5rem;
+    font-weight: bold;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.progressContainer {
+    text-align: center;
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.progress {
+    justify-content: center;
+    display: flex;
+    gap: 50px;
+    align-items: center;
+}
+
+.remembered {
+    margin-bottom: 15px;
+}
+
+.buttonsContainer {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+button {
+    background-color: transparent;
+    padding: 20px 30px;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #d3d3d3;
+    transform: scale(1.05);
+}
