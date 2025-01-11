@@ -34,7 +34,7 @@ const Flashcard = () => {
     const [progress, setProgress] = useState(0)
     const [isFlipped, setIsFlipped] = useState(false)
 
-    const [trackProgress, setTrackProgress] = useState(true)
+    const [trackProgress, setTrackProgress] = useState(false)
 
     useEffect(() => {
 
