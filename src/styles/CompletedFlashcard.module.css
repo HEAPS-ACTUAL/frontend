@@ -40,7 +40,7 @@
     justify-content: center;
 }
 
-button {
+.buttonsContainer button {
     background-color: transparent;
     padding: 20px 30px;
     border-radius: 10px;
@@ -50,7 +50,7 @@ button {
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-button:hover {
+.buttonsContainer button:hover {
     background-color: #d3d3d3;
     transform: scale(1.05);
 }
