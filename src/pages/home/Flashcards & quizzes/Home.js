@@ -47,6 +47,7 @@ function Home() {
 
   const [search, setSearch] = useState("");
   const [filteredFlashcards, setFilteredFlashcards] = useState([]);
+  const [selectedPages, setSelectedPages] = useState([]);
 
   async function fetchIsVerified() {
     const isVerified = await getUserVerificationStatus(email);
@@ -108,6 +109,11 @@ function Home() {
   const [difficulty, setDifficulty] = useState("");
   const [testTypeChecked, setTestTypeChecked] = useState(testTypeDict);
   const testList = Object.keys(testTypeDict);
+
+  const handleSelectedPages = async (pages) => {
+    // console.log("Selected pages:", pages);
+    setSelectedPages(pages);
+  };
 
   function handleFileUpload(event) {
     event.preventDefault();
@@ -214,6 +220,7 @@ function Home() {
             <span className={styles.chooseFile}>
               <SelectPagesModal
                 onChange={(event) => setFile(event.target.files[0])}
+                onSave={handleSelectedPages}
               />
             </span>
           </div>

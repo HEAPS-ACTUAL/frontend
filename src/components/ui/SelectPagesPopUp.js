@@ -1,34 +1,41 @@
 import React, { useState, useRef, useEffect } from "react";
 import { getDocument } from "pdfjs-dist/build/pdf";
 
-const SelectPagesModal = () => {
+const SelectPagesModal = ({ onSave }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [pdfDoc, setPdfDoc] = useState(null);
   const [numPages, setNumPages] = useState(0);
   const [selectedPages, setSelectedPages] = useState([]);
+  const [currentFileName, setCurrentFileName] = useState(null);
 
   const canvasRefs = useRef([]);
-  const scale = 0.25;
+  const selectedPagesRef = useRef({}); // To track selected pages for each file
 
-  // Function to render pages
   const renderPages = async () => {
-    if (pdfDoc) {
-      for (let i = 1; i <= numPages; i++) {
-        const page = await pdfDoc.getPage(i);
-        const viewport = page.getViewport({ scale });
-        const canvas = canvasRefs.current[i - 1];
-        const ctx = canvas.getContext("2d");
+    if (!pdfDoc) return;
 
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
+    const THUMBNAIL_MAX_WIDTH = 200;
 
-        const renderContext = {
-          canvasContext: ctx,
-          viewport,
-        };
+    for (let i = 1; i <= numPages; i++) {
+      const page = await pdfDoc.getPage(i);
+      const unscaledViewport = page.getViewport({ scale: 1 });
+      const pageWidth = unscaledViewport.width;
 
-        await page.render(renderContext).promise;
-      }
+      const dynamicScale = THUMBNAIL_MAX_WIDTH / pageWidth;
+      const viewport = page.getViewport({ scale: dynamicScale });
+
+      const canvas = canvasRefs.current[i - 1];
+      if (!canvas) continue;
+
+      const ctx = canvas.getContext("2d");
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+
+      const renderContext = {
+        canvasContext: ctx,
+        viewport,
+      };
+      await page.render(renderContext).promise;
     }
   };
 
@@ -38,62 +45,74 @@ const SelectPagesModal = () => {
     }
   }, [pdfDoc]);
 
-  // Handle file upload
-  const handleFileChange = async (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = async (e) => {
-        const pdfData = new Uint8Array(e.target.result);
-        const pdf = await getDocument({ data: pdfData }).promise;
-        setPdfDoc(pdf);
-        setNumPages(pdf.numPages);
-        setSelectedPages([]);
-        setIsOpen(true);
-      };
-      reader.readAsArrayBuffer(file);
-    }
+  const handleFileClick = (event) => {
+    event.target.value = null; // Clear the input field so that the same file can be selected again
   };
 
-  // Toggle page selection
+  const handleFileChange = async (event) => {
+    const file = event.target.files[0];
+    if (!file) {
+      return;
+    }
+
+    setCurrentFileName(file.name);
+
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      const pdfData = new Uint8Array(e.target.result);
+      const pdf = await getDocument({ data: pdfData }).promise;
+
+      setPdfDoc(pdf);
+      setNumPages(pdf.numPages);
+
+      // Load previously selected pages for the file (if any)
+      const previouslySelected = selectedPagesRef.current[file.name] || [];
+      setSelectedPages(previouslySelected);
+
+      setIsOpen(true);
+    };
+    reader.readAsArrayBuffer(file);
+  };
+
   const togglePageSelection = (pageIndex) => {
     setSelectedPages((prev) => {
-      if (prev.includes(pageIndex)) {
-        return prev.filter((p) => p !== pageIndex);
-      } else {
-        return [...prev, pageIndex];
-      }
+      const updatedSelection = prev.includes(pageIndex)
+        ? prev.filter((p) => p !== pageIndex)
+        : [...prev, pageIndex];
+
+      // Save the updated selection for the current file
+      selectedPagesRef.current[currentFileName] = updatedSelection;
+      return updatedSelection;
     });
   };
 
-  // Select or unselect all pages
   const toggleSelectAll = () => {
     if (selectedPages.length === numPages) {
       setSelectedPages([]);
+      selectedPagesRef.current[currentFileName] = [];
     } else {
-      setSelectedPages(Array.from({ length: numPages }, (_, i) => i));
+      const allPages = Array.from({ length: numPages }, (_, i) => i);
+      setSelectedPages(allPages);
+      selectedPagesRef.current[currentFileName] = allPages;
     }
   };
 
-  // Handle Generate action
-  const handleGenerate = async () => {
-    try {
-      console.log("Selected pages:", selectedPages);
-      // ... any logic for generating from selected pages
-      setIsOpen(false);
-    } catch (error) {
-      console.error(error);
-    }
+  const handleSave = async () => {
+    // console.log("Selected pages:", selectedPages);
+    onSave(selectedPages);
+    setIsOpen(false);
   };
 
-  // Toggle modal
-  const toggleModal = () => {
-    setIsOpen(!isOpen);
-  };
+  const toggleModal = () => setIsOpen(!isOpen);
 
   return (
     <div>
-      <input type="file" onChange={handleFileChange} />
+      <input
+        type="file"
+        accept=".pdf"
+        onClick={handleFileClick}
+        onChange={handleFileChange}
+      />
 
       {isOpen && (
         <div
@@ -114,62 +133,54 @@ const SelectPagesModal = () => {
           }}
         >
           <div
-            // Outer container for the dialog
             style={{
               position: "relative",
               padding: "1rem",
               width: "100%",
-              maxWidth: "768px", // approximate "max-w-3xl"
-              maxHeight: "80vh", // limit total height
-              backgroundColor: "white", // so scrollbar appears over a white background
-              borderRadius: "0.5rem", // ~rounded-lg
+              maxWidth: "768px",
+              maxHeight: "80vh",
+              backgroundColor: "white",
+              borderRadius: "0.5rem",
               boxShadow:
-                "0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.06)", // ~shadow
+                "0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.06)",
               display: "flex",
-              flexDirection: "column", // ensure header, body, footer stack vertically
+              flexDirection: "column",
             }}
           >
-            {/* Modal header */}
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                padding: "1.25rem", // ~ p-5
-                borderBottom: "1px solid #e5e7eb", // ~border-b, ~border-gray-200
+                padding: "1.25rem",
+                borderBottom: "1px solid #e5e7eb",
                 borderTopLeftRadius: "0.5rem",
                 borderTopRightRadius: "0.5rem",
               }}
             >
-              <h3
-                style={{
-                  fontSize: "1.25rem", // ~text-xl
-                  fontWeight: 600, // ~font-semibold
-                  color: "#111827", // ~text-gray-900
-                }}
-              >
+              <h3 style={{ fontSize: "1.25rem", fontWeight: 600 }}>
                 Select Pages to Generate
               </h3>
               <button
                 onClick={toggleModal}
                 type="button"
                 style={{
-                  color: "#9CA3AF", // ~text-gray-400
-                  backgroundColor: "transparent", // ~bg-transparent
-                  borderRadius: "0.5rem", // ~rounded-lg
-                  fontSize: "0.875rem", // ~text-sm
-                  width: "2rem", // ~w-8
-                  height: "2rem", // ~h-8
-                  marginLeft: "auto", // ~ms-auto
-                  display: "inline-flex", // ~inline-flex
-                  alignItems: "center", // ~items-center
-                  justifyContent: "center", // ~justify-center
+                  color: "#9CA3AF",
+                  backgroundColor: "transparent",
+                  borderRadius: "0.5rem",
+                  fontSize: "0.875rem",
+                  width: "2rem",
+                  height: "2rem",
+                  marginLeft: "auto",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                   cursor: "pointer",
                   border: "none",
                 }}
               >
                 <svg
-                  style={{ width: "0.75rem", height: "0.75rem" }} // ~w-3 h-3
+                  style={{ width: "0.75rem", height: "0.75rem" }}
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -189,30 +200,24 @@ const SelectPagesModal = () => {
               </button>
             </div>
 
-            {/* Modal body */}
             <div
               style={{
-                flex: 1, // Allow body to grow and fill available space
-                padding: "1.25rem", // ~p-5
-                overflowY: "auto", // Allow scrolling inside the body
+                flex: 1,
+                padding: "1.25rem",
+                overflowY: "auto",
                 display: "flex",
                 flexDirection: "column",
-                gap: "1rem", // ~space-y-4
+                gap: "1rem",
               }}
             >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end", // ~justify-end
-                }}
-              >
+              <div style={{ display: "flex", justifyContent: "flex-end" }}>
                 <button
                   type="button"
                   onClick={toggleSelectAll}
                   style={{
-                    fontSize: "0.875rem", // ~text-sm
-                    fontWeight: 500, // ~font-medium
-                    color: "#3B82F6", // ~text-blue-500
+                    fontSize: "0.875rem",
+                    fontWeight: 500,
+                    color: "#3B82F6",
                     background: "none",
                     border: "none",
                     cursor: "pointer",
@@ -223,11 +228,12 @@ const SelectPagesModal = () => {
                     : "Select All"}
                 </button>
               </div>
+
               <div
                 style={{
-                  display: "grid", // ~grid
-                  gridTemplateColumns: "repeat(3, minmax(0, 1fr))", // ~grid-cols-3
-                  gap: "0.75rem", // ~gap-3
+                  display: "grid",
+                  gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+                  gap: "0.75rem",
                 }}
               >
                 {Array.from({ length: numPages }, (_, index) => {
@@ -245,7 +251,6 @@ const SelectPagesModal = () => {
                         borderRadius: "5px",
                       }}
                     >
-                      {/* Page Number */}
                       <div
                         style={{
                           position: "absolute",
@@ -261,81 +266,55 @@ const SelectPagesModal = () => {
                       >
                         {index + 1}
                       </div>
-                      {/* Canvas */}
                       <canvas
                         ref={(el) => (canvasRefs.current[index] = el)}
-                        style={{
-                          display: "block",
-                          margin: "auto",
-                        }}
+                        style={{ display: "block", margin: "auto" }}
                       />
-                      {/* Selection Circle */}
-                      <div
-                        style={{
-                          position: "absolute",
-                          bottom: "10px",
-                          left: "50%",
-                          transform: "translateX(-50%)",
-                          width: "15px",
-                          height: "15px",
-                          borderRadius: "50%",
-                          background: pageSelected ? "#1d4ed8" : "#ffffff",
-                          border: "1px solid black",
-                        }}
-                      ></div>
                     </div>
                   );
                 })}
               </div>
             </div>
 
-            {/* Modal footer */}
             <div
               style={{
                 position: "sticky",
-                bottom: 0, // Ensure the footer sticks to the bottom of the modal
-                padding: "1.25rem", // ~p-5
-                borderTop: "1px solid #e5e7eb", // ~border-t
-                borderBottomLeftRadius: "0.5rem", // ~rounded-b
-                borderBottomRightRadius: "0.5rem", // ~rounded-b
-                backgroundColor: "white", // Ensure footer has the same background
-                zIndex: 10, // Keep it above scrolling content
+                bottom: 0,
+                padding: "1.25rem",
+                borderTop: "1px solid #e5e7eb",
+                backgroundColor: "white",
+                zIndex: 10,
                 display: "flex",
                 justifyContent: "flex-end",
-                gap: "0.75rem", // ~space-x-3
+                gap: "0.75rem",
               }}
             >
               <button
                 onClick={toggleModal}
                 type="button"
                 style={{
-                  paddingTop: "0.625rem", // ~py-2.5
-                  paddingBottom: "0.625rem",
-                  paddingLeft: "1.25rem", // ~px-5
-                  paddingRight: "1.25rem",
-                  fontSize: "0.875rem", // ~text-sm
-                  fontWeight: 500, // ~font-medium
-                  color: "#111827", // ~text-gray-900
-                  backgroundColor: "#ffffff", // ~bg-white
-                  borderRadius: "0.5rem", // ~rounded-lg
-                  border: "1px solid #e5e7eb", // ~border-gray-200
-                  outline: "none", // ~focus:outline-none
+                  padding: "0.625rem 1.25rem",
+                  fontSize: "0.875rem",
+                  fontWeight: 500,
+                  color: "#111827",
+                  backgroundColor: "#ffffff",
+                  borderRadius: "0.5rem",
+                  border: "1px solid #e5e7eb",
                   cursor: "pointer",
                 }}
               >
                 Cancel
               </button>
               <button
-                onClick={handleGenerate}
+                onClick={handleSave}
                 type="button"
                 style={{
-                  color: "#ffffff", // ~text-white
-                  backgroundColor: "#3B82F6", // ~bg-blue-500
-                  fontWeight: 500, // ~font-medium
-                  borderRadius: "0.5rem", // ~rounded-lg
-                  fontSize: "0.875rem", // ~text-sm
-                  padding: "0.625rem 1.25rem", // ~py-2.5 px-5
-                  outline: "none", // ~focus:outline-none
+                  color: "#ffffff",
+                  backgroundColor: "#3B82F6",
+                  fontWeight: 500,
+                  borderRadius: "0.5rem",
+                  fontSize: "0.875rem",
+                  padding: "0.625rem 1.25rem",
                   cursor: "pointer",
                   border: "none",
                 }}
