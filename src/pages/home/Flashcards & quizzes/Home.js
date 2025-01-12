@@ -110,9 +110,11 @@ function Home() {
   const [testTypeChecked, setTestTypeChecked] = useState(testTypeDict);
   const testList = Object.keys(testTypeDict);
 
-  const handleSelectedPages = async (pages) => {
-    // console.log("Selected pages:", pages);
+  const handleSelectedPages = (pages, file) => {
     setSelectedPages(pages);
+    setFile(file);
+    // console.log("Selected pages:", pages);
+    // console.log(file);
   };
 
   function handleFileUpload(event) {
@@ -154,15 +156,29 @@ function Home() {
                       testType,
                       difficulty,
                       file,
+                      selectedPages,
                       fileSize: `${convertFileSizeTo2DP(file)}MB`,
                     });
 
                     if (testType === "Q") {
-                      generateQuiz(email, testName, testType, difficulty, file);
+                      generateQuiz(
+                        email,
+                        testName,
+                        testType,
+                        difficulty,
+                        file,
+                        selectedPages
+                      );
                     }
 
                     if (testType === "F") {
-                      generateFlashcard(email, testName, testType, file);
+                      generateFlashcard(
+                        email,
+                        testName,
+                        testType,
+                        file,
+                        selectedPages
+                      );
                     }
                   }
                 }
@@ -218,10 +234,7 @@ function Home() {
               <option value="Hard">Hard</option>
             </select>
             <span className={styles.chooseFile}>
-              <SelectPagesModal
-                onChange={(event) => setFile(event.target.files[0])}
-                onSave={handleSelectedPages}
-              />
+              <SelectPagesModal onSave={handleSelectedPages} />
             </span>
           </div>
 

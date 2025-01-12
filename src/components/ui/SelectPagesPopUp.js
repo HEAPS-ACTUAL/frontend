@@ -7,6 +7,7 @@ const SelectPagesModal = ({ onSave }) => {
   const [numPages, setNumPages] = useState(0);
   const [selectedPages, setSelectedPages] = useState([]);
   const [currentFileName, setCurrentFileName] = useState(null);
+  const [currentFile, setCurrentFile] = useState(null);
 
   const canvasRefs = useRef([]);
   const selectedPagesRef = useRef({}); // To track selected pages for each file
@@ -54,7 +55,7 @@ const SelectPagesModal = ({ onSave }) => {
     if (!file) {
       return;
     }
-
+    setCurrentFile(file);
     setCurrentFileName(file.name);
 
     const reader = new FileReader();
@@ -99,7 +100,7 @@ const SelectPagesModal = ({ onSave }) => {
 
   const handleSave = async () => {
     // console.log("Selected pages:", selectedPages);
-    onSave(selectedPages);
+    onSave(selectedPages, currentFile);
     setIsOpen(false);
   };
 

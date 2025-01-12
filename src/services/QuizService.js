@@ -16,6 +16,7 @@ async function generateQuiz(
     formData.append("testType", testType);
     formData.append("file", file);
     formData.append("selectedPages", selectedPages);
+    // console.log("quizService:", selectedPages);
 
     const response = await axiosInstance({
       method: "post",
