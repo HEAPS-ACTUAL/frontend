@@ -14,7 +14,7 @@ async function generateFlashcard(
     formData.append("testName", testName);
     formData.append("testType", testType);
     formData.append("file", file);
-    formData.append("selectedPages", selectedPages);
+    formData.append("selectedPages", JSON.stringify(selectedPages));
 
     const response = await axiosInstance({
       method: "post",

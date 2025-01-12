@@ -15,7 +15,7 @@ async function generateQuiz(
     formData.append("difficulty", difficulty);
     formData.append("testType", testType);
     formData.append("file", file);
-    formData.append("selectedPages", selectedPages);
+    formData.append("selectedPages", JSON.stringify(selectedPages));
     // console.log("quizService:", selectedPages);
 
     const response = await axiosInstance({
