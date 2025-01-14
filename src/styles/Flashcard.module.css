@@ -62,7 +62,7 @@
     animation: fadeInRight 0.4s forwards;
   }
 
-  
+
 .container {
     margin: 2.5rem auto;
     padding: 0 18rem;
@@ -216,6 +216,12 @@
     transform: rotateY(180deg);
     padding: 40px;
 }
+
+.noFlipAnim {
+    /* Force no transition for immediate jump */
+    transition: none !important;
+}
+
 
 .icon {
     width: 1.5rem;

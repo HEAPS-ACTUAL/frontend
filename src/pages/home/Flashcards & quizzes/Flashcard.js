@@ -41,7 +41,7 @@ const Flashcard = () => {
     const [animIn, setAnimIn] = useState(false);
     // This holds either 'left' or 'right' to indicate the direction of exit
     const [outDirection, setOutDirection] = useState(null);
-
+    const [disableFlipAnim, setDisableFlipAnim] = useState(false);
 
     useEffect(() => {
 
@@ -86,36 +86,47 @@ const Flashcard = () => {
 
     function handleAnimationEnd() {
         if (animOut) {
-            // Exiting card done => update index
-            setAnimOut(false);
-
-            // Decide whether to go next or previous
-            if(outDirection === 'left') {
-                // Next
-                if (index === flashcardArray.length - 1) {
-                  // If you want to navigate to completed if last card
-                  navigate(`completed`, { state: { knowFlashcards, unsureFlashcards } });
-                } else {
-                  setIndex((prev) => prev + 1);
-                }
-                // Animate new card in from the right
-                setAnimIn(true);
-            } else if(outDirection === 'right') {
-                // Previous
-                setIndex((prev) => prev - 1);
-                // Animate new card in from the left
-                setAnimIn(true);
+          setAnimOut(false);
+      
+          if (outDirection === 'left') {
+            if (index === flashcardArray.length - 1) {
+              navigate(`completed`, { state: { knowFlashcards, unsureFlashcards } });
+            } else {
+              setIndex((prev) => prev + 1);
             }
-            
-            // Reset direction after usage
-            setOutDirection(null);
-
-        } else if (animIn) {
-            // Done entering => reset
-            setAnimIn(false);
+            // Immediately reset the new card to front
+            instantlyShowFront();
+      
+            setAnimIn(true);
+          } 
+          else if (outDirection === 'right') {
+            setIndex((prev) => prev - 1);
+            // Immediately reset the new card to front
+            instantlyShowFront();
+      
+            setAnimIn(true);
+          }
+          setOutDirection(null);
+        } 
+        else if (animIn) {
+          setAnimIn(false);
         }
-    }
+      }
 
+    function instantlyShowFront() {
+        // 1) Disable flipping transition
+        setDisableFlipAnim(true);
+      
+        // 2) Snap the card to front face
+        setIsFlipped(false);
+      
+        // 3) Next tick, re-enable the transition
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            setDisableFlipAnim(false);
+          });
+        });
+    }
   
     function handleLeftArrowClicked(){
         // If already at first card, do nothing
@@ -215,7 +226,13 @@ const Flashcard = () => {
                     `}
                     onAnimationEnd={handleAnimationEnd}
                     >
-                    <div className={`${styles.flashcardInner} ${isFlipped ? styles.flipped : ''}`}>
+                    <div 
+                        className={`
+                            ${styles.flashcardInner} 
+                            ${isFlipped ? styles.flipped : ''} 
+                            ${disableFlipAnim ? styles.noFlipAnim : ''}
+                        `}
+                        >
                         
                         {/* FRONT FACE */}
                         <div className={styles.flashcardFront}>
