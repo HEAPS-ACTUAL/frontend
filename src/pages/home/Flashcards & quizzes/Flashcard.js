@@ -36,6 +36,10 @@ const Flashcard = () => {
 
     const [trackProgress, setTrackProgress] = useState(false)
 
+    // 1) Extra local states
+    const [animOut, setAnimOut] = useState(false);
+    const [animIn, setAnimIn] = useState(false);
+
     useEffect(() => {
 
         async function fetchTestQuestions() {
@@ -67,14 +71,30 @@ const Flashcard = () => {
     }
     
     function nextFlashcard(){
-        if (index === flashcardArray.length - 1){
-            navigate(`completed`, {state: {knowFlashcards, unsureFlashcards}})
-        }
-        else {
-            setIndex(index + 1)
-        }
+        // if (index === flashcardArray.length - 1){
+        //     navigate(`completed`, {state: {knowFlashcards, unsureFlashcards}})
+        // }
+        // else {
+        //     setIndex(index + 1)
+        // }
+
+        setAnimOut(true);
     }
 
+    function handleAnimationEnd() {
+        if (animOut) {
+          // Done discarding => increment index
+          setIndex((prev) => prev + 1);
+          setAnimOut(false);
+      
+          // Animate new card in
+          setAnimIn(true);
+        } else if (animIn) {
+          // Done entering => reset
+          setAnimIn(false);
+        }
+    }
+  
     function handleLeftArrowClicked(){
         previousFlashcard()
     }
@@ -149,23 +169,30 @@ const Flashcard = () => {
                     )}
 
                     
-                    <div onClick={flipFlashcard}>
-                        <div className={styles.flashcardContainer}>
-                            <div className={`${styles.flashcardInner} ${isFlipped ? styles.flipped : ''}`}>
-                            
-                                {/* FRONT FACE */}
-                                <div className={styles.flashcardFront}>
-                                    {flashcardArray[index]?.QuestionText}
-                                    <img src={flipIcon} className={styles.icon} />
-                                </div>
-
-                                {/* BACK FACE */}
-                                <div className={styles.flashcardBack}>
-                                    {flashcardArray[index]?.Elaboration}
-                                    <img src={flipIcon} className={styles.icon} />
-                                </div>
-                            </div>
+                    <div
+                    onClick={flipFlashcard}
+                    className={`
+                        ${styles.flashcardContainer}
+                        ${animOut ? styles.fadeOutLeft : ''}
+                        ${animIn ? styles.fadeInRight : ''}
+                    `}
+                    onAnimationEnd={handleAnimationEnd}
+                    >
+                    <div className={`${styles.flashcardInner} ${isFlipped ? styles.flipped : ''}`}>
+                        
+                        {/* FRONT FACE */}
+                        <div className={styles.flashcardFront}>
+                        {flashcardArray[index]?.QuestionText}
+                        <img src={flipIcon} className={styles.icon} />
                         </div>
+
+                        {/* BACK FACE */}
+                        <div className={styles.flashcardBack}>
+                        {flashcardArray[index]?.Elaboration}
+                        <img src={flipIcon} className={styles.icon} />
+                        </div>
+
+                    </div>
                     </div>
 
 
