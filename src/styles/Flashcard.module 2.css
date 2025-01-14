@@ -1,0 +1,426 @@
+@keyframes shakeIconFront {
+    0% { transform: rotate(0deg); }
+    10% { transform: rotate(5deg); }
+    20% { transform: rotate(10deg); }
+    30% { transform: rotate(15deg); }
+    40% { transform: rotate(20deg); }
+    50% { transform: rotate(20deg); }
+    60% { transform: rotate(20deg); }
+    70% { transform: rotate(15deg); }
+    80% { transform: rotate(10deg); }
+    90% { transform: rotate(5deg); }
+    100% { transform: rotate(0deg); }
+}
+
+@keyframes shakeIconBack {
+    0% { transform: rotate(360deg) scaleX(-1); }
+    10% { transform: rotate(355deg) scaleX(-1); }
+    20% { transform: rotate(350deg) scaleX(-1); }
+    30% { transform: rotate(345deg) scaleX(-1); }
+    40% { transform: rotate(340deg) scaleX(-1); }
+    50% { transform: rotate(340deg) scaleX(-1); }
+    60% { transform: rotate(340deg) scaleX(-1); }
+    70% { transform: rotate(345deg) scaleX(-1); }
+    80% { transform: rotate(350deg) scaleX(-1); }
+    90% { transform: rotate(355deg) scaleX(-1); }
+    100% { transform: rotate(360deg) scaleX(-1); }
+}
+
+.container {
+    margin: 2.5rem auto;
+    padding: 0 18rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+.titleContainer {
+    position: relative;
+}
+
+.textCenter {
+    text-align: center;
+}
+
+.textLarge {
+    font-size: 1.25rem;
+}
+
+.button {
+    font-size: 1.25rem;
+    position: absolute;
+    top: 0.25rem;
+    right: 0;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.progressContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.progressBar {
+    height: 0.75rem;
+    background: #ffffff;
+    border-radius: 9999px;
+}
+
+.progressFill {
+    height: 0.75rem;
+    background: #22c55e;
+    border-radius: 9999px;
+    transition: all 0.5s ease-in-out;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 1.1rem;
+    align-items: center;
+}
+
+.scoreCount {
+    border-width: 1.5px;
+    border-style: solid;
+    width: 40px;
+    height: 25px;
+    border-radius: 15px;
+    text-align: center;
+    align-content: center;
+}
+
+.unsureCount {
+    background-color: #fac9c9;
+}
+
+.sureCount {
+    background-color: #b6f9cf;
+}
+
+.flexCenter {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    position: relative;
+}
+
+/* flashcard front */
+.flashcard { 
+    background: #ffffff;
+    border-radius: 1.5rem;
+    padding: 0 5rem;
+    font-size: 1.875rem;
+    cursor: pointer;
+    position: relative;
+    height: 450px;
+    align-content: center;
+    box-shadow: 5px 5px 5px gray;
+
+}
+
+/* flashcard back */
+.flashcardFlipped {
+    text-align: justify;
+    background-color: #ef4444;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+
+}
+
+.flashcard,
+.flashcardFlipped {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.flashcardNormal {
+    font-weight: bold;
+    text-align: center;
+}
+
+.icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    cursor: pointer;
+}
+
+.circleButton {
+    background: #ffffff;
+    border: none;
+    border-radius: 9999px;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0.25rem;
+    transition: background 0.2s;
+    cursor: pointer;
+    font-size: 2rem;
+}
+
+.circleButton:hover {
+    background: #e5e7eb;
+}
+
+.circleButtonDisabled {
+    background: #d1d5db;
+    cursor: not-allowed;
+}
+
+.cross, .tick {
+    font-size: 1.7rem;
+}
+
+.textRed {
+    color: #ef4444;
+    font-weight: bold;
+}
+
+.textGreen {
+    color: #22c55e;
+    font-weight: bold;
+}
+
+.toggleContainer {
+    position: absolute;
+    top: 0;
+}
+
+.toggle {
+    width: 2.75rem;
+    height: 1.5rem;
+    background: #e5e7eb;
+    border-radius: 9999px;
+    position: relative;
+    transition: background 0.3s;
+}
+
+.toggle::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 1.25rem;
+    height: 1.25rem;
+    background: #ffffff;
+    border-radius: 9999px;
+    transition: transform 0.3s;
+}
+
+.toggleChecked {
+    background: #2563eb;
+}
+
+.toggleChecked::after {
+    transform: translateX(1.25rem);
+}
+
+.toggleSwitch {
+    position: absolute;
+    left: 0;
+}
+
+/* EVERYTHING BELOW IS OLD STYLING */
+
+/* .wrapper {
+    position: relative;
+    width: 100%;
+    height: 95vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.FlashcardContainer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 40px;
+    padding: 10px;
+    width: 55%;
+    height: 55%;
+    background-color: white;
+    transition: transform 0.3s ease-in-out;
+    transform-style: preserve-3d;
+    transform: perspective(1000px) rotateY(0deg);
+    cursor: pointer;
+}
+
+.FlashcardFace{
+    position: absolute;
+    width: 100%;
+    height:100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 40px;
+}
+
+.FrontFlashcardContent, .BackFlashcardContent {
+    color: black;
+    font-size: 30px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 100%; 
+    padding: 50px;
+}
+
+.FrontFlashcardContent {
+    text-align: center;
+}
+
+.BackFlashcardContent{
+    transform: rotateY(180deg);
+    font-size: 40px;
+    font-weight: 100;
+    font-size: 30px;
+    background-color: transparent;
+    text-align: left;
+}
+
+.FlashcardContainer.isFlipped {
+    transform: rotateY(180deg);
+}
+
+.isFlipped {
+    --rotate-y: 180deg;
+}
+
+.flipIconFront, .flipIconBack {
+    width: 30px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.flipIconFront:hover {
+    animation: shakeIconFront 0.5s;
+}
+
+.flipIconBack:hover {
+    animation: shakeIconBack 0.5s;
+}
+
+.flipIconFront {
+    right: 20px;
+    top: 20px;
+}
+
+.flipIconBack {
+    left: 20px;
+    top: 20px;
+    transform: scaleX(-1);
+} 
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 20px; 
+}
+ 
+.previousBtn, .nextBtn, .RevisionScheduleButton, .HomeButton, .EditButton {
+    font-size: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    border: none; 
+    border-radius: 50%; 
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25); 
+    transition: background-color 0.3s, transform 0.3s; 
+    margin: 10px;
+
+}
+
+.RevisionScheduleButton, .HomeButton, .EditButton {
+    font-size: 28px;
+}
+
+.previousBtn:hover, .previousBtn:focus, .nextBtn:hover, .nextBtn:focus, .HomeButton:hover, .RevisionScheduleButton:hover, .EditButton:hover {
+    background-color: rgba(70, 99, 172, 0.6);
+    transform: scale(1.1);  
+    outline: none; 
+}
+  
+.nextBtn:disabled {
+    background-color: #CCCCCC;  
+    cursor: not-allowed;       
+}
+
+.previousBtn:disabled {
+    background-color: #CCCCCC;  
+    cursor: not-allowed;       
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+    gap: 20px;
+}
+
+.counter {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    margin-top: 50px;
+    color: gray;
+    width: 100%;
+}
+
+textarea {
+    width: 100%;
+    height: 250px;
+    font-size: 20px;
+    padding: 30px;
+    margin: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-align: center;
+    resize: none;
+    font-weight: bold;
+}
+
+.cancelBtn, .confirmBtn {
+    width: 120px !important;
+    height: 40px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px !important;
+    cursor: pointer;
+    margin-left: 20px;
+    display: inline-block;
+    margin-top: 350px;
+}
+
+.cancelBtn:hover, .confirmBtn:hover {
+    background-color: rgba(70, 99, 172, 0.6);
+    color: #fff;
+}
+
+.cancelBtnHidden, .confirmBtnHidden {
+    display: none;
+} */

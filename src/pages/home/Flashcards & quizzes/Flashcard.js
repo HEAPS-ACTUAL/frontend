@@ -148,10 +148,26 @@ const Flashcard = () => {
                         </div>
                     )}
 
-                    <div className={`${styles.flashcard} ${isFlipped ? styles.flashcardFlipped : styles.flashcardNormal}`} onClick={flipFlashcard}>
-                        {isFlipped ? flashcardArray[index].Elaboration : flashcardArray[index].QuestionText}
-                        <img src={flipIcon} className={styles.icon} />
+                    
+                    <div onClick={flipFlashcard}>
+                        <div className={styles.flashcardContainer}>
+                            <div className={`${styles.flashcardInner} ${isFlipped ? styles.flipped : ''}`}>
+                            
+                                {/* FRONT FACE */}
+                                <div className={styles.flashcardFront}>
+                                    {flashcardArray[index]?.QuestionText}
+                                    <img src={flipIcon} className={styles.icon} />
+                                </div>
+
+                                {/* BACK FACE */}
+                                <div className={styles.flashcardBack}>
+                                    {flashcardArray[index]?.Elaboration}
+                                    <img src={flipIcon} className={styles.icon} />
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
 
                     {trackProgress ? (
                         <div className={styles.flexCenter}>
