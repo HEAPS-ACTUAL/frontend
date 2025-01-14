@@ -26,7 +26,7 @@
     100% { transform: rotate(360deg) scaleX(-1); }
 }
 
-/* Example animations */
+/* Move old card LEFT, fade out */
 @keyframes fadeOutLeft {
     0%   { opacity: 1; transform: translateX(0); }
     100% { opacity: 0; transform: translateX(-50px); }
@@ -35,7 +35,25 @@
     animation: fadeOutLeft 0.4s forwards;
   }
   
-  /* Fade in from right */
+  /* Move old card RIGHT, fade out */
+  @keyframes fadeOutRight {
+    0%   { opacity: 1; transform: translateX(0); }
+    100% { opacity: 0; transform: translateX(50px); }
+  }
+  .fadeOutRight {
+    animation: fadeOutRight 0.4s forwards;
+  }
+  
+  /* Slide new card in from LEFT */
+  @keyframes fadeInLeft {
+    0%   { opacity: 0; transform: translateX(-50px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  .fadeInLeft {
+    animation: fadeInLeft 0.4s forwards;
+  }
+  
+  /* Slide new card in from RIGHT */
   @keyframes fadeInRight {
     0%   { opacity: 0; transform: translateX(50px); }
     100% { opacity: 1; transform: translateX(0); }
@@ -44,9 +62,7 @@
     animation: fadeInRight 0.4s forwards;
   }
 
-
   
-
 .container {
     margin: 2.5rem auto;
     padding: 0 18rem;

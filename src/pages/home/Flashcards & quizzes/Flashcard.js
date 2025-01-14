@@ -36,9 +36,12 @@ const Flashcard = () => {
 
     const [trackProgress, setTrackProgress] = useState(false)
 
-    // 1) Extra local states
+    // Animation states
     const [animOut, setAnimOut] = useState(false);
     const [animIn, setAnimIn] = useState(false);
+    // This holds either 'left' or 'right' to indicate the direction of exit
+    const [outDirection, setOutDirection] = useState(null);
+
 
     useEffect(() => {
 
@@ -83,34 +86,66 @@ const Flashcard = () => {
 
     function handleAnimationEnd() {
         if (animOut) {
-          // Done discarding => increment index
-          setIndex((prev) => prev + 1);
-          setAnimOut(false);
-      
-          // Animate new card in
-          setAnimIn(true);
+            // Exiting card done => update index
+            setAnimOut(false);
+
+            // Decide whether to go next or previous
+            if(outDirection === 'left') {
+                // Next
+                if (index === flashcardArray.length - 1) {
+                  // If you want to navigate to completed if last card
+                  navigate(`completed`, { state: { knowFlashcards, unsureFlashcards } });
+                } else {
+                  setIndex((prev) => prev + 1);
+                }
+                // Animate new card in from the right
+                setAnimIn(true);
+            } else if(outDirection === 'right') {
+                // Previous
+                setIndex((prev) => prev - 1);
+                // Animate new card in from the left
+                setAnimIn(true);
+            }
+            
+            // Reset direction after usage
+            setOutDirection(null);
+
         } else if (animIn) {
-          // Done entering => reset
-          setAnimIn(false);
+            // Done entering => reset
+            setAnimIn(false);
         }
     }
+
   
     function handleLeftArrowClicked(){
-        previousFlashcard()
+        // If already at first card, do nothing
+        if(index === 0) return;
+        // Slide OUT to the RIGHT, then we'll do index - 1
+        setOutDirection('right');
+        setAnimOut(true);
     }
 
     function handleRightArrowClicked(){
-        nextFlashcard()
+        // If at last card, maybe show completed or do nothing
+        // if(index === flashcardArray.length - 1) { ... } 
+        // else proceed:
+        setOutDirection('left');
+        setAnimOut(true);
     }
 
     function handleTickClicked(){
         setKnowFlashcards([...knowFlashcards, flashcardArray[index]])
-        nextFlashcard()
+        setKnowFlashcards([...knowFlashcards, flashcardArray[index]]);
+        // Animate out left => next
+        setOutDirection('left');
+        setAnimOut(true);
     }
 
     function handleCrossClicked(){
         setUnsureFlashcards([...unsureFlashcards, flashcardArray[index]])
-        nextFlashcard()
+         // Animate out left => next
+        setOutDirection('left');
+        setAnimOut(true);
     }
 
     function flipFlashcard(){
@@ -173,8 +208,10 @@ const Flashcard = () => {
                     onClick={flipFlashcard}
                     className={`
                         ${styles.flashcardContainer}
-                        ${animOut ? styles.fadeOutLeft : ''}
-                        ${animIn ? styles.fadeInRight : ''}
+                        ${animOut && outDirection === 'left' ? styles.fadeOutLeft : ''}
+                        ${animOut && outDirection === 'right' ? styles.fadeOutRight : ''}
+                        ${animIn && outDirection === 'left' ? styles.fadeInRight : ''}
+                        ${animIn && outDirection === 'right' ? styles.fadeInLeft : ''}
                     `}
                     onAnimationEnd={handleAnimationEnd}
                     >
