@@ -67,7 +67,7 @@ function CompletedFlashcardPage() {
 
             <div className={styles.buttonsContainer}>
                 <button onClick={handleResetFlashcardsClicked}> Restart Flashcards </button>
-                <button onClick={handleReviewUnsureFlashcardsClicked}> Review Unsure Flashcards </button>
+                {unsureFlashcards.length !== 0 && <button onClick={handleReviewUnsureFlashcardsClicked}> Review Unsure Flashcards </button> }
             </div>
         </div>
     )

@@ -22,7 +22,7 @@ const Flashcard = () => {
     const navigate = useNavigate();
     const { id } = useParams()
     const location = useLocation();
-    // const { knowFlashcardsArray = [], unsureFlashcardsArray = [] } = location.state || {};
+    const { knowFlashcardsArray = [], unsureFlashcardsArray = [] } = location.state || {};
 
     const [flashcardArray, setFlashcardArray] = useState([])
     const [flashcardName, setFlashcardName] = useState([])
@@ -46,9 +46,15 @@ const Flashcard = () => {
     useEffect(() => {
 
         async function fetchTestQuestions() {
-            const flashcardQuestions = await getAllQuestionsAndOptionsFromATest(id);
-            setFlashcardArray(flashcardQuestions);
-            console.log(flashcardQuestions)
+
+            if (unsureFlashcardsArray.length === 0){
+                const flashcardQuestions = await getAllQuestionsAndOptionsFromATest(id);
+                setFlashcardArray(flashcardQuestions);
+                console.log(flashcardQuestions)
+            }
+            else{
+                setFlashcardArray(unsureFlashcardsArray)
+            }
 
             const flashcardName = await getTestName(id)
             setFlashcardName(flashcardName.testName)
@@ -154,7 +160,7 @@ const Flashcard = () => {
 
     function handleCrossClicked(){
         setUnsureFlashcards([...unsureFlashcards, flashcardArray[index]])
-         // Animate out left => next
+        // Animate out left => next
         setOutDirection('left');
         setAnimOut(true);
     }
@@ -183,9 +189,9 @@ const Flashcard = () => {
                 <div className={styles.container}>
                     <div className={styles.titleContainer}>
                         <div className={`${styles.textLarge} ${styles.textCenter}`}> {flashcardName} </div>
-                        <button className={styles.button} onClick={() => navigate(`edit`)}>
+                        {/* <button className={styles.button} onClick={() => navigate(`edit`)}>
                             <FiEdit />
-                        </button>
+                        </button> */}
                     </div>
 
                     <div className={styles.progressContainer}>
