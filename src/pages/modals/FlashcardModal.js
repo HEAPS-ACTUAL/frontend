@@ -28,7 +28,7 @@ function FlashcardModal({ isOpen, scheduleID, onClose }) {
             followedRevisionDate = window.prompt("Is today the revision date? [Y|N]");
         }
         trackFollowedRevisionSchedule(followedRevisionDate);
-        navigate(`/test/flashcard/${testID}`);
+        navigate(`/test/flashcard/${flashcardID}`);
     }
     
     if (!isOpen) {
