@@ -262,26 +262,25 @@ const Flashcard = () => {
                         </div>
                     </div> */}
 
-                    {flashcardArray.map((flashcard) => 
                         
-                        <div className={` ${styles.flashcardContainer} ${isFlipped ? styles.isFlipped : ''} `} onAnimationEnd={handleAnimationEnd} >
-                            <div onClick={flipFlashcard} className={` ${styles.flashcardInner}  ${isFlipped ? styles.flipped : ''}  `} >
-                                
-                                {/* FRONT FACE */}
-                                <div className={styles.flashcardFront}>
-                                    {flashcard.QuestionText}
-                                    <img src={flipIcon} className={styles.icon} />
-                                </div>
-
-                                {/* BACK FACE */}
-                                <div className={styles.flashcardBack}>
-                                    {flashcard.Elaboration}
-                                    <img src={flipIcon} className={styles.icon} />
-                                </div>
-
+                    <div className={` ${styles.flashcardContainer} ${isFlipped ? styles.isFlipped : ''} `} onAnimationEnd={handleAnimationEnd} >
+                        <div onClick={flipFlashcard} className={` ${styles.flashcardInner}  ${isFlipped ? styles.flipped : ''}  `} >
+                            
+                            {/* FRONT FACE */}
+                            <div className={styles.flashcardFront}>
+                                {flashcardArray[index]?.QuestionText}
+                                <img src={flipIcon} className={styles.icon} />
                             </div>
+
+                            {/* BACK FACE */}
+                            <div className={styles.flashcardBack}>
+                                {flashcardArray[index]?.Elaboration}
+                                <img src={flipIcon} className={styles.icon} />
+                            </div>
+
                         </div>
-                    )}
+                    </div>
+
 
 
                     {trackProgress ? (
