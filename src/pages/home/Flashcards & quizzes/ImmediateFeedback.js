@@ -13,38 +13,38 @@ function ImmediateFeedback() {
     const [showOval, setShowOval] = useState(false)
     const [queryNumber, setQueryNumber] = useState(0)
 
-    // useEffect(() => {
-    //     const tl = gsap.timeline({ delay: 1 });
+    useEffect(() => {
+        const tl = gsap.timeline({ delay: 1 });
 
     // Animate the ticks and crosses
-    //     tl.fromTo(
-    //         ".cross-1",
-    //         { opacity: 0, scale: 0 },
-    //         { opacity: 1, scale: 1, duration: 1 }
-    //     )
-    //         .fromTo(
-    //             ".btn-1",
-    //             { opacity: 0, scale: 0 },
-    //             { opacity: 1, scale: 1, duration: 1 },
-    //             "<" // Sync this with the previous animation
-    //         )
-    //         .fromTo(
-    //             ".tick-1",
-    //             { opacity: 0, scale: 0 },
-    //             { opacity: 1, scale: 1, duration: 1 }
-    //         )
-    //         .fromTo(
-    //             ".cross-2",
-    //             { opacity: 0, scale: 0 },
-    //             { opacity: 1, scale: 1, duration: 1 }
-    //         )
-    //         .fromTo(
-    //             ".btn-2",
-    //             { opacity: 0, scale: 0 },
-    //             { opacity: 1, scale: 1, duration: 1 },
-    //             "<"
-    //         );
-    // }, []);
+        tl.fromTo(
+            ".cross-1",
+            { opacity: 0, scale: 0 },
+            { opacity: 1, scale: 1, duration: 1 }
+        )
+            .fromTo(
+                ".btn-1",
+                { opacity: 0, scale: 0 },
+                { opacity: 1, scale: 1, duration: 1 },
+                "<" // Sync this with the previous animation
+            )
+            .fromTo(
+                ".tick-1",
+                { opacity: 0, scale: 0 },
+                { opacity: 1, scale: 1, duration: 1 }
+            )
+            .fromTo(
+                ".cross-2",
+                { opacity: 0, scale: 0 },
+                { opacity: 1, scale: 1, duration: 1 }
+            )
+            .fromTo(
+                ".btn-2",
+                { opacity: 0, scale: 0 },
+                { opacity: 1, scale: 1, duration: 1 },
+                "<"
+            );
+    }, []);
 
     function handleCarrot(){
         setShowCarrot(!showCarrot)
@@ -117,7 +117,7 @@ function ImmediateFeedback() {
                     )}
 
                     <div class="dropup position-absolute" style={{ top: '41vw', left: '49vw' }}>
-                        <button onClick={handleOval} className="btn-1 btn shadow rounded-circle" data-bs-toggle="dropdown" style={{ width: '40px', height: '40px', backgroundColor: 'rgb(243 185 185)' }}>
+                        <button onClick={handleOval} className="btn-2 btn shadow rounded-circle" data-bs-toggle="dropdown" style={{ width: '40px', height: '40px', backgroundColor: 'rgb(243 185 185)' }}>
                             <MdOutlineRemoveRedEye />
                         </button>
                         <div class="dropdown-menu p-3" style={{ width: '300px' }}>
